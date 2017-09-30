@@ -89,6 +89,7 @@
     
 </TEXTURES>
 
+
 <MATERIALS>
 	<!-- Pyramid material -->
     <MATERIAL id="piramideMaterial">                                  
@@ -145,6 +146,12 @@
     </MATERIAL>
 
 </MATERIALS>
+
+
+<!-- The leaves -->
+<LEAVES>
+</LEAVES>
+
 
 <!-- The nodes -->
 <NODES>

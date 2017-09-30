@@ -1347,8 +1347,9 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 						else
 							this.warn("Error in leaf");
 						
-						//parse leaf
-						//this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]);
+                        //parse leaf
+                        console.log(descendants[j]);
+						this.nodes[nodeID].addChild(new MyGraphLeaf(this,descendants[j]));
                         sizeChildren++;
 					}
 					else
