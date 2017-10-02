@@ -4,10 +4,17 @@
 **/
 
 function MyGraphLeaf(graph, xmlelem) {
-    var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
-
+    this.graph = graph;
     this.element = xmlelem;
 
-    console.log(type);
+    this.type=this.graph.reader.getItem(this.element, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+    this.args = this.graph.reader.getString(this.element, 'args').split(" ");
+    this.primitive = null;
+    console.log(this.type);
+    
+    if (this.type == "rectangle"){
+        
+    }
+    
 }
 
