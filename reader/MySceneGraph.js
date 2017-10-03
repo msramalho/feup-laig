@@ -1349,7 +1349,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 						
                         //parse leaf
                         console.log(descendants[j]);
-						this.nodes[nodeID].addChild(new MyGraphLeaf(this,descendants[j]));
+						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
                         sizeChildren++;
 					}
 					else
@@ -1435,6 +1435,7 @@ MySceneGraph.prototype.displayScene = function() {
 MySceneGraph.prototype.interpretNode = function(node) {
         this.scene.multMatrix(node.transformMatrix);
         for(var i = 0; i < node.leaves.length; i++){
+            //console.log(node.leaves[i].primitive);
             node.leaves[i].primitive.display();
         }
         
