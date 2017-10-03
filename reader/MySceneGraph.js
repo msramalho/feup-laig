@@ -1424,24 +1424,30 @@ MySceneGraph.generateRandomString = function(length) {
  */
 MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
-	// remove log below to avoid performance issues
+    // remove log below to avoid performance issues
+    var rootNode = this.nodes["root"];
+    this.scene.setMatrix(this.initialTransforms);
+
     this.log("Graph should be rendered here...");
-    this.interpretNode(this.nodes["root"]);
+    this.interpretNode(rootNode);
 }
 /**
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.interpretNode = function(node) {
-    for(var i = 0; i < node.leaves.length; i++){
-        //console.log("LEAF: " +  node.leaves[i] + " - " + JSON.stringify(this.nodes[node.leaves[i]]));
-        //node.leaves[i]
-        console.log();
-        //this.nodes[node.leaves[i]].primitive.display();
+    this.scene.pushMatrix();
+        this.scene.mulMatrix(node.transformMatrix);
+        for(var i = 0; i < node.leaves.length; i++){
+            //console.log("LEAF: " +  node.leaves[i] + " - " + JSON.stringify(this.nodes[node.leaves[i]]));
+            //node.leaves[i]
+            console.log();
+            //this.nodes[node.leaves[i]].primitive.display();
 
-    }
-    
-    for(var i = 0; i < node.children.length; i++){
-        this.interpretNode(node.children[i]);
-    }
+        }
+        
+        for(var i = 0; i < node.children.length; i++){
+            this.interpretNode(node.children[i]);
+        }
+    this.scene.popMatrix();
 }
 
