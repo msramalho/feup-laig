@@ -1433,15 +1433,15 @@ MySceneGraph.prototype.displayScene = function() {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.interpretNode = function(node) {
-    this.scene.pushMatrix();
         this.scene.multMatrix(node.transformMatrix);
         for(var i = 0; i < node.leaves.length; i++){
-            this.nodes[node.leaves[i]].primitive.display();
+            node.leaves[i].primitive.display();
         }
         
         for(var i = 0; i < node.children.length; i++){
-            this.interpretNode(node.children[i]);
+            this.scene.pushMatrix();
+            this.interpretNode(this.nodes[node.children[i]]);
+            this.scene.popMatrix();
         }
-    this.scene.popMatrix();
 }
 
