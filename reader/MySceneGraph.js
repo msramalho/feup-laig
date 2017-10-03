@@ -1425,5 +1425,23 @@ MySceneGraph.generateRandomString = function(length) {
 MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
 	// remove log below to avoid performance issues
-	this.log("Graph should be rendered here...");
+    this.log("Graph should be rendered here...");
+    this.interpretNode(this.nodes["root"]);
 }
+/**
+ * Displays the scene, processing each node, starting in the root node.
+ */
+MySceneGraph.prototype.interpretNode = function(node) {
+    for(var i = 0; i < node.leaves.length; i++){
+        //console.log("LEAF: " +  node.leaves[i] + " - " + JSON.stringify(this.nodes[node.leaves[i]]));
+        //node.leaves[i]
+        console.log();
+        //this.nodes[node.leaves[i]].primitive.display();
+
+    }
+    
+    for(var i = 0; i < node.children.length; i++){
+        this.interpretNode(node.children[i]);
+    }
+}
+
