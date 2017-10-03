@@ -1427,8 +1427,6 @@ MySceneGraph.prototype.displayScene = function() {
     // remove log below to avoid performance issues
     var rootNode = this.nodes["root"];
     this.scene.setMatrix(this.initialTransforms);
-
-    this.log("Graph should be rendered here...");
     this.interpretNode(rootNode);
 }
 /**
@@ -1436,13 +1434,9 @@ MySceneGraph.prototype.displayScene = function() {
  */
 MySceneGraph.prototype.interpretNode = function(node) {
     this.scene.pushMatrix();
-        this.scene.mulMatrix(node.transformMatrix);
+        this.scene.multMatrix(node.transformMatrix);
         for(var i = 0; i < node.leaves.length; i++){
-            //console.log("LEAF: " +  node.leaves[i] + " - " + JSON.stringify(this.nodes[node.leaves[i]]));
-            //node.leaves[i]
-            console.log();
-            //this.nodes[node.leaves[i]].primitive.display();
-
+            this.nodes[node.leaves[i]].primitive.display();
         }
         
         for(var i = 0; i < node.children.length; i++){
