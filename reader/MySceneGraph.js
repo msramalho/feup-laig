@@ -1436,6 +1436,7 @@ MySceneGraph.prototype.interpretNode = function(node) {
         this.scene.multMatrix(node.transformMatrix);
         for(var i = 0; i < node.leaves.length; i++){
             //console.log(node.leaves[i].primitive);
+            //test commit
             node.leaves[i].primitive.display();
         }
         
