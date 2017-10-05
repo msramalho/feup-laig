@@ -1423,26 +1423,45 @@ MySceneGraph.generateRandomString = function(length) {
  */
 MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
-    var idrootNode = this.nodes["root"];
-    this.interpretNode("root");
+    this.interpretNode(this.idRoot, this.nodes[this.idRoot].materialID, this.nodes[this.idRoot].textureID);
 }
 /**
  * Displays the scene, processing each node, starting in the root node.
  */
-MySceneGraph.prototype.interpretNode = function(idnode) {
+MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
+    var mat = material;
+    var tex = texture;
+    var currNode = this.nodes[idnode];
+
+    this.scene.multMatrix(currNode.transformMatrix);
     
-        this.scene.multMatrix(this.nodes[idnode].transformMatrix);
+    if (this.materials[currNode.materialID]!=null){
+        mat = currNode.materialID;
+    }
 
-        for(var i = 0; i < this.nodes[idnode].leaves.length; i++){
-            this.scene.pushMatrix();
-            this.nodes[idnode].leaves[i].primitive.display();
-            this.scene.popMatrix();
-        }  
+    if (this.textures[currNode.textureID]!=null){
+        if (currNode.textureID == 'clear'){
+            tex = null;
+        }
+        else tex = currNode.textureID;
+    }
 
-        for(var i = 0; i < this.nodes[idnode].children.length; i++){
-            this.scene.pushMatrix();
-            this.interpretNode(this.nodes[idnode].children[i]);
-            this.scene.popMatrix();
-        }            
+    for (var i = 0; i < currNode.leaves.length; i++){
+        if (this.materials[mat]!=null){
+            this.materials[mat].apply();
+        }
+
+        if (this.textures[tex]!=null){
+            //currNode.leaves[i].primitive.updateTexCoords(this.textures[tex][1], this.textures[tex][2]);
+            this.textures[tex][0].bind();
+        }
+
+        currNode.leaves[i].primitive.display();
+    }  
+    
+    for (var i = 0; i < currNode.children.length; i++){
+        this.scene.pushMatrix();
+        this.interpretNode(currNode.children[i], mat, tex);
+        this.scene.popMatrix();
+    }    
 }
-
