@@ -190,14 +190,14 @@
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
         <DESCENDANTS>
-            <NODEREF id="minecraftDirtBlockGrasssGrass" />
+            <NODEREF id="minecraftDirtBlockGrass" />
             <NODEREF id="luzes" />
             <NODEREF id="chao" />
         </DESCENDANTS>
     </NODE>
 
-    <!--the minecraftDirtBlockGrasssGrass -->
-    <NODE id="minecraftDirtBlockGrasssGrass">
+    <!--the minecraftDirtBlockGrass -->
+    <NODE id="minecraftDirtBlockGrass">
         <MATERIAL id="null" />
         <TEXTURE id="clear" />
         <DESCENDANTS>
