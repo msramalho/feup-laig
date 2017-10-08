@@ -119,6 +119,24 @@
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
+    <!-- Upper Door -->
+    <TEXTURE id="Door">
+        <file path="images/door.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <!-- Lower Door -->
+    <TEXTURE id="Door2">
+        <file path="images/door2.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <!-- Side Door -->
+    <TEXTURE id="SideDoor">
+        <file path="images/sideDoor.png" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
 </TEXTURES>
 
 
@@ -225,6 +243,9 @@
             <NODEREF id="minecraftDirtBlocksGrass" />
             <NODEREF id="minecraftDirtBlocks" />
             <NODEREF id="luzes" />
+            <NODEREF id="minecraftWoodBlocks"/>
+            <NODEREF id="minecraftDoor1" />
+            <NODEREF id="minecraftDoor2" />
         </DESCENDANTS>
     </NODE>
 
@@ -244,22 +265,28 @@
             <!-- grass blocks for the two lights -->
             <NODEREF id="minecraftDirtBlockGrass7" />
             <NODEREF id="minecraftDirtBlockGrass8" />
+        </DESCENDANTS>
+    </NODE>
 
+    <!--the  minecraftWoodBlocks -->
+    <NODE id="minecraftWoodBlocks">
+        <MATERIAL id="null"/>
+        <TEXTURE id="clear"/>
+        <DESCENDANTS>
+            <!-- Back Wall -->
             <NODEREF id="minecraftWoodBlockLine1" />
             <NODEREF id="minecraftWoodBlockLine2" />
             <NODEREF id="minecraftWoodBlockLine3" />
             <NODEREF id="minecraftWoodBlockLine4" />
             <NODEREF id="minecraftWoodBlockLine5" />
-
+            <!-- Front Wall -->
             <NODEREF id="minecraftWoodBlockLineDoor1" />
             <NODEREF id="minecraftWoodBlockLineDoor2" />
-
+            <!-- Side Walls -->
             <NODEREF id="minecraftWoodBlock7" />
             <NODEREF id="minecraftWoodBlock8" />
             <NODEREF id="minecraftWoodBlock9" />
             <NODEREF id="minecraftWoodBlock10" />
-
-
         </DESCENDANTS>
     </NODE>
 
@@ -765,14 +792,90 @@
         </DESCENDANTS>
     </NODE>
 
+    <!-- Door 1 -->
+    <NODE id="minecraftDoor1">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="22.5" y="0" z="12.5" />
+        <ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+       		<NODEREF id="FrontDoor" />
+            <NODEREF id="BackDoor" />
+            <NODEREF id="SideDoor1" />
+            <NODEREF id="SideDoor2" />
+            <NODEREF id="SideDoor3" />
+        </DESCENDANTS>
+    </NODE>
 
+    <!-- Door 2 -->
+    <NODE id="minecraftDoor2">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="23" y="0" z="5" />
+        <ROTATION axis="y" angle="-180" />
+        <DESCENDANTS>
+       		<NODEREF id="FrontDoor" />
+            <NODEREF id="BackDoor" />
+            <NODEREF id="SideDoor1" />
+            <NODEREF id="SideDoor2" />
+            <NODEREF id="SideDoor3" />
+        </DESCENDANTS>
+    </NODE>
 
+    <!-- FrontDoor -->
+    <NODE id="FrontDoor">
+        <MATERIAL id="null" />
+        <TEXTURE id="Door" />
+        <TRANSLATION x="0" y="0" z="1" />
+        <ROTATION axis="x" angle="0" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 8 4 0" />
+        </DESCENDANTS>
+    </NODE>
 
+    <!-- BackDoor -->
+    <NODE id="BackDoor">
+        <MATERIAL id="null" />
+        <TEXTURE id="Door2" />
+        <TRANSLATION x="4" y="0" z="0" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 8 4 0" />
+        </DESCENDANTS>
+    </NODE>
 
+    <!-- SideDoor -->
+    <NODE id="SideDoor1">
+        <MATERIAL id="null" />
+        <TEXTURE id="SideDoor" />
+        <TRANSLATION x="4" y="0" z="1" />
+        <ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 8 1 0" />
+        </DESCENDANTS>
+    </NODE>
 
+    <!-- SideDoor -->
+    <NODE id="SideDoor2">
+        <MATERIAL id="null" />
+        <TEXTURE id="SideDoor" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 8 1 0" />
+        </DESCENDANTS>
+    </NODE>
 
-
-
+    <!-- SideDoor -->
+    <NODE id="SideDoor3">
+        <MATERIAL id="null" />
+        <TEXTURE id="SideDoor" />
+        <TRANSLATION x="0" y="8" z="1" />
+        <ROTATION axis="x" angle="-90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 1 4 0" />
+        </DESCENDANTS>
+    </NODE>
 
 
     <!--the  minecraftDirtBlocks -->
