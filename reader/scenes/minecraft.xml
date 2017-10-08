@@ -23,7 +23,7 @@
 <LIGHTS>
 	<LIGHT id="light0">
         <enable value ="1" />
-        <position  x="0" y="10" z="0" w="1" />
+        <position  x="1.5" y="17" z="-5.5" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -31,7 +31,7 @@
 
 	<LIGHT id="light1">
         <enable value ="1" />
-        <position x="30" y="10" z="0" w="1" />
+        <position x="29.5" y="13" z="-5.5" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -39,7 +39,7 @@
 
 	<LIGHT id="light2">
         <enable value ="1" />
-        <position x="0" y="10" z="20" w="1" />
+        <position x="1.5" y="17" z="22.5" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -47,10 +47,18 @@
 
     <LIGHT id="light3">
         <enable value ="1" />
-        <position x="30" y="10" z="20" w="1" />
+        <position x="29.5" y="13" z="22.5" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
         <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="lightsun">
+        <enable value ="1" />
+        <position x="-10" y="18" z="38" w="1" />
+        <ambient r="1" g="1" b="0.4" a="1.0" />
+        <diffuse r="1" g="1" b="0.4" a="1.0" />
+        <specular r="1" g="1" b="0.4" a="1.0" />
     </LIGHT>
 
 </LIGHTS>
@@ -116,6 +124,15 @@
         <diffuse r="0.2" g="0.2" b="0.2" a="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Sun material -->
+    <MATERIAL id="sunMaterial">
+        <shininess value="100" />
+        <specular r="0.5" g="0.5" b="0.2" a="1" />
+        <diffuse r="0.5" g="0.5" b="0.2" a="1" />
+        <ambient r="0.5" g="0.5" b="0.2" a="1" />
+        <emission r="1" g="1" b="0.4" a="1" />
     </MATERIAL>
 
 	<!-- Pyramid material -->
@@ -738,21 +755,29 @@
 
 
 
-
-
     <!-- The lights -->
      <NODE id="luzes">
         <MATERIAL id="lightMaterial" />
         <TEXTURE id="clear" />
-
         <DESCENDANTS>
             <NODEREF id="luz1" />
             <NODEREF id="luz2" />
             <NODEREF id="luz3" />
             <NODEREF id="luz4" />
+            <NODEREF id="luz_sol" />
         </DESCENDANTS>
-
     </NODE>
+
+    <!-- Sun Light -->
+    <NODE id="luz_sol">
+        <MATERIAL id="sunMaterial" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="-10" y="18" z="38" />
+        <DESCENDANTS>
+            <LEAF id="shpere_sun" type="sphere" args="4 20 20" />
+        </DESCENDANTS>
+    </NODE>
+
 
     <!-- The first light -->
      <NODE id="luz1">
@@ -814,15 +839,11 @@
     <NODE id="luz_esfera">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-
         <TRANSLATION x="0" y="13.3" z="0" />
         <SCALE sx="-0.7" sy="0.7" sz="0.7" />
-
         <DESCENDANTS>
-						<LEAF id="sphere1" type="sphere" args="2 20 20" />
-
+            <LEAF id="sphere1" type="sphere" args="2 20 20" />
         </DESCENDANTS>
-
     </NODE>
 
     <!-- The post in the lamp post... -->
