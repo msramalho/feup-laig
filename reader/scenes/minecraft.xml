@@ -7,7 +7,7 @@
     <rotation axis="x" angle="0" />
     <rotation axis="y" angle="0" />
     <rotation axis="z" angle="0" />
-    <scale sx="0.25" sy="0.25" sz="0.25" />
+    <scale sx="0.20" sy="0.20" sz="0.20" />
     <reference length="5" />
 </INITIALS>
 
@@ -193,7 +193,6 @@
             <NODEREF id="minecraftDirtBlocksGrass" />
             <NODEREF id="minecraftDirtBlocks" />
             <NODEREF id="luzes" />
-            <NODEREF id="chao" />
         </DESCENDANTS>
     </NODE>
 
@@ -202,9 +201,96 @@
         <MATERIAL id="null" />
         <TEXTURE id="clear" />
         <DESCENDANTS>
-            <NODEREF id="minecraftDirtBlockGrass1" />
+            <!-- Floor with "stair" effect -->
+            <NODEREF id="minecraftDirtBlockGrassLine1" />
+            <NODEREF id="minecraftDirtBlockGrassLine2" />
+            <NODEREF id="minecraftDirtBlockGrassLine3" />
+            <NODEREF id="minecraftDirtBlockGrassLine4" />
+            <NODEREF id="minecraftDirtBlockGrassLine5" />
+            <NODEREF id="minecraftDirtBlockGrassLine6" />
+            <NODEREF id="minecraftDirtBlockGrassLine7" />
+            <!-- grass blocks for the two lights -->
+            <NODEREF id="minecraftDirtBlockGrass7" />
+            <NODEREF id="minecraftDirtBlockGrass8" />
+
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 1 -->
+    <NODE id="minecraftDirtBlockGrassLine1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="8" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 2 -->
+    <NODE id="minecraftDirtBlockGrassLine2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="4" y="4" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 3 -->
+    <NODE id="minecraftDirtBlockGrassLine3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="8" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 4 -->
+    <NODE id="minecraftDirtBlockGrassLine4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="12" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 5 -->
+    <NODE id="minecraftDirtBlockGrassLine5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="16" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 6 -->
+    <NODE id="minecraftDirtBlockGrassLine6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="20" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="24" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic Dirt Grass Block Line of 6 -->
+    <NODE id="minecraftDirtBlockGrassLine">
+        <MATERIAL id="minecraftDirtMaterial" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+       		<NODEREF id="minecraftDirtBlockGrass1" />
             <NODEREF id="minecraftDirtBlockGrass2" />
             <NODEREF id="minecraftDirtBlockGrass3" />
+            <NODEREF id="minecraftDirtBlockGrass4" />
+            <NODEREF id="minecraftDirtBlockGrass5" />
+            <NODEREF id="minecraftDirtBlockGrass6" />
         </DESCENDANTS>
     </NODE>
 
@@ -212,7 +298,7 @@
     <NODE id="minecraftDirtBlockGrass1">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        <TRANSLATION x="-2" y="0" z="5" />
+        <TRANSLATION x="0" y="0" z="0" />
         <DESCENDANTS>
             <NODEREF id="minecraftDirtBlockGrass" />
         </DESCENDANTS>
@@ -221,25 +307,73 @@
     <NODE id="minecraftDirtBlockGrass2">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        <TRANSLATION x="22" y="-4" z="5" />
+        <TRANSLATION x="0" y="0" z="-4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 3 -->
+    <NODE id="minecraftDirtBlockGrass3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-8" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 4 -->
+    <NODE id="minecraftDirtBlockGrass4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-12" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 5 -->
+    <NODE id="minecraftDirtBlockGrass5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-16" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 6 -->
+    <NODE id="minecraftDirtBlockGrass6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-20" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 7 - for the left light platform -->
+    <NODE id="minecraftDirtBlockGrass7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="4" z="4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 8 - for the right light platform -->
+    <NODE id="minecraftDirtBlockGrass8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="4" z="-24" />
         <DESCENDANTS>
             <NODEREF id="minecraftDirtBlockGrass" />
         </DESCENDANTS>
     </NODE>
 
-    <!-- Dirt Block 3 -->
-    <NODE id="minecraftDirtBlockGrass3">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
-        <TRANSLATION x="-2" y="-4" z="9" />
-        <DESCENDANTS>
-            <NODEREF id="minecraftDirtBlockGrass" />
-        </DESCENDANTS>
-    </NODE>
-    <!-- Generic Dirt Block -->
+
+
+    <!-- Generic Dirt Grass Block -->
     <NODE id="minecraftDirtBlockGrass">
         <MATERIAL id="minecraftDirtMaterial" />
         <TEXTURE id="null" />
+        <TRANSLATION x="-3" y="-8" z="13" />
         <DESCENDANTS>
        		<NODEREF id="dirtBlockGrassFace1" />
             <NODEREF id="dirtBlockGrassFace2" />
@@ -330,16 +464,109 @@
         <MATERIAL id="null" />
         <TEXTURE id="clear" />
         <DESCENDANTS>
-            <NODEREF id="minecraftDirtBlock1" />
-            <NODEREF id="minecraftDirtBlock2" />
+            <!-- below the platform -->
+            <NODEREF id="minecraftDirtBlockLine1" />
+            <NODEREF id="minecraftDirtBlockLine2" />
+            <NODEREF id="minecraftDirtBlockLine3" />
+            <!-- around the platform -->
+            <NODEREF id="minecraftDirtBlockLine4" />
+            <NODEREF id="minecraftDirtBlockLineT1" />
+            <NODEREF id="minecraftDirtBlockLineT2" />
         </DESCENDANTS>
     </NODE>
+
+    <!-- Dirt Line of 6 Blocks 1 -->
+    <NODE id="minecraftDirtBlockLine1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 2 -->
+    <NODE id="minecraftDirtBlockLine2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="4" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 3 -->
+    <NODE id="minecraftDirtBlockLine3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="4" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 4 -->
+    <NODE id="minecraftDirtBlockLine4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="28" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks Transversal 1 -->
+    <NODE id="minecraftDirtBlockLineT1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLineT" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks Transversal 2 -->
+    <NODE id="minecraftDirtBlockLineT2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-28" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLineT" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <!-- Dirt Line of 6 Blocks Transversal General -->
+    <NODE id="minecraftDirtBlockLineT">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="24" y="0" z="21" />
+		<ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+            <NODEREF id="minecraftDirtBlock7" />
+            <NODEREF id="minecraftDirtBlock8" />
+        </DESCENDANTS>
+    </NODE>
+
+
+
+    <!-- Generic Dirt Block Line of 6 -->
+    <NODE id="minecraftDirtBlockLine">
+        <MATERIAL id="minecraftDirtMaterial" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+       		<NODEREF id="minecraftDirtBlock1" />
+            <NODEREF id="minecraftDirtBlock2" />
+            <NODEREF id="minecraftDirtBlock3" />
+            <NODEREF id="minecraftDirtBlock4" />
+            <NODEREF id="minecraftDirtBlock5" />
+            <NODEREF id="minecraftDirtBlock6" />
+        </DESCENDANTS>
+    </NODE>
+
+
 
     <!-- Dirt Block 1 -->
     <NODE id="minecraftDirtBlock1">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        <TRANSLATION x="-2" y="-4" z="5" />
+        <TRANSLATION x="0" y="0" z="0" />
         <DESCENDANTS>
             <NODEREF id="minecraftDirtBlock" />
         </DESCENDANTS>
@@ -348,16 +575,76 @@
     <NODE id="minecraftDirtBlock2">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        <TRANSLATION x="18" y="-4" z="5" />
+        <TRANSLATION x="0" y="0" z="-4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 3 -->
+    <NODE id="minecraftDirtBlock3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-8" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 4 -->
+    <NODE id="minecraftDirtBlock4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-12" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 5 -->
+    <NODE id="minecraftDirtBlock5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-16" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 6 -->
+    <NODE id="minecraftDirtBlock6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-20" />
         <DESCENDANTS>
             <NODEREF id="minecraftDirtBlock" />
         </DESCENDANTS>
     </NODE>
 
+    <!-- Dirt Block 7 - for line sides -->
+    <NODE id="minecraftDirtBlock7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 8 - for line sides -->
+    <NODE id="minecraftDirtBlock8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-24" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+
+
+
+
     <!-- Generic Dirt Block -->
     <NODE id="minecraftDirtBlock">
         <MATERIAL id="minecraftDirtMaterial" />
         <TEXTURE id="null" />
+        <TRANSLATION x="-3" y="-8" z="13" />
         <DESCENDANTS>
        		<NODEREF id="dirtBlockFace1" />
             <NODEREF id="dirtBlockFace2" />
@@ -424,7 +711,6 @@
         <TEXTURE id="minecraft_dirt_bottom" />
         <TRANSLATION x="2.5" y="4" z="3.5" />
         <ROTATION axis="x" angle="90" />
-        <SCALE sx="1" sy="1.25" sz="1" />
         <DESCENDANTS>
             <LEAF  type="rectangle" args="0 4 4 0" />
         </DESCENDANTS>
@@ -454,23 +740,6 @@
 
 
 
-
-
-
-
-    <!-- The floor -->
-    <NODE id="chao">
-        <MATERIAL id="null" />
-        <TEXTURE id="rocks" />
-        <SCALE sx="8" sy="1" sz="8" />
-        <TRANSLATION x="-1" y="0" z="3" />
-        <ROTATION axis="x" angle="-90" />
-
-        <DESCENDANTS>
-            <LEAF  type="rectangle" args="0 4 5 0" />
-        </DESCENDANTS>
-    </NODE>
-
     <!-- The lights -->
      <NODE id="luzes">
         <MATERIAL id="lightMaterial" />
@@ -489,7 +758,7 @@
      <NODE id="luz1">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-
+        <TRANSLATION x="1.5" y="4" z="-5.5" />
         <DESCENDANTS>
             <NODEREF id="luz_candeeiro" />
         </DESCENDANTS>
@@ -500,9 +769,7 @@
     <NODE id="luz2">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-
-        <TRANSLATION x="30" y="0" z="0" />
-
+        <TRANSLATION x="29.5" y="0" z="-5.5" />
         <DESCENDANTS>
             <NODEREF id="luz_candeeiro" />
         </DESCENDANTS>
@@ -513,9 +780,7 @@
     <NODE id="luz3">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-
-        <TRANSLATION x="0" y="0" z="20" />
-
+        <TRANSLATION x="1.5" y="4" z="22.5" />
         <DESCENDANTS>
            <NODEREF id="luz_candeeiro" />
         </DESCENDANTS>
@@ -526,9 +791,7 @@
     <NODE id="luz4">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-
-        <TRANSLATION x="30" y="0" z="20" />
-
+        <TRANSLATION x="29.5" y="0" z="22.5" />
         <DESCENDANTS>
            <NODEREF id="luz_candeeiro" />
         </DESCENDANTS>
@@ -552,8 +815,8 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0" y="10" z="0" />
-        <SCALE sx="-1" sy="1" sz="1" />
+        <TRANSLATION x="0" y="13.3" z="0" />
+        <SCALE sx="-0.7" sy="0.7" sz="0.7" />
 
         <DESCENDANTS>
 						<LEAF id="sphere1" type="sphere" args="2 20 20" />
@@ -567,7 +830,7 @@
         <MATERIAL id="lightPostMaterial" />
         <TEXTURE id="null" />
 
-        <SCALE sx="0.5" sy="2.02" sz="0.5" />
+        <SCALE sx="0.5" sy="3" sz="0.5" />
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
