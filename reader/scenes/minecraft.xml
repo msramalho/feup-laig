@@ -101,9 +101,9 @@
         <amplif_factor s="3" t="4" />
     </TEXTURE>
 
-    <!-- Rocks -->
-    <TEXTURE id="rocks">
-        <file path="images/rocks.jpg" />
+    <!-- Tile -->
+    <TEXTURE id="Tile">
+        <file path="images/tile.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
@@ -1136,14 +1136,14 @@
         </DESCENDANTS>
     </NODE>
 
-<!-- A pyramid -->
+    <!-- A pyramid -->
     <NODE id="rooftop">       
 
         <MATERIAL id="null" />      
-        <TEXTURE id="clear" />       			
+        <TEXTURE id="Tile" />       			
 
-        <TRANSLATION x="9.5" y="12" z="7" />
-        <SCALE sx="1" sy="2" sz="1" />
+        <TRANSLATION x="9" y="16" z="-17.5" />
+        <SCALE sx="1" sy="1.5" sz="2" />
 
         <DESCENDANTS>
        		<NODEREF id="meiaPiramide1" /> 
@@ -1159,10 +1159,11 @@
         <TEXTURE id="null" />       			
 
        	<ROTATION axis="x" angle="90" />
-       	<TRANSLATION x="0.5" y="0" z="0" /> 
+       	<TRANSLATION x="1" y="6" z="2.87" /> 
+       	<SCALE sx="2.8" sy="3.5" sz="1" />
 
         <DESCENDANTS>
-					<LEAF  type="rectangle" args="0 15 15 0" />        
+					<LEAF  type="rectangle" args="0 4 5 0" />        
         </DESCENDANTS>
 
     </NODE>
@@ -1170,8 +1171,7 @@
     <!-- Half a pyramid -->
     <NODE id="meiaPiramide1">       
         <MATERIAL id="null" />      
-        <TEXTURE id="null" />       	
-        <TRANSLATION x="0" y="3" z="0"	/>		
+        <TEXTURE id="null" />       			
 
         <DESCENDANTS>
             <NODEREF id="meiaPiramide" />      
@@ -1184,7 +1184,7 @@
         <MATERIAL id="null" />      
         <TEXTURE id="null" />       			
 
-		<TRANSLATION x="16" y="3" z="26"	/>
+		<TRANSLATION x="16" y="0" z="26"	/>
 		<ROTATION axis="y" angle="180" />
 
         <DESCENDANTS>
