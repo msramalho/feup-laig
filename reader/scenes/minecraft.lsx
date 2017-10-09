@@ -89,33 +89,9 @@
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
-	<!-- Tree trunk -->
-    <TEXTURE id="trunk">
-        <file path="images/trunk-image.jpg" />
-        <amplif_factor s="2" t="2" />
-    </TEXTURE>
-
-     <!-- Tree leaves -->
-    <TEXTURE id="folhas">
-        <file path="images/leaves.jpg" />
-        <amplif_factor s="3" t="4" />
-    </TEXTURE>
-
     <!-- Tile -->
     <TEXTURE id="Tile">
         <file path="images/tile.jpg" />
-        <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
-    <!-- Glass work -->
-    <TEXTURE id="vidral">
-        <file path="images/vidral.jpg" />
-        <amplif_factor s="15" t="10" />
-    </TEXTURE>
-
-    <!-- Street bench -->
-    <TEXTURE id="banco">
-        <file path="images/bank.jpg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
@@ -174,24 +150,6 @@
         <specular r="0" g="0" b="0" a="1" />
         <diffuse r="1.0" g="0.68" b="0.4" a="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1" />
-        <emission r="0.0" g="0.0" b="0.0" a="1" />
-    </MATERIAL>
-
-	<!-- Tree leaves material -->
-	<MATERIAL id="leavesTreeMaterial">
-        <shininess value="1" />
-        <specular r="0.2" g="0.2" b="0.2" a="1" />
-        <diffuse r="0.0" g="0.207" b="0.0" a="1" />
-        <ambient r="0.1" g="0.1" b="0.1" a="1" />
-        <emission r="0.0" g="0.0" b="0.0" a="1" />
-    </MATERIAL>
-
-	<!-- Tree trunk material -->
-	<MATERIAL id="trunkTreeMaterial">
-        <shininess value="1" />
-        <specular r="0.0" g="0.0" b="0.0" a="1" />
-        <diffuse r="0.6" g="0.298" b="0.0" a="1" />
-        <ambient r="0.1" g="0.1" b="0.1" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
@@ -300,7 +258,7 @@
             <NODEREF id="minecraftWoodBlockLine" />
         </DESCENDANTS>
     </NODE>
-    
+
     <!-- Wood Line of 6 Blocks 2 -->
     <NODE id="minecraftWoodBlockLine2">
         <MATERIAL id="null" />
@@ -320,7 +278,7 @@
             <NODEREF id="minecraftWoodBlockLine" />
         </DESCENDANTS>
     </NODE>
-    
+
     <!-- Wood Line of 6 Blocks 4 -->
     <NODE id="minecraftWoodBlockLine4">
         <MATERIAL id="null" />
@@ -372,7 +330,7 @@
             <NODEREF id="minecraftWoodBlock4" />
             <NODEREF id="minecraftWoodBlock5" />
             <NODEREF id="minecraftWoodBlock6" />
-           
+
         </DESCENDANTS>
     </NODE>
 
@@ -385,7 +343,7 @@
             <NODEREF id="minecraftWoodBlock2" />
             <NODEREF id="minecraftWoodBlock5" />
             <NODEREF id="minecraftWoodBlock6" />
-           
+
         </DESCENDANTS>
     </NODE>
 
@@ -1137,83 +1095,83 @@
     </NODE>
 
     <!-- A pyramid -->
-    <NODE id="rooftop">       
+    <NODE id="rooftop">
 
-        <MATERIAL id="null" />      
-        <TEXTURE id="Tile" />       			
+        <MATERIAL id="null" />
+        <TEXTURE id="Tile" />
 
         <TRANSLATION x="9" y="16" z="-17.5" />
         <SCALE sx="1" sy="1.5" sz="2" />
 
         <DESCENDANTS>
-       		<NODEREF id="meiaPiramide1" /> 
-            <NODEREF id="meiaPiramide2" />       
-            <NODEREF id="basePiramide" />   	 
+       		<NODEREF id="meiaPiramide1" />
+            <NODEREF id="meiaPiramide2" />
+            <NODEREF id="basePiramide" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- The pyramid base -->
-    <NODE id="basePiramide">       
-        <MATERIAL id="null" />     
-        <TEXTURE id="null" />       			
+    <NODE id="basePiramide">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
        	<ROTATION axis="x" angle="90" />
-       	<TRANSLATION x="1" y="6" z="2.87" /> 
+       	<TRANSLATION x="1" y="6" z="2.87" />
        	<SCALE sx="2.8" sy="3.5" sz="1" />
 
         <DESCENDANTS>
-					<LEAF  type="rectangle" args="0 4 5 0" />        
+					<LEAF  type="rectangle" args="0 4 5 0" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- Half a pyramid -->
-    <NODE id="meiaPiramide1">       
-        <MATERIAL id="null" />      
-        <TEXTURE id="null" />       			
+    <NODE id="meiaPiramide1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <DESCENDANTS>
-            <NODEREF id="meiaPiramide" />      
+            <NODEREF id="meiaPiramide" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- The other half -->
-    <NODE id="meiaPiramide2">       
-        <MATERIAL id="null" />      
-        <TEXTURE id="null" />       			
+    <NODE id="meiaPiramide2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
 		<TRANSLATION x="16" y="0" z="26"	/>
 		<ROTATION axis="y" angle="180" />
 
         <DESCENDANTS>
-            <NODEREF id="meiaPiramide" />       
+            <NODEREF id="meiaPiramide" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- Generic half a pyramid -->
-    <NODE id="meiaPiramide">       
-        <MATERIAL id="null" />      
-        <TEXTURE id="null" />       			
+    <NODE id="meiaPiramide">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <DESCENDANTS>
-            <NODEREF id="facePiramide1" />       
-            <NODEREF id="facePiramide2" />    	 
+            <NODEREF id="facePiramide1" />
+            <NODEREF id="facePiramide2" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- Pyramid face -->
-   <NODE id="facePiramide1">       
-        <MATERIAL id="null" />      
-        <TEXTURE id="null" />       			
+   <NODE id="facePiramide1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
 		<TRANSLATION x="8" y="4" z="13" />
 		<ROTATION axis="x" angle="44.42" />
        	<ROTATION axis="y" angle="-45" />
-        
+
         <DESCENDANTS>
 					<LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0" />
         </DESCENDANTS>
@@ -1221,14 +1179,14 @@
     </NODE>
 
     <!-- Another pyramid face -->
-    <NODE id="facePiramide2">      
-        <MATERIAL id="null" />      
-        <TEXTURE id="null" />       			
+    <NODE id="facePiramide2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
        	<TRANSLATION x="10" y="4" z="15" />
         <TRANSLATION x="-2" y="0" z="-2" />
        	<ROTATION axis="z" angle="-44.42" />
-       	<ROTATION axis="y" angle="45" />  
+       	<ROTATION axis="y" angle="45" />
 
         <DESCENDANTS>
 					<LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0" />
