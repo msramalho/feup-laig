@@ -1452,7 +1452,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         }
 
         if (this.textures[tex]!=null){
-            //currNode.leaves[i].primitive.updateTexCoords(this.textures[tex][1], this.textures[tex][2]);
+            currNode.leaves[i].primitive.setAmplifFactor(this.textures[tex][1], this.textures[tex][2]);
             this.textures[tex][0].bind();
         }
 
