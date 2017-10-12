@@ -99,7 +99,7 @@
     <!-- Tile -->
     <TEXTURE id="Tile">
         <file path="images/tile.jpg" />
-        <amplif_factor s="10" t="10" />
+        <amplif_factor s="10" t="20" />
     </TEXTURE>
 
     <!-- Upper Door -->
