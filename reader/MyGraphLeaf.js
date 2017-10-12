@@ -1,11 +1,17 @@
 /**
  * MyGraphLeaf class, representing a leaf in the scene graph.
  * @constructor
+ * @param graph a MySceneGraph that has a data structure that allows this method to access the parsed data from the .lsx file, calling the primitives
+ * @param lsxelem the leaf element from the .lsx file
+ * @see Rectangle
+ * @see Triangle
+ * @see Shpere
+ * @see Cylinder
  **/
 
-function MyGraphLeaf(graph, xmlelem) {
+function MyGraphLeaf(graph, lsxelem) {
     this.graph = graph;
-    this.element = xmlelem;
+    this.element = lsxelem;
 
     this.type = this.graph.reader.getItem(this.element, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
     this.args = this.graph.reader.getString(this.element, 'args').split(" ").map(Number);
