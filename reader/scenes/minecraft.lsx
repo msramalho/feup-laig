@@ -68,56 +68,56 @@
     <!-- Minecraft Dirt Block sides-->
     <TEXTURE id="minecraft_dirt_side">
         <file path="images/minecraft_dirt_side.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="4" t="4" />
     </TEXTURE>
 
     <!-- Minecraft Wood Block sides-->
     <TEXTURE id="minecraft_wood">
         <file path="images/minecraft_wood.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="4" t="4" />
     </TEXTURE>
 
     <!-- Minecraft Dirt Block Top = Grass -->
     <TEXTURE id="minecraft_dirt_top">
         <file path="images/minecraft_dirt_top.jpg" />
-        <amplif_factor s="2" t="2" />
+        <amplif_factor s="4" t="4" />
     </TEXTURE>
 
     <!-- Minecraft Dirt Block Bottom -->
     <TEXTURE id="minecraft_dirt_bottom">
         <file path="images/minecraft_dirt_bottom.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="4" t="4" />
     </TEXTURE>
 
     <!-- Minecraft Dirt Fence -->
     <TEXTURE id="minecraft_fence">
         <file path="images/minecraft_fence.png" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="4" t="4" />
     </TEXTURE>
 
 
     <!-- Tile -->
     <TEXTURE id="Tile">
         <file path="images/tile.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="10" t="10" />
     </TEXTURE>
 
     <!-- Upper Door -->
     <TEXTURE id="Door">
         <file path="images/door.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="4" t="8" />
     </TEXTURE>
 
     <!-- Lower Door -->
     <TEXTURE id="Door2">
         <file path="images/door2.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="4" t="8" />
     </TEXTURE>
 
     <!-- Side Door -->
     <TEXTURE id="SideDoor">
         <file path="images/sideDoor.png" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="4" t="4" />
     </TEXTURE>
 
 </TEXTURES>
@@ -227,6 +227,34 @@
             <NODEREF id="minecraftFence2" />
             <NODEREF id="minecraftFence3" />
             <NODEREF id="minecraftFence4" />
+            <NODEREF id="minecraftFence5" />
+            <NODEREF id="minecraftFence6" />
+            <NODEREF id="minecraftFence7" />
+            <NODEREF id="minecraftFence8" />
+            <NODEREF id="minecraftFence9" />
+            <NODEREF id="minecraftFence10" />
+            <NODEREF id="minecraftFence11" />
+            <NODEREF id="minecraftFence12" />
+            <NODEREF id="minecraftFence13" />
+            <NODEREF id="minecraftFence14" />
+            <NODEREF id="minecraftFence15" />
+            <NODEREF id="minecraftFence16" />
+            <NODEREF id="minecraftFence17" />
+            <NODEREF id="minecraftFence18" />
+            <NODEREF id="minecraftFence19" />
+            <NODEREF id="minecraftFence20" />
+            <NODEREF id="minecraftFence21" />
+            <NODEREF id="minecraftFence22" />
+            <NODEREF id="minecraftFence23" />
+            <NODEREF id="minecraftFence24" />
+            <NODEREF id="minecraftFence25" />
+            <NODEREF id="minecraftFence26" />
+            <NODEREF id="minecraftFence27" />
+            <NODEREF id="minecraftFence28" />
+            <NODEREF id="minecraftFence29" />
+            <NODEREF id="minecraftFence30" />
+            <NODEREF id="minecraftFence31" />
+            <NODEREF id="minecraftFence32" />
         </DESCENDANTS>
     </NODE>
 
@@ -266,7 +294,260 @@
             <NODEREF id="minecraftFence" />
         </DESCENDANTS>
     </NODE>
-
+<!-- fence 5 -->
+    <NODE id="minecraftFence5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="16" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 6 -->
+    <NODE id="minecraftFence6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="20" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 7 -->
+    <NODE id="minecraftFence7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="24" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 8 -->
+    <NODE id="minecraftFence8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="28" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 9 -->
+    <NODE id="minecraftFence9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="32" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 10 -->
+    <NODE id="minecraftFence10">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="36" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 11 -->
+    <NODE id="minecraftFence11">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="40" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 12 -->
+    <NODE id="minecraftFence12">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="44" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 13 -->
+    <NODE id="minecraftFence13">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="48" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 14 -->
+    <NODE id="minecraftFence14">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="52" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 15 -->
+    <NODE id="minecraftFence15">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="56" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 16 -->
+    <NODE id="minecraftFence16">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="60" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 17 -->
+    <NODE id="minecraftFence17">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="64" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 18 -->
+    <NODE id="minecraftFence18">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="68" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 19 -->
+    <NODE id="minecraftFence19">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="72" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 20 -->
+    <NODE id="minecraftFence20">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="76" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 21 -->
+    <NODE id="minecraftFence21">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="80" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 22 -->
+    <NODE id="minecraftFence22">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="84" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 23 -->
+    <NODE id="minecraftFence23">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="88" y="0" z="46" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 24 -->
+    <NODE id="minecraftFence24">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="23" y="0" z="0" />
+        <ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 25 -->
+    <NODE id="minecraftFence25">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="3" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 26 -->
+    <NODE id="minecraftFence26">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="3" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 27 -->
+    <NODE id="minecraftFence27">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="3" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 28 -->
+    <NODE id="minecraftFence28">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="3" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 29 -->
+    <NODE id="minecraftFence29">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="3" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 30 -->
+    <NODE id="minecraftFence30">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="4" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 31 -->
+    <NODE id="minecraftFence31">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="8" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 32 -->
+    <NODE id="minecraftFence32">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="3" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
 
 
 
