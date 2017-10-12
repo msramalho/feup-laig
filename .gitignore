@@ -1,1 +1,10 @@
 .vscode/*
+reader/Primitives/MyCylinder.js
+reader/Primitives/MyQuad.js
+reader/Primitives/MySphere.js
+reader/Primitives/MyTriangle.js
+reader/scenes/images/images.rar
+reader/scenes/images/images.zip
+reader/scenes/interior.lsx
+reader/scenes/redbull.lsx
+reader/scenes/wall.lsx
