@@ -121,7 +121,7 @@
     <!-- Wood Stripes -->
     <TEXTURE id="Stripes">
         <file path="images/stripes.jpg" />
-        <amplif_factor s="1" t="4" />
+        <amplif_factor s="0.5" t="8" />
     </TEXTURE>
 
 </TEXTURES>
@@ -219,17 +219,42 @@
             <NODEREF id="fence1"/>
             <NODEREF id="fence2"/>
             <NODEREF id="fence3"/>
+            <NODEREF id="bridgeS"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeS">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
             <NODEREF id="bridge"/>
             <NODEREF id="bridge2"/>
             <NODEREF id="bridgeSide"/>
             <NODEREF id="bridgeSide2"/>
+            <NODEREF id="bridgeInside"/>
+            <NODEREF id="bridgeInside2"/>
+            <NODEREF id="bridgeRails"/>
+            <NODEREF id="bridgeRails2"/>
+            <NODEREF id="bridgeCovers"/>
+        </DESCENDANTS>
+    </NODE>
+
+        <NODE id="bridgeCovers">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="76" y="-0.5" z="0" />
+        <ROTATION axis="y" angle="90"/>
+        <DESCENDANTS>
+            <NODEREF id="bridgeRect"/>
+            <NODEREF id="bridgeRect2"/>
+            <NODEREF id="bridgeRect3"/>
+            <NODEREF id="bridgeRect4"/>
         </DESCENDANTS>
     </NODE>
 
     <NODE id="bridge">
         <MATERIAL id="null" />
         <TEXTURE id="Stripes" />
-
         <TRANSLATION x="48" y="2" z="-20" />
         <DESCENDANTS>
             <LEAF type="patch" args="30 30" >
@@ -276,9 +301,9 @@
         <DESCENDANTS>
             <LEAF type="patch" args="30 30" >
                 <CPLINE>
-                    <CPOINT xx="0" yy="-2.5" zz="20" ww="1"/>
-                    <CPOINT xx="14" yy="10" zz="20" ww="1"/>
-                    <CPOINT xx="28" yy="-2.5" zz="20" ww="1"/>
+                    <CPOINT xx="0" yy="3.5" zz="20" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="20" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="20" ww="1"/>
                 </CPLINE>
                 <CPLINE>
                     <CPOINT xx="0" yy="-4.5" zz="20" ww="1"/>
@@ -302,11 +327,133 @@
                     <CPOINT xx="28" yy="-4.5" zz="0" ww="1"/>
                 </CPLINE>
                 <CPLINE>
-                    <CPOINT xx="0" yy="-2.5" zz="0" ww="1"/>
-                    <CPOINT xx="14" yy="10" zz="0" ww="1"/>
-                    <CPOINT xx="28" yy="-2.5" zz="0" ww="1"/>
+                    <CPOINT xx="0" yy="3.5" zz="0" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="0" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="0" ww="1"/>
                 </CPLINE>
             </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeInside">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+                <CPLINE>
+                    <CPOINT xx="0" yy="-4.5" zz="18" ww="1"/>
+                    <CPOINT xx="14" yy="8" zz="18" ww="1"/>
+                    <CPOINT xx="28" yy="-4.5" zz="18" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="18" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="18" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="18" ww="1"/>
+                </CPLINE>
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeInside2">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+                <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="2" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="2" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="2" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="-4.5" zz="2" ww="1"/>
+                    <CPOINT xx="14" yy="8" zz="2" ww="1"/>
+                    <CPOINT xx="28" yy="-4.5" zz="2" ww="1"/>
+                </CPLINE>
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRails">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+                <CPLINE>
+                        <CPOINT xx="0" yy="3.5" zz="0" ww="1"/>
+                        <CPOINT xx="14" yy="16" zz="0" ww="1"/>
+                        <CPOINT xx="28" yy="3.5" zz="0" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                        <CPOINT xx="0" yy="3.5" zz="2" ww="1"/>
+                        <CPOINT xx="14" yy="16" zz="2" ww="1"/>
+                        <CPOINT xx="28" yy="3.5" zz="2" ww="1"/>
+                </CPLINE>    
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRails2">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+            <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="18" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="18" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="18" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="20" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="20" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="20" ww="1"/>
+                </CPLINE>
+                
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRect">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 6 2 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRect2">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+        <ROTATION axis="y" angle="180" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 6 2 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRect3">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 6 2 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRect4">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+        <ROTATION axis="y" angle="180" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 6 2 0" />
         </DESCENDANTS>
     </NODE>
 
@@ -2533,26 +2680,6 @@
         </DESCENDANTS>
 
     </NODE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- The lights -->
      <NODE id="luzes">
