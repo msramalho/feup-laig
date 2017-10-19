@@ -1395,32 +1395,40 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 
     this.scene.multMatrix(currNode.transformMatrix);
 
+    // if this node has a material defined, override the default material
     if (this.materials[currNode.materialID] != null) {
         mat = currNode.materialID;
     }
 
+    // if this node has a texture defined, override the default texture
     if (this.textures[currNode.textureID] != null) {
+        //if this node specifies that it does not want a texture
         if (currNode.textureID == 'clear') {
             tex = null;
         } else tex = currNode.textureID;
     }
 
+    //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {
         if (this.materials[mat] != null) {
+            //aplly the material
             this.materials[mat].apply();
         }
 
         if (this.textures[tex] != null) {
+            //set Amplification Factor for this texture
             currNode.leaves[i].primitive.setAmplifFactor(this.textures[tex][1], this.textures[tex][2]);
             this.textures[tex][0].bind();
         }
 
+        //invoke the display on this primitie
         currNode.leaves[i].primitive.display();
     }
 
+    //recursive implementation of interpret node
     for (var i = 0; i < currNode.children.length; i++) {
-        this.scene.pushMatrix();
-        this.interpretNode(currNode.children[i], mat, tex);
-        this.scene.popMatrix();
+        this.scene.pushMatrix(); //save the current matrix's state so it is not altered wrongly
+        this.interpretNode(currNode.children[i], mat, tex); //recursive call
+        this.scene.popMatrix(); //restore the matrix
     }
 }
