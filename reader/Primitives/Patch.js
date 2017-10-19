@@ -49,5 +49,6 @@ function Patch(scene, div_u, div_v, cpoints) {
       this.nurbs_object.display();
     }
     
-    Patch.prototype.updateTexture = function(texture) {
-    }
+    Patch.prototype.updateTexture = function(texture) {}
+
+    Patch.prototype.setAmplifFactor = function(amplif_s, amplif_t) {}
