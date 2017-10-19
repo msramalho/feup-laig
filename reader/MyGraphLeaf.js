@@ -26,6 +26,7 @@ function MyGraphLeaf(graph, lsxelem) {
         this.primitive = new Sphere(this.graph.scene, this.args[0], this.args[1], this.args[2]);
     } else if (this.type == "cylinder") {
         this.primitive = new Cylinder(this.graph.scene, this.args[0], this.args[1], this.args[2], this.args[3], this.args[4]);
+    } else if (this.type == "patch") {
+        this.primitive = new Patch(this.graph.scene, this.args[0], this.args[1], this.graph.patch);
     }
 }
-

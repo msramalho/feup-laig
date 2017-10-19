@@ -1340,8 +1340,32 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 else
 					if (descendants[j].nodeName == "LEAF")
 					{
-						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
-						
+						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']);
+                        
+                        if (type == 'patch'){
+                            
+                            this.patch = [];
+                            var cplines = descendants[j].children;
+                            
+                            for(var n = 0 ; n < cplines.length ; n++){
+                                
+                                this.cpline = [];
+                                var cpoints = cplines[n].children;
+                                
+                                for(var d = 0 ; d < cpoints.length ; d++){
+
+                                    var x = this.reader.getFloat(cpoints[d], 'xx');
+                                    var y = this.reader.getFloat(cpoints[d], 'yy');
+                                    var z = this.reader.getFloat(cpoints[d], 'zz');
+                                    var w = this.reader.getFloat(cpoints[d], 'ww'); 
+                                    
+                                    var point = [x, y, z, w];
+                                    this.cpline.push(point);                                    
+                                }
+                                this.patch.push(this.cpline);
+                            }
+                        }
+
 						if (type != null)
 							this.log("   Leaf: "+ type);
 						else
