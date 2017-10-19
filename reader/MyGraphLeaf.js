@@ -13,11 +13,13 @@ function MyGraphLeaf(graph, lsxelem) {
     this.graph = graph;
     this.element = lsxelem;
 
-    this.type = this.graph.reader.getItem(this.element, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']);
+    //get type from accepted types
+    this.type = this.graph.reader.getItem(this.element, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
     this.args = this.graph.reader.getString(this.element, 'args').split(" ").map(Number);
     this.primitive = null;
     console.log(this.type);
 
+    //from the node type, instantiate the right primitive, with the correct arguments
     if (this.type == "rectangle") {
         this.primitive = new Rectangle(this.graph.scene, this.args[0], this.args[1], this.args[2], this.args[3]);
     } else if (this.type == "triangle") {
@@ -28,6 +30,5 @@ function MyGraphLeaf(graph, lsxelem) {
         this.primitive = new Cylinder(this.graph.scene, this.args[0], this.args[1], this.args[2], this.args[3], this.args[4]);
     } else if (this.type == "patch") {
         this.primitive = new Patch(this.graph.scene, this.args[0], this.args[1], this.graph.patch);
-        console.log("patch: " + this.primitive);
     }
 }

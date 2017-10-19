@@ -13,13 +13,14 @@ Patch.prototype = Object.create(CGFnurbsObject.prototype);
 Patch.prototype.constructor = Patch;
 
 Patch.prototype.getKnotsVector = function(degree) {
+    //return vector of degree + 1 zeros and degree + 1 ones, for the degrees
     var array0 = new Array(degree + 1).fill(0);
     var array1 = new Array(degree + 1).fill(1);
     return array0.concat(array1);
 }
 
 Patch.prototype.makeSurface = function(degree_1, degree_2, cpoints) {
-
+    //create the nurbs surface from the knots and degress
     var knots_1 = this.getKnotsVector(degree_1);
     var knots_2 = this.getKnotsVector(degree_2);
 
@@ -36,6 +37,8 @@ Patch.prototype.display = function() {
     this.nurbs_object.display();
 }
 
+//function stubs so the MySceneGraph can invoke them on any nodes
 Patch.prototype.updateTexture = function(texture) {}
 
+//function stubs so the MySceneGraph can invoke them on any nodes
 Patch.prototype.setAmplifFactor = function(amplif_s, amplif_t) {}
