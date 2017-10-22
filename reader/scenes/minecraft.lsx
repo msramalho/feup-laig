@@ -3,10 +3,10 @@
 <!-- Initial values -->
 <INITIALS>
     <frustum near="0.1" far="500"/>
-    <translation x="-4" y="1.5" z="0" />
-    <rotation axis="x" angle="0" />
-    <rotation axis="y" angle="-45" />
-    <rotation axis="z" angle="0" />
+    <translation x="-1.1" y="2.3" z="0" />
+    <rotation axis="x" angle="10" />
+    <rotation axis="y" angle="-65" />
+    <rotation axis="z" angle="20" />
     <scale sx="0.10" sy="0.10" sz="0.10" />
     <reference length="5" />
 </INITIALS>
@@ -91,7 +91,7 @@
 
     <!-- Minecraft Dirt Fence -->
     <TEXTURE id="minecraft_fence">
-        <file path="images/minecraft_wood2.jpg" />
+        <file path="images/minecraft_fence.jpg" />
         <amplif_factor s="4" t="4" />
     </TEXTURE>
 
@@ -122,6 +122,16 @@
     <TEXTURE id="Stripes">
         <file path="images/stripes.jpg" />
         <amplif_factor s="0.5" t="8" />
+    </TEXTURE>
+    <!-- Trunk -->
+    <TEXTURE id="Trunk">
+        <file path="images/trunk2.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+    <!-- Leaves -->
+    <TEXTURE id="Leaves">
+        <file path="images/leaves.png" />
+        <amplif_factor s="1" t="1" />
     </TEXTURE>
 
 </TEXTURES>
@@ -173,6 +183,15 @@
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
+    <!-- Tree leaves material -->
+	<MATERIAL id="leavesTreeMaterial">                                  
+        <shininess value="1" />
+        <specular r="0.2" g="0.2" b="0.2" a="1" />        
+        <diffuse r="0.0" g="0.207" b="0.0" a="1" />       
+        <ambient r="0.1" g="0.1" b="0.1" a="1" />         
+        <emission r="0.0" g="0.0" b="0.0" a="1" />        
+    </MATERIAL>
+
     <!-- Light bulb material -->
     <MATERIAL id="lightMaterial">
         <shininess value="100" />
@@ -193,12 +212,6 @@
 
 </MATERIALS>
 
-
-<!-- The leaves -->
-<LEAVES>
-</LEAVES>
-
-
 <!-- The nodes -->
 <NODES>
 
@@ -207,7 +220,7 @@
     <!-- The root node -->
     <NODE id="root">
         <MATERIAL id="defaultMaterial" />
-        <TEXTURE id="null" />
+        <TEXTURE id="clear" />
         <DESCENDANTS>
             <NODEREF id="minecraftDirtBlocksGrass" />
             <NODEREF id="minecraftDirtBlocks" />
@@ -220,6 +233,7 @@
             <NODEREF id="fence2"/>
             <NODEREF id="fence3"/>
             <NODEREF id="bridgeS"/>
+            <NODEREF id="trees"/>
         </DESCENDANTS>
     </NODE>
 
@@ -752,7 +766,6 @@
         <MATERIAL id="minecraftWoodMaterial" />
         <TEXTURE id="null" />
         <DESCENDANTS>
-       		<!-- <NODEREF id="fencePoleLeft" /> -->
             <NODEREF id="fencePoleRight" />
             <NODEREF id="fenceSidePoleTop" />
             <NODEREF id="fenceSidePoleBottom" />
@@ -785,9 +798,6 @@
     <NODE id="fenceSidePole">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        <!-- <TRANSLATION x="0" y="0" z="-1" />
-        <SCALE sx="0.25" sy="1" sz="0.25" />
-		<ROTATION axis="y" angle="-90" /> -->
         <ROTATION axis="z" angle="-90" />
         <TRANSLATION x="-2" y="0.625" z="22.20" />
         <SCALE sx="0.5" sy="0.9" sz="0.5" />
@@ -2681,6 +2691,161 @@
 
     </NODE>
 
+    <!-- Trees -->
+     <NODE id="trees">       
+        <MATERIAL id="null" />     
+        <TEXTURE id="null" />       			
+        <DESCENDANTS>
+       		<NODEREF id="tree" />
+            <NODEREF id="tree2" />      
+        </DESCENDANTS>
+
+    </NODE>
+    
+    <!-- Generic tree -->
+    <NODE id="tree">       
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" /> 
+        <TRANSLATION x="50" y="0" z="-20" />    
+        <SCALE sx="3" sy="3" sz="3" />	
+        <ROTATION axis="y" angle="180" />	
+
+        <DESCENDANTS>
+            <NODEREF id="treeTrunk" />
+            <NODEREF id="treeLeaves" />     	    
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic tree -->
+    <NODE id="tree2">       
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" /> 
+        <TRANSLATION x="30" y="0" z="-40" />    
+        <SCALE sx="3" sy="3" sz="3" />	
+        <ROTATION axis="y" angle="180" />	
+
+        <DESCENDANTS>
+            <NODEREF id="treeTrunk" />
+            <NODEREF id="treeLeaves" />     	    
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tree trunk -->
+    <NODE id="treeTrunk">       
+        <MATERIAL id="minecraftWoodMaterial" />     
+        <TEXTURE id="Trunk" />       			
+
+        <ROTATION axis="x" angle="90" />
+        <TRANSLATION x="5" y="5" z="-4" />
+
+        <DESCENDANTS>
+					<LEAF type="cylinder" args="4 1 1 20 20" /> 
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tree leaves -->
+     <NODE id="treeLeaves">       
+        <MATERIAL id="leavesTreeMaterial" />     
+        <TEXTURE id="Leaves" />       			
+
+        <DESCENDANTS>
+       		<NODEREF id="treeSide1" />
+            <NODEREF id="treeSide2" />
+            <NODEREF id="treeSide3" />
+            <NODEREF id="treeSide4" />
+            <NODEREF id="treeSide5" />
+            <NODEREF id="treeSide6" />      
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- A cube face -->
+    <NODE id="treeSide1">       
+        <MATERIAL id="null" />     
+        <TEXTURE id="null" />       			
+
+        <TRANSLATION x="2.5" y="4" z="7.5" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />        
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+     <NODE id="treeSide2">      
+        <MATERIAL id="null" />     
+        <TEXTURE id="null" />       			
+
+        <TRANSLATION x="2.5" y="4" z="2.5" />
+		<ROTATION axis="y" angle="-90" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />        
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="treeSide3">       
+        <MATERIAL id="null" />     
+        <TEXTURE id="null" />       			
+
+        <TRANSLATION x="7.5" y="4" z="7.5" />
+		<ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />        
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="treeSide4">       
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+        <TRANSLATION x="7.5" y="4" z="2.5" />
+        <ROTATION axis="y" angle="180" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />        
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="treeSide5">       
+        <MATERIAL id="null" />    
+        <TEXTURE id="null" />       			
+
+        <ROTATION axis="x" angle="-90" />
+        <TRANSLATION x="2.5" y="-7.5" z="8" />
+        <SCALE sx="1" sy="1.25" sz="1" />
+
+        <DESCENDANTS>
+ 					<LEAF  type="rectangle" args="0 4 5 0" />        
+       </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="treeSide6">       
+        <MATERIAL id="null" />     
+        <TEXTURE id="null" />       			
+
+        <TRANSLATION x="2.5" y="4" z="2.5" />
+        <ROTATION axis="x" angle="90" />
+        <SCALE sx="1" sy="1.25" sz="1" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />        
+        </DESCENDANTS>
+
+    </NODE>
+
     <!-- The lights -->
      <NODE id="luzes">
         <MATERIAL id="lightMaterial" />
@@ -2775,7 +2940,7 @@
     <!-- The post in the lamp post... -->
     <NODE id="luz_suporte">
         <MATERIAL id="lightPostMaterial" />
-        <TEXTURE id="null" />
+        <TEXTURE id="SideDoor" />
 
         <SCALE sx="0.5" sy="3" sz="0.5" />
         <ROTATION axis="x" angle="-90" />

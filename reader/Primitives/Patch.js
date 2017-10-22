@@ -21,10 +21,10 @@ Patch.prototype.getKnotsVector = function(degree) {
 
 Patch.prototype.makeSurface = function(degree1, degree2, cpoints) {
     //create the nurbs surface from the knots and degress
-    var knots_1 = this.getKnotsVector(degree1);
-    var knots_2 = this.getKnotsVector(degree2);
+    var knots1 = this.getKnotsVector(degree1);
+    var knots2 = this.getKnotsVector(degree2);
 
-    var nurbs_surface = new CGFnurbsSurface(degree1, degree2, knots_1, knots_2, cpoints);
+    var nurbs_surface = new CGFnurbsSurface(degree1, degree2, knots1, knots2, cpoints);
 
     getSurfacePoint = function(u, v) {
         return nurbs_surface.getPoint(u, v);
