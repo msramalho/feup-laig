@@ -1201,15 +1201,11 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 			}
 
 		}
-
-
-		/*
-		TODO: uncomment when this is ready
-		var newAnimation = new AnimationFactory(animationType, animationProperties);
-
+		//create and return the correct type of animation
+		var newAnimation = AnimationFactory(animationType, animationProperties);
+		if(!newAnimation) return "Unable to create animation type for animation: " + animationID;
+		//add the newly created animation to this.animations
 		this.animations[spanrefId] = newAnimation;
-		*/
-		this.animations[animationID] = "tempValue";//replace with above when AnimationFactory is ready
     }
 }
 
