@@ -1166,7 +1166,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 
 		//make sure all the required properties for each type are set, they are all float, so this is quite straightforward
 		for (let j = 0; j < animationTypesRequires[animationProperties["type"]].length; j++) {
-			const requirement = animationTypesRequires[animationProperties["type"]][i];
+			const requirement = animationTypesRequires[animationProperties["type"]][j];
 			animationProperties[requirement] = this.reader.getFloat(children[i], requirement);
 			if (animationProperties[requirement] == null || isNaN(animationProperties[requirement])){
 				return "Animation (id: "+animationID+") needs property: " + requirement;
