@@ -1,8 +1,10 @@
-var Animation = function() {
+function Animation() {
     if(this.constructor === Animation){
-        throw new Error("This is an abstract class and cannot therefore be instantiated, use of it's descendants!");
+        throw new Error("ERROR: This is an abstract class and cannot therefore be instantiated, use of it's descendants!");
 	}
 };
+
+Animation.prototype.constructor = Animation;
 
 /**
  * Abstract methods TODO
