@@ -1491,9 +1491,10 @@ MySceneGraph.generateRandomString = function(length) {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function() {
-        // entry point for graph rendering
-        this.interpretNode(this.idRoot, this.nodes[this.idRoot].materialID, this.nodes[this.idRoot].textureID);
-    }
+	// entry point for graph rendering
+	this.interpretNode(this.idRoot, this.nodes[this.idRoot].materialID, this.nodes[this.idRoot].textureID);
+}
+
     /**
      * Displays the scene, processing each node, starting in the root node.
      */
