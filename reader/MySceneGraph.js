@@ -1245,14 +1245,10 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             this.nodes[nodeID] = new MyGraphNode(this, nodeID);
 
 			// Checks if this a selectable node
-
-			try {
-				var isSelectable = this.reader.getString(children[i], 'selectable');
-
-				this.nodes[nodeID].selectable = isSelectable==="true"?true:false;
-				console.log("NODE is selectable?: " + this.nodes[nodeID].selectable);
-			} catch (error) {
-				console.log("ERROR: " + error);
+			var isSelectable = children[i].getAttribute('selectable');
+			if (isSelectable==="true") {
+				this.nodes[nodeID].selectable = true;//set this as a selectable node
+				this.selectables.push(nodeID);//save the id of the selectable nodes
 			}
 
             // Gathers child nodes.
