@@ -184,8 +184,11 @@
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
 
-        <DESCENDANTS>
+		<ANIMATIONREFS>
+			<ANIMATIONREF id = "animLin">
+		</ANIMATIONREFS>
 
+        <DESCENDANTS>
             <NODEREF id="luzes" />
             <NODEREF id="piramide" />
             <NODEREF id="arvores" />
