@@ -196,7 +196,7 @@
     </NODE>
 
     <!-- The floor -->
-    <NODE id="chao">
+    <NODE id="chao" selectable="true">
         <MATERIAL id="null" />
         <TEXTURE id="rocks" />
 
@@ -328,7 +328,7 @@
     </NODE>
 
     <!-- One bench -->
-    <NODE id="banco2">
+    <NODE id="banco2" selectable="true">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
