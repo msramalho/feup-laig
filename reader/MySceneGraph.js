@@ -1256,7 +1256,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
-            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS"];
+            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS", "ANIMATIONREFS"];
             for (var j = 0; j < nodeSpecs.length; j++) {
                 var name = nodeSpecs[j].nodeName;
                 specsNames.push(nodeSpecs[j].nodeName);
@@ -1363,6 +1363,23 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         break;
                 }
             }
+
+			// Retrieves information about animations in this node.
+            var animationsIndex = specsNames.indexOf("ANIMATIONREFS");
+			if (animationsIndex != -1) {//there is at least one animation to parse
+				var animations = nodeSpecs[animationsIndex].children;
+				for (var j = 0; j < animations.length; j++) {//for each node
+					if (animations[j].nodeName == "ANIMATIONREF") {//that is an animation ref
+						var animId = this.reader.getString(animations[j], 'id');
+						if(animId == null || !this.animations[animId]){
+							this.onXMLError("ANIMATIONREF: " + animId + " is not defined on node: " + nodeID);
+						}
+						this.nodes[nodeID].animations.push(this.animations[animId]);
+						//this.nodes[nodeID].animations.push(animId);//if just the ids are needed
+					}
+				}
+
+			}
 
             // Retrieves information about children.
             var descendantsIndex = specsNames.indexOf("DESCENDANTS");
