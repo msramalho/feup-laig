@@ -6,8 +6,9 @@ var ILLUMINATION_INDEX = 1;
 var LIGHTS_INDEX = 2;
 var TEXTURES_INDEX = 3;
 var MATERIALS_INDEX = 4;
-var LEAVES_INDEX = 5;
-var NODES_INDEX = 6;
+var ANIMATIONS_INDEX = 5;
+var LEAVES_INDEX = 6;
+var NODES_INDEX = 7;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -137,6 +138,17 @@ MySceneGraph.prototype.parseLSXFile = function(rootElement) {
         if ((error = this.parseMaterials(nodes[index])) != null)
             return error;
     }
+
+
+    // <ANIMATIONS>
+    if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
+        return "tag <ANIMATIONS> missing";
+    else {
+        if (index != ANIMATIONS_INDEX)
+            this.onXMLMinorError("tag <ANIMATIONS> out of order");
+		if ((error = this.parseAnimations(nodes[index])) != null)
+			return error;
+	}
 
     // <NODES>
     if ((index = nodeNames.indexOf("NODES")) == -1)
@@ -1107,6 +1119,95 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
     console.log("Parsed materials");
 }
 
+/**
+ * Parses the <ANIMATIONS> node.
+ */
+MySceneGraph.prototype.parseAnimations = function(animationsNode) {
+
+    var children = animationsNode.children;
+    // Each material.
+
+    this.animations = [];
+
+    var oneMaterialDefined = false;
+
+    for (var i = 0; i < children.length; i++) {
+        if (children[i].nodeName != "ANIMATION") {
+            this.onXMLMinorError("unknown tag name <" + children[i].nodeName + ">");
+            continue;
+        }
+        var animationID = this.reader.getString(children[i], 'id');
+        if (animationID == null)
+            return "no ID defined for animation";
+
+        if (this.animations[animationID] != null)
+            return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
+
+
+		var animationType = this.reader.getString(children[i], 'type');
+		if (animationType == null)
+			return "no type defined for animation : " + animationID;
+
+		//read all the properties of each ANIMATION node
+
+		var animationProperties = {};
+		//MANDATORY properties:
+		//type - ss
+		animationProperties["type"] = this.reader.getString(children[i], 'type');
+		if (animationProperties["type"] == null)
+			return "no type defined for animation : " + animationID;
+
+		var animationTypesRequires = {
+			"linear": ["speed"],
+			"circular": ["speed", "centerx", "centery", "centerz", "radius", "startang", "rotang"],
+			"bezier": ["speed"],
+			"combo": []
+		};
+
+		//make sure all the required properties for each type are set, they are all float, so this is quite straightforward
+		for (let j = 0; j < animationTypesRequires[animationProperties["type"]].length; j++) {
+			const requirement = animationTypesRequires[animationProperties["type"]][j];
+			animationProperties[requirement] = this.reader.getFloat(children[i], requirement);
+			if (animationProperties[requirement] == null || isNaN(animationProperties[requirement])){
+				return "Animation (id: "+animationID+") needs property: " + requirement;
+			}
+		}
+
+		//Read all the controlpoint and SPANREF names
+        var animationSpecs = children[i].children;
+
+		//Parse all the controlpoint and SPANREF names
+		animationProperties["controlpoints"] = [];//array of {x,y,z}
+		animationProperties["spanrefs"] = [];//array of animations
+		for (let j = 0; j < animationSpecs.length; j++) {
+			const node = animationSpecs[j];
+			if (node.nodeName == "controlpoint") {//parse control point <controlpoint xx="ff" yy="ff" zz="ff />
+				let xx = this.reader.getFloat(node, "xx");
+				if (xx == null || isNaN(xx)) return "Animation (id: "+animationID+")'s controlpoint needs valid property: xx for subnode " + (j + 1);
+
+				let yy = this.reader.getFloat(node, "yy");
+				if (yy == null || isNaN(yy)) return "Animation (id: "+animationID+")'s controlpoint needs valid property: yy for subnode " + (j + 1);
+
+				let zz = this.reader.getFloat(node, "zz");
+				if (zz == null || isNaN(zz)) return "Animation (id: "+animationID+")'s controlpoint needs valid property: xx for subnode " + (j + 1);
+
+				animationProperties["controlpoints"].push({x: xx, y: yy, z: zz});
+			} else if(node.nodeName == "SPANREF") {//parse SPANREF <SPANREF id="ss" />
+				let spanrefId = this.reader.getString(node, "id");
+				if(spanrefId == null) return "Animation (id: "+animationID+")'s SPANREF needs valid ID for subnode " + (j + 1);
+				if(this.animations[spanrefId] == null) return "Animation (id: "+animationID+") references a SPANREF for an animation that has not yet been declared: " + spanrefId;
+
+				animationProperties["spanrefs"].push(this.animations[spanrefId]);
+			}
+
+		}
+		//create and return the correct type of animation
+		var newAnimation = AnimationFactory(animationType, animationProperties);
+		if(!newAnimation) return "Unable to create animation type for animation: " + animationID;
+		//add the newly created animation to this.animations
+		this.animations[spanrefId] = newAnimation;
+    }
+}
 
 /**
  * Parses the <NODES> block.
@@ -1137,10 +1238,22 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             if (this.nodes[nodeID] != null)
                 return "node ID must be unique (conflict: ID = " + nodeID + ")";
 
+
             this.log("Processing node " + nodeID);
 
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this, nodeID);
+
+			// Checks if this a selectable node
+
+			try {
+				var isSelectable = this.reader.getString(children[i], 'selectable');
+
+				this.nodes[nodeID].selectable = isSelectable==="true"?true:false;
+				console.log("NODE is selectable?: " + this.nodes[nodeID].selectable);
+			} catch (error) {
+				console.log("ERROR: " + error);
+			}
 
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
