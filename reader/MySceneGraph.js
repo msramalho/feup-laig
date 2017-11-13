@@ -1207,7 +1207,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 		var newAnimation = AnimationFactory(animationType, animationProperties);
 		if(!newAnimation) return "Unable to create animation type for animation: " + animationID;
 		//add the newly created animation to this.animations
-		this.animations[spanrefId] = newAnimation;
+		this.animations[animationID] = newAnimation;
     }
 }
 
