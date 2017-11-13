@@ -10,6 +10,7 @@ function XMLscene(interface) {
     this.interface = interface;
 
     this.lightValues = {};
+    this.selectableValues = {};
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -100,7 +101,8 @@ XMLscene.prototype.onGraphLoaded = function()
     this.initLights();
 
     // Adds lights group.
-    this.interface.addLightsGroup(this.graph.lights);
+	this.interface.addLightsGroup(this.graph.lights);
+	this.interface.addSelectablesGroup(this.graph.selectables);
 }
 
 /**
@@ -130,6 +132,7 @@ XMLscene.prototype.display = function() {
 		// Draw axis
 		this.axis.display();
 
+		//detect changes in the lights
         var i = 0;
         for (var key in this.lightValues) {
             if (this.lightValues.hasOwnProperty(key)) {
@@ -145,6 +148,11 @@ XMLscene.prototype.display = function() {
                 i++;
             }
         }
+		//detect changes in the selectable checkboxes
+		for (var key in this.selectableValues) {
+			this.graph.nodes[key].selected = this.selectableValues[key];
+		}
+
 
         // Displays the scene.
         this.graph.displayScene();

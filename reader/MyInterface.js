@@ -3,7 +3,7 @@
  * @constructor
  */
 function MyInterface() {
-    //call CGFinterface constructor 
+    //call CGFinterface constructor
     CGFinterface.call(this);
 }
 ;
@@ -21,11 +21,11 @@ MyInterface.prototype.init = function(application) {
 
     // init GUI. For more information on the methods, check:
     //  http://workshop.chromeexperiments.com/examples/gui
-    
+
     this.gui = new dat.GUI();
 
     // add a group of controls (and open/expand by defult)
-    
+
     return true;
 };
 
@@ -33,6 +33,8 @@ MyInterface.prototype.init = function(application) {
  * Adds a folder containing the IDs of the lights passed as parameter.
  */
 MyInterface.prototype.addLightsGroup = function(lights) {
+	console.log("this.scene.lightValues");
+	console.log(this.scene.lightValues);
 
     var group = this.gui.addFolder("Lights");
     group.open();
@@ -46,5 +48,26 @@ MyInterface.prototype.addLightsGroup = function(lights) {
             group.add(this.scene.lightValues, key);
         }
     }
-}
+};
+
+/**
+ * Adds a folder containing the IDs of the selectable nodes passed as parameter.
+ */
+MyInterface.prototype.addSelectablesGroup = function(selectables) {
+	this.scene.selectableValues = {};
+	for (let i = 0; i < selectables.length; i++) {
+		const selectable = selectables[i];
+		this.scene.selectableValues[selectable] = false;
+
+	}
+
+    var group = this.gui.addFolder("Selectables");
+	group.open();
+
+    for (var key in selectables) {
+        if (selectables.hasOwnProperty(key)) {
+            group.add(this.scene.selectableValues, selectables[key]);
+        }
+    }
+};
 

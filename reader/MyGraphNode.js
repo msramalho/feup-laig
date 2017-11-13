@@ -10,6 +10,7 @@ function MyGraphNode(graph, nodeID) {
 
 	//selectable node
 	this.selectable = false;
+	this.selected = false;
 
     // IDs of child nodes.
     this.children = [];

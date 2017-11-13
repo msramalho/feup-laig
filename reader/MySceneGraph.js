@@ -21,7 +21,9 @@ function MySceneGraph(filename, scene) {
     this.scene = scene;
     scene.graph = this;
 
-    this.nodes = [];
+	this.nodes = [];
+
+	this.selectables = [];
 
     this.idRoot = null; // The id of the root element.
 
@@ -1493,6 +1495,8 @@ MySceneGraph.generateRandomString = function(length) {
 MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
 	this.interpretNode(this.idRoot, this.nodes[this.idRoot].materialID, this.nodes[this.idRoot].textureID);
+
+
 }
 
     /**
@@ -1502,6 +1506,11 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     var mat = material;
     var tex = texture;
     var currNode = this.nodes[idnode];
+
+	if(this.nodes[idnode].selected){
+		console.log("NODE: " + idnode + " is selected");
+		//todo intereact with necessary shaders
+	}
 
     this.scene.multMatrix(currNode.transformMatrix);
 
