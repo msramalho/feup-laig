@@ -1,5 +1,5 @@
 function LinearAnimation(speed, controlPoints) {
-	this.init(id);
+	//this.init(id);
 	this.speed = speed;
 	this.controlPoints = controlPoints;
 
