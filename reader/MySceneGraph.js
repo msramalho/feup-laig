@@ -1238,10 +1238,22 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             if (this.nodes[nodeID] != null)
                 return "node ID must be unique (conflict: ID = " + nodeID + ")";
 
+
             this.log("Processing node " + nodeID);
 
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this, nodeID);
+
+			// Checks if this a selectable node
+
+			try {
+				var isSelectable = this.reader.getString(children[i], 'selectable');
+
+				this.nodes[nodeID].selectable = isSelectable==="true"?true:false;
+				console.log("NODE is selectable?: " + this.nodes[nodeID].selectable);
+			} catch (error) {
+				console.log("ERROR: " + error);
+			}
 
             // Gathers child nodes.
             var nodeSpecs = children[i].children;

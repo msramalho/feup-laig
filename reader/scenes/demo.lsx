@@ -148,7 +148,7 @@
 </MATERIALS>
 
 <ANIMATIONS>
-	<ANIMATION id="animLin" speed="10" type="linear">
+<!-- 	<ANIMATION id="animLin" speed="10" type="linear">
 		<controlpoint xx="1" yy="1" zz="1" />
 		<controlpoint xx="2" yy="2" zz="2" />
 	</ANIMATION>
@@ -165,7 +165,7 @@
 	<ANIMATION id="animComb" type="combo">
 		<SPANREF id="animLin" />
 		<SPANREF id="animB" />
-	</ANIMATION>
+	</ANIMATION> -->
 </ANIMATIONS>
 
 
