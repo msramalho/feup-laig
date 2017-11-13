@@ -1,5 +1,3 @@
-CircularAnimation.prototype = new Animation();
-
 function CircularAnimation(speed, center, radius, angInit, rotation) {
 	this.speed = speed;
 	this.center = center;
