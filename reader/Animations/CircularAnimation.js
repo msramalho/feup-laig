@@ -1,9 +1,9 @@
-function CircularAnimation(speed, center, radius, angInit, rotation) {
+function CircularAnimation(speed, center, radius, startAng, rotAng) {
 	this.speed = speed;
 	this.center = center;
 	this.radius = radius;
-	this.angInit = angInit;
-	this.rotation = rotation;
+	this.startAng = startAng;
+	this.rotAng = rotAng;
 }
 
 CircularAnimation.prototype = Object.create(Animation.prototype);
@@ -16,9 +16,9 @@ CircularAnimation.prototype.animate = function(time) {
 		time = this.speed;
 
 	mat4.translate(matrix, matrix, this.center);
-	mat4.rotate(matrix, matrix, this.angInit + (time / this.speed) * this.rotation, [0, 1, 0]);
+	mat4.rotate(matrix, matrix, this.startAng + (time / this.speed) * this.rotAng, [0, 1, 0]);
 	mat4.translate(matrix, matrix, [this.radius, 0, 0]);
-	if(this.rotation > 0)
+	if(this.rotAng > 0)
 		mat4.rotate(matrix, matrix, Math.PI, [0, 1, 0]);
 	return matrix;
 }
