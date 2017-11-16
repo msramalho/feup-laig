@@ -12,7 +12,7 @@ Animation.prototype.constructor = Animation;
 /* Animation.prototype.getMatrix = function() {
     throw new Error("getMatrix is an abstract method!");
 };
-
-Animation.prototype.animate = function(deltaTime){
+*/
+Animation.prototype.animate = function(time){
     throw new Error("animate is an abstract method!");
-}; */
+};
