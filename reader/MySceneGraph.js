@@ -1194,6 +1194,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 				if (zz == null || isNaN(zz)) return "Animation (id: "+animationID+")'s controlpoint needs valid property: xx for subnode " + (j + 1);
 
 				animationProperties["controlpoints"].push({x: xx, y: yy, z: zz});
+				console.log("Control Points: " + xx + " " + yy + " " + zz + "\n");
 			} else if(node.nodeName == "SPANREF") {//parse SPANREF <SPANREF id="ss" />
 				let spanrefId = this.reader.getString(node, "id");
 				if(spanrefId == null) return "Animation (id: "+animationID+")'s SPANREF needs valid ID for subnode " + (j + 1);
@@ -1206,6 +1207,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 		//create and return the correct type of animation
 		var newAnimation = AnimationFactory(animationType, animationProperties);
 		if(!newAnimation) return "Unable to create animation type for animation: " + animationID;
+		console.log("[ANIMATION] Processed animation " + animationID + " with a " + animationType + " type animation.");
 		//add the newly created animation to this.animations
 		this.animations[animationID] = newAnimation;
     }
@@ -1542,7 +1544,11 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         if (currNode.textureID == 'clear') {
             tex = null;
         } else tex = currNode.textureID;
-    }
+	}
+
+	for (var i = 0 ; i < currNode.animations.length ; i++){
+		this.scene.multMatrix(currNode.animations[i].animate());
+	}
 
     //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {
@@ -1555,7 +1561,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
             //set Amplification Factor for this texture
             currNode.leaves[i].primitive.setAmplifFactor(this.textures[tex][1], this.textures[tex][2]);
             this.textures[tex][0].bind();
-        }
+		}
 
         //invoke the display on this primitie
         currNode.leaves[i].primitive.display();
@@ -1563,8 +1569,8 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 
     //recursive implementation of interpret node
     for (var i = 0; i < currNode.children.length; i++) {
-        this.scene.pushMatrix(); //save the current matrix's state so it is not altered wrongly
+		this.scene.pushMatrix(); //save the current matrix's state so it is not altered wrongly
         this.interpretNode(currNode.children[i], mat, tex); //recursive call
         this.scene.popMatrix(); //restore the matrix
-    }
+	}
 }

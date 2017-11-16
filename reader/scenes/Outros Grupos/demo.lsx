@@ -150,20 +150,20 @@
 <ANIMATIONS>
 	<ANIMATION id="animLin" speed="10" type="linear">
 		<controlpoint xx="1" yy="1" zz="1" />
-		<controlpoint xx="2" yy="2" zz="2" />
+		<controlpoint xx="4" yy="4" zz="4" />
 	</ANIMATION>
-<!--
-	<ANIMATION id="animB" speed="20" type="bezier">
+
+<!-- 	<ANIMATION id="animB" speed="20" type="bezier">
 		<controlpoint xx="1" yy="1" zz="1" />
 		<controlpoint xx="2" yy="2" zz="2" />
 		<controlpoint xx="3" yy="3" zz="3" />
 		<controlpoint xx="4" yy="4" zz="4" />
-	</ANIMATION>
+	</ANIMATION> -->
 	<ANIMATION id="animCirc" speed="15" type="circular"
 		centerx="1" centery="1" centerz="1"
 		radius="10" startang="20" rotang="10"
 		/>
-	<ANIMATION id="animComb" type="combo">
+<!-- 	<ANIMATION id="animComb" type="combo">
 		<SPANREF id="animLin" />
 		<SPANREF id="animB" />
 	</ANIMATION> -->
@@ -186,7 +186,7 @@
         <TEXTURE id="null" />
 
 		<ANIMATIONREFS>
-			<ANIMATIONREF id = "animLin" />
+			<ANIMATIONREF id = "animCirc" />
 		</ANIMATIONREFS>
 
         <DESCENDANTS>
@@ -210,7 +210,7 @@
 
         <DESCENDANTS>
 					<LEAF  type="rectangle" args="0 4 5 0" />
-				</DESCENDANTS>
+		</DESCENDANTS>
 
     </NODE>
 
@@ -218,6 +218,10 @@
      <NODE id="luzes">
         <MATERIAL id="lightMaterial" />
         <TEXTURE id="clear" />
+
+		<ANIMATIONREFS>
+			<ANIMATIONREF id = "animLin" />
+		</ANIMATIONREFS>
 
         <DESCENDANTS>
             <NODEREF id="luz1" />
