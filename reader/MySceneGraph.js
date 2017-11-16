@@ -1546,9 +1546,9 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         } else tex = currNode.textureID;
 	}
 
-	for (var i = 0 ; i < currNode.animations.length ; i++){
+	/*for (var i = 0 ; i < currNode.animations.length ; i++){
 		this.scene.multMatrix(currNode.animations[i].animate());
-	}
+	}*/
 
     //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {

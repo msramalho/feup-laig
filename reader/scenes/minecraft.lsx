@@ -184,12 +184,12 @@
     </MATERIAL>
 
     <!-- Tree leaves material -->
-	<MATERIAL id="leavesTreeMaterial">                                  
+	<MATERIAL id="leavesTreeMaterial">
         <shininess value="1" />
-        <specular r="0.2" g="0.2" b="0.2" a="1" />        
-        <diffuse r="0.0" g="0.207" b="0.0" a="1" />       
-        <ambient r="0.1" g="0.1" b="0.1" a="1" />         
-        <emission r="0.0" g="0.0" b="0.0" a="1" />        
+        <specular r="0.2" g="0.2" b="0.2" a="1" />
+        <diffuse r="0.0" g="0.207" b="0.0" a="1" />
+        <ambient r="0.1" g="0.1" b="0.1" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
     <!-- Light bulb material -->
@@ -211,6 +211,28 @@
     </MATERIAL>
 
 </MATERIALS>
+
+<ANIMATIONS>
+	<ANIMATION id="animLin" speed="10" type="linear">
+		<controlpoint xx="1" yy="1" zz="1" />
+		<controlpoint xx="4" yy="4" zz="4" />
+	</ANIMATION>
+
+<!-- 	<ANIMATION id="animB" speed="20" type="bezier">
+		<controlpoint xx="1" yy="1" zz="1" />
+		<controlpoint xx="2" yy="2" zz="2" />
+		<controlpoint xx="3" yy="3" zz="3" />
+		<controlpoint xx="4" yy="4" zz="4" />
+	</ANIMATION> -->
+	<ANIMATION id="animCirc" speed="15" type="circular"
+		centerx="1" centery="1" centerz="1"
+		radius="10" startang="20" rotang="10"
+		/>
+<!-- 	<ANIMATION id="animComb" type="combo">
+		<SPANREF id="animLin" />
+		<SPANREF id="animB" />
+	</ANIMATION> -->
+</ANIMATIONS>
 
 <!-- The nodes -->
 <NODES>
@@ -303,7 +325,7 @@
                     <CPOINT xx="14" yy="8" zz="0" ww="1"/>
                     <CPOINT xx="28" yy="-4.5" zz="0" ww="1"/>
                 </CPLINE>
-                
+
             </LEAF>
         </DESCENDANTS>
     </NODE>
@@ -407,7 +429,7 @@
                         <CPOINT xx="0" yy="3.5" zz="2" ww="1"/>
                         <CPOINT xx="14" yy="16" zz="2" ww="1"/>
                         <CPOINT xx="28" yy="3.5" zz="2" ww="1"/>
-                </CPLINE>    
+                </CPLINE>
             </LEAF>
         </DESCENDANTS>
     </NODE>
@@ -429,7 +451,7 @@
                     <CPOINT xx="14" yy="16" zz="20" ww="1"/>
                     <CPOINT xx="28" yy="3.5" zz="20" ww="1"/>
                 </CPLINE>
-                
+
             </LEAF>
         </DESCENDANTS>
     </NODE>
@@ -2692,63 +2714,63 @@
     </NODE>
 
     <!-- Trees -->
-     <NODE id="trees">       
-        <MATERIAL id="null" />     
-        <TEXTURE id="null" />       			
+     <NODE id="trees">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
         <DESCENDANTS>
        		<NODEREF id="tree" />
-            <NODEREF id="tree2" />      
+            <NODEREF id="tree2" />
         </DESCENDANTS>
 
     </NODE>
-    
+
     <!-- Generic tree -->
-    <NODE id="tree">       
-        <MATERIAL id="null" />    
-        <TEXTURE id="null" /> 
-        <TRANSLATION x="50" y="0" z="-20" />    
-        <SCALE sx="3" sy="3" sz="3" />	
-        <ROTATION axis="y" angle="180" />	
+    <NODE id="tree">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="50" y="0" z="-20" />
+        <SCALE sx="3" sy="3" sz="3" />
+        <ROTATION axis="y" angle="180" />
 
         <DESCENDANTS>
             <NODEREF id="treeTrunk" />
-            <NODEREF id="treeLeaves" />     	    
+            <NODEREF id="treeLeaves" />
         </DESCENDANTS>
     </NODE>
 
     <!-- Generic tree -->
-    <NODE id="tree2">       
-        <MATERIAL id="null" />    
-        <TEXTURE id="null" /> 
-        <TRANSLATION x="30" y="0" z="-40" />    
-        <SCALE sx="3" sy="3" sz="3" />	
-        <ROTATION axis="y" angle="180" />	
+    <NODE id="tree2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="30" y="0" z="-40" />
+        <SCALE sx="3" sy="3" sz="3" />
+        <ROTATION axis="y" angle="180" />
 
         <DESCENDANTS>
             <NODEREF id="treeTrunk" />
-            <NODEREF id="treeLeaves" />     	    
+            <NODEREF id="treeLeaves" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- Tree trunk -->
-    <NODE id="treeTrunk">       
-        <MATERIAL id="minecraftWoodMaterial" />     
-        <TEXTURE id="Trunk" />       			
+    <NODE id="treeTrunk">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="Trunk" />
 
         <ROTATION axis="x" angle="90" />
         <TRANSLATION x="5" y="5" z="-4" />
 
         <DESCENDANTS>
-					<LEAF type="cylinder" args="4 1 1 20 20" /> 
+					<LEAF type="cylinder" args="4 1 1 20 20" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- Tree leaves -->
-     <NODE id="treeLeaves">       
-        <MATERIAL id="leavesTreeMaterial" />     
-        <TEXTURE id="Leaves" />       			
+     <NODE id="treeLeaves">
+        <MATERIAL id="leavesTreeMaterial" />
+        <TEXTURE id="Leaves" />
 
         <DESCENDANTS>
        		<NODEREF id="treeSide1" />
@@ -2756,92 +2778,92 @@
             <NODEREF id="treeSide3" />
             <NODEREF id="treeSide4" />
             <NODEREF id="treeSide5" />
-            <NODEREF id="treeSide6" />      
+            <NODEREF id="treeSide6" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- A cube face -->
-    <NODE id="treeSide1">       
-        <MATERIAL id="null" />     
-        <TEXTURE id="null" />       			
+    <NODE id="treeSide1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <TRANSLATION x="2.5" y="4" z="7.5" />
 
         <DESCENDANTS>
-					<LEAF  type="rectangle" args="0 4 5 0" />        
+					<LEAF  type="rectangle" args="0 4 5 0" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- Another cube face -->
-     <NODE id="treeSide2">      
-        <MATERIAL id="null" />     
-        <TEXTURE id="null" />       			
+     <NODE id="treeSide2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <TRANSLATION x="2.5" y="4" z="2.5" />
 		<ROTATION axis="y" angle="-90" />
 
         <DESCENDANTS>
-					<LEAF  type="rectangle" args="0 4 5 0" />        
+					<LEAF  type="rectangle" args="0 4 5 0" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- Another cube face -->
-    <NODE id="treeSide3">       
-        <MATERIAL id="null" />     
-        <TEXTURE id="null" />       			
+    <NODE id="treeSide3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <TRANSLATION x="7.5" y="4" z="7.5" />
 		<ROTATION axis="y" angle="90" />
 
         <DESCENDANTS>
-					<LEAF  type="rectangle" args="0 4 5 0" />        
+					<LEAF  type="rectangle" args="0 4 5 0" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- Another cube face -->
-    <NODE id="treeSide4">       
-        <MATERIAL id="null" />    
-        <TEXTURE id="null" />       			
+    <NODE id="treeSide4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <TRANSLATION x="7.5" y="4" z="2.5" />
         <ROTATION axis="y" angle="180" />
 
         <DESCENDANTS>
-					<LEAF  type="rectangle" args="0 4 5 0" />        
+					<LEAF  type="rectangle" args="0 4 5 0" />
         </DESCENDANTS>
 
     </NODE>
 
     <!-- Another cube face -->
-    <NODE id="treeSide5">       
-        <MATERIAL id="null" />    
-        <TEXTURE id="null" />       			
+    <NODE id="treeSide5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <ROTATION axis="x" angle="-90" />
         <TRANSLATION x="2.5" y="-7.5" z="8" />
         <SCALE sx="1" sy="1.25" sz="1" />
 
         <DESCENDANTS>
- 					<LEAF  type="rectangle" args="0 4 5 0" />        
+ 					<LEAF  type="rectangle" args="0 4 5 0" />
        </DESCENDANTS>
 
     </NODE>
 
     <!-- Another cube face -->
-    <NODE id="treeSide6">       
-        <MATERIAL id="null" />     
-        <TEXTURE id="null" />       			
+    <NODE id="treeSide6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
 
         <TRANSLATION x="2.5" y="4" z="2.5" />
         <ROTATION axis="x" angle="90" />
         <SCALE sx="1" sy="1.25" sz="1" />
 
         <DESCENDANTS>
-					<LEAF  type="rectangle" args="0 4 5 0" />        
+					<LEAF  type="rectangle" args="0 4 5 0" />
         </DESCENDANTS>
 
     </NODE>
