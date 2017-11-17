@@ -1524,8 +1524,9 @@ MySceneGraph.prototype.displayScene = function() {
 MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     var mat = material;
     var tex = texture;
-    var currNode = this.nodes[idnode];
-    var deltaTime = this.scene.getCurrTime();
+	var currNode = this.nodes[idnode];
+	var lastTime = 0;
+	var deltaTime = lastTime - this.scene.getCurrTime();
 
 	if(this.nodes[idnode].selected){
 		console.log("NODE: " + idnode + " is selected");
@@ -1548,11 +1549,14 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 	}
 
     for (let key in currNode.animations) {
-        let value = currNode.animations[key];
-        //console.log(currNode.animations[value]);
+		let value = currNode.animations[key];
+		/* console.log(key);
+		console.log(value.animate(deltaTime)); */
         this.scene.multMatrix(value.animate(deltaTime));
-    }
-    
+	}
+
+	//console.log(deltaTime);
+
     //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {
         if (this.materials[mat] != null) {
@@ -1575,5 +1579,6 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 		this.scene.pushMatrix(); //save the current matrix's state so it is not altered wrongly
         this.interpretNode(currNode.children[i], mat, tex); //recursive call
         this.scene.popMatrix(); //restore the matrix
-    }
+	}
+	lastTime = this.scene.getCurrTime();
 }

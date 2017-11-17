@@ -1,13 +1,17 @@
 function BezierAnimation(speed, controlPoints) {
 	this.speed = speed;
-	this.controlPoints = controlPoints;
+	this.controlPoints = [];
+	console.log("CONTROL POINT" , controlPoints);
+
+	controlPoints.forEach(cp => {
+		this.controlPoints.push(cp);
+	}, this);
 
 	this.totalDistance = 0;
-	for (var i = 1; i < controlPoints.length; i++)
+	for (var i = 1; i < this.controlPoints.length; i++)
 	{
-		this.totalDistance += this.calculateDistance(controlPoints[i - 1], controlPoints[i]);
+		this.totalDistance += this.calculateDistance(this.controlPoints[i - 1], this.controlPoints[i]);
 	}
-	console.log("TEST: " + speed + controlPoints[0][0]);
 }
 
 BezierAnimation.prototype = Object.create(Animation.prototype);
@@ -28,7 +32,7 @@ BezierAnimation.prototype.animate = function(time) {
 	var i;
 	var dist;
 
-	for (var i = 1; i < this.controlPoints.length; i++)
+	for (i = 1; i < this.controlPoints.length; i++)
 	{
 		dist = this.calculateDistance(this.controlPoints[i - 1], this.controlPoints[i]);
 		if (currentDist + dist < totalS)
@@ -44,7 +48,7 @@ BezierAnimation.prototype.animate = function(time) {
 	var p2 = this.controlPoints[i];
 	var result = [];
 
-	for (var j = 0; j < this.controlPoints[j - 1].length; j++)
+	for (var j = 1; j < this.controlPoints[j - 1].length; j++)
 	{
 		result[j] = p1[j] * (1.0 - time) + (p2[j] * time);
 	}
@@ -58,12 +62,12 @@ BezierAnimation.prototype.animate = function(time) {
 }
 
 BezierAnimation.prototype.calculateRotation = function(p1, p2) {
-	return Math.atan2(p2[0] - p1[0], p2[2] - p1[2]);
+	return Math.atan2(p2.x - p1.x, p2.y - p1.y);
 }
 
 BezierAnimation.prototype.calculateDistance = function(p1, p2) {
 	return Math.sqrt(
-			Math.pow(p2[0] - p1[0], 2) +
-			Math.pow(p2[1] - p1[1], 2) +
-			Math.pow(p2[2] - p1[2], 2));
+			Math.pow(p2.x - p1.x, 2) +
+			Math.pow(p2.y - p1.y, 2) +
+			Math.pow(p2.y - p1.y, 2));
 }

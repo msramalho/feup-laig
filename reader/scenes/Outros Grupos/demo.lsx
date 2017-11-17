@@ -148,7 +148,7 @@
 </MATERIALS>
 
 <ANIMATIONS>
-	<ANIMATION id="animLin" speed="10" type="linear">
+	<ANIMATION id="animLin" speed="1" type="linear">
 		<controlpoint xx="1" yy="1" zz="1" />
 		<controlpoint xx="4" yy="4" zz="4" />
 	</ANIMATION>
@@ -185,9 +185,9 @@
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
 
-		<ANIMATIONREFS>
+		<!-- <ANIMATIONREFS>
 			<ANIMATIONREF id = "animCirc" />
-		</ANIMATIONREFS>
+		</ANIMATIONREFS> -->
 
         <DESCENDANTS>
             <NODEREF id="luzes" />
