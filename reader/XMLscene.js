@@ -33,7 +33,7 @@ XMLscene.prototype.init = function(application) {
 
 	this.axis = new CGFaxis(this);
 
-	this.setUpdatePeriod(1000 / 60);
+	this.setUpdatePeriod(1000/60);
 	this.timerStarted = false;
 	this.startingTime = 0;
 	this.currTime = 0;
@@ -43,12 +43,12 @@ XMLscene.prototype.init = function(application) {
  * Function called every update period
  */
 XMLscene.prototype.update = function(currTime) {
-	/*if (!this.timerStarted)
+	if (!this.timerStarted)
 	{
 		this.startingTime = currTime;
 		this.timerStarted = true;
 	}
-	this.currTime = (currTime - this.startingTime) / 1000.0;*/
+	this.currTime = (currTime - this.startingTime) / 1000.0;
 }
 
 /**

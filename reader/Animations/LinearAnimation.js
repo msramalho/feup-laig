@@ -32,7 +32,7 @@ LinearAnimation.prototype.animate = function(time) {
 	var i;
 	var dist;
 
-	for (var i = 1; i < this.controlPoints.length; i++)
+	for (i = 1; i < this.controlPoints.length; i++)
 	{
 		dist = this.calculateDistance(this.controlPoints[i - 1], this.controlPoints[i]);
 		if (currentDist + dist < totalS)
