@@ -1382,8 +1382,6 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 				}
 
             }
-            console.log(this.animations);  
-            console.log(this.nodes["root"].animations[0]);          
 
             // Retrieves information about children.
             var descendantsIndex = specsNames.indexOf("DESCENDANTS");
@@ -1527,8 +1525,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     var mat = material;
     var tex = texture;
     var currNode = this.nodes[idnode];
-    var lastTick = 0;
-    var deltaTime = deltaTime - lastTick;
+    var deltaTime = this.scene.getCurrTime();
 
 	if(this.nodes[idnode].selected){
 		console.log("NODE: " + idnode + " is selected");
@@ -1550,16 +1547,11 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         } else tex = currNode.textureID;
 	}
 
-	/* for (var i = 0 ; i < currNode.animations.length ; i++){
-        console.log(this.scene.multMatrix(currNode.animations[i].animate(deltaTime)));
-    } */
     for (let key in currNode.animations) {
         let value = currNode.animations[key];
         //console.log(currNode.animations[value]);
         this.scene.multMatrix(value.animate(deltaTime));
     }
-
-    //console.log(currNode.animations);
     
     //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {
@@ -1584,6 +1576,4 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         this.interpretNode(currNode.children[i], mat, tex); //recursive call
         this.scene.popMatrix(); //restore the matrix
     }
-    
-    lastTick = deltaTime;
 }

@@ -51,6 +51,10 @@ XMLscene.prototype.update = function(currTime) {
 	this.currTime = (currTime - this.startingTime) / 1000.0;
 }
 
+XMLscene.prototype.getCurrTime = function(){
+    return this.currTime;
+}
+
 /**
  * Initializes the scene lights with the values read from the LSX file.
  */
