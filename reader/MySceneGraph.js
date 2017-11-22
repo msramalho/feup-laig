@@ -1525,8 +1525,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     var mat = material;
     var tex = texture;
 	var currNode = this.nodes[idnode];
-	var lastTime = 0;
-	var deltaTime = lastTime - this.scene.getCurrTime();
+	var time = this.scene.getCurrTime();
 
 	if(this.nodes[idnode].selected){
 		console.log("NODE: " + idnode + " is selected");
@@ -1551,11 +1550,12 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     for (let key in currNode.animations) {
 		let value = currNode.animations[key];
 		/* console.log(key);
-		console.log(value.animate(deltaTime)); */
-        this.scene.multMatrix(value.animate(deltaTime));
+		console.log(value.animate(time)); */
+		console.log("time: " + time);
+        this.scene.multMatrix(value.animate(time));
 	}
 
-	//console.log(deltaTime);
+	//console.log(time);
 
     //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {
