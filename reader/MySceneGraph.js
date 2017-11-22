@@ -1549,9 +1549,6 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 
     for (let key in currNode.animations) {
 		let value = currNode.animations[key];
-		/* console.log(key);
-		console.log(value.animate(time)); */
-		console.log("time: " + time);
         this.scene.multMatrix(value.animate(time));
 	}
 
