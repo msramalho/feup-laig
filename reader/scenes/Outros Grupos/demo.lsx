@@ -159,9 +159,9 @@
 		<controlpoint xx="3" yy="3" zz="3" />
 		<controlpoint xx="4" yy="4" zz="4" />
 	</ANIMATION> -->
-	<ANIMATION id="animCirc" speed="15" type="circular"
+	<ANIMATION id="animCirc" speed="10" type="circular"
 		centerx="1" centery="1" centerz="1"
-		radius="10" startang="20" rotang="10"
+		radius="10" startang="0" rotang="360"
 		/>
 <!-- 	<ANIMATION id="animComb" type="combo">
 		<SPANREF id="animLin" />
@@ -184,10 +184,6 @@
     <NODE id="root">
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
-
-		<!-- <ANIMATIONREFS>
-			<ANIMATIONREF id = "animCirc" />
-		</ANIMATIONREFS> -->
 
         <DESCENDANTS>
             <NODEREF id="luzes" />
@@ -219,9 +215,9 @@
         <MATERIAL id="lightMaterial" />
         <TEXTURE id="clear" />
 
-		<ANIMATIONREFS>
+		<!-- <ANIMATIONREFS>
 			<ANIMATIONREF id = "animLin" />
-		</ANIMATIONREFS>
+		</ANIMATIONREFS> -->
 
         <DESCENDANTS>
             <NODEREF id="luz1" />
@@ -397,6 +393,10 @@
     <NODE id="arvore1">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
+
+		<ANIMATIONREFS>
+			<ANIMATIONREF id = "animCirc" />
+		</ANIMATIONREFS>
 
         <TRANSLATION x="-2" y="0" z="5" />
 
