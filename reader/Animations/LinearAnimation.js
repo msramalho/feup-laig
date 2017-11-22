@@ -1,7 +1,6 @@
 function LinearAnimation(speed, controlPoints) {
 	this.speed = speed;
 	this.controlPoints = [];
-	console.log("CONTROL POINT" , controlPoints);
 
 	controlPoints.forEach(cp => {
 		this.controlPoints.push(cp);
@@ -12,6 +11,8 @@ function LinearAnimation(speed, controlPoints) {
 	{
 		this.totalDistance += this.calculateDistance(this.controlPoints[i - 1], this.controlPoints[i]);
 	}
+	//calculate total time for the animation
+	this.totalTime = this.totalDistance / this.speed;
 }
 
 LinearAnimation.prototype = Object.create(Animation.prototype);
@@ -20,18 +21,19 @@ LinearAnimation.prototype.constructor = LinearAnimation;
 LinearAnimation.prototype.animate = function(time) {
 	var matrix = mat4.create();
 
-	if (time >= this.speed)
+	if (time >= this.totalTime)
 	{
 		mat4.translate(matrix, matrix, this.controlPoints[this.controlPoints.length - 1]);
 		mat4.rotate(matrix, matrix, this.calculateRotation(this.controlPoints[this.controlPoints.length - 2], this.controlPoints[this.controlPoints.length - 1]), [0, 1, 0]);
 		return matrix;
 	}
 
-	var totalS = this.totalDistance * time / this.speed;
+	var totalS = this.speed * (time % this.totalTime);//distance so far
 	var currentDist = 0;
 	var i;
 	var dist;
 
+	//determine which controlpoint is the current controlpoint
 	for (i = 1; i < this.controlPoints.length; i++)
 	{
 		dist = this.calculateDistance(this.controlPoints[i - 1], this.controlPoints[i]);
@@ -41,7 +43,7 @@ LinearAnimation.prototype.animate = function(time) {
 			break;
 	}
 
-	var s = totalS - currentDist;
+	var s = totalS - currentDist; //
 	var result = this.calculateMove(this.controlPoints[i - 1], this.controlPoints[i], s / dist);
 	console.log(matrix);
 
@@ -60,7 +62,7 @@ LinearAnimation.prototype.calculateDistance = function(p1, p2) {
 	return Math.sqrt(
 			Math.pow(p2.x - p1.x, 2) +
 			Math.pow(p2.y - p1.y, 2) +
-			Math.pow(p2.y - p1.y, 2));
+			Math.pow(p2.z - p1.z, 2));
 }
 
 LinearAnimation.prototype.calculateMove = function(p1, p2, t) {
