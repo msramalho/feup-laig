@@ -33,21 +33,26 @@ BezierAnimation.prototype.animate = function (time) {
 		var new_y = calc1 * this.controlPoints[0].y + calc2 * this.controlPoints[1].y + calc3 * this.controlPoints[2].y + calc4 * this.controlPoints[3].y;
 		var new_z = calc1 * this.controlPoints[0].z + calc2 * this.controlPoints[1].z + calc3 * this.controlPoints[2].z + calc4 * this.controlPoints[3].z;
 
-		var dx = new_x - this.x;
-		var dy = new_y - this.y;
-		var dz = new_z - this.z;
+		var dx = 3 * Math.pow((1 - this.t), 2) * (this.controlPoints[1].x - this.controlPoints[0].x) + 3* (1 - this.t) * this.t * (this.controlPoints[2].x - this.controlPoints[1].x) + 3 * Math.pow(this.t, 2) * (this.controlPoints[3].x - this.controlPoints[2].x);
+		var dy = 3 * Math.pow((1 - this.t), 2) * (this.controlPoints[1].y - this.controlPoints[0].y) + 3 * (1 - this.t) * this.t * (this.controlPoints[2].y - this.controlPoints[1].y) + 3 * Math.pow(this.t, 2) * (this.controlPoints[3].y - this.controlPoints[2].y);
+		var dz = 3 * Math.pow((1 - this.t), 2) * (this.controlPoints[1].z - this.controlPoints[0].z) + 3 * (1 - this.t) * this.t * (this.controlPoints[2].z - this.controlPoints[1].z) + 3 * Math.pow(this.t, 2) * (this.controlPoints[3].z - this.controlPoints[2].z);
 
-		this.angleY = Math.atan(dx / dz) + (dz < 0 ? 180.0 * degToRad : 0);
-		this.angleX = Math.atan(dy / Math.sqrt(dx * dx + dy * dy + dz * dz));
+		this.tangent = vec3.fromValues(dx, dy, dz);
+		var zVec = vec3.fromValues(0,0,1);
+		vec3.normalize(zVec, zVec);
+		vec3.normalize(this.tangent, this.tangent);
+		var angle = Math.acos(vec3.dot(zVec, this.tangent));
+		console.log("ANGLE: ",angle)
 
-		/*   this.y_offset = (1 - this.t) * -1.6;
-    if (this.y_offset > 0)
-        this.y_offset = 0;
-    this.z_offset = (1 - this.t) * 1.5;
-    if (this.z_offset < 0)
-		this.z_offset = 0; */
+		this.x = new_x;
+		this.y = new_y;
+		this.z = new_z;
+
+		mat4.rotateY(this.matrix, this.matrix, angle);
 
 		mat4.translate(this.matrix, this.matrix, [new_x, new_y, new_z]);
+
+		//mat4.rotate(this.matrix, this.matrix, );
 	}
 	return this.matrix;
 }
