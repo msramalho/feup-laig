@@ -13,23 +13,21 @@ CircularAnimation.prototype = Object.create(Animation.prototype);
 CircularAnimation.prototype.constructor = CircularAnimation;
 
 CircularAnimation.prototype.animate = function(time) {
-	if (time > this.totalTime)
-		return this.matrix;
 
-	this.matrix = mat4.create();
+	var matrix = mat4.create();
 
-	mat4.translate(this.matrix, this.matrix, [this.centerx, this.centery, this.centerz]);
-	mat4.translate(this.matrix, this.matrix, [this.radius, 0, 0]);
-	mat4.rotate(this.matrix, this.matrix, this.startAng + (time / this.totalTime) * this.rotAng, [0, 1, 0]);
+	mat4.translate(matrix, matrix, [this.centerx, this.centery, this.centerz]);
+	mat4.translate(matrix, matrix, [this.radius, 0, 0]);
+	mat4.rotate(matrix, matrix, this.startAng + (time / this.totalTime) * this.rotAng, [0, 1, 0]);
 
 /*
-	mat4.rotate(this.matrix, this.matrix, Math.PI/2, [0, 1, 0]);
-	mat4.translate(this.matrix, this.matrix, [this.radius, 0, 0]);
-	mat4.translate(this.matrix, this.matrix, [this.centerx, this.centery, this.centerz]);
+	mat4.rotate(matrix, matrix, Math.PI/2, [0, 1, 0]);
+	mat4.translate(matrix, matrix, [this.radius, 0, 0]);
+	mat4.translate(matrix, matrix, [this.centerx, this.centery, this.centerz]);
 
-	mat4.rotate(this.matrix, this.matrix, this.startAng + (time / this.totalTime) * this.rotAng, [0, 1, 0]);
+	mat4.rotate(matrix, matrix, this.startAng + (time / this.totalTime) * this.rotAng, [0, 1, 0]);
 
 /*	if(this.rotAng > 0)
-		mat4.rotate(this.matrix, this.matrix, Math.PI, [0, 1, 0]); */
-	return this.matrix;
+		mat4.rotate(matrix, matrix, Math.PI, [0, 1, 0]); */
+	return matrix;
 }

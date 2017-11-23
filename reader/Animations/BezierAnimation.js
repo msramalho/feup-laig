@@ -16,10 +16,7 @@ BezierAnimation.prototype = Object.create(Animation.prototype);
 BezierAnimation.prototype.constructor = BezierAnimation;
 
 BezierAnimation.prototype.animate = function (time) {
-	if (time > this.totalTime)
-		return this.matrix;
-
-	this.matrix = mat4.create();
+	var matrix = mat4.create();
 
 	this.t = time / this.totalTime;
 
@@ -47,13 +44,13 @@ BezierAnimation.prototype.animate = function (time) {
 		this.y = new_y;
 		this.z = new_z;
 
-		mat4.rotateY(this.matrix, this.matrix, angle);
+		mat4.rotateY(matrix, matrix, angle);
 
-		mat4.translate(this.matrix, this.matrix, [new_x, new_y, new_z]);
+		mat4.translate(matrix, matrix, [new_x, new_y, new_z]);
 
-		//mat4.rotate(this.matrix, this.matrix, );
+		//mat4.rotate(matrix, matrix, );
 	}
-	return this.matrix;
+	return matrix;
 }
 
 BezierAnimation.prototype.calculateDistance = function () {

@@ -1546,12 +1546,18 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         } else tex = currNode.textureID;
 	}
 
+	var remainingTime = time;
+
     for (let key in currNode.animations) {
 		let value = currNode.animations[key];
-        this.scene.multMatrix(value.animate(time));
+		if (remainingTime < currNode.animations[key].totalTime) {
+			this.scene.multMatrix(value.animate(remainingTime));
+			break;
+		} else {
+			remainingTime -= currNode.animations[key].totalTime;
+		}
+		console.log(remainingTime);
 	}
-
-	//console.log(time);
 
     //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {
