@@ -1376,8 +1376,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 						if(animId == null || !this.animations[animId]){
 							this.onXMLError("ANIMATIONREF: " + animId + " is not defined on node: " + nodeID);
 						}
-                        this.nodes[nodeID].animations.push(this.animations[animId]);
-                        //this.nodes[nodeID].animations.push(animId);//if just the ids are needed
+						var animationRef = new AnimationRefs(this.animations[animId]);
+                        this.nodes[nodeID].animations.push(animationRef);
 					}
 				}
 

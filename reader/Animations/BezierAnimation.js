@@ -9,19 +9,19 @@ function BezierAnimation(speed, controlPoints) {
 
 	this.calculateDistance();
 
-	this.totaltime = this.totalDistance / this.speed;
+	this.totalTime = this.totalDistance / this.speed;
 }
 
 BezierAnimation.prototype = Object.create(Animation.prototype);
 BezierAnimation.prototype.constructor = BezierAnimation;
 
 BezierAnimation.prototype.animate = function (time) {
-	if (time > this.totaltime)
+	if (time > this.totalTime)
 		return this.matrix;
 
 	this.matrix = mat4.create();
 
-	this.t = time / this.totaltime;
+	this.t = time / this.totalTime;
 
 	if (this.t < 1.0) {
 		var calc1 = Math.pow(1 - this.t, 3);
@@ -42,7 +42,6 @@ BezierAnimation.prototype.animate = function (time) {
 		vec3.normalize(zVec, zVec);
 		vec3.normalize(this.tangent, this.tangent);
 		var angle = Math.acos(vec3.dot(zVec, this.tangent));
-		console.log("ANGLE: ",angle)
 
 		this.x = new_x;
 		this.y = new_y;
@@ -85,5 +84,5 @@ BezierAnimation.prototype.calculateDistance = function () {
 	vec3.divide(r2, r2, divide_aux);
 
 	this.totalDistance = vec3.distance(l1, l2) + vec3.distance(l2, l3) + vec3.distance(l3, r2) + vec3.distance(r2, r3) + vec3.distance(r3, r4);
-	console.log("DISTANCIA", this.totalDistance);
+	console.log("[Bezier] Distance: ", this.totalDistance);
 }
