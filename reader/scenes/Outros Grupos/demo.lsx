@@ -163,10 +163,10 @@
 		centerx="0" centery="0" centerz="0"
 		radius="5" startang="0" rotang="360"
 		/>
-<!-- 	<ANIMATION id="animComb" type="combo">
-		<SPANREF id="animLin" />
+	<ANIMATION id="animComb" type="combo">
+		<SPANREF id="animCirc" />
 		<SPANREF id="animB" />
-	</ANIMATION> -->
+	</ANIMATION>
 </ANIMATIONS>
 
 
@@ -352,7 +352,7 @@
         <TRANSLATION x="7.5" y="-2" z="4" />
 
 		<ANIMATIONREFS>
-			<ANIMATIONREF id = "animB" />
+			<ANIMATIONREF id = "animComb" />
 		</ANIMATIONREFS>
 
         <DESCENDANTS>
