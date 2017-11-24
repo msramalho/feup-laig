@@ -9,6 +9,10 @@ function XMLscene(interface) {
 
     this.interface = interface;
 
+	this.selectedShader = 0;
+	this.wireframe = false;
+	this.scaleFactor = 50.0;
+
     this.lightValues = {};
     this.selectableValues = {};
 }
@@ -37,6 +41,18 @@ XMLscene.prototype.init = function(application) {
 	this.timerStarted = false;
 	this.startingTime = 0;
 	this.currTime = 0;
+
+
+	this.shaders=[
+		new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),
+		new CGFshader(this.gl, "Shaders/uScale.vert", "Shaders/uScale.frag"),
+		new CGFshader(this.gl, "Shaders/varying.vert", "Shaders/varying.frag"),
+		new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag"),
+		new CGFshader(this.gl, "Shaders/texture2.vert", "Shaders/texture2.frag"),
+		new CGFshader(this.gl, "Shaders/texture3.vert", "Shaders/texture3.frag"),
+		new CGFshader(this.gl, "Shaders/texture3.vert", "Shaders/sepia.frag"),
+		new CGFshader(this.gl, "Shaders/texture3.vert", "Shaders/convolution.frag")
+	];
 }
 
 /**
@@ -180,4 +196,4 @@ XMLscene.prototype.display = function() {
 
     // ---- END Background, camera and axis setup
 
-}
+};
