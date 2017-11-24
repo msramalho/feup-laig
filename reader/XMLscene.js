@@ -38,6 +38,7 @@ XMLscene.prototype.init = function (application) {
 	this.startingTime = 0;
 	this.currTime = 0;
 
+	this.selectedSelectable = 0;
 	this.selectedShader = 0;
 	this.wireframe = false;
 	this.selectionColor = [0, 128, 255, 1]; //rgba
@@ -129,9 +130,8 @@ XMLscene.prototype.onGraphLoaded = function () {
 
 	// Adds lights group.
 	this.interface.addLightsGroup(this.graph.lights);
-	this.interface.addSelectablesGroup(this.graph.selectables);
-	this.interface.addShaderOptions();
-}
+	this.interface.addShadersGroup(this.graph.selectables);
+};
 
 /**
  * Displays the scene.
@@ -174,12 +174,6 @@ XMLscene.prototype.display = function () {
 				i++;
 			}
 		}
-		//detect changes in the selectable checkboxes
-		for (var key in this.selectableValues) {
-			this.graph.nodes[key].selected = this.selectableValues[key];
-		}
-
-
 		// Displays the scene.
 		this.graph.displayScene();
 

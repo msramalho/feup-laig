@@ -23,7 +23,7 @@ function MySceneGraph(filename, scene) {
 
 	this.nodes = [];
 
-	this.selectables = [];
+	this.selectables = {};
 
     this.idRoot = null; // The id of the root element.
 
@@ -1252,7 +1252,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 			var isSelectable = children[i].getAttribute('selectable');
 			if (isSelectable==="true") {
 				this.nodes[nodeID].selectable = true;//set this as a selectable node
-				this.selectables.push(nodeID);//save the id of the selectable nodes
+				this.selectables[nodeID] = nodeID;//save the id of the selectable nodes
 			}
 
             // Gathers child nodes.
@@ -1528,8 +1528,8 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 	var time = this.scene.getCurrTime();
 	var remainingTime = time;
 
-
-	if(currNode.selected){
+	console.log("SELECTED IS:" + this.scene.selectedSelectable);
+	if(this.scene.selectedSelectable  == idnode){
 		this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
 		/* if (this.scene.wireframe) {
 			this.setLineMode();
@@ -1591,7 +1591,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         this.scene.popMatrix(); //restore the matrix
 	}
 
-	if(this.nodes[idnode].selected){//stop shader propagation
+	if(this.scene.selectedSelectable  == idnode){
 		this.scene.setActiveShader(this.scene.defaultShader);
 	}
 }

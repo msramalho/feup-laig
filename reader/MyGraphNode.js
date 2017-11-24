@@ -8,10 +8,6 @@ function MyGraphNode(graph, nodeID) {
 
     this.nodeID = nodeID;
 
-	//selectable node
-	this.selectable = false;
-	this.selected = false;
-
     // IDs of child nodes.
     this.children = [];
 
