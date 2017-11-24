@@ -1526,6 +1526,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     var tex = texture;
 	var currNode = this.nodes[idnode];
 	var time = this.scene.getCurrTime();
+	var remainingTime = time;
 
 	if(this.nodes[idnode].selected){
 		this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
@@ -1546,17 +1547,16 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         } else tex = currNode.textureID;
 	}
 
-	var remainingTime = time;
-
     for (let key in currNode.animations) {
 		let value = currNode.animations[key];
 		if (remainingTime < currNode.animations[key].totalTime) {
-			this.scene.multMatrix(value.animate(remainingTime));
+			value.lastMatrix = value.animate(remainingTime)
+			this.scene.multMatrix(value.lastMatrix);
 			break;
 		} else {
 			remainingTime -= currNode.animations[key].totalTime;
 		}
-		console.log(remainingTime);
+		this.scene.multMatrix(value.lastMatrix);
 	}
 
     //iterate all this node's leaves
