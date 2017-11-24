@@ -18,11 +18,23 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
 			 'Animations/AnimationRefs.js',
 
 
+
 main=function()
 {
+	availableShaders = {
+		'Flat Shading': 0,
+		'Passing a scale as uniform': 1,
+		'Passing a varying parameter from VS -> FS': 2,
+		'Simple texturing': 3,
+		'Multiple textures in the FS': 4,
+		'Multiple textures in VS and FS': 5,
+		'Sepia': 6,
+		'Convolution': 7
+	};
+
 	// Standard application, scene and interface setup
     var app = new CGFapplication(document.body);
-    var myInterface = new MyInterface();
+    var myInterface = new MyInterface(availableShaders);
     var myScene = new XMLscene(myInterface);
 
     app.init();

@@ -1528,9 +1528,16 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 	var time = this.scene.getCurrTime();
 	var remainingTime = time;
 
-	if(this.nodes[idnode].selected){
+	if(currNode.selected){
 		this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
+		currNode.updateWireframe(wireframe);
+		/* if (this.scene.wireframe) {
+			currNode.setLineMode();
+		}else{
+			currNode.setFillMode();
+		} */
 	}
+
 
     this.scene.multMatrix(currNode.transformMatrix);
 
@@ -1583,7 +1590,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         this.scene.popMatrix(); //restore the matrix
 	}
 
-	if(this.nodes[idnode].selected){
+	if(this.nodes[idnode].selected){//stop shader propagation
 		this.scene.setActiveShader(this.scene.defaultShader);
 	}
 }
