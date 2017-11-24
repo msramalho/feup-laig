@@ -86,9 +86,9 @@ Cylinder.prototype.createIndicesLines = function(){
 
 Cylinder.prototype.updateWireframe = function(wireframe){
 	if (wireframe) {
-		currNode.setLineMode();
+		this.setLineMode();
 	}else{
-		currNode.setFillMode();
+		this.setFillMode();
 	}
 };
 

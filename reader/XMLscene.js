@@ -42,6 +42,9 @@ XMLscene.prototype.init = function(application) {
 	this.startingTime = 0;
 	this.currTime = 0;
 
+	this.selectedShader=0;
+	this.wireframe=false;
+ 	this.scaleFactor=50.0;
 
 	this.shaders=[
 		new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),

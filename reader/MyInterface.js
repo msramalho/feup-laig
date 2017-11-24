@@ -6,9 +6,6 @@ function MyInterface(availableShaders) {
 	//call CGFinterface constructor
 	this.availableShaders = availableShaders;
 
-	this.selectedShader=0;
-	this.wireframe=false;
- 	this.scaleFactor=50.0;
 
     CGFinterface.call(this);
 };
