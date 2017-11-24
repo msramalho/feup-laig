@@ -26,7 +26,6 @@ MyInterface.prototype.init = function(application) {
 
     this.gui = new dat.GUI();
 
-    this.addShaderOptions();
 
     return true;
 };
@@ -60,12 +59,12 @@ MyInterface.prototype.addSelectablesGroup = function(selectables) {
 
 	}
 
-    var group = this.gui.addFolder("Selectables");
-	group.open();
+    this.shadersFolder = this.gui.addFolder("Shaders");
+	this.shadersFolder.open();
 
     for (var key in selectables) {
         if (selectables.hasOwnProperty(key)) {
-            group.add(this.scene.selectableValues, selectables[key]);
+            this.shadersFolder.add(this.scene.selectableValues, selectables[key]);
         }
     }
 };
@@ -73,9 +72,12 @@ MyInterface.prototype.addSelectablesGroup = function(selectables) {
 MyInterface.prototype.addShaderOptions = function(){
 	//this.availableShaders
 	//automatically update selectedShader
-	this.gui.add(this.scene, 'selectedShader', this.availableShaders).name('Shaders: ');
+	this.shadersFolder.add(this.scene, 'selectedShader', this.availableShaders).name('Shaders: ');
+
+
+	this.shadersFolder.addColor(this.scene, 'selectionColor');
 
 	obj=this;
 	//automatically update wireframe
-	this.gui.add(this.scene, 'wireframe');
+	this.shadersFolder.add(this.scene, 'wireframe');
 };
