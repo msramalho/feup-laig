@@ -1376,8 +1376,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 						if(animId == null || !this.animations[animId]){
 							this.onXMLError("ANIMATIONREF: " + animId + " is not defined on node: " + nodeID);
 						}
-                        this.nodes[nodeID].animations.push(this.animations[animId]);
-                        //this.nodes[nodeID].animations.push(animId);//if just the ids are needed
+						var animationRef = new AnimationRefs(this.animations[animId]);
+                        this.nodes[nodeID].animations.push(animationRef);
 					}
 				}
 
@@ -1526,6 +1526,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     var tex = texture;
 	var currNode = this.nodes[idnode];
 	var time = this.scene.getCurrTime();
+	var remainingTime = time;
 
 	if(this.nodes[idnode].selected){
 		this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
@@ -1548,10 +1549,15 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 
     for (let key in currNode.animations) {
 		let value = currNode.animations[key];
-        this.scene.multMatrix(value.animate(time));
+		if (remainingTime < currNode.animations[key].totalTime) {
+			value.lastMatrix = value.animate(remainingTime)
+			this.scene.multMatrix(value.lastMatrix);
+			break;
+		} else {
+			remainingTime -= currNode.animations[key].totalTime;
+		}
+		this.scene.multMatrix(value.lastMatrix);
 	}
-
-	//console.log(time);
 
     //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {
