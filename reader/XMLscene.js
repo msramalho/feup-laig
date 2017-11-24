@@ -7,11 +7,7 @@ var DEGREE_TO_RAD = Math.PI / 180;
 function XMLscene(interface) {
     CGFscene.call(this);
 
-    this.interface = interface;
-
-	this.selectedShader = 0;
-	this.wireframe = false;
-	this.scaleFactor = 50.0;
+	this.interface = interface;
 
     this.lightValues = {};
     this.selectableValues = {};
@@ -44,9 +40,9 @@ XMLscene.prototype.init = function(application) {
 
 	this.selectedShader=0;
 	this.wireframe=false;
- 	this.scaleFactor=50.0;
 
 	this.shaders=[
+		new CGFshader(this.gl, "Shaders/main.vert", "Shaders/main.frag"),
 		new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),
 		new CGFshader(this.gl, "Shaders/uScale.vert", "Shaders/uScale.frag"),
 		new CGFshader(this.gl, "Shaders/varying.vert", "Shaders/varying.frag"),
@@ -62,11 +58,11 @@ XMLscene.prototype.init = function(application) {
  * Function called every update period
  */
 XMLscene.prototype.update = function(currTime) {
-	if (!this.timerStarted)
-	{
+	if (!this.timerStarted)	{
 		this.startingTime = currTime;
 		this.timerStarted = true;
 	}
+	this.updateShaders(currTime);
 	this.currTime = (currTime - this.startingTime) / 1000.0;
 }
 
@@ -199,4 +195,12 @@ XMLscene.prototype.display = function() {
 
     // ---- END Background, camera and axis setup
 
+};
+XMLscene.prototype.updateShaders = function(){
+	if (typeof counter == 'undefined') {counter = 0;}//use counter as static variable
+	counter++;
+	let timeFactor = Math.sin(counter/10);
+	for (let i = 0; i < this.shaders.length; i++) {
+		this.shaders[i].setUniformsValues({timeFactor: timeFactor});
+	}
 };

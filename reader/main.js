@@ -22,14 +22,15 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
 main=function()
 {
 	availableShaders = {
-		'Flat Shading': 0,
-		'Passing a scale as uniform': 1,
-		'Passing a varying parameter from VS -> FS': 2,
-		'Simple texturing': 3,
-		'Multiple textures in the FS': 4,
-		'Multiple textures in VS and FS': 5,
-		'Sepia': 6,
-		'Convolution': 7
+		'Main Shader': 0,
+		'Flat Shading': 1,
+		'Passing a scale as uniform': 2,
+		'Passing a varying parameter from VS -> FS': 3,
+		'Simple texturing': 4,
+		'Multiple textures in the FS': 5,
+		'Multiple textures in VS and FS': 6,
+		'Sepia': 7,
+		'Convolution': 8
 	};
 
 	// Standard application, scene and interface setup

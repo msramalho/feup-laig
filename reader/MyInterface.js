@@ -78,7 +78,4 @@ MyInterface.prototype.addShaderOptions = function(){
 	obj=this;
 	//automatically update wireframe
 	this.gui.add(this.scene, 'wireframe');
-
-	//automatically update scaleFactor
-	this.gui.add(this.scene, 'scaleFactor',-50,50);
 };
