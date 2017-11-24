@@ -2,11 +2,16 @@
  * MyInterface class, creating a GUI interface.
  * @constructor
  */
-function MyInterface() {
-    //call CGFinterface constructor
+function MyInterface(availableShaders) {
+	//call CGFinterface constructor
+	this.availableShaders = availableShaders;
+
+	this.selectedShader=0;
+	this.wireframe=false;
+ 	this.scaleFactor=50.0;
+
     CGFinterface.call(this);
-}
-;
+};
 
 MyInterface.prototype = Object.create(CGFinterface.prototype);
 MyInterface.prototype.constructor = MyInterface;
@@ -24,7 +29,7 @@ MyInterface.prototype.init = function(application) {
 
     this.gui = new dat.GUI();
 
-    // add a group of controls (and open/expand by defult)
+    this.addShaderOptions();
 
     return true;
 };
@@ -68,3 +73,15 @@ MyInterface.prototype.addSelectablesGroup = function(selectables) {
     }
 };
 
+MyInterface.prototype.addShaderOptions = function(){
+	//this.availableShaders
+	//automatically update selectedShader
+	this.gui.add(this.scene, 'selectedShader', this.availableShaders).name('Shaders: ');
+
+	obj=this;
+	//automatically update wireframe
+	this.gui.add(this.scene, 'wireframe');
+
+	//automatically update scaleFactor
+	this.gui.add(this.scene, 'scaleFactor',-50,50);
+};
