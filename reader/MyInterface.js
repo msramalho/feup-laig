@@ -57,6 +57,7 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
 
 	this.shadersFolder.add(this.scene, 'selectedSelectable', selectables).name('Selectables: ');
 	this.shadersFolder.add(this.scene, 'selectedShader', this.availableShaders).name('Shaders: ');
-	this.shadersFolder.addColor(this.scene, 'selectionColor');
-	this.shadersFolder.add(this.scene, 'wireframe');
+	this.shadersFolder.addColor(this.scene, 'selectionColor').name('Selection Color: ');
+	this.shadersFolder.add(this.scene,'scaleFactor', 1.0, 5.0);
+	this.shadersFolder.add(this.scene, 'wireframe').name('Wireframe');
 };

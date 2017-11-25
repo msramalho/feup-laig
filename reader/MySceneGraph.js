@@ -1528,7 +1528,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 	var time = this.scene.getCurrTime();
 	var remainingTime = time;
 
-	console.log("SELECTED IS:" + this.scene.selectedSelectable);
+	//console.log("SELECTED IS:" + this.scene.selectedSelectable);
 	if(this.scene.selectedSelectable  == idnode){
 		this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
 	}
@@ -1558,7 +1558,8 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 		} else {
 			remainingTime -= currNode.animations[key].totalTime;
 		}
-		this.scene.multMatrix(value.lastMatrix);
+		if (value.lastMatrix != 'undefined')
+			this.scene.multMatrix(value.lastMatrix);
 	}
 
     //iterate all this node's leaves

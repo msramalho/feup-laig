@@ -41,6 +41,7 @@ XMLscene.prototype.init = function (application) {
 	this.selectedSelectable = 0;
 	this.selectedShader = 0;
 	this.wireframe = false;
+	this.scaleFactor = 1.0;
 	this.selectionColor = [0, 128, 255, 1]; //rgba
 
 	this.shaders = [
@@ -194,13 +195,14 @@ XMLscene.prototype.updateShaders = function () {
 	counter++;
 	let timeFactor = Math.abs(Math.sin(counter / 10));
 	let timeFactorInverted = 1 - timeFactor;
-	let goalColor = vec4.fromValues(this.selectionColor[0], this.selectionColor[1], this.selectionColor[2], this.selectionColor[3]);
-	let saturatedColor = vec4.fromValues(255, 100, 100, 1);
+	let goalColor = vec4.fromValues(this.selectionColor[0]/255, this.selectionColor[1]/255, this.selectionColor[2]/255, this.selectionColor[3]);
+	console.log(this.selectionColor);
+	let saturatedColor = vec4.fromValues(255/255, 100/255, 100/255, 1);
 	for (let i = 0; i < this.shaders.length; i++) {
 		this.shaders[i].setUniformsValues({
-			timeFactor: timeFactor,
+			timeFactor: this.scaleFactor*timeFactor,
 			timeFactorInverted: timeFactorInverted,
-			goalColor: goalColor,
+			goalColor: this.selectionColor,
 			saturatedColor: saturatedColor
 		});
 	}
