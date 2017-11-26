@@ -159,13 +159,29 @@
 		<controlpoint xx="4" yy="0" zz="4" />
 		<controlpoint xx="4" yy="0" zz="0" />
 	</ANIMATION>
+	<ANIMATION id="animB2" speed="5" type="bezier">
+		<controlpoint xx="0" yy="0" zz="0" />
+		<controlpoint xx="0" yy="0" zz="10" />
+		<controlpoint xx="10" yy="0" zz="10" />
+		<controlpoint xx="10" yy="0" zz="0" />
+	</ANIMATION>
+	<ANIMATION id="animBPir" speed="5" type="bezier">
+		<controlpoint xx="0" yy="0" zz="5" />
+		<controlpoint xx="5" yy="10" zz="10" />
+		<controlpoint xx="15" yy="10" zz="10" />
+		<controlpoint xx="-25" yy="0" zz="-10" />
+	</ANIMATION>
+	<ANIMATION id="animCirc2" speed="1" type="circular"
+		centerx="3" centery="0" centerz="0"
+		radius="1" startang="0" rotang="360"
+		/>
 	<ANIMATION id="animCirc" speed="10" type="circular"
 		centerx="0" centery="0" centerz="0"
 		radius="5" startang="0" rotang="360"
 		/>
 	<ANIMATION id="animComb" type="combo">
 		<SPANREF id="animCirc" />
-		<SPANREF id="animB" />
+		<SPANREF id="animB2" />
 	</ANIMATION>
 </ANIMATIONS>
 
@@ -196,7 +212,7 @@
     </NODE>
 
     <!-- The floor -->
-    <NODE id="chao" selectable="true">
+    <NODE id="chao">
         <MATERIAL id="null" />
         <TEXTURE id="rocks" />
 
@@ -233,6 +249,10 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
+		<ANIMATIONREFS>
+			<ANIMATIONREF id = "animCirc2" />
+		</ANIMATIONREFS>
+
         <DESCENDANTS>
             <NODEREF id="luz_candeeiro" />
         </DESCENDANTS>
@@ -240,7 +260,7 @@
     </NODE>
 
    <!-- The second light -->
-    <NODE id="luz2">
+    <NODE id="luz2" selectable="true">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -332,7 +352,7 @@
     </NODE>
 
     <!-- One bench -->
-    <NODE id="banco2" selectable="true">
+    <NODE id="banco2">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -400,9 +420,8 @@
 
 		<ANIMATIONREFS>
 			<ANIMATIONREF id = "animB" />
-			<ANIMATIONREF id = "animCirc" />
+			<ANIMATIONREF id = "animCirc2" />
 		</ANIMATIONREFS>
-
 
         <DESCENDANTS>
             <NODEREF id="arvore" />
@@ -411,7 +430,7 @@
     </NODE>
 
     <!-- Another tree -->
-    <NODE id="arvore2">
+    <NODE id="arvore2" selectable="true">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -555,6 +574,10 @@
 
         <MATERIAL id="null" />
         <TEXTURE id="vidral" />
+
+		<ANIMATIONREFS>
+			<ANIMATIONREF id = "animBPir" />
+		</ANIMATIONREFS>
 
         <TRANSLATION x="12" y="5.8" z="4.75" />
         <SCALE sx="0.4" sy="2" sz="0.4" />

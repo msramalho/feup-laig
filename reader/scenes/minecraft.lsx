@@ -213,25 +213,25 @@
 </MATERIALS>
 
 <ANIMATIONS>
-	<ANIMATION id="animLin" speed="10" type="linear">
+	<ANIMATION id="animLin" speed="1" type="linear">
 		<controlpoint xx="1" yy="1" zz="1" />
 		<controlpoint xx="4" yy="4" zz="4" />
 	</ANIMATION>
 
-<!-- 	<ANIMATION id="animB" speed="20" type="bezier">
-		<controlpoint xx="1" yy="1" zz="1" />
-		<controlpoint xx="2" yy="2" zz="2" />
-		<controlpoint xx="3" yy="3" zz="3" />
-		<controlpoint xx="4" yy="4" zz="4" />
-	</ANIMATION> -->
-	<ANIMATION id="animCirc" speed="15" type="circular"
-		centerx="1" centery="1" centerz="1"
-		radius="10" startang="20" rotang="10"
+	<ANIMATION id="animB" speed="1" type="bezier">
+		<controlpoint xx="0" yy="0" zz="0" />
+		<controlpoint xx="0" yy="5" zz="40" />
+		<controlpoint xx="30" yy="5" zz="30" />
+		<controlpoint xx="40" yy="0" zz="0" />
+	</ANIMATION>
+	<ANIMATION id="animCirc" speed="20" type="circular"
+		centerx="20" centery="0" centerz="0"
+		radius="30" startang="0" rotang="100"
 		/>
-<!-- 	<ANIMATION id="animComb" type="combo">
-		<SPANREF id="animLin" />
+	<ANIMATION id="animComb" type="combo">
+		<SPANREF id="animCirc" />
 		<SPANREF id="animB" />
-	</ANIMATION> -->
+	</ANIMATION>
 </ANIMATIONS>
 
 <!-- The nodes -->
@@ -259,7 +259,7 @@
         </DESCENDANTS>
     </NODE>
 
-    <NODE id="bridgeS">
+    <NODE id="bridgeS" selectable="true">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
         <DESCENDANTS>
@@ -2725,7 +2725,7 @@
     </NODE>
 
     <!-- Generic tree -->
-    <NODE id="tree">
+    <NODE id="tree"  selectable="true">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
         <TRANSLATION x="50" y="0" z="-20" />
@@ -2885,6 +2885,12 @@
     <NODE id="luz_sol">
         <MATERIAL id="sunMaterial" />
         <TEXTURE id="null" />
+
+		<ANIMATIONREFS>
+			<ANIMATIONREF id = "animCirc" />
+			<ANIMATIONREF id = "animB" />
+		</ANIMATIONREFS>
+
         <TRANSLATION x="-10" y="18" z="38" />
         <DESCENDANTS>
             <LEAF id="shpere_sun" type="sphere" args="4 20 20" />
