@@ -33,7 +33,7 @@ LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
 LinearAnimation.prototype.animate = function(time) {
-	if(this.animations.length == 0 || typeof  this.animations[0] == "undefined"){
+	if(this.animations.length == 0 || (typeof this.animations[0] === 'undefined' || !this.animations[0])){
 		return this.lastMatrix;
 	}
 	var matrix = mat4.create();
@@ -46,8 +46,12 @@ LinearAnimation.prototype.animate = function(time) {
 
 	var animationTime = time - this.times[0];
 	var animationDistance = animationTime*this.speed;
-
-	var p1 = this.animations[0]['p1'];
+	var p1;
+	try {
+		p1 = this.animations[0]['p1'];
+	} catch (error) {
+		return this.lastMatrix;
+	}
 	var p2 = this.animations[0]['p2'];
 
 	this.vec = vec3.fromValues(p2.x-p1.x,p2.y-p1.y,p2.z-p1.z);
@@ -63,7 +67,6 @@ LinearAnimation.prototype.animate = function(time) {
 
 	mat4.rotateY(matrix,matrix,this.angles);
 
-	console.log(matrix);
 	this.lastMatrix = matrix;
 	return matrix;
 }
