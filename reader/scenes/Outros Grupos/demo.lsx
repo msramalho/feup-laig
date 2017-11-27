@@ -231,9 +231,9 @@
         <MATERIAL id="lightMaterial" />
         <TEXTURE id="clear" />
 
-		<!-- <ANIMATIONREFS>
+		<ANIMATIONREFS>
 			<ANIMATIONREF id = "animLin" />
-		</ANIMATIONREFS> -->
+		</ANIMATIONREFS>
 
         <DESCENDANTS>
             <NODEREF id="luz1" />
