@@ -24,13 +24,7 @@ main=function()
 	availableShaders = {
 		'Main Shader': 0,
 		'Flat Shading': 1,
-		'Passing a scale as uniform': 2,
-		'Passing a varying parameter from VS -> FS': 3,
-		'Simple texturing': 4,
-		'Multiple textures in the FS': 5,
-		'Multiple textures in VS and FS': 6,
-		'Sepia': 7,
-		'Convolution': 8
+		'Simple texturing': 2,
 	};
 
 	// Standard application, scene and interface setup

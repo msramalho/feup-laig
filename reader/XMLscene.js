@@ -47,15 +47,9 @@ XMLscene.prototype.init = function (application) {
 	this.shaders = [
 		new CGFshader(this.gl, "Shaders/main.vert", "Shaders/main.frag"),
 		new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),
-		new CGFshader(this.gl, "Shaders/uScale.vert", "Shaders/uScale.frag"),
-		new CGFshader(this.gl, "Shaders/varying.vert", "Shaders/varying.frag"),
-		new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag"),
-		new CGFshader(this.gl, "Shaders/texture2.vert", "Shaders/texture2.frag"),
-		new CGFshader(this.gl, "Shaders/texture3.vert", "Shaders/texture3.frag"),
-		new CGFshader(this.gl, "Shaders/texture3.vert", "Shaders/sepia.frag"),
-		new CGFshader(this.gl, "Shaders/texture3.vert", "Shaders/convolution.frag")
+		new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag")
 	];
-}
+};
 
 /**
  * Function called every update period
@@ -195,17 +189,18 @@ XMLscene.prototype.updateShaders = function () {
 	counter++;
 	let timeFactor = Math.abs(Math.sin(counter / 10));
 	let timeFactorInverted = 1 - timeFactor;
-	let goalColor = vec4.fromValues(this.selectionColor[0]/255, this.selectionColor[1]/255, this.selectionColor[2]/255, this.selectionColor[3]);
+	let goalColor = vec4.fromValues(this.selectionColor[0]/255, this.selectionColor[1]/255, this.selectionColor[2]/255, 1);
 	let saturatedColor = vec4.fromValues(255/255, 100/255, 100/255, 1);
 	for (let i = 0; i < this.shaders.length; i++) {
 		this.shaders[i].setUniformsValues({
 			timeFactor: this.scaleFactor*timeFactor,
 			timeFactorInverted: timeFactorInverted,
-			goalColor: goalColor,
-			saturatedColor: saturatedColor,
-			colorr: this.selectionColor[0]/255,
-			colorg: this.selectionColor[1]/255,
-			colorb: this.selectionColor[2]/255
+			goal_r: goalColor[0],
+			goal_g: goalColor[1],
+			goal_b: goalColor[2],
+			saturated_r: saturatedColor[0],
+			saturated_g: saturatedColor[1],
+			saturated_b: saturatedColor[2],
 		});
 	}
 };
