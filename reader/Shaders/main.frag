@@ -8,24 +8,25 @@ varying vec4 normal;
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
 
+uniform float goal_r;
+uniform float goal_g;
+uniform float goal_b;
+
+uniform float saturated_r;
+uniform float saturated_g;
+uniform float saturated_b;
+
+
 uniform float timeFactor;
 uniform float timeFactorInverted;
-varying vec4 goalColor;
-varying vec4 saturatedColor;
 
 void main() {
 	vec4 color = texture2D(uSampler, vTextureCoord);
 
-	//the new color is a factor of the saturated and the goal colors, since timeFactor is varying between 0 and 1, and timeFactorInverted between 1 and 0, this should give the resulting match of colors:
-	//color = timeFactor * saturatedColor + timeFactorInverted * goalColor;
+	vec4 goalColor = vec4(goal_r, goal_g, goal_b, 1);
+	vec4 saturatedColor = vec4(saturated_r, saturated_g, saturated_b, 1);
 
-	color = vec4(timeFactor,timeFactor,timeFactorInverted,1);
-
-	//however it is not working. Furthermore even simply doing:
-	// gl_FragColor = saturatedColor;
-	// or even
-	// gl_FragColor = goalColor;
-	// has no effect and i cannot seem to understang why, there are plenty of examples for instance the sepia.frag file which uses the texture3.vert, and a simple copy+paste of those two files into our main.* does not seem to work :(
+	color.rgb = timeFactor * saturatedColor.rgb + timeFactorInverted * goalColor.rgb;
 
 	gl_FragColor = color;
 }

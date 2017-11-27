@@ -20,13 +20,13 @@ struct lightProperties {
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
 
-uniform float colorr;
-uniform float colorg;
-uniform float colorb;
+uniform float goal_r;
+uniform float goal_g;
+uniform float goal_b;
 
 #define NUMBER_OF_LIGHTS 8
 uniform lightProperties uLight[NUMBER_OF_LIGHTS];
 
 void main() {
-		gl_FragColor =  vec4(colorr,colorg,colorb, 1.0) * uLight[0].diffuse;
+		gl_FragColor =  vec4(goal_r,goal_g,goal_b, 1.0) * uLight[0].diffuse;
 }
