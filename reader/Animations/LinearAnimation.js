@@ -34,6 +34,12 @@ LinearAnimation.prototype.constructor = LinearAnimation;
 LinearAnimation.prototype.animate = function(time) {
 	var matrix = mat4.create();
 
+	if(time >= this.animations[0]['time'])
+	{
+	  this.animations.shift();
+	  this.times.shift();
+	}
+
 	var animationTime = time - this.times[0];
 	var animationDistance = animationTime*this.speed;
 
