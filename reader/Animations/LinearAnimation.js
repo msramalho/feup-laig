@@ -32,7 +32,6 @@ LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
 LinearAnimation.prototype.animate = function(time) {
-	console.log("PENIS");
 	var matrix = mat4.create();
 
 	var animationTime = time - this.times[0];
@@ -41,7 +40,7 @@ LinearAnimation.prototype.animate = function(time) {
 	var p1 = this.animations[0]['p1'];
 	var p2 = this.animations[0]['p2'];
 
-	this.vec = vec3.fromValues(p2[0]-p1[0],p2[1]-p1[1],p2[2]-p1[2]);
+	this.vec = vec3.fromValues(p2.x-p1.x,p2.y-p1.y,p2.z-p1.z);
 	vec3.normalize(this.vec,this.vec);
 	var orient = vec3.fromValues(1,0,0);
 	this.angles = this.calcAngle(orient,this.vec);
