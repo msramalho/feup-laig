@@ -19,19 +19,20 @@ function LinearAnimation(speed, controlPoints) {
 		this.distance.push(this.calculateDistance(this.controlPoints[i - 1], this.controlPoints[i]));
 		this.times.push(this.distance[i]/this.speed);
 		console.log("DIST",this.distance[i]/this.speed);
-		this.totalDistance += this.distance[i-1];
+		this.totalDistance += this.distance[i];
 	}
 	this.getAnimations();
 	console.log("[Linear]",this.totalDistance,this.times,this.distance,this.animations);
 	this.totalTime = this.totalDistance / this.speed;
 
-
+	console.log("[Linear] totalTime: ", this.totalTime);
 }
 
 LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
 LinearAnimation.prototype.animate = function(time) {
+	console.log("PENIS");
 	var matrix = mat4.create();
 
 	var animationTime = time - this.times[0];
