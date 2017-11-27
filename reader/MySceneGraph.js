@@ -1552,14 +1552,15 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     for (let key in currNode.animations) {
 		let value = currNode.animations[key];
 		if (remainingTime < currNode.animations[key].totalTime) {
-			value.lastMatrix = value.animate(remainingTime)
+			value.lastMatrix = value.animate(remainingTime);
 			this.scene.multMatrix(value.lastMatrix);
 			break;
 		} else {
 			remainingTime -= currNode.animations[key].totalTime;
 		}
-		if (value.lastMatrix != 'undefined')
+		if (value.lastMatrix != 'undefined'){
 			this.scene.multMatrix(value.lastMatrix);
+		}
 	}
 
     //iterate all this node's leaves
