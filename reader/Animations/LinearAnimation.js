@@ -13,6 +13,7 @@ function LinearAnimation(speed, controlPoints) {
 	this.times = [];
 	this.angles = [];
 	this.animations = [];
+	this.lastMatrix = undefined;
 
 
 	for (var i = 1; i < this.controlPoints.length; i++)	{
@@ -32,6 +33,9 @@ LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
 LinearAnimation.prototype.animate = function(time) {
+	if(this.animations.length == 0 || typeof  this.animations[0] == "undefined"){
+		return this.lastMatrix;
+	}
 	var matrix = mat4.create();
 
 	if(time >= this.animations[0]['time'])
@@ -60,7 +64,7 @@ LinearAnimation.prototype.animate = function(time) {
 	mat4.rotateY(matrix,matrix,this.angles);
 
 	console.log(matrix);
-
+	this.lastMatrix = matrix;
 	return matrix;
 }
 
