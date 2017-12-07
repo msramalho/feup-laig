@@ -370,7 +370,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="7.5" y="-2" z="4" />
+        <!-- <TRANSLATION x="7.5" y="-2" z="4" /> -->
 
 		<ANIMATIONREFS>
 			<ANIMATIONREF id = "animComb" />
