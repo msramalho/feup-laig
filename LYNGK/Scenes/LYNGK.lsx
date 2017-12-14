@@ -76,12 +76,12 @@
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
-	<!-- Red material -->
-    <MATERIAL id="redMaterial">
+	<!-- Spot material -->
+    <MATERIAL id="spotMaterial">
         <shininess value="1" />
         <specular r="0" g="0" b="0" a="1" />
-        <diffuse r="1" g="0" b="0" a="1" />
-        <ambient r="1" g="0" b="0" a="1" />
+        <diffuse r="0.8" g="0.1" b="0.1" a="1" />
+        <ambient r="0.8" g="0.1" b="0.1" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
@@ -623,7 +623,7 @@
     </NODE>
 
 	<NODE id="placeCylinders">
-        <MATERIAL id="redMaterial" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
         <DESCENDANTS>
@@ -639,7 +639,7 @@
     </NODE>
 
 	<NODE id="placeCylinder1">
-        <MATERIAL id="redMaterial" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
         <DESCENDANTS>
@@ -649,7 +649,7 @@
     </NODE>
 
 	<NODE id="placeCylinder2">
-        <MATERIAL id="redMaterial" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
 		<TRANSLATION x="0" y="0" z="4.5" />
@@ -661,7 +661,7 @@
     </NODE>
 
 	<NODE id="placeCylinder3">
-        <MATERIAL id="redMaterial" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
 		<TRANSLATION x="0" y="0" z="9" />
@@ -673,7 +673,7 @@
     </NODE>
 
 	<NODE id="placeCylinder4">
-        <MATERIAL id="redMaterial" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
 		<TRANSLATION x="0" y="0" z="13.5" />
@@ -685,7 +685,7 @@
     </NODE>
 
 	<NODE id="placeCylinder5">
-        <MATERIAL id="redMaterial" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
 		<TRANSLATION x="0" y="0" z="18" />
@@ -697,7 +697,7 @@
     </NODE>
 
 	<NODE id="placeCylinder6">
-        <MATERIAL id="redMaterial" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
 		<TRANSLATION x="0" y="0" z="22.5" />
@@ -709,7 +709,7 @@
     </NODE>
 
 	<NODE id="placeCylinder7">
-        <MATERIAL id="redMaterial" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
 		<TRANSLATION x="0" y="0" z="27" />
@@ -721,7 +721,7 @@
     </NODE>
 
 	<NODE id="placeCylinder">
-        <MATERIAL id="redMaterial" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
 		<TRANSLATION x="0" y="0.225" z="0" />
