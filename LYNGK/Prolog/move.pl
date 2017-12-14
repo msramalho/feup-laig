@@ -4,7 +4,7 @@ move.pl:file with the predicates for the implementation of the move command
 
 % check if cell is valid (x, y) and print error if not
 checkValidCell(X, Y):-isValid(X, Y), !.
-checkValidCell(X, Y):-setOutputMessage('This is not a valid cell in the board'), fail.
+checkValidCell(_X, _Y):-setOutputMessage('This is not a valid cell in the board'), fail.
 
 %fails if stack is empty
 checkStackNotEmpty(X, Y):-

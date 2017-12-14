@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Sicstus Prolog HTTP Server Test</title>
-	</head>
-	<body>
-		<h1>Sicstus HTTP Test</h1>
-	
-		<div>
-			<input id="query_field" type="Text" value="handshake"/>
-			<br>
-			<button id="send_button" type="button" onClick="makeRequest();"> Send </button>
-			<button id="send_button" type="button" onClick="makeRequest('quit');"> Quit </button>
-			<button id="send_button" type="button" onClick="makeRequest('reconsult');"> Reconsult </button>
-		</div>
-		<h3> Result: </h3>
-		<div id="query_result"></div>
-		
-		<script>
-			function getPrologRequest(requestString, onSuccess, onError, port) {
-				var requestPort = port || 8081
-				var request = new XMLHttpRequest();
-				request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, true);
 
-				request.onload = onSuccess || function(data){console.log("Request successful. Reply: " + data.target.response);};
-				request.onerror = onError || function(){console.log("Error waiting for response");};
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Sicstus Prolog HTTP Server Test</title>
+</head>
 
-				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-				request.send();
+<body>
+	<h1>Sicstus HTTP Test</h1>
+
+	<div>
+		<input id="query_field" type="Text" value="handshake" />
+		<br>
+		<button id="send_button" type="button" onClick="makeRequest();"> Send </button>
+		<button id="send_button" type="button" onClick="makeRequest('init(humanVhuman)');"> hVh </button>
+		<button id="send_button" type="button" onClick="makeRequest('init(botVbot,random,greedy)');"> bVb </button>
+		<button id="send_button" type="button" onClick="makeRequest('action(playBot)');"> playBot </button>
+		<button id="send_button" type="button" onClick="makeRequest('quit');"> Quit </button>
+		<button id="send_button" type="button" onClick="makeRequest('reconsult');"> Reconsult </button>
+	</div>
+	<h3> Result: </h3>
+	<div id="query_result"></div>
+
+	<script>
+		document.getElementById("query_field").addEventListener('keypress', function (e) {
+			var key = e.which || e.keyCode;
+			if (key === 13) { // 13 is enter
+				makeRequest();
 			}
-		
-			function makeRequest(requestString) {
-				if (requestString == undefined){
-					// Get Parameter Values
-					requestString = document.querySelector("#query_field").value;			
-				}	
-				// Make Request
-				getPrologRequest(requestString, handleReply);
+		});
+
+		function getPrologRequest(requestString, onSuccess, onError, port) {
+			queryResult.innerHTML = "sending...";//clear the output log until a message arrives
+			var requestPort = port || 8081
+			var request = new XMLHttpRequest();
+			request.open('GET', 'http://localhost:' + requestPort + '/' + requestString, true);
+
+			request.onload = onSuccess || function (data) {
+				console.log("Request successful. Reply: " + data.target.response);
+			};
+			request.onerror = onError || function () {
+				console.log("Error waiting for response");
+			};
+
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+			request.send();
+		}
+
+		function makeRequest(requestString) {
+			if (requestString == undefined) {
+				// Get Parameter Values
+				requestString = document.querySelector("#query_field").value;
 			}
-			
-			//Handle the Reply
-			function handleReply(data){
-				document.querySelector("#query_result").innerHTML=data.target.response;
-			}
-		
-		</script>
-	</body>
+			// Make Request
+			getPrologRequest(requestString, handleReply);
+		}
+
+		//Handle the Reply
+		var queryResult = document.querySelector("#query_result");
+		function handleReply(data) {
+			queryResult.innerHTML = data.target.response;
+		}
+	</script>
+</body>
+
 </html>

@@ -17,7 +17,7 @@ playBotByLevel(Number, Move):-%hardcore move (alpha-beta)
     integer(Number),
     startAlphaBeta(Number, _Value:Move).
 
-playBot(Bot):-
+playBot(Bot, Move):-
     botLevel(Bot, Level),
     playBotByLevel(Level, Move),
     write('Bot is executing move: '), write(Move), nl,
@@ -42,7 +42,7 @@ getFullValidMove(MoveableColors, Xf, Yf, Xt, Yt, none):-%no color claimed
 getFullValidMove(MoveableColors, Xf, Yf, Xt, Yt, ClaimedColor):-%with claim
     once(validClaim), %the player has claimed less than 2 colors
 
-    isClaimableColor(ClaimedColor), %is this a valid color to claim
+    colorAvailable(ClaimedColor), %is this a valid color to claim
     once(append([MoveableColors, [ClaimedColor]], NewMoveableColors)), %the claimed color can also be moved
 
     getFullValidMove(NewMoveableColors, Xf, Yf, Xt, Yt, none).
@@ -78,20 +78,17 @@ evaluateMove(Move, Score):-
     once(popGame).
 
 %--------------------------------------------bot difficulty
-validBotLevel(r, random).%random move
-validBotLevel(g, greedy).%greedy move
-validBotLevel(Number, Number):-%numeric value (alfa-beta prunning)
+validBotLevel(random).%random move
+validBotLevel(greedy).%greedy move
+validBotLevel(Number):-%numeric value (alfa-beta prunning)
     integer(Number), Number > 0.%random move
-
-chooseBotLevel(Bot):-
-    displayBotLevels(Bot),
-    read(BotLevel),
-    read_line([]),
-    validBotLevel(BotLevel, TranslatedLevel),
-    saveBotLevel(Bot, TranslatedLevel).
-chooseBotLevel(Bot):-setOutputMessage('Invalid bot difficulty, try again:'), !, chooseBotLevel(Bot).
-
 
 isBot(bot).
 isBot(bot1).
 isBot(bot2).
+
+chooseBotLevel(Bot, BotLevel):-
+	isBot(Bot),
+    validBotLevel(BotLevel),
+    saveBotLevel(Bot, BotLevel).
+chooseBotLevel(_Bot):-setOutputMessage('Invalid bot difficulty, try again:'), !, fail.

@@ -45,56 +45,27 @@ randomizeBotPlay:-
     Temp =:= 0,
     savePlayer(player1),
     saveNextPlayer(bot),
-    setOutputMessage('Player 1 goes first...\n').
+    setOutputMessage('Player 1 goes first...').
 randomizeBotPlay:-
     savePlayer(bot),
     saveNextPlayer(player1),
-    setOutputMessage('Bot goes first...\n').
+    setOutputMessage('Bot goes first...').
 
 %game type (User x User | User x Bot)
-startGame(quit):-exit. %abort
-startGame(instructions):-displayInstructions. %abort
 startGame(humanVhuman):- %intialize both players. The real players should randomly choose their turn
     savePlayer(player1),
     saveNextPlayer(player2),
-    setOutputMessage('Human Vs Human Selected\n').
+    setOutputMessage('Human Vs Human Selected').
 
 startGame(humanVbot):- % initialize the player and the nextPlayer randomly, the bot may be first
-    setOutputMessage('Human Vs Bot Selected\n'),
-    chooseBotLevel(bot),
+    setOutputMessage('Human Vs Bot Selected'),
     randomizeBotPlay.
 
 startGame(botVbot):- % initialize the player and the nextPlayer randomly, the bot may be first
-    setOutputMessage('Bot Vs Bot Selected\n'),
-    chooseBotLevel(bot1),
-    chooseBotLevel(bot2),
+    setOutputMessage('Bot Vs Bot Selected'),
     savePlayer(bot1),
     saveNextPlayer(bot2).
 
-%try to read a valid game type (1(humanVhuman), 2(humanVbot) or 3 (quit))
-getGameType(GameType):-
-    read_line([GameTypeLine|_]),
-    menuTranslate(GameType, GameTypeLine).
-getGameType(GameType):-
-    setOutputMessage('Wrong game type, try again:\n'),
-    getGameType(GameType).
-
-%wait for instruction and enter
-/* waitForInstruction:-
-    read_line(Instruction),
-    parseInstruction(Instruction).
- */
-/* %expecting a quit instruction
-parseInstruction("quit"):- abort.
-%expecting a move instruction
-parseInstruction("move"):-!, moveStack.
-%expecting a claim instruction
-parseInstruction("claim"):-!, claimColor. % the players can move after a claim
-%ignore empty input->newline
-parseInstruction([]):- !, waitForInstruction.
-%unexpected instruction
-parseInstruction(_):-setOutputMessage('Instruction not recognized, try again.\n'), fail.
- */
 % inverts the two players
 invertPlayers:-
     player(CurrentPlayer),
@@ -102,12 +73,12 @@ invertPlayers:-
     savePlayer(NextPlayer),
     saveNextPlayer(CurrentPlayer).
 
-nextPlayerGoes:-%if this is a bot playing
+/* nextPlayerGoes:-%if this is a bot playing
     player(Player),
     isBot(Player), !,
     displayBoard,
     playBot(Player), !,
-    endTurn.
+    endTurn. */
 /* nextPlayerGoes:-%else, if this is a human player
     displayBoard,
     repeat,
@@ -117,15 +88,11 @@ nextPlayerGoes:-%if this is a bot playing
     endTurn. */
 
 %checks the board state, changes the players and starts the nextTurn
-endTurn:-
+endTurn(Removed):-
     clearHasClaimed, % clear the hasClaimed flag.
-    removeClaimedStacksWithFive, %move all the 5 stacks to the players they belong to to their Stacks
-    invertPlayers,
-    assertBoard,
-    nextPlayerGoes.
+    removeClaimedStacksWithFive(Removed), %move all the 5 stacks to the players they belong to to their Stacks
+    invertPlayers.
 
-%empties the database and stops the program
-exit:-clearInit, abort.
 %empties the database
 clearInit:-
     abolish(game/1),
@@ -143,23 +110,23 @@ clearInit:-
     clearHasClaimed. % abolishes and resets
 
 %where everything begins
-init:-
-    clearInit,
-    displayMenu,
-    getGameType(GameType),
-    startGame(GameType),
-    generateBoard(Board),
+% init:-
+%     clearInit,
+%     displayMenu,
+%     getGameType(GameType),
+%     startGame(GameType),
+%     generateBoard(Board),
 
-    player(CurrentPlayer),
-    nextPlayer(NextPlayer),
+%     player(CurrentPlayer),
+%     nextPlayer(NextPlayer),
 
-    claimableColors(C),
-    saveToClaim(C), % load the colors that can be claimed
-    saveBoard(Board), % save the board initial state
-    saveGetColors(CurrentPlayer, []),
-    saveGetColors(NextPlayer, []),
-    saveGetStacks(CurrentPlayer, []),
-    saveGetStacks(NextPlayer, []),
-    !,
-    nextPlayerGoes,
-    clearInit.
+%     claimableColors(C),
+%     saveToClaim(C), % load the colors that can be claimed
+%     saveBoard(Board), % save the board initial state
+%     saveGetColors(CurrentPlayer, []),
+%     saveGetColors(NextPlayer, []),
+%     saveGetStacks(CurrentPlayer, []),
+%     saveGetStacks(NextPlayer, []),
+%     !,
+%     nextPlayerGoes,
+%     clearInit.

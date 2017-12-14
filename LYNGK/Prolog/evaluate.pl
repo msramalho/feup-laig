@@ -3,8 +3,8 @@ evaluate.pl: This file implements the predicates required for assessing what are
 */
 
 %iterate over a list of X-Y-Color and give those to the correct player
-moveStackToPLayer([]).
-moveStackToPLayer([X-Y-Stack|T]):-
+moveStackToPLayer([], []).
+moveStackToPLayer([X-Y-Stack|T], MovedStacks):-
     Stack = [TopColor|_],
     getPlayerFromColor(TopColor, Player), %if this fails the color does not belong to any player
     %update the player's stacks with the new one
@@ -15,15 +15,16 @@ moveStackToPLayer([X-Y-Stack|T]):-
     board(B),
     replaceBoardStack(B, X, Y, [], NewBoard),
     saveBoard(NewBoard),
-    moveStackToPLayer(T).
+    moveStackToPLayer(T, TempStacks),
+	MovedStacks = [X-Y-Stack|TempStacks].
 %simply call itself again ignoring this one, to get here it means this stack is an obstacle (belongs to no one)
-moveStackToPLayer([_|T]):-
-    moveStackToPLayer(T).
+moveStackToPLayer([_|T], MovedStacks):-
+    moveStackToPLayer(T, MovedStacks).
 
-removeClaimedStacksWithFive:-
+removeClaimedStacksWithFive(MovedStacks):-
     findall(X-Y-Stack, (getBoardStackHeight(X, Y, 5), getBoardStack(X, Y, Stack)), L), %get all the blocks with height 5
     remove_dups(L, Pruned), %remove duplicates
-    moveStackToPLayer(Pruned).
+    moveStackToPLayer(Pruned, MovedStacks).
 
 %fails if current player has no move left
 currentPlayerHasMoves:-
@@ -31,16 +32,13 @@ currentPlayerHasMoves:-
     getFullValidMove(MoveableColors, _Xf, _Yf, _Xt, _Yt, _Color).
 
 %check if the current player has moves, if not check if the next player has moves, if not endGame
-assertBoard:-currentPlayerHasMoves.
-assertBoard:-%current player has no moves, invert and test
+movesAvailable:-currentPlayerHasMoves.
+movesAvailable:-%current player has no moves, invert and test
     invertPlayers,
     currentPlayerHasMoves.
-assertBoard:-%if no player has moves, end the game
-    displayBoard,
-    setOutputMessage('no more valid moves'), nl,
-    getWinner(Winner),
-    displayWinner(Winner),
-    exit.
+movesAvailable:-%if no player has moves
+	setOutputMessage('game over'), fail.
+
 
 %--------------------- identify te winner start
 getWinner(Winner):-%if the one player has more collected stacks than the other

@@ -3,30 +3,69 @@
 
 %define the actions that can be triggered
 
-%main functions
+%------------------------------------global functions
 executeCommand(handshake, handshake).
 executeCommand(reconsult, 'reconsulted'):-reconsult('C:/xampp/htdocs/FEUP-LAIG/LYNGK/Prolog/server.pl').
 executeCommand(quit, goodbye).
+executeCommand(clear, 'done'):-clear.
+executeCommand(displayBoard, 'done'):-displayBoard.
 
+%------------------------------------game settings
 
 % init(GameType) - humanVhuman - humanVbot - botVbot
 % start a new game given a modeType
 % returns the next player
-executeCommand(init(GameType), Player):-init(GameType), player(Player).
+executeCommand(init(humanVhuman), Player):-init(humanVhuman), player(Player).
+executeCommand(init(humanVbot, BotLevel), Player):-init(humanVbot), chooseBotLevel(bot, BotLevel), player(Player).
+executeCommand(init(botVbot, Bot1Level, Bot2Level), Player):-init(botVbot), chooseBotLevel(bot1, Bot1Level), chooseBotLevel(bot2, Bot2Level), player(Player).
 
+%------------------------------------actions
 % action(move, Xf, Yf, Xt, Yt)
 % executes a move for the current user
-% returns 'success' if all ok and an error message otherwise
-executeCommand(action(move, Xf, Yf, Xt, Yt), 'success'):-processMove(Xf, Yf, Xt, Yt).
-executeCommand(action(move, _Xf, _Yf, _Xt, _Yt), OutputMessage):-outputMessage(OutputMessage).
+% returns 'success' if all ok or an error message otherwise
+executeCommand(action(move, Xf, Yf, Xt, Yt), 'success'+Removed):-processMove(Xf, Yf, Xt, Yt), endTurn(Removed).
 
+% action(claim, Color)
+% makes the current user claim the supplied Color
+% returns 'success' if all ok or an error message otherwise
 executeCommand(action(claim, Color), 'success'):-claimColor(Color).
-executeCommand(action(claim, _Color), OutputMessage):-outputMessage(OutputMessage).
+
+% action(playBot)
+% if the next player is a bot, the bot executes a move
+% returns the Move, like
+executeCommand(action(playBot), Move+Removed):- movesAvailable, player(Bot),isBot(Bot),playBot(Bot, Move), endTurn(Removed).
+
+
+% action errors
+executeCommand(action(_), OutputMessage):-outputMessage(OutputMessage).
+executeCommand(action(_, _), OutputMessage):-outputMessage(OutputMessage).
+executeCommand(action(_, _, _, _, _), OutputMessage):-outputMessage(OutputMessage).
+
+
+
+
+%------------------------------------queries
+% query(board) - returns the board
+executeCommand(query(board), Board):-board(Board).
+% query(player)
+executeCommand(query(player), Player):-player(Player).
+% query(nextPlayer)
+executeCommand(query(nextPlayer), NextPlayer):-nextPlayer(NextPlayer).
+% query(toClaim) get a list of the next colors to claim
+executeCommand(query(toClaim), ToClaim):-toClaim(ToClaim).
+% query(getColors) get the colors of the current player
+executeCommand(query(getColors), Colors):-getColors(Colors).
+% query(getColors,Player) get the colors of a given Player
+executeCommand(query(getColors,Player), Colors):-getColors(Player, Colors).
+% query(gameOver) returns (draw, player1, player2, bot, bot1, bot2 or false)
+executeCommand(query(gameOver), Winner):- \+movesAvailable, getWinner(Winner).
+executeCommand(query(gameOver), false). % game not over yet
+% default query response
+executeCommand(query(_), 'queried variable not set (yet)').
 
 %functions for the interface
 init(GameType):-
 	clearInit,
-    displayMenu,
     startGame(GameType),
     generateBoard(Board),
     player(CurrentPlayer),

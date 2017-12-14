@@ -108,7 +108,7 @@ displayBoard:-
     board(Board),
 	displayLine(Board, 0),
 	wd(66),
-    nl, !,
+    nl,
 
     player(CurrentPlayer),
 	write('\nNow playing:'),

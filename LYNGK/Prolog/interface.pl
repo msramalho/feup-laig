@@ -41,43 +41,6 @@ displayMenu:-
 	wel('30'), wel('30'),wel('30'),
 	wllc, wd(39), wlrc, nl.
 
-displayInstructions:-
-	write('\33\[2J'),
-	wulc, wd(67), wurc, nl,
-	wel('51'),
-	wel('51', 'Instructions'),
-	wel('51'),
-	wsl(67),
-	wel('51'), wel('51'),wel('51'),
-	wel('51', 'WHEN PLAYING, choose one of:'),
-	wel('51', 'move, claim'),
-	wel('51', 'and then press enter'), wel('51'),
-	wel('51', 'for move specify:'),
-	wel('51', 'Xfrom-Yfrom:Xto-Yto'), wel('51'),
-	wel('51', 'for claim specify:'),
-	wel('51', 'colorName'), wel('51'), wel('51'),
-	wel('51', 'Enter to go back'),
-	wel('51'), wel('51'),wel('51'),
-	wllc, wd(67), wlrc, nl,
-    waitForEnter,
-    init.
-
-displayBotLevels(Bot):-
-	write('\33\[2J'),
-	wulc, wd(107), wurc, nl,
-	wel('81'),
-	wel('81', 'Choose Bot Level for:'),
-	wel('81', Bot),
-	wel('81'),
-	wsl(107),
-	wel('81'), wel('81'),wel('81'),
-	wel('81', 'Available levels:'), wel('81'),
-	wel('81', 'r. : (Random) random moves'),
-	wel('81', 'g. : (Greedy) The bot will choose the next direct best move'),
-	wel('81', '<N>. : (Integer) The bot will search the next <N> plays for the best move'),
-	wel('81'), wel('81'),wel('81'),
-	wllc, wd(107), wlrc, nl, !.
-
 displayWinner(draw):-
     wulc, wd(39), wurc, nl,
 	wel('30'), wel('30'),

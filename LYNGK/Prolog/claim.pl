@@ -2,9 +2,9 @@
 claim.pl: predicates related to the color claiming operation
 */
 
-colorAvailable(Translated):-
+colorAvailable(Color):-
     toClaim(ToClaim), %load the colors left for claiming
-    nth0(_, ToClaim, Translated).%if the chosen color is inside ToClaim
+    nth0(_, ToClaim, Color).%if the chosen color is inside ToClaim
 
 %fails if the user cannot claim
 validClaim:-
@@ -24,33 +24,8 @@ claim(Color):-
 
 claimColor(_Color):- hasClaimed(true), setOutputMessage('You can only claim one color per turn'), !, fail.
 claimColor(Color):- \+ colorAvailable(Color), setOutputMessage('This color is no longer available'), !, fail.
-claimColor(Color):- \+ validClaim, setOutputMessage('You can only claim two colors'), !, fail.
+claimColor(_Color):- \+ validClaim, setOutputMessage('You can only claim two colors'), !, fail.
 claimColor(Color):- claim(Color), setOutputMessage('success').
 
-%colors transaltion
-translateColor("black", black).
-translateColor("D", black).
-translateColor("d", black).
-
-translateColor("red", red).
-translateColor("R", red).
-translateColor("r", red).
-
-translateColor("ivory", ivory).
-translateColor("I", ivory).
-translateColor("i", ivory).
-
-translateColor("green", green).
-translateColor("G", green).
-translateColor("g", green).
-
-translateColor("blue", blue).
-translateColor("B", blue).
-translateColor("b", blue).
-
-% fails if this color is not a claimable one
-isClaimableColor(Color):-
-    toClaim(Colors),
-    nth0(_, Colors, Color).
 %from the initial colors, which can be claimed
 claimableColors([black, red, ivory, green, blue]).
