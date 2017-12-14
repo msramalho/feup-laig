@@ -470,7 +470,7 @@
     </NODE>
 
     <!-- Tree leaves -->
-     <NODE id="folhasArvore">
+    <NODE id="folhasArvore">
         <MATERIAL id="leavesTreeMaterial" />
         <TEXTURE id="folhas" />
 
