@@ -37,7 +37,7 @@ assertBoard:-%current player has no moves, invert and test
     currentPlayerHasMoves.
 assertBoard:-%if no player has moves, end the game
     displayBoard,
-    write('no more valid moves'), nl,
+    setOutputMessage('no more valid moves'), nl,
     getWinner(Winner),
     displayWinner(Winner),
     exit.

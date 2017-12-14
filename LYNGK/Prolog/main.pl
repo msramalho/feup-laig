@@ -24,7 +24,8 @@
     getColors/3,    % a list of the colors claimed by the selected player getColors(player, Colors)
     getStacks/3,    % a list of the stacks collected by the selected player getStacks(player, Stacks)
     hasClaimed/2,   % a flag to indicate wheter the current player has claimed a color in this turn
-    botLevel/3.     % the level of difficulty of each bot
+    botLevel/3,     % the level of difficulty of each bot
+	outputMessage/1. % the current error message
 
 :- dynamic
     game/1,
@@ -35,7 +36,8 @@
     getColors/3,
     getStacks/3,
     hasClaimed/2,
-    botLevel/3.
+    botLevel/3,
+	outputMessage/1.
 
 %make bot start first or human start first, 50% chance
 randomizeBotPlay:-
@@ -43,11 +45,11 @@ randomizeBotPlay:-
     Temp =:= 0,
     savePlayer(player1),
     saveNextPlayer(bot),
-    write('Player 1 goes first...\n').
+    setOutputMessage('Player 1 goes first...\n').
 randomizeBotPlay:-
     savePlayer(bot),
     saveNextPlayer(player1),
-    write('Bot goes first...\n').
+    setOutputMessage('Bot goes first...\n').
 
 %game type (User x User | User x Bot)
 startGame(quit):-exit. %abort
@@ -55,15 +57,15 @@ startGame(instructions):-displayInstructions. %abort
 startGame(humanVhuman):- %intialize both players. The real players should randomly choose their turn
     savePlayer(player1),
     saveNextPlayer(player2),
-    write('Human Vs Human Selected\n').
+    setOutputMessage('Human Vs Human Selected\n').
 
 startGame(humanVbot):- % initialize the player and the nextPlayer randomly, the bot may be first
-    write('Human Vs Bot Selected\n'),
+    setOutputMessage('Human Vs Bot Selected\n'),
     chooseBotLevel(bot),
     randomizeBotPlay.
 
 startGame(botVbot):- % initialize the player and the nextPlayer randomly, the bot may be first
-    write('Bot Vs Bot Selected\n'),
+    setOutputMessage('Bot Vs Bot Selected\n'),
     chooseBotLevel(bot1),
     chooseBotLevel(bot2),
     savePlayer(bot1),
@@ -74,15 +76,15 @@ getGameType(GameType):-
     read_line([GameTypeLine|_]),
     menuTranslate(GameType, GameTypeLine).
 getGameType(GameType):-
-    write('Wrong game type, try again:\n'),
+    setOutputMessage('Wrong game type, try again:\n'),
     getGameType(GameType).
 
 %wait for instruction and enter
-waitForInstruction:-
+/* waitForInstruction:-
     read_line(Instruction),
     parseInstruction(Instruction).
-
-%expecting a quit instruction
+ */
+/* %expecting a quit instruction
 parseInstruction("quit"):- abort.
 %expecting a move instruction
 parseInstruction("move"):-!, moveStack.
@@ -91,8 +93,8 @@ parseInstruction("claim"):-!, claimColor. % the players can move after a claim
 %ignore empty input->newline
 parseInstruction([]):- !, waitForInstruction.
 %unexpected instruction
-parseInstruction(_):-write('Instruction not recognized, try again.\n'), fail.
-
+parseInstruction(_):-setOutputMessage('Instruction not recognized, try again.\n'), fail.
+ */
 % inverts the two players
 invertPlayers:-
     player(CurrentPlayer),
@@ -106,13 +108,13 @@ nextPlayerGoes:-%if this is a bot playing
     displayBoard,
     playBot(Player), !,
     endTurn.
-nextPlayerGoes:-%else, if this is a human player
+/* nextPlayerGoes:-%else, if this is a human player
     displayBoard,
     repeat,
-        write('Enter your instruction (move, claim, quit)\n'),
+        setOutputMessage('Enter your instruction (move, claim, quit)\n'),
         waitForInstruction,
     !,
-    endTurn.
+    endTurn. */
 
 %checks the board state, changes the players and starts the nextTurn
 endTurn:-
@@ -134,6 +136,9 @@ clearInit:-
     abolish(getColors/3),
     abolish(getStacks/3),
     abolish(botLevel/3),
+    abolish(outputMessage/1),
+	assert(outputMessage('empty')),
+	setOutputMessage('success'),
     assert(game(0)), % the only assert needed, others are in utils.pl
     clearHasClaimed. % abolishes and resets
 

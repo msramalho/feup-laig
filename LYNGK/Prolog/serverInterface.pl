@@ -9,8 +9,19 @@ executeCommand(reconsult, 'reconsulted'):-reconsult('C:/xampp/htdocs/FEUP-LAIG/L
 executeCommand(quit, goodbye).
 
 
-%start a new game given a modeType
-executeCommand(init(GameType), 'New Game started'):-init(GameType).
+% init(GameType) - humanVhuman - humanVbot - botVbot
+% start a new game given a modeType
+% returns the next player
+executeCommand(init(GameType), Player):-init(GameType), player(Player).
+
+% action(move, Xf, Yf, Xt, Yt)
+% executes a move for the current user
+% returns 'success' if all ok and an error message otherwise
+executeCommand(action(move, Xf, Yf, Xt, Yt), 'success'):-processMove(Xf, Yf, Xt, Yt).
+executeCommand(action(move, _Xf, _Yf, _Xt, _Yt), OutputMessage):-outputMessage(OutputMessage).
+
+executeCommand(action(claim, Color), 'success'):-claimColor(Color).
+executeCommand(action(claim, _Color), OutputMessage):-outputMessage(OutputMessage).
 
 %functions for the interface
 init(GameType):-
@@ -27,3 +38,13 @@ init(GameType):-
     saveGetColors(NextPlayer, []),
     saveGetStacks(CurrentPlayer, []),
     saveGetStacks(NextPlayer, []).
+
+
+% utils functions
+% error message functions
+setOutputMessage(Message):-
+	retract(outputMessage(_)),
+	assert(outputMessage(Message)).
+writeOutputMessage(Message):-
+	write(Message),
+	setOutputMessage(Message).

@@ -2,19 +2,9 @@
 claim.pl: predicates related to the color claiming operation
 */
 
-updateClaimedColor(Translated):-
+colorAvailable(Translated):-
     toClaim(ToClaim), %load the colors left for claiming
     nth0(_, ToClaim, Translated).%if the chosen color is inside ToClaim
-updateClaimedColor(_):-%if update fails then it's because:
-    write('This color is no longer available\n'), fail.
-
-readValidColor(Translated):-
-    write('Which color would you like to claim?\n'),
-    read_line(Color),
-    translateColor(Color, Translated), !,
-    updateClaimedColor(Translated).
-readValidColor(_):-%if readValid fails it's because:
-    write('Invalid color name.\n'), fail.
 
 %fails if the user cannot claim
 validClaim:-
@@ -29,21 +19,13 @@ claim(Color):-
     saveGetColors(Result),
     saveHasClaimed(true),%set the flag hasClaimed to true
     toClaim(ToClaim),
-    nth0(_, ToClaim, Color, NewToClaim),%if the chosen color is inside ToClaim
+    nth0(_, ToClaim, Color, NewToClaim),%if the chosen color is inside ToClaim never fails because of colorAvailable
     saveToClaim(NewToClaim). %updated available colors
 
-claimColor:-
-    hasClaimed(true), write('You can only claim one color per turn\n'), !, fail.
-
-claimColor:-
-    validClaim, !,
-    repeat,%repeatedly read color
-        readValidColor(Translated),
-    !,
-    claim(Translated), fail.%,write('new colors for '), write(CurrentPlayer), write(' are: '), write(Result), nl.
-
-claimColor:-
-    write('You can only claim two colors\n').
+claimColor(_Color):- hasClaimed(true), setOutputMessage('You can only claim one color per turn'), !, fail.
+claimColor(Color):- \+ colorAvailable(Color), setOutputMessage('This color is no longer available'), !, fail.
+claimColor(Color):- \+ validClaim, setOutputMessage('You can only claim two colors'), !, fail.
+claimColor(Color):- claim(Color), setOutputMessage('success').
 
 %colors transaltion
 translateColor("black", black).

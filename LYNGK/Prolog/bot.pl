@@ -89,7 +89,7 @@ chooseBotLevel(Bot):-
     read_line([]),
     validBotLevel(BotLevel, TranslatedLevel),
     saveBotLevel(Bot, TranslatedLevel).
-chooseBotLevel(Bot):-write('Invalid bot difficulty, try again:'), !, chooseBotLevel(Bot).
+chooseBotLevel(Bot):-setOutputMessage('Invalid bot difficulty, try again:'), !, chooseBotLevel(Bot).
 
 
 isBot(bot).

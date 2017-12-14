@@ -4,7 +4,7 @@ move.pl:file with the predicates for the implementation of the move command
 
 % check if cell is valid (x, y) and print error if not
 checkValidCell(X, Y):-isValid(X, Y), !.
-checkValidCell(X, Y):-format('Cell(~p, ~p) is not a valid cell in the board\n', [X, Y]), fail.
+checkValidCell(X, Y):-setOutputMessage('This is not a valid cell in the board'), fail.
 
 %fails if stack is empty
 checkStackNotEmpty(X, Y):-
@@ -29,7 +29,7 @@ belongsToPlayer(X, Y):-
 
 %check if there is a stack in a cell and, if so, if that stack belongs or can be played by the current player (assumes isValid(X, Y))
 checkBelongsToPlayer(X, Y):-belongsToPlayer(X, Y).
-checkBelongsToPlayer(_,_):-write('You cannot play this stack because of its top color\n'), !, fail.
+checkBelongsToPlayer(_,_):-setOutputMessage('You cannot play this stack because of its top color'), !, fail.
 
 
 canPileStacks(Xf, Yf, Xt, Yt):-
@@ -39,7 +39,7 @@ canPileStacks(Xf, Yf, Xt, Yt):-
     Sum =< 5. %only allow them to be piled if the height does not exceed 5
 %check if the first stack can go on top of the second
 checkStacksPile(Xf, Yf, Xt, Yt):-canPileStacks(Xf, Yf, Xt, Yt), !.
-checkStacksPile(_,_,_,_):-write('You cannot pile those two stacks, max height is 5\n'), fail.
+checkStacksPile(_,_,_,_):-setOutputMessage('You cannot pile those two stacks, max height is 5'), fail.
 
 trySelect(Find, Initial, Final):-
     select(Find, Initial, Final). %remove wild pieces, because this can be more than one
@@ -64,7 +64,7 @@ isHeighSmaller(Xf, Yf, Xt, Yt):-
     getBoardStackHeight(Xt, Yt, H2),
     H1 >= H2.
 checkHeightIsSmaller(Xf, Yf, Xt, Yt):-isHeighSmaller(Xf, Yf, Xt, Yt).
-checkHeightIsSmaller(_, _, _, _):-write('A Neutral Stack (or piece) cannot jump on top of a larger one'), nl, !, fail.
+checkHeightIsSmaller(_, _, _, _):-setOutputMessage('A Neutral Stack (or piece) cannot jump on top of a larger one'), nl, !, fail.
 
 hasNoDuplicateColors(Xf, Yf, Xt, Yt):-
     getBoardStack(Xf, Yf, Stack1),
@@ -76,7 +76,7 @@ hasNoDuplicateColors(Xf, Yf, Xt, Yt):-
     length(Pruned, LenOriginal). %if not equal than there were duplicates
 %check if the stacks have duplicate colors -> cannot be piled if so, fails if no wild
 checkDuplicateColors(Xf, Yf, Xt, Yt):-hasNoDuplicateColors(Xf, Yf, Xt, Yt).
-checkDuplicateColors(_,_,_,_):-write('You cannot pile because they would have duplicate colors\n'), !, fail.
+checkDuplicateColors(_,_,_,_):-setOutputMessage('You cannot pile because they would have duplicate colors'), !, fail.
 
 %after the user inputs, check if it is to abort or to process
 processMove(q, _, _, _). %quit if Xf is q
@@ -93,11 +93,11 @@ processMove(Xf, Yf, Xt, Yt):-%process move otherwise
 
 
 %prompt for valid X and Y coordinates for origin and destination
-moveStack:-
+/* moveStack:-
     write('Choose cells FROM and TO using the following format "Xfrom-Yfrom:Xto-Yto."\n'),
     read(Xf-Yf:Xt-Yt), !,
     processMove(Xf, Yf, Xt, Yt),
-    read_line([]).
+    read_line([]). */
 
 %checks if F and T are equal cells
 isSameCell(X, Y, X, Y).
