@@ -3,7 +3,7 @@
 <!-- Initial values -->
 <INITIALS>
     <frustum near="0.1" far="500"/>
-    <translation x="-6" y="-1" z="0" />
+    <translation x="-10" y="-3.5" z="-1" />
     <rotation axis="x" angle="0" />
     <rotation axis="y" angle="45" />
     <rotation axis="z" angle="0" />
@@ -31,7 +31,7 @@
 
 	<LIGHT id="light1">
         <enable value ="1" />
-        <position x="30" y="10" z="0" w="1" />
+        <position x="50" y="10" z="0" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -39,7 +39,7 @@
 
 	<LIGHT id="light2">
         <enable value ="1" />
-        <position x="0" y="10" z="20" w="1" />
+        <position x="0" y="10" z="50" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -47,7 +47,7 @@
 
     <LIGHT id="light3">
         <enable value ="1" />
-        <position x="30" y="10" z="20" w="1" />
+        <position x="50" y="10" z="50" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
         <specular r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -57,12 +57,30 @@
 
 <!-- Textures -->
 <TEXTURES>
-	<!-- Tree trunk -->
-    <TEXTURE id="trunk">
-        <file path="images/trunk-image.jpg" />
-        <amplif_factor s="2" t="2" />
+    <TEXTURE id="woodFloor">
+        <file path="images/wood.jpg" />
+        <amplif_factor s="8" t="8" />
     </TEXTURE>
 
+	<TEXTURE id="artPaint">
+        <file path="images/painting.jpg" />
+        <amplif_factor s="20" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="lisa">
+        <file path="images/lisa.jpg" />
+        <amplif_factor s="20" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="scream">
+        <file path="images/scream.jpg" />
+        <amplif_factor s="20" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="wallPaint">
+        <file path="images/yellowWall.jpg" />
+        <amplif_factor s="50" t="30" />
+    </TEXTURE>
 </TEXTURES>
 
 
@@ -104,10 +122,10 @@
     </MATERIAL>
 
     <!-- Lamp post material -->
-    <MATERIAL id="lightPostMaterial">
-        <shininess value="100" />
+    <MATERIAL id="wallMaterial">
+        <shininess value="10000" />
         <specular r="0.0" g="0.0" b="0.0" a="1" />
-        <diffuse r="0.447" g="0.416" b="0.416" a="1" />
+        <diffuse r="0.9" g="0.9" b="0.5" a="1" />
         <ambient r="0.0" g="0.0" b="0.0" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
@@ -188,9 +206,13 @@
         <TEXTURE id="null" />
 
         <DESCENDANTS>
-            <!-- <NODEREF id="chao" /> -->
+            <NODEREF id="floor" />
 			<NODEREF id="pieces" />
 			<NODEREF id="board"/>
+			<NODEREF id="walls" />
+			<NODEREF id="painting1" />
+			<NODEREF id="painting2" />
+			<NODEREF id="painting3" />
 			<!-- <NODEREF id="tableWood"/> -->
         </DESCENDANTS>
 
@@ -199,6 +221,8 @@
 	<NODE id="board">
 		<MATERIAL id="null" />
         <TEXTURE id="null" />
+
+		<TRANSLATION x="9.5" y="0.225" z="9" />
 
 		<DESCENDANTS>
 			<NODEREF id="horBoardLines" />
@@ -290,15 +314,277 @@
 	</NODE>
 
     <!-- The floor -->
-    <NODE id="chao">
+    <NODE id="floor">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <TEXTURE id="woodFloor" />
 
-        <TRANSLATION x="0" y="0" z="30" />
+        <TRANSLATION x="0" y="0" z="50" />
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-			<LEAF  type="rectangle" args="0 30 30 0" />
+			<LEAF  type="rectangle" args="0 50 50 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="painting1">
+		<MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0.2" y="10" z="35" />
+
+		<DESCENDANTS>
+			<NODEREF id="paintingArt" />
+			<NODEREF id="painting" />
+		</DESCENDANTS>
+
+	</NODE>
+
+	<NODE id="painting2">
+		<MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<SCALE sx="0.75" sy="0.6" sz="0.75"/>
+		<TRANSLATION x="15" y="40" z="0.2" />
+		<ROTATION axis="x" angle="-90" />
+		<ROTATION axis="z" angle="-90" />
+
+		<DESCENDANTS>
+			<NODEREF id="paintingLisa" />
+			<NODEREF id="painting" />
+		</DESCENDANTS>
+
+	</NODE>
+
+	<NODE id="painting3">
+		<MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<SCALE sx="0.75" sy="0.6" sz="0.75"/>
+		<TRANSLATION x="40" y="30" z="0.2" />
+		<ROTATION axis="x" angle="-90" />
+		<ROTATION axis="z" angle="-90" />
+
+
+		<DESCENDANTS>
+			<NODEREF id="paintingScream" />
+			<NODEREF id="painting" />
+		</DESCENDANTS>
+
+	</NODE>
+
+	<NODE id="painting">
+		<MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<DESCENDANTS>
+			<NODEREF id="paintingBorderTop" />
+			<NODEREF id="paintingBorderBot" />
+			<NODEREF id="paintingBorderRight" />
+			<NODEREF id="paintingBorderLeft" />
+			<NODEREF id="paintingBorderCorner1" />
+			<NODEREF id="paintingBorderCorner2" />
+			<NODEREF id="paintingBorderCorner3" />
+			<NODEREF id="paintingBorderCorner4" />
+		</DESCENDANTS>
+
+	</NODE>
+
+	<NODE id="paintingBorderCorner1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0.2" y="10" z="-20" />
+
+        <DESCENDANTS>
+			<LEAF id="sphere" type="sphere" args="0.2 20 20" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingBorderCorner2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0.2" y="0" z="-20" />
+
+        <DESCENDANTS>
+			<LEAF id="sphere" type="sphere" args="0.2 20 20" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingBorderCorner3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0.2" y="10" z="0" />
+
+        <DESCENDANTS>
+			<LEAF id="sphere" type="sphere" args="0.2 20 20" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingBorderCorner4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0.2" y="0" z="0" />
+
+        <DESCENDANTS>
+			<LEAF id="sphere" type="sphere" args="0.2 20 20" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingBorderTop">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0.2" y="10" z="-20" />
+
+        <DESCENDANTS>
+			<LEAF id="cylinder" type="cylinder" args="20 0.2 0.2 50 50" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingBorderBot">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0.2" y="0" z="-20" />
+
+        <DESCENDANTS>
+			<LEAF id="cylinder" type="cylinder" args="20 0.2 0.2 50 50" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingBorderRight">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0.2" y="0" z="0" />
+		<ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF id="cylinder" type="cylinder" args="10 0.2 0.2 50 50" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingBorderLeft">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0.2" y="0" z="-20" />
+		<ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF id="cylinder" type="cylinder" args="10 0.2 0.2 50 50" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingArt">
+        <MATERIAL id="null" />
+        <TEXTURE id="artPaint" />
+
+		<ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 10 20 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingLisa">
+        <MATERIAL id="null" />
+        <TEXTURE id="lisa" />
+
+		<ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 10 20 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="paintingScream">
+        <MATERIAL id="null" />
+        <TEXTURE id="scream" />
+
+		<ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 10 20 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<!-- The Walls -->
+	<NODE id="walls">
+		<MATERIAL id="wallMaterial" />
+        <TEXTURE id="wallPaint" />
+
+		<DESCENDANTS>
+			<NODEREF id="wall1" />
+			<NODEREF id="wall2" />
+			<NODEREF id="wall3" />
+			<NODEREF id="wall4" />
+		</DESCENDANTS>
+
+	</NODE>
+
+    <NODE id="wall1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="50" />
+		<ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 30 50 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="wall2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <ROTATION axis="y" angle="-90" />
+		<TRANSLATION x="0" y="0" z="-50" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 30 50 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="wall3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="50" y="0" z="50" />
+        <ROTATION axis="y" angle="180" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 30 50 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="wall4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="0" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 30 50 0" />
 		</DESCENDANTS>
 
     </NODE>
