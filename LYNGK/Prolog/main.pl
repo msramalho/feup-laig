@@ -91,7 +91,8 @@ invertPlayers:-
 endTurn(Removed):-
     clearHasClaimed, % clear the hasClaimed flag.
     removeClaimedStacksWithFive(Removed), %move all the 5 stacks to the players they belong to to their Stacks
-    invertPlayers.
+    invertPlayers,
+	pushGame.
 
 %empties the database
 clearInit:-

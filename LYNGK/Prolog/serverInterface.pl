@@ -35,6 +35,11 @@ executeCommand(action(claim, Color), 'success'):-claimColor(Color).
 % returns the Move, like
 executeCommand(action(playBot), 'success'+Move+Removed):- movesAvailable, player(Bot),isBot(Bot),playBot(Bot, Move), endTurn(Removed).
 
+% action(undo)
+% returns the Move, like
+executeCommand(action(undo), 'success'):- popGame.
+executeCommand(action(undo), 'Nothing to undo').
+
 
 % action errors
 executeCommand(action(_), OutputMessage):-outputMessage(OutputMessage).

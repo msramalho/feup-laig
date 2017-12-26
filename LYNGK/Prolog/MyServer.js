@@ -15,7 +15,7 @@ class MyServer {
 	// start a new game
 	async init(gameType) {
 		let start = await this.sendCommand(`init(${gameType})`);
-		this.board = this.parseList(await this.sendCommand("query(board)"));
+		await this.updateBoard();
 		this.player = await this.sendCommand("query(player)");
 		this.nextPlayer = await this.sendCommand("query(nextPlayer)");
 		return start == "success";
@@ -24,23 +24,33 @@ class MyServer {
 	// move
 	async move(Xfrom, Yfrom, Xto, Yto) {
 		let response = await this.sendCommand(`action(move,${Xfrom},${Yfrom},${Xto},${Yto})`);
-		let res = {};
-		this.saveMoveResponse(response, res);
-		return res;
+		await this.updateBoard();
+		return this.saveMoveResponse(response);
 	}
 
+	//update board
+	async updateBoard(){
+		this.board = this.parseList(await this.sendCommand("query(board)"));
+	}
 
 	// undo move
-	undo() {
-
+	async undo() {
+		return await this.sendCommand("action(undo)");
 	}
 
 	// private functions
-	saveMoveResponse(response, restult) {
-		console.log("saveMoveResponse" +  response);
+	saveMoveResponse(response) {
 		let parts = response.split("+");
-		if (parts[0] != "success") return false;
-
+		if (parts[0] != "success") return response;
+		let coords = parts[1].split("-");
+		this.moves.push({
+			Xf: coords[0],
+			Yf: coords[1],
+			Xt: coords[2],
+			Yt: coords[3],
+			removed: this.parseList(parts[2])
+		});
+		return true;
 	}
 
 	// send command
@@ -51,11 +61,11 @@ class MyServer {
 			request.open('GET', self.url + command, true);
 			let res;
 			request.onload = function (data) {
-				console.log("Request successful. Reply: " + data.target.response);
+				console.log("["+command+"]: " + data.target.response);
 				resolve(data.target.response);
 			};
 			request.onerror = function () {
-				console.log("Error waiting for response");
+				console.log("Error waiting for response("+command+")");
 				resolve(false);
 			};
 
