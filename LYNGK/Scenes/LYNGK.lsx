@@ -53,6 +53,14 @@
         <specular r="0.6" g="0.6" b="0.6" a="1.0" />
     </LIGHT>
 
+	<LIGHT id="light4">
+        <enable value ="1" />
+        <position x="25" y="50" z="25" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+        <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
 </LIGHTS>
 
 <!-- Textures -->
@@ -108,7 +116,7 @@
         <shininess value="1" />
         <specular r="0.2" g="0.2" b="0.2" a="1" />
         <diffuse r="0.0" g="0.207" b="0.0" a="1" />
-        <ambient r="0.1" g="0.1" b="0.1" a="1" />
+        <ambient r="0.05" g="0.207" b="0.05" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
