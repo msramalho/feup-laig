@@ -23,7 +23,7 @@ executeCommand(init(botVbot, Bot1Level, Bot2Level), Player):-init(botVbot), choo
 % action(move, Xf, Yf, Xt, Yt)
 % executes a move for the current user
 % returns 'success' if all ok or an error message otherwise
-executeCommand(action(move, Xf, Yf, Xt, Yt), 'success'+Removed):-processMove(Xf, Yf, Xt, Yt), endTurn(Removed).
+executeCommand(action(move, Xf, Yf, Xt, Yt), 'success'++Removed):-processMove(Xf, Yf, Xt, Yt), endTurn(Removed).
 
 % action(claim, Color)
 % makes the current user claim the supplied Color
@@ -33,7 +33,7 @@ executeCommand(action(claim, Color), 'success'):-claimColor(Color).
 % action(playBot)
 % if the next player is a bot, the bot executes a move
 % returns the Move, like
-executeCommand(action(playBot), Move+Removed):- movesAvailable, player(Bot),isBot(Bot),playBot(Bot, Move), endTurn(Removed).
+executeCommand(action(playBot), 'success'+Move+Removed):- movesAvailable, player(Bot),isBot(Bot),playBot(Bot, Move), endTurn(Removed).
 
 
 % action errors
@@ -76,7 +76,8 @@ init(GameType):-
     saveGetColors(CurrentPlayer, []),
     saveGetColors(NextPlayer, []),
     saveGetStacks(CurrentPlayer, []),
-    saveGetStacks(NextPlayer, []).
+    saveGetStacks(NextPlayer, []),
+	displayBoard.
 
 
 % utils functions
