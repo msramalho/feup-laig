@@ -49,6 +49,8 @@ XMLscene.prototype.init = function (application) {
 		new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),
 		new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag")
 	];
+
+	this.setPickEnabled(true);
 };
 
 /**
@@ -100,6 +102,25 @@ XMLscene.prototype.initLights = function () {
 	}
 
 }
+/**
+ * Logs objects picked.
+ */
+XMLscene.prototype.logPicking = function ()
+{
+	if (this.pickMode == false) {
+		if (this.pickResults != null && this.pickResults.length > 0) {
+			for (var i=0; i< this.pickResults.length; i++) {
+				var obj = this.pickResults[i][0];
+				if (obj)
+				{
+					var customId = this.pickResults[i][1];
+					console.log("Picked object: " + obj + ", with pick id " + customId);
+				}
+			}
+			this.pickResults.splice(0,this.pickResults.length);
+		}
+	}
+}
 
 /**
  * Initializes the scene cameras.
@@ -132,6 +153,8 @@ XMLscene.prototype.onGraphLoaded = function () {
  * Displays the scene.
  */
 XMLscene.prototype.display = function () {
+	// Calls picking logger
+	this.logPicking();
 	// ---- BEGIN Background, camera and axis setup
 
 	// Clear image and depth buffer everytime we update the scene
