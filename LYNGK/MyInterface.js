@@ -4,8 +4,13 @@
  */
 function MyInterface() {
 	//call CGFinterface constructor
+	this.availableShaders = {
+		'Main Shader': 0,
+		'Flat Shading': 1,
+		'Simple texturing': 2,
+	};
 	CGFinterface.call(this);
-};
+}
 
 MyInterface.prototype = Object.create(CGFinterface.prototype);
 MyInterface.prototype.constructor = MyInterface;
@@ -15,11 +20,9 @@ MyInterface.prototype.constructor = MyInterface;
  * @param {CGFapplication} application
  */
 MyInterface.prototype.init = function (application) {
-	// call CGFinterface init
-	CGFinterface.prototype.init.call(this, application);
+	CGFinterface.prototype.init.call(this, application); // call CGFinterface init
 
-	// init GUI. For more information on the methods, check:
-	//  http://workshop.chromeexperiments.com/examples/gui
+	// init GUI. For more information on the methods, check: http://workshop.chromeexperiments.com/examples/gui
 
 	this.gui = new dat.GUI();
 
@@ -30,8 +33,6 @@ MyInterface.prototype.init = function (application) {
 	this.gameFolder.add(this.scene.server, "botLevel1", MyServer.botLevels);
 	this.gameFolder.add(this.scene.server, "botLevel2", MyServer.botLevels);
 	this.gameFolder.add(this.scene, "startNewGame");
-	// gameFolder.add(text, 'speed');
-	// gameFolder.add(text, 'noiseStrength');
 
 	return true;
 };
