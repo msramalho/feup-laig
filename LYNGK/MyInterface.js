@@ -48,10 +48,7 @@ MyInterface.prototype.addLightsGroup = function(lights) {
     }
 };
 
-/**
- * Adds a folder containing the IDs of the selectable nodes passed as parameter.
- */
-MyInterface.prototype.addShadersGroup = function(selectables) {
+/* MyInterface.prototype.addShadersGroup = function(selectables) {
     this.shadersFolder = this.gui.addFolder("Shaders Options");
 	this.shadersFolder.open();
 
@@ -60,4 +57,4 @@ MyInterface.prototype.addShadersGroup = function(selectables) {
 	this.shadersFolder.addColor(this.scene, 'selectionColor').name('Selection Color: ');
 	this.shadersFolder.add(this.scene,'scaleFactor', -10.0, 10.0);
 	this.shadersFolder.add(this.scene, 'wireframe').name('Wireframe');
-};
+}; */

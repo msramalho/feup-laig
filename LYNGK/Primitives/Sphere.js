@@ -64,15 +64,6 @@ Sphere.prototype.initBuffers = function () {
  */
 Sphere.prototype.setAmplifFactor = function (amplif_s, amplif_t) {}
 
-
-Sphere.prototype.updateWireframe = function(wireframe){
-	if (wireframe) {
-		this.setLineMode();
-	}else{
-		this.setFillMode();
-	}
-};
-
 Sphere.prototype.createIndicesLines = function () {
 	ntris = this.indicesTris.length / 3;
 	this.indicesLines = new Array(ntris * 6);

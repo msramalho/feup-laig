@@ -40,13 +40,6 @@ Patch.prototype.display = function() {
 //function stubs so the MySceneGraph can invoke them on any nodes
 Patch.prototype.setAmplifFactor = function(amplif_s, amplif_t) {}
 
-Patch.prototype.updateWireframe = function (wireframe) {
-/* 	if (wireframe) {
-		this.setLineMode();
-	} else {
-		this.setFillMode();
-	} */
-};
 /* HOW DOES ONE?
 Patch.prototype.setFillMode = function () {
 	this.indices = this.indicesTris;

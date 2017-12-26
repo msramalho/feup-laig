@@ -114,14 +114,6 @@ Rectangle.prototype.createIndicesLines = function () {
 	}
 };
 
-Rectangle.prototype.updateWireframe = function (wireframe) {
-	if (wireframe) {
-		this.setLineMode();
-	} else {
-		this.setFillMode();
-	}
-};
-
 Rectangle.prototype.setFillMode = function () {
 	this.indices = this.indicesTris;
 	this.primitiveType = this.scene.gl.TRIANGLES;

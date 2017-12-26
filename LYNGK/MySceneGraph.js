@@ -1577,7 +1577,6 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 		}
 
 		//invoke the display on this primitive
-        currNode.leaves[i].primitive.updateWireframe(this.scene.wireframe);
         currNode.leaves[i].primitive.display();
     }
 

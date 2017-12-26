@@ -84,14 +84,6 @@ Cylinder.prototype.createIndicesLines = function(){
 	}
 };
 
-Cylinder.prototype.updateWireframe = function(wireframe){
-	if (wireframe) {
-		this.setLineMode();
-	}else{
-		this.setFillMode();
-	}
-};
-
 Cylinder.prototype.setFillMode=function () {
 	this.indices=this.indicesTris;
 	this.primitiveType=this.scene.gl.TRIANGLES;
