@@ -79,7 +79,7 @@ checkDuplicateColors(Xf, Yf, Xt, Yt):-hasNoDuplicateColors(Xf, Yf, Xt, Yt).
 checkDuplicateColors(_,_,_,_):-setOutputMessage('You cannot pile because they would have duplicate colors'), !, fail.
 
 %after the user inputs, check if it is to abort or to process
-processMove(q, _, _, _). %quit if Xf is q
+% processMove(q, _, _, _). %quit if Xf is q
 processMove(Xf, Yf, Xt, Yt):-%process move otherwise
     checkValidCell(Xf, Yf),
     checkValidCell(Xt, Yt),

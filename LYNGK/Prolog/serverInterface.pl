@@ -15,15 +15,15 @@ executeCommand(displayBoard, 'done'):-displayBoard.
 % init(GameType) - humanVhuman - humanVbot - botVbot
 % start a new game given a modeType
 % returns the next player
-executeCommand(init(humanVhuman), Player):-init(humanVhuman), player(Player).
-executeCommand(init(humanVbot, BotLevel), Player):-init(humanVbot), chooseBotLevel(bot, BotLevel), player(Player).
-executeCommand(init(botVbot, Bot1Level, Bot2Level), Player):-init(botVbot), chooseBotLevel(bot1, Bot1Level), chooseBotLevel(bot2, Bot2Level), player(Player).
+executeCommand(init(humanVhuman), 'success'):-init(humanVhuman).
+executeCommand(init(humanVbot, BotLevel), 'success'):-init(humanVbot), chooseBotLevel(bot, BotLevel).
+executeCommand(init(botVbot, Bot1Level, Bot2Level), 'success'):-init(botVbot), chooseBotLevel(bot1, Bot1Level), chooseBotLevel(bot2, Bot2Level).
 
 %------------------------------------actions
 % action(move, Xf, Yf, Xt, Yt)
 % executes a move for the current user
 % returns 'success' if all ok or an error message otherwise
-executeCommand(action(move, Xf, Yf, Xt, Yt), 'success'++Removed):-processMove(Xf, Yf, Xt, Yt), endTurn(Removed).
+executeCommand(action(move, Xf, Yf, Xt, Yt), 'success'+Xf-Yf-Xt-Yt+Removed):-processMove(Xf, Yf, Xt, Yt), endTurn(Removed).
 
 % action(claim, Color)
 % makes the current user claim the supplied Color
