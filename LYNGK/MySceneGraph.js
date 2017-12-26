@@ -1534,6 +1534,10 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 		// this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
 	}
 
+	if(idnode == "piece"){
+		this.scene.registerForPick(6, currNode);
+	}
+
     this.scene.multMatrix(currNode.transformMatrix);
 
     // if this node has a material defined, override the default material

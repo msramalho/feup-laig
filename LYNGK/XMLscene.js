@@ -53,13 +53,6 @@ XMLscene.prototype.init = function (application) {
 	//game settings
 	this.server = new MyServer();
 
-	this.objects= [
-		new CGFplane(this),
-		new CGFplane(this),
-		new CGFplane(this),
-		new CGFplane(this)
-	];
-
 	this.setPickEnabled(true);
 };
 
@@ -176,7 +169,7 @@ XMLscene.prototype.onGraphLoaded = function () {
 
 	// Adds lights group.
 	this.interface.addLightsGroup(this.graph.lights);
-	this.interface.addShadersGroup(this.graph.selectables);
+	//this.interface.addShadersGroup(this.graph.selectables);
 };
 
 /**
@@ -231,19 +224,6 @@ XMLscene.prototype.display = function () {
 	}
 
 	this.popMatrix();
-
-	for (i =0; i<this.objects.length; i++) {
-		this.pushMatrix();
-		this.rotate(Math.PI/12.0,0,1,0);
-		this.translate(i*1.3, -3.49, 0);
-		this.scale(0.8,0.8,0.8);
-
-		this.registerForPick(i+1, this.objects[i]);
-
-		this.objects[i].display();
-		this.popMatrix();
-	}
-
 	// ---- END Background, camera and axis setup
 
 };

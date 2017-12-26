@@ -287,9 +287,22 @@
 	</NODE>
 
 	<NODE id="pieces">
-		<MATERIAL id="leavesTreeMaterial" />
+		<MATERIAL id="null" />
         <TEXTURE id="null" />
 
+		<DESCENDANTS>
+			<NODEREF id="piece1" />
+			<!-- <NODEREF id="piece2" />
+			<NODEREF id="piece3" />
+			<NODEREF id="piece4" />
+			<NODEREF id="piece5" /> -->
+		</DESCENDANTS>
+
+	</NODE>
+
+	<NODE id="piece1">
+		<MATERIAL id="leavesTreeMaterial" />
+        <TEXTURE id="null" />
 
 		<DESCENDANTS>
 			<NODEREF id="piece" />
@@ -298,7 +311,7 @@
 	</NODE>
 
 	<NODE id="piece">
-		<MATERIAL id="leavesTreeMaterial" />
+		<MATERIAL id="null" />
         <TEXTURE id="null" />
 
 		<SCALE sx="0.45" sy="0.45" sz="0.45"/>
