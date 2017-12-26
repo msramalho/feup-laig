@@ -6,6 +6,7 @@ class MyServer {
 		this.nextPlayer = {};
 		this.moves = []; //the moves done so far
 		this.board = []; //the game board
+		this.availableColors = [];
 		//defaults
 		this.port = port || 8081;
 		this.url = url || 'http://localhost:';
@@ -28,19 +29,25 @@ class MyServer {
 
 	// claim - true or error message
 	async claim(color) {
-		return await this.sendCommandExpectSuccess(`action(claim,${color})`);
+		this.sendCommandExpectSuccess(`action(claim,${color})`).then((value) => {
+			if (value) {
+				this.player.colors.push(color);
+			}
+			return value;
+		});
 	}
 
 	//update board
 	async updateState(){
 		this.board = this.parseList(await this.sendCommand("query(board)"));
+		this.availableColors = this.parseList(await this.sendCommand("query(availableColors)"));
 		this.nextPlayer = this.player;
 		this.player = {
 			name: await this.sendCommand("query(player)"),
 			colors: this.parseList(await this.sendCommand("query(colors)")),
-			stacks: this.parseList(await this.sendCommand("query(stacks)"))
+			stacks: this.parseList(await this.sendCommand("query(stacks)")),
+			score: await this.sendCommand("query(score)")
 		};
-
 	}
 
 	// undo move
