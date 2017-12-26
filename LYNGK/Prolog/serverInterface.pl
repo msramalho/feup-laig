@@ -58,10 +58,10 @@ executeCommand(query(player), Player):-player(Player).
 executeCommand(query(nextPlayer), NextPlayer):-nextPlayer(NextPlayer).
 % query(toClaim) get a list of the next colors to claim
 executeCommand(query(toClaim), ToClaim):-toClaim(ToClaim).
-% query(getColors) get the colors of the current player
-executeCommand(query(getColors), Colors):-getColors(Colors).
-% query(getColors,Player) get the colors of a given Player
-executeCommand(query(getColors,Player), Colors):-getColors(Player, Colors).
+% query(colors) get the colors of the current player
+executeCommand(query(colors), Colors):-getColors(Colors).
+% query(stacks) get the stacks of the current player
+executeCommand(query(stacks), Stacks):-getStacks(Stacks).
 % query(gameOver) returns (draw, player1, player2, bot, bot1, bot2 or false)
 executeCommand(query(gameOver), Winner):- \+movesAvailable, getWinner(Winner).
 executeCommand(query(gameOver), false). % game not over yet
