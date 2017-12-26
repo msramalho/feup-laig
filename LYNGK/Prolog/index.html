@@ -21,8 +21,14 @@
 	</div>
 	<h3> Result: </h3>
 	<div id="query_result"></div>
+	<script src="MyServer.js"></script>
 
 	<script>
+		"use strict";
+
+		let server = new MyServer();
+		console.log(server.parseList(t3));
+
 		document.getElementById("query_field").addEventListener('keypress', function (e) {
 			var key = e.which || e.keyCode;
 			if (key === 13) { // 13 is enter
@@ -30,9 +36,10 @@
 			}
 		});
 
-		function getPrologRequest(requestString, onSuccess, onError, port) {
+		async function getPrologRequest(requestString, onSuccess, onError, port) {
 			queryResult.innerHTML = "sending...";//clear the output log until a message arrives
-			var requestPort = port || 8081
+			queryResult.innerHTML = await server.sendCommand(requestString);
+			/* var requestPort = port || 8081
 			var request = new XMLHttpRequest();
 			request.open('GET', 'http://localhost:' + requestPort + '/' + requestString, true);
 
@@ -44,7 +51,7 @@
 			};
 
 			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-			request.send();
+			request.send(); */
 		}
 
 		function makeRequest(requestString) {
