@@ -24,9 +24,12 @@ MyInterface.prototype.init = function (application) {
 	this.gui = new dat.GUI();
 
 	//game folders
-	var gameFolder = this.gui.addFolder('Game Info');
-	gameFolder.open();
-	gameFolder.add(this.scene, "startNewGame");
+	this.gameFolder = this.gui.addFolder('Game Settings');
+	this.gameFolder.open();
+	this.gameFolder.add(this.scene.server, "gameType", MyServer.gameTypes);
+	this.gameFolder.add(this.scene.server, "botLevel1", MyServer.botLevels);
+	this.gameFolder.add(this.scene.server, "botLevel2", MyServer.botLevels);
+	this.gameFolder.add(this.scene, "startNewGame");
 	// gameFolder.add(text, 'speed');
 	// gameFolder.add(text, 'noiseStrength');
 
@@ -38,7 +41,7 @@ MyInterface.prototype.init = function (application) {
  */
 MyInterface.prototype.addLightsGroup = function (lights) {
 	var group = this.gui.addFolder("Lights");
-	group.open();
+	// group.open();
 
 	// add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
 	// e.g. this.option1=true; this.option2=false;
