@@ -25,9 +25,18 @@
 
 	<script>
 		"use strict";
+		var t3 =
+			"[[[],[],[blue,red,green],[],[],[],[ivory,black,green],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[black],[]],[[],[],[green,black],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[black,green,red]],[[],[red,blue,ivory,wild],[],[],[],[],[],[],[]],[[],[],[green,blue,red,black,ivory],[],[],[],[],[],[]],[[],[ivory,blue],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]]]";
 
 		let server = new MyServer();
-		console.log(server.parseList(t3));
+		// console.log(JSON.stringify(server.parseList(t3)));
+		server.init("humanVhuman").then((res1) => {
+			server.move(0, 2, 1, 3).then((res2) => {
+				console.log(res2);
+			})
+		});
+
+
 
 		document.getElementById("query_field").addEventListener('keypress', function (e) {
 			var key = e.which || e.keyCode;
@@ -37,7 +46,7 @@
 		});
 
 		async function getPrologRequest(requestString, onSuccess, onError, port) {
-			queryResult.innerHTML = "sending...";//clear the output log until a message arrives
+			queryResult.innerHTML = "sending..."; //clear the output log until a message arrives
 			queryResult.innerHTML = await server.sendCommand(requestString);
 			/* var requestPort = port || 8081
 			var request = new XMLHttpRequest();
@@ -65,6 +74,7 @@
 
 		//Handle the Reply
 		var queryResult = document.querySelector("#query_result");
+
 		function handleReply(data) {
 			queryResult.innerHTML = data.target.response;
 		}
