@@ -47,15 +47,9 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
     'Animations/AnimationRefs.js', 'Prolog/MyServer.js',
 
     main = function() {
-        availableShaders = {
-            'Main Shader': 0,
-            'Flat Shading': 1,
-            'Simple texturing': 2,
-        };
-
         // Standard application, scene and interface setup
         var app = new CGFapplication(document.body);
-        var myInterface = new MyInterface(availableShaders);
+        var myInterface = new MyInterface();
         var myScene = new XMLscene(myInterface);
 
         app.init();

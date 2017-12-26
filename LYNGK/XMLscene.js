@@ -38,34 +38,25 @@ XMLscene.prototype.init = function (application) {
 	this.startingTime = 0;
 	this.currTime = 0;
 
-	this.selectedSelectable = 0;
-	this.selectedShader = 0;
-	this.wireframe = false;
-	this.scaleFactor = 1.0;
-	this.selectionColor = [0, 128, 255, 1]; //rgba
+	//game settings
+	this.server = new MyServer();
 
-	this.shaders = [
-		new CGFshader(this.gl, "Shaders/main.vert", "Shaders/main.frag"),
-		new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),
-		new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag")
-	];
 };
 
 /**
  * Function called every update period
  */
 XMLscene.prototype.update = function (currTime) {
-	if (!this.timerStarted) {
-		this.startingTime = currTime;
-		this.timerStarted = true;
-	}
-	this.updateShaders(currTime);
-	this.currTime = (currTime - this.startingTime) / 1000.0;
-}
+	// if (!this.timerStarted) {
+	// 	this.startingTime = currTime;
+	// 	this.timerStarted = true;
+	// }
+	// this.currTime = (currTime - this.startingTime) / 1000.0;
+};
 
 XMLscene.prototype.getCurrTime = function () {
 	return this.currTime;
-}
+};
 
 /**
  * Initializes the scene lights with the values read from the LSX file.
@@ -125,7 +116,6 @@ XMLscene.prototype.onGraphLoaded = function () {
 
 	// Adds lights group.
 	this.interface.addLightsGroup(this.graph.lights);
-	this.interface.addShadersGroup(this.graph.selectables);
 };
 
 /**
@@ -182,25 +172,14 @@ XMLscene.prototype.display = function () {
 	// ---- END Background, camera and axis setup
 
 };
-XMLscene.prototype.updateShaders = function () {
-	if (typeof counter == 'undefined') {
-		counter = 0;
-	} //use counter as static variable
-	counter++;
-	let timeFactor = Math.abs(Math.sin(counter / 10));
-	let timeFactorInverted = 1 - timeFactor;
-	let goalColor = vec4.fromValues(this.selectionColor[0]/255, this.selectionColor[1]/255, this.selectionColor[2]/255, 1);
-	let saturatedColor = vec4.fromValues(255/255, 100/255, 100/255, 1);
-	for (let i = 0; i < this.shaders.length; i++) {
-		this.shaders[i].setUniformsValues({
-			timeFactor: this.scaleFactor*timeFactor,
-			timeFactorInverted: timeFactorInverted,
-			goal_r: goalColor[0],
-			goal_g: goalColor[1],
-			goal_b: goalColor[2],
-			saturated_r: saturatedColor[0],
-			saturated_g: saturatedColor[1],
-			saturated_b: saturatedColor[2],
-		});
+
+/**
+ * Start a new Game
+ */
+XMLscene.prototype.startNewGame = function () {
+	console.log("startNewGame");
+	if (!this.server.validGameType()) {
+		alert(`Wrong game type selected: ${this.server.gameType}`);
 	}
+
 };

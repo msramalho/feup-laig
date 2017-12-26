@@ -97,14 +97,6 @@ Triangle.prototype.setAmplifFactor = function (amplif_s, amplif_t) {
 	this.updateTexCoordsGLBuffers();
 };
 
-Triangle.prototype.updateWireframe = function(wireframe){
-	if (wireframe) {
-		this.setLineMode();
-	}else{
-		this.setFillMode();
-	}
-};
-
 Triangle.prototype.createIndicesLines = function () {
 	ntris = this.indicesTris.length / 3;
 	this.indicesLines = new Array(ntris * 6);

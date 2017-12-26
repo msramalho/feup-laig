@@ -38,6 +38,10 @@ class MyServer {
 		return start == "success";
 	}
 
+	validGameType(){
+		return ["humanVhuman","humanVbot","botVbot"].indexOf(this.gameType)!=-1;
+	}
+
 	// move - true or error message
 	async move(Xf, Yf, Xt, Yt) {
 		let response = await this.sendCommand(`action(move,${Xf},${Yf},${Xt},${Yt})`);

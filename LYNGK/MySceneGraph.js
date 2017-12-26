@@ -1528,11 +1528,6 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 	var time = this.scene.getCurrTime();
 	var remainingTime = time;
 
-	//console.log("SELECTED IS:" + this.scene.selectedSelectable);
-	if(this.scene.selectedSelectable  == idnode){
-		this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
-	}
-
 
     this.scene.multMatrix(currNode.transformMatrix);
 
@@ -1577,7 +1572,6 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 		}
 
 		//invoke the display on this primitive
-        currNode.leaves[i].primitive.updateWireframe(this.scene.wireframe);
         currNode.leaves[i].primitive.display();
     }
 
@@ -1586,9 +1580,5 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 		this.scene.pushMatrix(); //save the current matrix's state so it is not altered wrongly
         this.interpretNode(currNode.children[i], mat, tex); //recursive call
         this.scene.popMatrix(); //restore the matrix
-	}
-
-	if(this.scene.selectedSelectable  == idnode){
-		this.scene.setActiveShader(this.scene.defaultShader);
 	}
 }
