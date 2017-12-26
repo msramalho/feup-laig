@@ -50,6 +50,16 @@ XMLscene.prototype.init = function (application) {
 		new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag")
 	];
 
+	//game settings
+	this.server = new MyServer();
+
+	this.objects= [
+		new CGFplane(this),
+		new CGFplane(this),
+		new CGFplane(this),
+		new CGFplane(this)
+	];
+
 	this.setPickEnabled(true);
 };
 
@@ -121,7 +131,27 @@ XMLscene.prototype.logPicking = function ()
 		}
 	}
 }
-
+/**
+ * Start a new Game
+ */
+XMLscene.prototype.startNewGame = function () {
+	console.log("startNewGame");
+	if (!this.server.validGameType()) {
+		alert(Invalid game type selected: ${this.server.gameType});
+		return;
+	}
+	if (!this.server.validBotLevel1()) {
+		alert(Invalid botlevel 1 type selected: ${this.server.botLevel1});
+		return;
+	}
+	if (!this.server.validBotLevel2()) {
+		alert(Invalid botlevel 2 type selected: ${this.server.botLevel2});
+		return;
+	}
+	this.server.init().then((value) => {
+		this.interface.gameFolder.close();
+	});
+};
 /**
  * Initializes the scene cameras.
  */
@@ -201,6 +231,18 @@ XMLscene.prototype.display = function () {
 	}
 
 	this.popMatrix();
+
+	for (i =0; i<this.objects.length; i++) {
+		this.pushMatrix();
+		this.rotate(Math.PI/12.0,0,1,0);
+		this.translate(i*1.3, -3.49, 0);
+		this.scale(0.8,0.8,0.8);
+
+		this.registerForPick(i+1, this.objects[i]);
+
+		this.objects[i].display();
+		this.popMatrix();
+	}
 
 	// ---- END Background, camera and axis setup
 
