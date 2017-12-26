@@ -28,9 +28,7 @@ class MyServer {
 
 	// claim - true or error message
 	async claim(color) {
-		let response = await this.sendCommand(`action(claim,${color})`);
-		if (response == "success") return true;
-		return response;
+		return await this.sendCommandExpectSuccess(`action(claim,${color})`);
 	}
 
 	//update board
@@ -47,7 +45,13 @@ class MyServer {
 
 	// undo move
 	async undo() {
-		return await this.sendCommand("action(undo)");
+		return await this.sendCommandExpectSuccess("action(undo)");
+	}
+
+	async sendCommandExpectSuccess(command){
+		let response = await this.sendCommand(command);
+		if (response == "success") return true;
+		return response;
 	}
 
 	// save a move response into the moves - true or error message
