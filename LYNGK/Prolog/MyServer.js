@@ -97,8 +97,8 @@ class MyServer {
 		});
 	}
 
+	//parse a prolog list into an array (atoms are strings)
 	parseList(list) {
-		// console.log("list = " + list);
 		list = list.replace(/\s+/g, '');
 		let res = [
 			[]
