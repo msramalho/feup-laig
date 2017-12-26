@@ -24,13 +24,10 @@
 	<script src="MyServer.js"></script>
 
 	<script>
-		"use strict";
-		var t3 =
-			"[[[],[],[blue,red,green],[],[],[],[ivory,black,green],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[black],[]],[[],[],[green,black],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[black,green,red]],[[],[red,blue,ivory,wild],[],[],[],[],[],[],[]],[[],[],[green,blue,red,black,ivory],[],[],[],[],[],[]],[[],[ivory,blue],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]],[[],[],[],[],[],[],[],[],[]]]";
-
+		"use strict";//not sure if needed
 		let server = new MyServer();
 		// console.log(JSON.stringify(server.parseList(t3)));
-		server.init("humanVhuman").then((resInit) => {
+		server.initHvH().then((resInit) => {
 			server.claim("red").then((resClaim) => {
 				server.move(0, 2, 1, 3).then((resMove) => {
 					if (resMove !== true) {
@@ -42,6 +39,20 @@
 					}
 				});
 			});
+		});
+
+		server.initBvB("random", "greedy").then((resInit) => {
+			if (server.isBotNext()) {
+				server.playBot().then((resMove) => {
+					if (resMove !== true) {
+						console.error(resMove);
+					} else {
+						//call animation from 0,2 to 1,3
+						console.log(server.player);
+						console.log(server.nextPlayer);
+					}
+				});
+			}
 		});
 
 

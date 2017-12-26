@@ -33,12 +33,11 @@ executeCommand(action(claim, Color), 'success'):-claimColor(Color).
 % action(playBot)
 % if the next player is a bot, the bot executes a move
 % returns the Move, like
-executeCommand(action(playBot), 'success'+Move+Removed):- movesAvailable, player(Bot),isBot(Bot),playBot(Bot, Move), endTurn(Removed).
+executeCommand(action(playBot), 'success'+Xf-Yf-Xt-Yt+Removed+Color):- movesAvailable, player(Bot),isBot(Bot),playBot(Bot, Xf-Yf-Xt-Yt-Color), endTurn(Removed).
 
 % action(undo)
-% returns the Move, like
+% undo a Move, like
 executeCommand(action(undo), 'success'):- popGame.
-executeCommand(action(undo), 'Nothing to undo').
 
 
 % action errors

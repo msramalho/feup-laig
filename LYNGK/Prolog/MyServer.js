@@ -11,11 +11,29 @@ class MyServer {
 		this.port = port || 8081;
 		this.url = url || 'http://localhost:';
 		this.url += this.port + "/";
+		//utils
+		this.color = false;
+		this.gameType = "";
 	}
 
-	// start a new game - bool
-	async init(gameType) {
-		let start = await this.sendCommand(`init(${gameType})`);
+	// start a new humanVhuman game - bool
+	async initHvH() {
+		this.gameType = "humanVhuman";
+		let start = await this.sendCommand(`init(${this.gameType})`);
+		await this.updateState();
+		return start == "success";
+	}
+	// start a new humanVbot game - bool - botLevel(random, greedy, number)
+	async initHvB(botLevel) {
+		this.gameType = "humanVbot";
+		let start = await this.sendCommand(`init(${this.gameType},${botLevel})`);
+		await this.updateState();
+		return start == "success";
+	}
+	// start a new botVbot game - bool - botLevel(random, greedy, number)
+	async initBvB(bot1Level, bot2Level) {
+		this.gameType = "botVbot";
+		let start = await this.sendCommand(`init(${this.gameType},${bot1Level},${bot2Level})`);
 		await this.updateState();
 		return start == "success";
 	}
@@ -29,16 +47,17 @@ class MyServer {
 
 	// claim - true or error message
 	async claim(color) {
-		this.sendCommandExpectSuccess(`action(claim,${color})`).then((value) => {
-			if (value) {
-				this.player.colors.push(color);
-			}
-			return value;
+		self = this;
+		return new Promise(function (resolve, reject) {
+			self.sendCommandExpectSuccess(`action(claim,${color})`).then((value) => {
+				if (value) self.color = color;
+				resolve(value);
+			});
 		});
 	}
 
 	//update board
-	async updateState(){
+	async updateState() {
 		this.board = this.parseList(await this.sendCommand("query(board)"));
 		this.availableColors = this.parseList(await this.sendCommand("query(availableColors)"));
 		this.nextPlayer = this.player;
@@ -55,7 +74,19 @@ class MyServer {
 		return await this.sendCommandExpectSuccess("action(undo)");
 	}
 
-	async sendCommandExpectSuccess(command){
+	// is the next player from a bot
+	isBotNext() {
+		return this.gameType == "botVbot" || this.gameType == "humanVbot" && this.player.name[0] == "p";
+	}
+
+	// make the bot move
+	async playBot() {
+		let response = await this.sendCommand(`action(playBot)`);
+		await this.updateState();
+		return this.saveMoveResponse(response);
+	}
+
+	async sendCommandExpectSuccess(command) {
 		let response = await this.sendCommand(command);
 		if (response == "success") return true;
 		return response;
@@ -66,13 +97,17 @@ class MyServer {
 		let parts = response.split("+");
 		if (parts[0] != "success") return response;
 		let coords = parts[1].split("-");
+		if (parts.length == 4 && parts[3] != "none") this.color = parts[3]; //bot move comes with extra info
 		this.moves.push({
 			Xf: coords[0],
 			Yf: coords[1],
 			Xt: coords[2],
 			Yt: coords[3],
-			removed: this.parseList(parts[2])
+			removed: this.parseList(parts[2]),
+			color: this.color
 		});
+		if (this.color) this.player.colors.push(this.color);
+		this.color = false;
 		return true;
 	}
 
@@ -84,14 +119,13 @@ class MyServer {
 			request.open('GET', self.url + command, true);
 			let res;
 			request.onload = function (data) {
-				console.log("["+command+"]: " + data.target.response);
+				console.log("[" + command + "]: " + data.target.response);
 				resolve(data.target.response);
 			};
 			request.onerror = function () {
-				console.log("Error waiting for response("+command+")");
+				console.log("Error waiting for response(" + command + ")");
 				resolve(false);
 			};
-
 			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 			request.send();
 		});

@@ -221,4 +221,4 @@ popGame:-
     PreviousGame >= 0,
     destroyGame(Current),
     saveGame(PreviousGame).
-
+popGame:-setOutputMessage('Nothing to undo'), !, fail.
