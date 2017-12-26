@@ -1408,7 +1408,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                     }
                 } else
                 if (descendants[j].nodeName == "LEAF") {
-                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
+                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch','piece']);
 
                     if (type == 'patch') {
 
@@ -1527,6 +1527,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 	var currNode = this.nodes[idnode];
 	var time = this.scene.getCurrTime();
 	var remainingTime = time;
+	this.scene.clearPickRegistration();
 
 	//console.log("SELECTED IS:" + this.scene.selectedSelectable);
 	if(this.scene.selectedSelectable  == idnode){
@@ -1534,8 +1535,8 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 		// this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
 	}
 
-	if(idnode == "piece"){
-		this.scene.registerForPick(6, currNode);
+	if(/piece*/.test(idnode)){
+		this.scene.registerForPick(Number(idnode.substring(5,idnode.length)), currNode);
 	}
 
     this.scene.multMatrix(currNode.transformMatrix);

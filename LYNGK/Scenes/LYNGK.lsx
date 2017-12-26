@@ -292,8 +292,8 @@
 
 		<DESCENDANTS>
 			<NODEREF id="piece1" />
-			<!-- <NODEREF id="piece2" />
-			<NODEREF id="piece3" />
+			<NODEREF id="piece2" />
+			<!-- <NODEREF id="piece3" />
 			<NODEREF id="piece4" />
 			<NODEREF id="piece5" /> -->
 		</DESCENDANTS>
@@ -305,23 +305,19 @@
         <TEXTURE id="null" />
 
 		<DESCENDANTS>
-			<NODEREF id="piece" />
+			<LEAF  type="piece" args = ""/>
 		</DESCENDANTS>
 
 	</NODE>
 
-	<NODE id="piece">
-		<MATERIAL id="null" />
+	<NODE id="piece2">
+		<MATERIAL id="leavesTreeMaterial" />
         <TEXTURE id="null" />
 
-		<SCALE sx="0.45" sy="0.45" sz="0.45"/>
+		<TRANSLATION x="15.6" y="0.5" z="15" />
 
 		<DESCENDANTS>
-			<NODEREF id="piecePart" />
-			<NODEREF id="piecePart2" />
-			<NODEREF id="piecePart3" />
-			<NODEREF id="piecePart4" />
-			<NODEREF id="piecePart5" />
+			<LEAF  type="piece" args = ""/>
 		</DESCENDANTS>
 
 	</NODE>
@@ -599,71 +595,6 @@
         <DESCENDANTS>
 			<LEAF  type="rectangle" args="0 30 50 0" />
 		</DESCENDANTS>
-
-    </NODE>
-
-	<NODE id="piecePart">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
-
-        <ROTATION axis="x" angle="-90" />
-		<TRANSLATION x="0" y="0" z="0.2" />
-
-        <DESCENDANTS>
-			<LEAF id="cylinder" type="cylinder" args="0.8 2.5 2 50 50" />
-        </DESCENDANTS>
-
-    </NODE>
-
-	<NODE id="piecePart2">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
-
-        <ROTATION axis="x" angle="-90" />
-		<TRANSLATION x="0" y="0" z="1" />
-
-        <DESCENDANTS>
-			<LEAF id="cylinder" type="cylinder" args="-0.5 2.8 2 50 50" />
-        </DESCENDANTS>
-
-    </NODE>
-
-	<NODE id="piecePart3">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
-
-        <ROTATION axis="x" angle="-90" />
-
-        <DESCENDANTS>
-			<LEAF id="cylinder" type="cylinder" args="1 3.3 3.3 50 50" />
-        </DESCENDANTS>
-
-    </NODE>
-
-	<NODE id="piecePart4">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
-
-        <ROTATION axis="x" angle="-90" />
-		<TRANSLATION x="0" y="0" z="1" />
-
-        <DESCENDANTS>
-			<LEAF id="cylinder" type="cylinder" args="0 3.3 2.8 50 50" />
-			<LEAF id="cylinder" type="cylinder" args="0 2 0 50 50" />
-        </DESCENDANTS>
-
-    </NODE>
-
-	<NODE id="piecePart5">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
-
-        <ROTATION axis="x" angle="-90" />
-		<ROTATION axis="y" angle="180" />
-
-        <DESCENDANTS>
-			<LEAF id="cylinder" type="cylinder" args="0 3.3 0 50 50" />
-        </DESCENDANTS>
 
     </NODE>
 
