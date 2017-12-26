@@ -137,15 +137,15 @@ XMLscene.prototype.logPicking = function ()
 XMLscene.prototype.startNewGame = function () {
 	console.log("startNewGame");
 	if (!this.server.validGameType()) {
-		alert(Invalid game type selected: ${this.server.gameType});
+		alert('Invalid game type selected: ${this.server.gameType}');
 		return;
 	}
 	if (!this.server.validBotLevel1()) {
-		alert(Invalid botlevel 1 type selected: ${this.server.botLevel1});
+		alert('Invalid botlevel 1 type selected: ${this.server.botLevel1}');
 		return;
 	}
 	if (!this.server.validBotLevel2()) {
-		alert(Invalid botlevel 2 type selected: ${this.server.botLevel2});
+		alert('Invalid botlevel 2 type selected: ${this.server.botLevel2}');
 		return;
 	}
 	this.server.init().then((value) => {
