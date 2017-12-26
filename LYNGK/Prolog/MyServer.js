@@ -1,5 +1,4 @@
 "user strict";
-
 class MyServer {
 	constructor(url, port) {
 		this.player = {};
@@ -7,36 +6,39 @@ class MyServer {
 		this.moves = []; //the moves done so far
 		this.board = []; //the game board
 		this.availableColors = [];
+		this.botLevel1 = MyServer.botLevels[0];
+		this.botLevel2 = MyServer.botLevels[0];
+		this.gameType  = MyServer.gameTypes[0];
 		//defaults
 		this.port = port || 8081;
 		this.url = url || 'http://localhost:';
 		this.url += this.port + "/";
 		//utils
 		this.color = false;
-		this.gameType = "";
 	}
 
-	// start a new humanVhuman game - bool
-	async initHvH() {
-		this.gameType = "humanVhuman";
-		let start = await this.sendCommand(`init(${this.gameType})`);
+	// start a new game - bool
+	async init() {
+		let gameIndex = MyServer.gameTypes.indexOf(this.gameType);
+		let command = "";
+
+		if (gameIndex == 0) {//humanVhuman
+			command = `init(${this.gameType})`;
+		} else if (gameIndex == 1) {//humanVbot
+			command = `init(${this.gameType},${botLevel1})`;
+		} else if (gameIndex == 2) {//botVbot
+			command = `init(${this.gameType},${botLevel1},${botLevel2})`
+		}else{throw "invalid game type";}
+
+		let start = await this.sendCommand(command);
 		await this.updateState();
 		return start == "success";
 	}
-	// start a new humanVbot game - bool - botLevel(random, greedy, number)
-	async initHvB(botLevel) {
-		this.gameType = "humanVbot";
-		let start = await this.sendCommand(`init(${this.gameType},${botLevel})`);
-		await this.updateState();
-		return start == "success";
-	}
-	// start a new botVbot game - bool - botLevel(random, greedy, number)
-	async initBvB(bot1Level, bot2Level) {
-		this.gameType = "botVbot";
-		let start = await this.sendCommand(`init(${this.gameType},${bot1Level},${bot2Level})`);
-		await this.updateState();
-		return start == "success";
-	}
+
+	validGameType(){return MyServer.gameTypes.indexOf(this.gameType)!=-1;}
+	validBotLevel1(){return this.validBotLevel(this.botLevel1) || this.gameType=="humanVhuman";}
+	validBotLevel2(){return this.validBotLevel(this.botLevel2) || this.gameType=="botVhuman";}
+	validBotLevel(level){return MyServer.botLevels.indexOf(level)!=-1;}
 
 	// move - true or error message
 	async move(Xf, Yf, Xt, Yt) {
@@ -160,3 +162,5 @@ class MyServer {
 		return res[0][0];
 	}
 }
+MyServer.gameTypes = ["humanVhuman","humanVbot","botVbot"];
+MyServer.botLevels = ["random","greedy","1","2","3"];
