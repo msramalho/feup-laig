@@ -1530,9 +1530,9 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 
 	//console.log("SELECTED IS:" + this.scene.selectedSelectable);
 	if(this.scene.selectedSelectable  == idnode){
-		this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
+		// TODO: update and uncomment thw following line with the correct shader(s)
+		// this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
 	}
-
 
     this.scene.multMatrix(currNode.transformMatrix);
 
