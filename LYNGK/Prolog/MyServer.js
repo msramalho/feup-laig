@@ -2,8 +2,8 @@
 
 class MyServer {
 	constructor(url, port) {
-		this.player = undefined;
-		this.nextPlayer = undefined;
+		this.player = {};
+		this.nextPlayer = {};
 		this.moves = []; //the moves done so far
 		this.board = []; //the game board
 		//defaults
@@ -12,25 +12,37 @@ class MyServer {
 		this.url += this.port + "/";
 	}
 
-	// start a new game
+	// start a new game - bool
 	async init(gameType) {
 		let start = await this.sendCommand(`init(${gameType})`);
-		await this.updateBoard();
-		this.player = await this.sendCommand("query(player)");
-		this.nextPlayer = await this.sendCommand("query(nextPlayer)");
+		await this.updateState();
 		return start == "success";
 	}
 
-	// move
-	async move(Xfrom, Yfrom, Xto, Yto) {
-		let response = await this.sendCommand(`action(move,${Xfrom},${Yfrom},${Xto},${Yto})`);
-		await this.updateBoard();
+	// move - true or error message
+	async move(Xf, Yf, Xt, Yt) {
+		let response = await this.sendCommand(`action(move,${Xf},${Yf},${Xt},${Yt})`);
+		await this.updateState();
 		return this.saveMoveResponse(response);
 	}
 
+	// claim - true or error message
+	async claim(color) {
+		let response = await this.sendCommand(`action(claim,${color})`);
+		if (response == "success") return true;
+		return response;
+	}
+
 	//update board
-	async updateBoard(){
+	async updateState(){
 		this.board = this.parseList(await this.sendCommand("query(board)"));
+		this.nextPlayer = this.player;
+		this.player = {
+			name: await this.sendCommand("query(player)"),
+			colors: this.parseList(await this.sendCommand("query(colors)")),
+			stacks: this.parseList(await this.sendCommand("query(stacks)"))
+		};
+
 	}
 
 	// undo move
@@ -38,7 +50,7 @@ class MyServer {
 		return await this.sendCommand("action(undo)");
 	}
 
-	// private functions
+	// save a move response into the moves - true or error message
 	saveMoveResponse(response) {
 		let parts = response.split("+");
 		if (parts[0] != "success") return response;
