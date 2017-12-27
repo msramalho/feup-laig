@@ -50,7 +50,8 @@ XMLscene.prototype.init = function (application) {
 		new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),
 		new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag")
 	]; */
-	this.pickedShader = new CGFshader(this.gl, "Shaders/main.vert", "Shaders/main.frag");
+	this.pickedShader = new CGFshader(this.gl, "Shaders/picked.vert", "Shaders/picked.frag");
+	this.possibleShader = new CGFshader(this.gl, "Shaders/possible.vert", "Shaders/possible.frag");
 	//game settings
 	this.server = new MyServer();
 
@@ -110,28 +111,49 @@ XMLscene.prototype.initLights = function () {
  * Logs objects picked.
  */
 XMLscene.prototype.logPicking = function () {
-	if ( typeof this.lastPicked == 'undefined' ) {//simulate static variable
-        this.lastPicked = false;
-    }
+	if (typeof this.lastPicked == 'undefined') { //simulate static variable
+		this.lastPicked = false;
+	}
 	if (this.pickMode == false) {
 		if (this.pickResults != null && this.pickResults.length > 0) {
 			for (var i = 0; i < this.pickResults.length; i++) {
-				var obj = this.pickResults[i][0];
-				if (obj) {
+				var piece = this.pickResults[i][0];
+				if (piece) {
 					var customId = this.pickResults[i][1];
-					console.log("Picked object: " + obj + ", with pick id " + customId);
-					if(this.lastPicked != obj){
-						if(this.lastPicked){
+					console.log("Picked object: " + piece + ", with pick id " + customId);
+					if (this.lastPicked != piece) {
+						if (this.lastPicked)
 							this.lastPicked.picked = false;
-						}
-						this.lastPicked = obj;
+						this.lastPicked = piece;
 					}
-					obj.togglePicked();
+					piece.picked = !piece.picked;
+					if (piece.picked) {
+						this.displayPossibleMoves(piece);
+					} else {
+						for (let p = 0; p < this.pieces.length; p++)
+							this.pieces[p].possible = false;
+					}
 				}
 			}
 			this.pickResults.splice(0, this.pickResults.length);
 		}
 	}
+};
+
+XMLscene.prototype.displayPossibleMoves = function (piece) {
+	let self = this;
+	this.server.getPossibleMoves(piece.line, piece.column).then(function (moves) {
+		moves.forEach(move => {
+			for (let i = 0; i < self.pieces.length; i++) {
+				const piece = self.pieces[i];
+				if (move == `${piece.line}-${piece.column}`) {
+					console.log("possible");
+					piece.possible = true;
+					break; //found the stack for this move
+				}
+			}
+		});
+	});
 };
 
 /**
@@ -208,9 +230,10 @@ XMLscene.prototype.display = function () {
 		this.graph.displayScene();
 
 		for (let i = 0; i < this.pieces.length; i++) {
-			this.pushMatrix();{
+			this.pushMatrix(); {
 				this.pieces[i].display();
-			}this.popMatrix();
+			}
+			this.popMatrix();
 		}
 		this.clearPickRegistration();
 	} else {
