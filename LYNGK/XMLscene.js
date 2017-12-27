@@ -168,11 +168,14 @@ XMLscene.prototype.logPicking = function () {
 				if (stack) {
 					var customId = this.pickResults[i][1];
 					console.log("Picked object: " + stack + ", with pick id " + customId);
-					if (this.lastPicked != stack) {
+					if (this.lastPicked != stack) { //new stack picked, not the same to unpick
 						if (this.lastPicked) {
+							if (stack.possible) { //this is actually an execute move, assumes it is valid
+								this.doMove(this.lastPicked, stack);
+								break;
+							}
 							this.lastPicked.picked = false;
-							for (let s = 0; s < this.stacks.length; s++)
-								this.stacks[s].possible = false;
+							this.clearPossible();
 						}
 						this.lastPicked = stack;
 					}
@@ -180,8 +183,7 @@ XMLscene.prototype.logPicking = function () {
 					if (stack.picked) {
 						this.displayPossibleMoves(stack);
 					} else {
-						for (let s = 0; s < this.stacks.length; s++)
-							this.stacks[s].possible = false;
+						this.clearPossible();
 					}
 				}
 			}
@@ -190,6 +192,10 @@ XMLscene.prototype.logPicking = function () {
 	}
 };
 
+XMLscene.prototype.clearPossible = function () {
+	for (let s = 0; s < this.stacks.length; s++)
+		this.stacks[s].possible = false;
+};
 XMLscene.prototype.displayPossibleMoves = function (stack) {
 	let self = this;
 	this.server.getPossibleMoves(stack.line, stack.column).then(function (moves) {
@@ -206,6 +212,16 @@ XMLscene.prototype.displayPossibleMoves = function (stack) {
 	});
 };
 
+XMLscene.prototype.doMove = function (from, to) {
+	this.server.move(from.line, from.column, to.line, to.column).then((moveRes) => {
+		if (moveRes) { //success -> animate
+			from.moveTo(to);
+			this.clearPossible();
+		} else {
+			alert(`An error occured: ${moveRes}`);
+		}
+	});
+};
 /**
  * Initializes the scene cameras.
  */

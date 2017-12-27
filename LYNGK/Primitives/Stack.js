@@ -10,7 +10,7 @@ function Stack(scene, line, column) {
 
 	this.line = line || 0;
 	this.column = column || 0;
-	this.pieces = [];//list of Piece
+	this.pieces = []; //list of Piece
 
 	//for shaders
 	this.picked = false;
@@ -28,9 +28,15 @@ Stack.prototype.display = function () {
 	else if (this.possible) this.scene.setActiveShader(this.scene.possibleShader);
 	this.scene.registerForPick(this.id, this);
 	for (let i = 0; i < this.pieces.length; i++) {
-		// this.scene.pushMatrix();{
-			this.pieces[i].display(this.line, this.column, i);//i is the height
-		// }this.scene.popMatrix();
+		this.scene.pushMatrix(); {
+			this.pieces[i].display(this.line, this.column, i); //i is the height
+		}
+		this.scene.popMatrix();
 	}
 	if (this.picked || this.possible) this.scene.setActiveShader(this.scene.defaultShader);
+};
+
+Stack.prototype.moveTo = function (destination) {
+	destination.pieces = destination.pieces.concat(this.pieces);
+	this.pieces = [];
 };

@@ -19,7 +19,7 @@ function Piece(scene, color) {
 }
 //scale factor from prolog coordinates into the board size
 Piece.factors = {
-	y: 1,
+	y: 0.75,
 	x: 3.9,
 	z: 2.25
 };
