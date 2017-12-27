@@ -21,13 +21,6 @@ function Piece(scene, line, column, height, color) {
 	this.color = color || "noColor";
 	this.picked = false;
 	this.id = ++Piece.id;
-
-	this.scene.colorMaterial = new CGFappearance(this.scene);
-	this.scene.colorMaterial.setAmbient(0.5, 0.5, 0, 1);
-	this.scene.colorMaterial.setDiffuse(1, 0, 0, 1);
-	this.scene.colorMaterial.setSpecular(0.34, 0.32, 0.17, 1);
-	this.scene.colorMaterial.setShininess(10);
-
 }
 Piece.id = 0;
 //scale factor from prolog coordinates into the board size
@@ -46,7 +39,7 @@ Piece.prototype = Object.create(CGFobject.prototype);
 Piece.prototype.constructor = Piece;
 
 Piece.prototype.display = function () {
-	this.scene.colorMaterial.apply();
+	this.setColor();
 	if (this.picked) this.scene.setActiveShader(this.scene.pickedShader);
 	this.scene.registerForPick(this.id, this);
 	this.scene.translate(
@@ -75,4 +68,19 @@ Piece.prototype.display = function () {
 	this.part6.display();
 	this.scene.popMatrix();
 	if (this.picked) this.scene.setActiveShader(this.scene.defaultShader);
+};
+
+Piece.prototype.setColor = function () {
+	if (this.color == "wild")
+		this.scene.wildMaterial.apply();
+	else if (this.color == "blue")
+		this.scene.blueMaterial.apply();
+	else if (this.color == "green")
+		this.scene.greenMaterial.apply();
+	else if (this.color == "black")
+		this.scene.blackMaterial.apply();
+	else if (this.color == "red")
+		this.scene.redMaterial.apply();
+	else if (this.color == "ivory")
+		this.scene.ivoryMaterial.apply();
 };
