@@ -85,6 +85,56 @@
         <amplif_factor s="20" t="10" />
     </TEXTURE>
 
+	<TEXTURE id="number0">
+        <file path="images/0.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="number1">
+        <file path="images/1.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="number2">
+        <file path="images/2.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="number3">
+        <file path="images/3.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="number4">
+        <file path="images/4.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="number5">
+        <file path="images/5.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="number6">
+        <file path="images/6.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="number7">
+        <file path="images/7.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="number8">
+        <file path="images/8.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
+	<TEXTURE id="number9">
+        <file path="images/9.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
 	<TEXTURE id="wallPaint">
         <file path="images/yellowWall.jpg" />
         <amplif_factor s="50" t="30" />
@@ -220,8 +270,51 @@
 			<NODEREF id="painting1" />
 			<NODEREF id="painting2" />
 			<NODEREF id="painting3" />
+			<NODEREF id="coutdownBoard" />
 			<!-- <NODEREF id="tableWood"/> -->
         </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="coutdownBoard">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<SCALE sx="0.8" sy="1" sz="1"/>
+        <TRANSLATION x="42.5" y="10" z="0.1" />
+        <ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+			<NODEREF id="coutdownDigits1" />
+			<NODEREF id="coutdownDigits2" />
+			<NODEREF id="painting" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="coutdownDigits2">
+        <MATERIAL id="null" />
+        <TEXTURE id="number0" />
+
+		<TRANSLATION x="0" y="0" z="-10" />
+		<ROTATION axis="y" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 10 10 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="coutdownDigits1">
+        <MATERIAL id="null" />
+        <TEXTURE id="number0" />
+
+		<TRANSLATION x="0" y="0" z="-20" />
+		<ROTATION axis="y" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 10 10 0" />
+		</DESCENDANTS>
 
     </NODE>
 
@@ -324,10 +417,10 @@
 		<MATERIAL id="null" />
         <TEXTURE id="null" />
 
+		<TRANSLATION x="49.8" y="18" z="10" />
 		<SCALE sx="0.75" sy="0.6" sz="0.75"/>
-		<TRANSLATION x="15" y="40" z="0.2" />
 		<ROTATION axis="x" angle="-90" />
-		<ROTATION axis="z" angle="-90" />
+		<ROTATION axis="z" angle="180" />
 
 		<DESCENDANTS>
 			<NODEREF id="paintingLisa" />
@@ -340,10 +433,10 @@
 		<MATERIAL id="null" />
         <TEXTURE id="null" />
 
+		<TRANSLATION x="49.8" y="25" z="30" />
 		<SCALE sx="0.75" sy="0.6" sz="0.75"/>
-		<TRANSLATION x="40" y="30" z="0.2" />
 		<ROTATION axis="x" angle="-90" />
-		<ROTATION axis="z" angle="-90" />
+		<ROTATION axis="z" angle="180" />
 
 
 		<DESCENDANTS>

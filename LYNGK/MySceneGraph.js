@@ -1533,9 +1533,8 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 		// this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
 	} */
 
-	if(/piece*/.test(idnode)){
-		this.scene.registerForPick(Number(idnode.substring(5,idnode.length)), currNode);
-	}
+	if (/coutdownDigits*/.test(idnode))
+		this.scene.updateCountdownTex(this.nodes[idnode], Number(idnode.substring(14,idnode.length)));
 
     this.scene.multMatrix(currNode.transformMatrix);
 

@@ -29,6 +29,8 @@ XMLscene.prototype.init = function (application) {
 
 	this.initTextures();
 
+	this.loadCountdownDigits();
+
 	this.gl.clearDepth(100.0);
 	this.gl.enable(this.gl.DEPTH_TEST);
 	this.gl.enable(this.gl.CULL_FACE);
@@ -108,13 +110,16 @@ XMLscene.prototype.initTextures = function () {
 /**
  * Function called every update period
  */
-XMLscene.prototype.update = function (currTime) {
+XMLscene.prototype.update = function (systemTime) {
 	if (!this.timerStarted) {
-		this.startingTime = currTime;
+		this.startingTime = systemTime;
 		this.timerStarted = true;
 	}
-	this.updateShaders(currTime);
-	this.currTime = (currTime - this.startingTime) / 1000.0;
+	this.updateShaders(systemTime);
+	this.oldTime = this.currTime;
+	this.currTime = (systemTime - this.startingTime) / 1000.0;
+	this.deltaTime = this.currTime - this.oldTime;
+	this.decreaseCountdown();
 }
 
 XMLscene.prototype.getCurrTime = function () {
@@ -192,10 +197,54 @@ XMLscene.prototype.logPicking = function () {
 	}
 };
 
+XMLscene.prototype.loadCountdownDigits = function () {
+	this.number1 = new CGFappearance(this);
+	this.number1.loadTexture("Scenes/images/1.png");
+	this.number2 = new CGFappearance(this);
+	this.number2.loadTexture("Scenes/images/2.png");
+	this.number3 = new CGFappearance(this);
+	this.number3.loadTexture("Scenes/images/3.png");
+	this.number4 = new CGFappearance(this);
+	this.number4.loadTexture("Scenes/images/4.png");
+	this.number5 = new CGFappearance(this);
+	this.number5.loadTexture("Scenes/images/5.png");
+	this.number6 = new CGFappearance(this);
+	this.number6.loadTexture("Scenes/images/6.png");
+	this.number7 = new CGFappearance(this);
+	this.number7.loadTexture("Scenes/images/7.png");
+	this.number8 = new CGFappearance(this);
+	this.number8.loadTexture("Scenes/images/8.png");
+	this.number9 = new CGFappearance(this);
+	this.number9.loadTexture("Scenes/images/9.png");
+	this.number0 = new CGFappearance(this);
+	this.number0.loadTexture("Scenes/images/0.png");
+};
+
+XMLscene.prototype.resetCountdown = function () {
+	this.countdownStarted = true;
+	this.countdownSeconds = 60;
+};
+
+XMLscene.prototype.decreaseCountdown = function () {
+	if (this.countdownStarted){
+		this.countdownSeconds -= this.deltaTime;
+		if (this.countdownSeconds <= 0){
+			this.countdownStarted = false; //GAME OVER
+			this.countdownSeconds = 0;
+		}
+
+	}
+};
+
+XMLscene.prototype.updateCountdownTex = function (node, digit) {
+	node.textureID = "number" + Math.floor(this.countdownSeconds).toString().charAt(digit-1);
+};
+
 XMLscene.prototype.clearPossible = function () {
 	for (let s = 0; s < this.stacks.length; s++)
 		this.stacks[s].possible = false;
 };
+
 XMLscene.prototype.displayPossibleMoves = function (stack) {
 	let self = this;
 	this.server.getPossibleMoves(stack.line, stack.column).then(function (moves) {
@@ -215,6 +264,7 @@ XMLscene.prototype.displayPossibleMoves = function (stack) {
 XMLscene.prototype.doMove = function (from, to) {
 	this.server.move(from.line, from.column, to.line, to.column).then((moveRes) => {
 		if (moveRes) { //success -> animate
+			this.resetCountdown();
 			from.moveTo(to);
 			this.clearPossible();
 		} else {
@@ -372,4 +422,6 @@ XMLscene.prototype.populateStacks = function () {
 		}
 	}
 	console.log(this.stacks);
+	//After stacks are populated countdown starts counting
+	this.resetCountdown();
 };
