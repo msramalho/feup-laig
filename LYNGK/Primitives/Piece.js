@@ -22,7 +22,7 @@ function Piece(scene, line, column, height, color) {
 	this.picked = false;
 	this.id = ++Piece.id;
 
-	this.scene.colorMaterial = new CGFappearance(this);
+	this.scene.colorMaterial = new CGFappearance(this.scene);
 	this.scene.colorMaterial.setAmbient(0.5, 0.5, 0, 1);
 	this.scene.colorMaterial.setDiffuse(1, 0, 0, 1);
 	this.scene.colorMaterial.setSpecular(0.34, 0.32, 0.17, 1);
@@ -75,8 +75,4 @@ Piece.prototype.display = function () {
 	this.part6.display();
 	this.scene.popMatrix();
 	if (this.picked) this.scene.setActiveShader(this.scene.defaultShader);
-};
-
-Piece.prototype.togglePicked = function () {
-	this.picked = !this.picked;
 };
