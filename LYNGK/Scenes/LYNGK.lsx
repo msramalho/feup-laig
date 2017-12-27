@@ -215,6 +215,7 @@
 
         <DESCENDANTS>
             <NODEREF id="floor" />
+			<NODEREF id="pieces" />
 			<NODEREF id="board"/>
 			<NODEREF id="walls" />
 			<NODEREF id="painting1" />
@@ -289,6 +290,42 @@
 			<NODEREF id="boardPart5" />
 			<NODEREF id="boardPart6" />
 			<NODEREF id="boardPart7" />
+		</DESCENDANTS>
+
+	</NODE>
+
+	<NODE id="pieces">
+		<MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<DESCENDANTS>
+			<NODEREF id="piece1" />
+			<NODEREF id="piece2" />
+			<!-- <NODEREF id="piece3" />
+			<NODEREF id="piece4" />
+			<NODEREF id="piece5" /> -->
+		</DESCENDANTS>
+
+	</NODE>
+
+	<NODE id="piece1">
+		<MATERIAL id="leavesTreeMaterial" />
+        <TEXTURE id="null" />
+
+		<DESCENDANTS>
+			<LEAF  type="piece" args = ""/>
+		</DESCENDANTS>
+
+	</NODE>
+
+	<NODE id="piece2">
+		<MATERIAL id="leavesTreeMaterial" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="15.6" y="0.5" z="15" />
+
+		<DESCENDANTS>
+			<LEAF  type="piece" args = ""/>
 		</DESCENDANTS>
 
 	</NODE>
