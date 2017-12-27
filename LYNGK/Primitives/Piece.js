@@ -23,12 +23,12 @@ function Piece(scene, line, column, height, color) {
 //scale factor from prolog coordinates into the board size
 Piece.factors = {
 	z: 2.25,
-	x: 4,
+	x: 3.9,
 	y: 1
 };
 Piece.boardStart = {
 	z: 10.5,
-	x: 9.25,
+	x: 9.5,
 	y: -0.1
 };
 Piece.prototype = Object.create(CGFobject.prototype);
