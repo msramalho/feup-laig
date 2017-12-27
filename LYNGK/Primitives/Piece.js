@@ -3,7 +3,7 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function Piece(scene, x, y, z, color) {
+function Piece(scene, line, column, height, color) {
 	CGFobject.call(this, scene);
 
 	this.scene = scene;
@@ -15,16 +15,30 @@ function Piece(scene, x, y, z, color) {
 	this.part5 = new Cylinder(this.scene, 0, 2, 0, 50, 50);
 	this.part6 = new Cylinder(this.scene, 0, 3.3, 0, 50, 50);
 
-	this.x = x || 0;
-	this.y = y || 0;
-	this.z = z || 0;
+	this.x = column || 0;
+	this.y = height || 0;
+	this.z = line || 0;
 	this.color = color || "noColor";
 }
-
+//scale factor from prolog coordinates into the board size
+Piece.factors = {
+	z: 2.25,
+	x: 4,
+	y: 1
+};
+Piece.boardStart = {
+	z: 10.5,
+	x: 9.25,
+	y: -0.1
+};
 Piece.prototype = Object.create(CGFobject.prototype);
 Piece.prototype.constructor = Piece;
 
 Piece.prototype.display = function () {
+	this.scene.translate(
+		Piece.factors.x * this.x + Piece.boardStart.x,
+		Piece.factors.y * this.y + Piece.boardStart.y,
+		Piece.factors.z * this.z + Piece.boardStart.z);
 	this.scene.scale(0.45, 0.45, 0.45);
 	this.scene.rotate(Math.PI / 2, -1, 0, 0);
 

@@ -11,6 +11,7 @@ function XMLscene(interface) {
 
 	this.lightValues = {};
 	this.selectableValues = {};
+	this.pieces = [];
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -108,43 +109,21 @@ XMLscene.prototype.initLights = function () {
 /**
  * Logs objects picked.
  */
-XMLscene.prototype.logPicking = function ()
-{
+XMLscene.prototype.logPicking = function () {
 	if (this.pickMode == false) {
 		if (this.pickResults != null && this.pickResults.length > 0) {
-			for (var i=0; i< this.pickResults.length; i++) {
+			for (var i = 0; i < this.pickResults.length; i++) {
 				var obj = this.pickResults[i][0];
-				if (obj)
-				{
+				if (obj) {
 					var customId = this.pickResults[i][1];
 					console.log("Picked object: " + obj + ", with pick id " + customId);
 				}
 			}
-			this.pickResults.splice(0,this.pickResults.length);
+			this.pickResults.splice(0, this.pickResults.length);
 		}
 	}
-}
-/**
- * Start a new Game
- */
-XMLscene.prototype.startNewGame = function () {
-	console.log("startNewGame");
-	if (!this.server.validGameType()) {
-		alert('Invalid game type selected: ${this.server.gameType}');
-		return;
-	}
-	if (!this.server.validBotLevel1()) {
-		alert('Invalid botlevel 1 type selected: ${this.server.botLevel1}');
-		return;
-	}
-	if (!this.server.validBotLevel2()) {
-		alert('Invalid botlevel 2 type selected: ${this.server.botLevel2}');
-		return;
-	}
-	this.server.init().then((value) => {
-		this.interface.gameFolder.close();
-	});
 };
+
 /**
  * Initializes the scene cameras.
  */
@@ -218,6 +197,12 @@ XMLscene.prototype.display = function () {
 		// Displays the scene.
 		this.graph.displayScene();
 
+		for (let i = 0; i < this.pieces.length; i++) {
+			this.pushMatrix();{
+
+				this.pieces[i].display();
+			}this.popMatrix();
+		}
 	} else {
 		// Draw axis
 		this.axis.display();
@@ -225,6 +210,7 @@ XMLscene.prototype.display = function () {
 
 	this.popMatrix();
 	// ---- END Background, camera and axis setup
+
 
 };
 XMLscene.prototype.updateShaders = function () {
@@ -234,11 +220,11 @@ XMLscene.prototype.updateShaders = function () {
 	counter++;
 	let timeFactor = Math.abs(Math.sin(counter / 10));
 	let timeFactorInverted = 1 - timeFactor;
-	let goalColor = vec4.fromValues(this.selectionColor[0]/255, this.selectionColor[1]/255, this.selectionColor[2]/255, 1);
-	let saturatedColor = vec4.fromValues(255/255, 100/255, 100/255, 1);
+	let goalColor = vec4.fromValues(this.selectionColor[0] / 255, this.selectionColor[1] / 255, this.selectionColor[2] / 255, 1);
+	let saturatedColor = vec4.fromValues(255 / 255, 100 / 255, 100 / 255, 1);
 	for (let i = 0; i < this.shaders.length; i++) {
 		this.shaders[i].setUniformsValues({
-			timeFactor: this.scaleFactor*timeFactor,
+			timeFactor: this.scaleFactor * timeFactor,
 			timeFactorInverted: timeFactorInverted,
 			goal_r: goalColor[0],
 			goal_g: goalColor[1],
@@ -248,4 +234,43 @@ XMLscene.prototype.updateShaders = function () {
 			saturated_b: saturatedColor[2],
 		});
 	}
+};
+
+
+/**
+ * Start a new Game
+ */
+XMLscene.prototype.startNewGame = function () {
+	console.log("startNewGame");
+	if (!this.server.validGameType()) {
+		alert(`Invalid game type selected: ${this.server.gameType}`);
+		return;
+	}
+	if (!this.server.validBotLevel1()) {
+		alert(`Invalid botlevel 1 type selected: ${this.server.botLevel1}`);
+		return;
+	}
+	if (!this.server.validBotLevel2()) {
+		alert(`Invalid botlevel 2 type selected: ${this.server.botLevel2}`);
+		return;
+	}
+	this.server.init().then((value) => {
+		this.interface.gameFolder.close();
+		this.populatePieces();
+	});
+};
+
+/**
+ * Load the pieces from the server into the scene
+ */
+XMLscene.prototype.populatePieces = function () {
+	for (let l = 0; l < this.server.board.length; l++) {
+		const line = this.server.board[l];
+		for (let c = 0; c < line.length; c++) {
+			if (line[c].length > 0) {
+				this.pieces.push(new Piece(this, l, c, 0, line[c][0]));
+			}
+		}
+	}
+	console.log(this.pieces);
 };
