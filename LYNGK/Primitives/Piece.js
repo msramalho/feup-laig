@@ -3,7 +3,7 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function Piece(scene, line, column, height, color) {
+function Piece(scene, color) {
 	CGFobject.call(this, scene);
 
 	this.scene = scene;
@@ -15,24 +15,8 @@ function Piece(scene, line, column, height, color) {
 	this.part5 = new Cylinder(this.scene, 0, 2, 0, 50, 50);
 	this.part6 = new Cylinder(this.scene, 0, 3.3, 0, 50, 50);
 
-	this.line = line || 0;
-	this.column = column || 0;
-	this.height = height || 0;
 	this.color = color || "noColor";
-	//for shaders
-	this.picked = false;
-	this.possible = false;
-
-	this.id = ++Piece.id;
-
-	this.scene.colorMaterial = new CGFappearance(this.scene);
-	this.scene.colorMaterial.setAmbient(0.5, 0.5, 0, 1);
-	this.scene.colorMaterial.setDiffuse(1, 0, 0, 1);
-	this.scene.colorMaterial.setSpecular(0.34, 0.32, 0.17, 1);
-	this.scene.colorMaterial.setShininess(10);
-
 }
-Piece.id = 0;
 //scale factor from prolog coordinates into the board size
 Piece.factors = {
 	y: 1,
@@ -48,15 +32,12 @@ Piece.boardStart = {
 Piece.prototype = Object.create(CGFobject.prototype);
 Piece.prototype.constructor = Piece;
 
-Piece.prototype.display = function () {
+Piece.prototype.display = function (line, column, height) {
 	this.setColor();
-	if (this.picked) this.scene.setActiveShader(this.scene.pickedShader);
-	else if (this.possible) this.scene.setActiveShader(this.scene.possibleShader);
-	this.scene.registerForPick(this.id, this);
 	this.scene.translate(
-		Piece.factors.x * this.column + Piece.boardStart.x,
-		Piece.factors.y * this.height + Piece.boardStart.y,
-		Piece.factors.z * this.line + Piece.boardStart.z);
+		Piece.factors.x * column + Piece.boardStart.x,
+		Piece.factors.y * height + Piece.boardStart.y,
+		Piece.factors.z * line + Piece.boardStart.z);
 	this.scene.scale(0.45, 0.45, 0.45);
 	this.scene.rotate(Math.PI / 2, -1, 0, 0);
 
@@ -78,7 +59,6 @@ Piece.prototype.display = function () {
 	this.scene.rotate(Math.PI, 0, 1, 0);
 	this.part6.display();
 	this.scene.popMatrix();
-	if (this.picked || this.possible) this.scene.setActiveShader(this.scene.defaultShader);
 };
 
 Piece.prototype.setColor = function () {

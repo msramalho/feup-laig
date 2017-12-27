@@ -11,7 +11,7 @@ function XMLscene(interface) {
 
 	this.lightValues = {};
 	this.selectableValues = {};
-	this.pieces = [];
+	this.stacks = [];
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -164,24 +164,24 @@ XMLscene.prototype.logPicking = function () {
 	if (this.pickMode == false) {
 		if (this.pickResults != null && this.pickResults.length > 0) {
 			for (var i = 0; i < this.pickResults.length; i++) {
-				var piece = this.pickResults[i][0];
-				if (piece) {
+				var stack = this.pickResults[i][0];
+				if (stack) {
 					var customId = this.pickResults[i][1];
-					console.log("Picked object: " + piece + ", with pick id " + customId);
-					if (this.lastPicked != piece) {
+					console.log("Picked object: " + stack + ", with pick id " + customId);
+					if (this.lastPicked != stack) {
 						if (this.lastPicked) {
 							this.lastPicked.picked = false;
-							for (let p = 0; p < this.pieces.length; p++)
-								this.pieces[p].possible = false;
+							for (let s = 0; s < this.stacks.length; s++)
+								this.stacks[s].possible = false;
 						}
-						this.lastPicked = piece;
+						this.lastPicked = stack;
 					}
-					piece.picked = !piece.picked;
-					if (piece.picked) {
-						this.displayPossibleMoves(piece);
+					stack.picked = !stack.picked;
+					if (stack.picked) {
+						this.displayPossibleMoves(stack);
 					} else {
-						for (let p = 0; p < this.pieces.length; p++)
-							this.pieces[p].possible = false;
+						for (let s = 0; s < this.stacks.length; s++)
+							this.stacks[s].possible = false;
 					}
 				}
 			}
@@ -190,15 +190,15 @@ XMLscene.prototype.logPicking = function () {
 	}
 };
 
-XMLscene.prototype.displayPossibleMoves = function (piece) {
+XMLscene.prototype.displayPossibleMoves = function (stack) {
 	let self = this;
-	this.server.getPossibleMoves(piece.line, piece.column).then(function (moves) {
+	this.server.getPossibleMoves(stack.line, stack.column).then(function (moves) {
 		moves.forEach(move => {
-			for (let i = 0; i < self.pieces.length; i++) {
-				const piece = self.pieces[i];
-				if (move == `${piece.line}-${piece.column}`) {
+			for (let i = 0; i < self.stacks.length; i++) {
+				const s = self.stacks[i];
+				if (move == `${s.line}-${s.column}`) {
 					console.log("possible");
-					piece.possible = true;
+					s.possible = true;
 					break; //found the stack for this move
 				}
 			}
@@ -279,9 +279,9 @@ XMLscene.prototype.display = function () {
 		// Displays the scene.
 		this.graph.displayScene();
 
-		for (let i = 0; i < this.pieces.length; i++) {
+		for (let i = 0; i < this.stacks.length; i++) {
 			this.pushMatrix(); {
-				this.pieces[i].display();
+				this.stacks[i].display();
 			}
 			this.popMatrix();
 		}
@@ -337,21 +337,23 @@ XMLscene.prototype.startNewGame = function () {
 	}
 	this.server.init().then((value) => {
 		this.interface.gameFolder.close();
-		this.populatePieces();
+		this.populateStacks();
 	});
 };
 
 /**
- * Load the pieces from the server into the scene
+ * Load the stacks from the server into the scene
  */
-XMLscene.prototype.populatePieces = function () {
+XMLscene.prototype.populateStacks = function () {
 	for (let l = 0; l < this.server.board.length; l++) {
 		const line = this.server.board[l];
 		for (let c = 0; c < line.length; c++) {
 			if (line[c].length > 0) {
-				this.pieces.push(new Piece(this, l, c, 0, line[c][0]));
+				let stack = new Stack(this, l, c);
+				stack.pieces.push(new Piece(this, line[c][0]));
+				this.stacks.push(stack);
 			}
 		}
 	}
-	console.log(this.pieces);
+	console.log(this.stacks);
 };
