@@ -29,8 +29,6 @@ XMLscene.prototype.init = function (application) {
 
 	this.initTextures();
 
-	this.loadCountdownDigits();
-
 	this.gl.clearDepth(100.0);
 	this.gl.enable(this.gl.DEPTH_TEST);
 	this.gl.enable(this.gl.CULL_FACE);
