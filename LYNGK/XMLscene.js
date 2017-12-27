@@ -27,6 +27,8 @@ XMLscene.prototype.init = function (application) {
 
 	this.enableTextures(true);
 
+	this.initTextures();
+
 	this.gl.clearDepth(100.0);
 	this.gl.enable(this.gl.DEPTH_TEST);
 	this.gl.enable(this.gl.CULL_FACE);
@@ -57,7 +59,52 @@ XMLscene.prototype.init = function (application) {
 
 	this.setPickEnabled(true);
 };
+/**
+ * Initialize Pieces Textures
+ */
+XMLscene.prototype.initTextures = function () {
+	this.blackMaterial = new CGFappearance(this);
+	this.blackMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+	this.blackMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
+	this.blackMaterial.setSpecular(0.34, 0.32, 0.17, 1);
+	this.blackMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.blackMaterial.setShininess(10);
 
+	this.redMaterial = new CGFappearance(this);
+	this.redMaterial.setAmbient(1, 0.1, 0.1, 1);
+	this.redMaterial.setDiffuse(1, 0.05, 0.05, 1);
+	this.redMaterial.setSpecular(0.9, 0.32, 0.17, 0.5);
+	this.redMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.redMaterial.setShininess(5);
+
+	this.ivoryMaterial = new CGFappearance(this);
+	this.ivoryMaterial.setAmbient(0.6, 0.6, 0.6, 1);
+	this.ivoryMaterial.setDiffuse(0.3, 0.3, 0.3, 1);
+	this.ivoryMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);
+	this.ivoryMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.ivoryMaterial.setShininess(10);
+
+	this.greenMaterial = new CGFappearance(this);
+	this.greenMaterial.setAmbient(0.2, 0.2, 0.2, 1);
+	this.greenMaterial.setDiffuse(0, 0.407, 0, 1);
+	this.greenMaterial.setSpecular(0.05, 0.207, 0.05, 1);
+	this.greenMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.greenMaterial.setShininess(10);
+
+	this.blueMaterial = new CGFappearance(this);
+	this.blueMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+	this.blueMaterial.setDiffuse(0, 0.3, 0.8, 1);
+	this.blueMaterial.setSpecular(0.2, 0.2, 1, 1);
+	this.blueMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.blueMaterial.setShininess(10);
+
+	this.wildMaterial = new CGFappearance(this);
+	this.wildMaterial.setAmbient(0.6, 0.6, 0.6, 1);
+	this.wildMaterial.setDiffuse(0.3, 0.3, 0.3, 1);
+	this.wildMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);
+	this.wildMaterial.loadTexture("Scenes/images/spotty.jpg");
+	this.wildMaterial.setShininess(10);
+}
 /**
  * Function called every update period
  */
