@@ -295,7 +295,7 @@
 	</NODE>
 
 	<NODE id="pieces">
-		<MATERIAL id="leavesTreeMaterial" />
+		<MATERIAL id="null" />
         <TEXTURE id="null" />
 
 		<TRANSLATION x="15.6" y="0.5" z="15" />
