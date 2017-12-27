@@ -9,6 +9,12 @@ function MyInterface() {
 		'Flat Shading': 1,
 		'Simple texturing': 2,
 	};
+
+	this.availableScenes = {
+		'Main Room': 1,
+		'Scene 2': 2,
+	};
+
 	CGFinterface.call(this);
 }
 
@@ -29,10 +35,11 @@ MyInterface.prototype.init = function (application) {
 	//game folders
 	this.gameFolder = this.gui.addFolder('Game Settings');
 	this.gameFolder.open();
-	this.gameFolder.add(this.scene.server, "gameType", MyServer.gameTypes);
-	this.gameFolder.add(this.scene.server, "botLevel1", MyServer.botLevels);
-	this.gameFolder.add(this.scene.server, "botLevel2", MyServer.botLevels);
-	this.gameFolder.add(this.scene, "startNewGame");
+	this.gameFolder.add(this.scene.server, "gameType", MyServer.gameTypes).name('Game Type');
+	this.gameFolder.add(this.scene.server, "botLevel1", MyServer.botLevels).name('Bot 1 Level');
+	this.gameFolder.add(this.scene.server, "botLevel2", MyServer.botLevels).name('Bot 2 Level');
+	this.gameFolder.add(this.scene, "selectedScene", this.availableScenes).name('Selected Scene');
+	this.gameFolder.add(this.scene, "startNewGame").name('Start New Game');
 
 	return true;
 };
@@ -50,7 +57,7 @@ MyInterface.prototype.addLightsGroup = function (lights) {
 	for (var key in lights) {
 		if (lights.hasOwnProperty(key)) {
 			this.scene.lightValues[key] = lights[key][0];
-			group.add(this.scene.lightValues, key);
+			group.add(this.scene.lightValues, key).name('Light ' + key.substring(5,key.length));
 		}
 	}
 };

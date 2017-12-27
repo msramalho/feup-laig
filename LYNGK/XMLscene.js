@@ -41,7 +41,7 @@ XMLscene.prototype.init = function (application) {
 	this.startingTime = 0;
 	this.currTime = 0;
 
-	this.selectedSelectable = 0;
+	this.selectedScene = 1;
 	this.selectedShader = 0;
 	this.wireframe = false;
 	this.scaleFactor = 2;
@@ -317,7 +317,7 @@ XMLscene.prototype.display = function () {
 			}
 		}
 		// Displays the scene.
-		this.graph.displayScene();
+		this.graph.displayScene(this.selectedScene);
 
 		for (let i = 0; i < this.stacks.length; i++) {
 			this.pushMatrix(); {

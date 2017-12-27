@@ -264,7 +264,7 @@
     <ROOT id="root" />
 
     <!-- The root node -->
-    <NODE id="root">
+    <NODE id="root1">
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
 
@@ -1064,6 +1064,21 @@
         <DESCENDANTS>
 			<LEAF id="cylinder" type="cylinder" args="0 0.5 0 20 20" />
         </DESCENDANTS>
+    </NODE>
+
+	<NODE id="root2">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="floor" />
+			<NODEREF id="board"/>
+			<NODEREF id="painting1" />
+			<NODEREF id="painting2" />
+			<NODEREF id="painting3" />
+			<NODEREF id="coutdownBoard" />
+        </DESCENDANTS>
+
     </NODE>
 
 </NODES>
