@@ -295,30 +295,6 @@
 	</NODE>
 
 	<NODE id="pieces">
-		<MATERIAL id="null" />
-        <TEXTURE id="null" />
-
-		<DESCENDANTS>
-			<NODEREF id="piece1" />
-			<NODEREF id="piece2" />
-			<!-- <NODEREF id="piece3" />
-			<NODEREF id="piece4" />
-			<NODEREF id="piece5" /> -->
-		</DESCENDANTS>
-
-	</NODE>
-
-	<NODE id="piece1">
-		<MATERIAL id="leavesTreeMaterial" />
-        <TEXTURE id="null" />
-
-		<DESCENDANTS>
-			<LEAF  type="piece" args = ""/>
-		</DESCENDANTS>
-
-	</NODE>
-
-	<NODE id="piece2">
 		<MATERIAL id="leavesTreeMaterial" />
         <TEXTURE id="null" />
 
