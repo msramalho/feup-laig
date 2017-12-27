@@ -19,7 +19,11 @@ function Piece(scene, line, column, height, color) {
 	this.y = height || 0;
 	this.z = line || 0;
 	this.color = color || "noColor";
+
+	this.id = ++Piece.id;
+	console.log(this.id);
 }
+Piece.id = 0;
 //scale factor from prolog coordinates into the board size
 Piece.factors = {
 	z: 2.25,
@@ -35,6 +39,7 @@ Piece.prototype = Object.create(CGFobject.prototype);
 Piece.prototype.constructor = Piece;
 
 Piece.prototype.display = function () {
+	this.scene.registerForPick(this.id, this);
 	this.scene.translate(
 		Piece.factors.x * this.x + Piece.boardStart.x,
 		Piece.factors.y * this.y + Piece.boardStart.y,
@@ -60,4 +65,4 @@ Piece.prototype.display = function () {
 	this.scene.rotate(Math.PI, 0, 1, 0);
 	this.part6.display();
 	this.scene.popMatrix();
-}
+};

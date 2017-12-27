@@ -199,10 +199,10 @@ XMLscene.prototype.display = function () {
 
 		for (let i = 0; i < this.pieces.length; i++) {
 			this.pushMatrix();{
-
 				this.pieces[i].display();
 			}this.popMatrix();
 		}
+		this.clearPickRegistration();
 	} else {
 		// Draw axis
 		this.axis.display();
