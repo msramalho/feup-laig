@@ -169,8 +169,11 @@ XMLscene.prototype.logPicking = function () {
 					var customId = this.pickResults[i][1];
 					console.log("Picked object: " + piece + ", with pick id " + customId);
 					if (this.lastPicked != piece) {
-						if (this.lastPicked)
+						if (this.lastPicked) {
 							this.lastPicked.picked = false;
+							for (let p = 0; p < this.pieces.length; p++)
+								this.pieces[p].possible = false;
+						}
 						this.lastPicked = piece;
 					}
 					piece.picked = !piece.picked;
