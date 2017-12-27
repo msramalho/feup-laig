@@ -63,6 +63,10 @@ executeCommand(query(colors), Colors):-getColors(Colors).
 executeCommand(query(stacks), Stacks):-getStacks(Stacks).
 % query(score) get the score of the current player
 executeCommand(query(score), Score):-evaluateBoard(Score).
+% query(validMoves,Xf,Yf) get a list of all the valid moves from X and Y
+executeCommand(query(validMoves,Xf,Yf), Moves):-
+	getMoveableColorsByPlayer(MoveableColors),
+    findall(Xt-Yt, getFullValidMove(MoveableColors, Xf, Yf, Xt, Yt, none), Moves).
 % query(gameOver) returns (draw, player1, player2, bot, bot1, bot2 or false)
 executeCommand(query(gameOver), Winner):- \+movesAvailable, getWinner(Winner).
 executeCommand(query(gameOver), false). % game not over yet

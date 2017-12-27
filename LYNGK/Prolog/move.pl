@@ -153,24 +153,24 @@ assertMoveToLynkg(Xt, Yt, LyngkColor):- % if same color - LYNGK rule
 
 %----------------------------------------MOVE RECURSIVE START
 %-----------------move LEFT Recursive
-moveL_Recursive(X, Yf, X, Yt):-%reached the end
-    NewYf is Yf - 2,
-    isSameCell(X, NewYf, X, Yt).%reached the destination
-moveL_Recursive(X, Yf, X, Yt):-%did not reach the end
-    NewYf is Yf - 2,
-    isValid(X, NewYf), % must be inside the board range, else does not even try
-    assertMoveTo(X, NewYf),
-    moveL_Recursive(X, NewYf, X, Yt).%go until the next
+moveL_Recursive(Xf, Y, Xt, Y):-%reached the end
+    NewXf is Xf - 2,
+    isSameCell(NewXf, Y, Xt, Y).%reached the destination
+moveL_Recursive(Xf, Y, Xt, Y):-%did not reach the end
+    NewXf is Xf - 2,
+    isValid(NewXf, Y), % must be inside the board range, else does not even try
+    assertMoveTo(NewXf, Y),
+    moveL_Recursive(NewXf, Y, Xt, Y).%go until the next
 
 %-----------------move RIGHT Recursive
-moveR_Recursive(X, Yf, X, Yt):-%reached the end
-    NewYf is Yf + 2,
-    isSameCell(X, NewYf, X, Yt).%reached the destination
-moveR_Recursive(X, Yf, X, Yt):-%did not reach the end
-    NewYf is Yf + 2,
-    isValid(X, NewYf), % must be inside the board range, else does not even try
-    assertMoveTo(X, NewYf),
-    moveR_Recursive(X, NewYf, X, Yt).%go until the next
+moveR_Recursive(Xf, Y, Xt, Y):-%reached the end
+    NewXf is Xf + 2,
+    isSameCell(NewXf, Y, Xt, Y).%reached the destination
+moveR_Recursive(Xf, Y, Xt, Y):-%did not reach the end
+    NewXf is Xf + 2,
+    isValid(NewXf, Y), % must be inside the board range, else does not even try
+    assertMoveTo(NewXf, Y),
+    moveR_Recursive(NewXf, Y, Xt, Y).%go until the next
 
 %-----------------move UP and LEFT Recursive
 moveUL_Recursive(Xf, Yf, Xt, Yt):-%reached the end
@@ -249,20 +249,20 @@ notInPath(X-Y, Path):-
     nth0(_, Path,  X-Y), !, fail.
 notInPath(_, _).
 %-----------------move LEFT Recursive
-moveL_RecursiveLyngk(X, Yf, X, Yt, _, _):-%reached the end LYNGK
-    NewYf is Yf - 2,
-    isSameCell(X, NewYf, X, Yt).%reached the destination
-moveL_RecursiveLyngk(X, Yf, X, Yt, Path, LyngkColor):-%did not reach the end
-    NewYf is Yf - 2,
-    moveRecursiveLyngkHelper(X, NewYf, X, Yt, Path, LyngkColor).
+moveL_RecursiveLyngk(Xf, Y, Xt, Y, _, _):-%reached the end LYNGK
+    NewXf is Xf - 2,
+    isSameCell(NewXf, Y, Xt, Y).%reached the destination
+moveL_RecursiveLyngk(Xf, Y, Xt, Y, Path, LyngkColor):-%did not reach the end
+    NewXf is Xf - 2,
+    moveRecursiveLyngkHelper(NewXf, Y, Xt, Y, Path, LyngkColor).
 
 %-----------------move RIGHT Recursive LYNGK
-moveR_RecursiveLyngk(X, Yf, X, Yt, _, _):-%reached the end
-    NewYf is Yf + 2,
+moveR_RecursiveLyngk(Xf, Y, Xt, Y, _, _):-%reached the end
+    NewXf is Xf + 2,
     isSameCell(X, NewYf, X, Yt).%reached the destination
-moveR_RecursiveLyngk(X, Yf, X, Yt, Path, LyngkColor):-%did not reach the end
-    NewYf is Yf + 2,
-    moveRecursiveLyngkHelper(X, NewYf, X, Yt, Path, LyngkColor).
+moveR_RecursiveLyngk(Xf, Y, Xt, Y, Path, LyngkColor):-%did not reach the end
+    NewXf is Xf + 2,
+    moveRecursiveLyngkHelper(NewXf, Y, Xy, Y, Path, LyngkColor).
 
 %-----------------move UP and LEFT Recursive LYNGK
 moveUL_RecursiveLyngk(Xf, Yf, Xt, Yt, _, _):-%reached the end
@@ -321,21 +321,21 @@ moveRecursiveStraightLyngkHelper(Xf, Yf, Path, NewPath):-
     assertMoveTo(Xf, Yf),
     addToPath(Xf-Yf, Path, NewPath).% add to the path so as to avoid circular paths
 %-----------------move LEFT Recursive
-moveLStraight_Recursive(ResX, Yf, NewPath, LyngkColor, NewPath, ResX, ResY):-%reached the end
-    ResY is Yf - 2,
+moveLStraight_Recursive(Xf, ResY, NewPath, LyngkColor, NewPath, ResX, ResY):-%reached the end
+    ResX is Xf - 2,
     getBoardTopColor(ResX, ResY, LyngkColor).%reached the destination
 moveLStraight_Recursive(Xf, Yf, Path, LyngkColor, FinalPath, ResX, ResY):-%did not reach the end
-    NewYf is Yf - 2,
-    moveRecursiveStraightLyngkHelper(Xf, NewYf, Path, NewPath),
-    moveLStraight_Recursive(Xf, NewYf, NewPath, LyngkColor, FinalPath, ResX, ResY).
+    NexXf is Xf - 2,
+    moveRecursiveStraightLyngkHelper(NexXf, Yf, Path, NewPath),
+    moveLStraight_Recursive(NexXf, Yf, NewPath, LyngkColor, FinalPath, ResX, ResY).
 %-----------------move RIGHT Recursive
-moveRStraight_Recursive(ResX, Yf, NewPath, LyngkColor, NewPath, ResX, ResY):-%reached the end
-    ResY is Yf + 2,
+moveRStraight_Recursive(Xf, ResY, NewPath, LyngkColor, NewPath, ResX, ResY):-%reached the end
+    ResX is Xf + 2,
     getBoardTopColor(ResX, ResY, LyngkColor).%reached the destination
 moveRStraight_Recursive(Xf, Yf, Path, LyngkColor, FinalPath, ResX, ResY):-%did not reach the end
-    NewYf is Yf + 2,
-    moveRecursiveStraightLyngkHelper(Xf, NewYf, Path, NewPath),
-    moveRStraight_Recursive(Xf, NewYf, NewPath, LyngkColor, FinalPath, ResX, ResY).
+    NexXf is Xf + 2,
+    moveRecursiveStraightLyngkHelper(NexXf, Yf, Path, NewPath),
+    moveRStraight_Recursive(NexXf, Yf, NewPath, LyngkColor, FinalPath, ResX, ResY).
 %-----------------move UP and LEFT Recursive
 moveULStraight_Recursive(Xf, Yf, NewPath, LyngkColor, NewPath, ResX, ResY):-%reached the end
     ResX is Xf - 1,
