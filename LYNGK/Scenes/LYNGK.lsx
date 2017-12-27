@@ -135,6 +135,11 @@
         <amplif_factor s="10" t="10" />
     </TEXTURE>
 
+	<TEXTURE id="00">
+        <file path="images/00.png" />
+        <amplif_factor s="10" t="10" />
+    </TEXTURE>
+
 	<TEXTURE id="wallPaint">
         <file path="images/yellowWall.jpg" />
         <amplif_factor s="50" t="30" />
@@ -277,11 +282,11 @@
     </NODE>
 
     <NODE id="coutdownBoard">
-        <MATERIAL id="null" />
+        <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
 		<SCALE sx="0.8" sy="1" sz="1"/>
-        <TRANSLATION x="42.5" y="10" z="0.1" />
+        <TRANSLATION x="42.5" y="10" z="0.5" />
         <ROTATION axis="y" angle="90" />
 
         <DESCENDANTS>
@@ -293,10 +298,10 @@
     </NODE>
 
 	<NODE id="coutdownDigits2">
-        <MATERIAL id="null" />
-        <TEXTURE id="number0" />
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="00" />
 
-		<TRANSLATION x="0" y="0" z="-10" />
+		<TRANSLATION x="0.25" y="0" z="-10" />
 		<ROTATION axis="y" angle="-90" />
 
         <DESCENDANTS>
@@ -306,10 +311,10 @@
     </NODE>
 
 	<NODE id="coutdownDigits1">
-        <MATERIAL id="null" />
-        <TEXTURE id="number0" />
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="00" />
 
-		<TRANSLATION x="0" y="0" z="-20" />
+		<TRANSLATION x="0.25" y="0" z="-20" />
 		<ROTATION axis="y" angle="-90" />
 
         <DESCENDANTS>
