@@ -8,7 +8,7 @@ class MyServer {
 		this.availableColors = [];
 		this.botLevel1 = MyServer.botLevels[0];
 		this.botLevel2 = MyServer.botLevels[0];
-		this.gameType  = MyServer.gameTypes[0];
+		this.gameType = MyServer.gameTypes[0];
 		//defaults
 		this.port = port || 8081;
 		this.url = url || 'http://localhost:';
@@ -22,23 +22,33 @@ class MyServer {
 		let gameIndex = MyServer.gameTypes.indexOf(this.gameType);
 		let command = "";
 
-		if (gameIndex == 0) {//humanVhuman
+		if (gameIndex == 0) { //humanVhuman
 			command = `init(${this.gameType})`;
-		} else if (gameIndex == 1) {//humanVbot
+		} else if (gameIndex == 1) { //humanVbot
 			command = `init(${this.gameType},${botLevel1})`;
-		} else if (gameIndex == 2) {//botVbot
+		} else if (gameIndex == 2) { //botVbot
 			command = `init(${this.gameType},${botLevel1},${botLevel2})`
-		}else{throw "invalid game type";}
+		} else {
+			throw "invalid game type";
+		}
 
 		let start = await this.sendCommand(command);
 		await this.updateState();
 		return start == "success";
 	}
 
-	validGameType(){return MyServer.gameTypes.indexOf(this.gameType)!=-1;}
-	validBotLevel1(){return this.validBotLevel(this.botLevel1) || this.gameType=="humanVhuman";}
-	validBotLevel2(){return this.validBotLevel(this.botLevel2) || this.gameType=="botVhuman";}
-	validBotLevel(level){return MyServer.botLevels.indexOf(level)!=-1;}
+	validGameType() {
+		return MyServer.gameTypes.indexOf(this.gameType) != -1;
+	}
+	validBotLevel1() {
+		return this.validBotLevel(this.botLevel1) || this.gameType == "humanVhuman";
+	}
+	validBotLevel2() {
+		return this.validBotLevel(this.botLevel2) || this.gameType == "botVhuman";
+	}
+	validBotLevel(level) {
+		return MyServer.botLevels.indexOf(level) != -1;
+	}
 
 	// move - true or error message
 	async move(Xf, Yf, Xt, Yt) {
@@ -71,6 +81,10 @@ class MyServer {
 		};
 	}
 
+	// get a list of valid moves from X and Y
+	async getPossibleMoves(xf, yf){
+		return this.parseList(await this.sendCommand(`query(validMoves,${xf},${yf})`));
+	}
 	// undo move
 	async undo() {
 		return await this.sendCommandExpectSuccess("action(undo)");
@@ -162,5 +176,5 @@ class MyServer {
 		return res[0][0];
 	}
 }
-MyServer.gameTypes = ["humanVhuman","humanVbot","botVbot"];
-MyServer.botLevels = ["random","greedy","1","2","3"];
+MyServer.gameTypes = ["humanVhuman", "humanVbot", "botVbot"];
+MyServer.botLevels = ["random", "greedy", "1", "2", "3"];
