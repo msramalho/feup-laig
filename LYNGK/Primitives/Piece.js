@@ -33,7 +33,7 @@ Piece.factors = {
 Piece.boardStart = {
 	z: 10.5,
 	x: 9.5,
-	y: -0.1
+	y: 0.5
 };
 Piece.prototype = Object.create(CGFobject.prototype);
 Piece.prototype.constructor = Piece;
