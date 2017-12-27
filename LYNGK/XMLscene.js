@@ -45,12 +45,12 @@ XMLscene.prototype.init = function (application) {
 	this.scaleFactor = 1.0;
 	this.selectionColor = [0, 128, 255, 1]; //rgba
 
-	this.shaders = [
+	/* this.shaders = [
 		new CGFshader(this.gl, "Shaders/main.vert", "Shaders/main.frag"),
 		new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),
 		new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag")
-	];
-
+	]; */
+	this.pickedShader = new CGFshader(this.gl, "Shaders/main.vert", "Shaders/main.frag");
 	//game settings
 	this.server = new MyServer();
 
@@ -110,6 +110,9 @@ XMLscene.prototype.initLights = function () {
  * Logs objects picked.
  */
 XMLscene.prototype.logPicking = function () {
+	if ( typeof this.lastPicked == 'undefined' ) {//simulate static variable
+        this.lastPicked = false;
+    }
 	if (this.pickMode == false) {
 		if (this.pickResults != null && this.pickResults.length > 0) {
 			for (var i = 0; i < this.pickResults.length; i++) {
@@ -117,6 +120,13 @@ XMLscene.prototype.logPicking = function () {
 				if (obj) {
 					var customId = this.pickResults[i][1];
 					console.log("Picked object: " + obj + ", with pick id " + customId);
+					if(this.lastPicked != obj){
+						if(this.lastPicked){
+							this.lastPicked.picked = false;
+						}
+						this.lastPicked = obj;
+					}
+					obj.togglePicked();
 				}
 			}
 			this.pickResults.splice(0, this.pickResults.length);
@@ -222,18 +232,16 @@ XMLscene.prototype.updateShaders = function () {
 	let timeFactorInverted = 1 - timeFactor;
 	let goalColor = vec4.fromValues(this.selectionColor[0] / 255, this.selectionColor[1] / 255, this.selectionColor[2] / 255, 1);
 	let saturatedColor = vec4.fromValues(255 / 255, 100 / 255, 100 / 255, 1);
-	for (let i = 0; i < this.shaders.length; i++) {
-		this.shaders[i].setUniformsValues({
-			timeFactor: this.scaleFactor * timeFactor,
-			timeFactorInverted: timeFactorInverted,
-			goal_r: goalColor[0],
-			goal_g: goalColor[1],
-			goal_b: goalColor[2],
-			saturated_r: saturatedColor[0],
-			saturated_g: saturatedColor[1],
-			saturated_b: saturatedColor[2],
-		});
-	}
+	this.pickedShader.setUniformsValues({
+		timeFactor: this.scaleFactor * timeFactor,
+		timeFactorInverted: timeFactorInverted,
+		goal_r: goalColor[0],
+		goal_g: goalColor[1],
+		goal_b: goalColor[2],
+		saturated_r: saturatedColor[0],
+		saturated_g: saturatedColor[1],
+		saturated_b: saturatedColor[2],
+	});
 };
 
 

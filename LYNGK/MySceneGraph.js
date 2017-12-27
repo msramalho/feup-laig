@@ -1514,13 +1514,11 @@ MySceneGraph.generateRandomString = function(length) {
 MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
 	this.interpretNode(this.idRoot, this.nodes[this.idRoot].materialID, this.nodes[this.idRoot].textureID);
-
-
 }
 
-    /**
-     * Displays the scene, processing each node, starting in the root node.
-     */
+/**
+ * Displays the scene, processing each node, starting in the root node.
+ */
 MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     var mat = material;
     var tex = texture;
@@ -1530,10 +1528,10 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
 	this.scene.clearPickRegistration();
 
 	//console.log("SELECTED IS:" + this.scene.selectedSelectable);
-	if(this.scene.selectedSelectable  == idnode){
+	/* if(this.scene.selectedSelectable  == idnode){
 		// TODO: update and uncomment thw following line with the correct shader(s)
 		// this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
-	}
+	} */
 
 	if(/piece*/.test(idnode)){
 		this.scene.registerForPick(Number(idnode.substring(5,idnode.length)), currNode);
@@ -1592,7 +1590,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         this.scene.popMatrix(); //restore the matrix
 	}
 
-	if(this.scene.selectedSelectable  == idnode){
+	/* if(this.scene.selectedSelectable  == idnode){
 		this.scene.setActiveShader(this.scene.defaultShader);
-	}
+	} */
 }

@@ -19,9 +19,8 @@ function Piece(scene, line, column, height, color) {
 	this.y = height || 0;
 	this.z = line || 0;
 	this.color = color || "noColor";
-
+	this.picked = false;
 	this.id = ++Piece.id;
-	console.log(this.id);
 }
 Piece.id = 0;
 //scale factor from prolog coordinates into the board size
@@ -30,6 +29,7 @@ Piece.factors = {
 	x: 3.9,
 	y: 1
 };
+//where does the board start
 Piece.boardStart = {
 	z: 10.5,
 	x: 9.5,
@@ -39,6 +39,7 @@ Piece.prototype = Object.create(CGFobject.prototype);
 Piece.prototype.constructor = Piece;
 
 Piece.prototype.display = function () {
+	if (this.picked) this.scene.setActiveShader(this.scene.pickedShader);
 	this.scene.registerForPick(this.id, this);
 	this.scene.translate(
 		Piece.factors.x * this.x + Piece.boardStart.x,
@@ -65,4 +66,9 @@ Piece.prototype.display = function () {
 	this.scene.rotate(Math.PI, 0, 1, 0);
 	this.part6.display();
 	this.scene.popMatrix();
+	if (this.picked) this.scene.setActiveShader(this.scene.defaultShader);
+};
+
+Piece.prototype.togglePicked = function () {
+	this.picked = !this.picked;
 };
