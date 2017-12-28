@@ -205,7 +205,7 @@ XMLscene.prototype.decreaseCountdown = function () {
 	if (this.countdownStarted){
 		this.countdownSeconds -= this.deltaTime;
 		if (this.countdownSeconds <= 0){
-			this.countdownStarted = false; //GAME OVER
+			this.countdownStarted = false; //TODO: GAME OVER
 			this.countdownSeconds = 0;
 		}
 	}
@@ -215,7 +215,7 @@ XMLscene.prototype.updateCountdownTex = function (node, digit) {
 	node.textureID = "number" + Math.round(this.countdownSeconds).toString().charAt(digit-1);
 };
 
-XMLscene.prototype.updateScoreTex = function () {
+XMLscene.prototype.updateScoreTex = function () { //TODO: Diference between player 1/2 AND score always 20
 	this.graph.nodes["score1"].textureID = "number" + this.server.player.score.toString().charAt(0);
 	this.graph.nodes["score2"].textureID = "number" + this.server.player.score.toString().charAt(1);
 };
