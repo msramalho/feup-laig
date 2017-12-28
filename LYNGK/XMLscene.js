@@ -175,6 +175,7 @@ XMLscene.prototype.logPicking = function () {
 						if (this.lastPicked) {
 							if (stack.possible) { //this is actually an execute move, assumes it is valid
 								this.doMove(this.lastPicked, stack);
+								this.updateScoreTex();
 								break;
 							}
 							this.lastPicked.picked = false;
@@ -212,6 +213,11 @@ XMLscene.prototype.decreaseCountdown = function () {
 
 XMLscene.prototype.updateCountdownTex = function (node, digit) {
 	node.textureID = "number" + Math.round(this.countdownSeconds).toString().charAt(digit-1);
+};
+
+XMLscene.prototype.updateScoreTex = function () {
+	this.graph.nodes["score1"].textureID = "number" + this.server.player.score.toString().charAt(0);
+	this.graph.nodes["score2"].textureID = "number" + this.server.player.score.toString().charAt(1);
 };
 
 XMLscene.prototype.clearPossible = function () {

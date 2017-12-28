@@ -276,8 +276,79 @@
 			<NODEREF id="painting2" />
 			<NODEREF id="painting3" />
 			<NODEREF id="coutdownBoard" />
+			<NODEREF id="scoreBoard1" />
+			<NODEREF id="scoreBoard2" />
 			<!-- <NODEREF id="tableWood"/> -->
         </DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="scoreBoard1">
+        <MATERIAL id="spotMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="13.5" y="10" z="2" />
+		<SCALE sx="0.4" sy="0.4" sz="4"/>
+        <ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+			<NODEREF id="score1" />
+			<NODEREF id="scoreBorder" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="scoreBoard2">
+        <MATERIAL id="spotMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="42.5" y="10" z="2" />
+		<SCALE sx="0.4" sy="0.4" sz="4"/>
+        <ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+			<NODEREF id="score2" />
+			<NODEREF id="scoreBorder" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="scoreBorder">
+        <MATERIAL id="spotMaterial" />
+        <TEXTURE id="null" />
+
+		<SCALE sx="1" sy="1" sz="0.5"/>
+
+        <DESCENDANTS>
+			<NODEREF id="painting" />
+		</DESCENDANTS>
+
+    </NODE>
+
+
+	<NODE id="score2">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="00" />
+
+		<TRANSLATION x="0.25" y="0" z="-10" />
+		<ROTATION axis="y" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 10 10 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="score1">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="00" />
+
+		<TRANSLATION x="0.25" y="0" z="-10" />
+		<ROTATION axis="y" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 10 10 0" />
+		</DESCENDANTS>
 
     </NODE>
 
