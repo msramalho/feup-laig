@@ -55,7 +55,15 @@
 
 	<LIGHT id="light4">
         <enable value ="1" />
-        <position x="25" y="50" z="25" w="1" />
+        <position x="25" y="60" z="25" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+        <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+	<LIGHT id="light5">
+        <enable value ="1" />
+        <position x="-20" y="60" z="-20" w="1" />
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
         <specular r="0.6" g="0.6" b="0.6" a="1.0" />
@@ -144,6 +152,16 @@
         <file path="images/yellowWall.jpg" />
         <amplif_factor s="50" t="30" />
     </TEXTURE>
+
+	<TEXTURE id="forest">
+        <file path="images/forest.jpg" />
+        <amplif_factor s="50" t="1" />
+    </TEXTURE>
+
+	<TEXTURE id="forestFloor">
+        <file path="images/forestFloor.jpg" />
+        <amplif_factor s="50" t="50" />
+    </TEXTURE>
 </TEXTURES>
 
 
@@ -198,7 +216,7 @@
         <shininess value="100" />
         <specular r="0.5" g="0.5" b="0.5" a="1" />
         <diffuse r="0.5" g="0.5" b="0.5" a="1" />
-        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <ambient r="0.6" g="0.6" b="0.6" a="1" />
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
@@ -1142,13 +1160,100 @@
         <TEXTURE id="null" />
 
         <DESCENDANTS>
-            <NODEREF id="floor" />
-			<NODEREF id="board"/>
-			<NODEREF id="painting1" />
+            <NODEREF id="floor2" />
+			<NODEREF id="boardV2"/>
+			<NODEREF id="walls2" />
+			<!-- <NODEREF id="painting1" />
 			<NODEREF id="painting2" />
-			<NODEREF id="painting3" />
+			<NODEREF id="painting3" /> -->
+			<NODEREF id="boardStats" />
+        </DESCENDANTS>
+
+    </NODE>
+
+	<!-- The Walls -->
+	<NODE id="walls2">
+		<MATERIAL id="wallMaterial" />
+        <TEXTURE id="forest" />
+
+		<TRANSLATION x="25" y="50" z="25" />
+		<ROTATION axis="x" angle="-90" />
+
+		<DESCENDANTS>
+			<LEAF id="cylinder" type="cylinder" args="-50 70 70 50 50" />
+		</DESCENDANTS>
+
+	</NODE>
+
+	<NODE id="boardV2">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="10" y="0" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="board" />
+        </DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="boardStats">
+        <MATERIAL id="spotMaterial" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="25" y="0" z="50" />
+		<ROTATION axis="y" angle="90" />
+		<ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+			<NODEREF id="scoreBoard1V2" />
+			<NODEREF id="scoreBoard2V2" />
 			<NODEREF id="coutdownBoard" />
         </DESCENDANTS>
+
+    </NODE>
+
+	<!-- The floor -->
+    <NODE id="floor2">
+        <MATERIAL id="lightMaterial" />
+        <TEXTURE id="forestFloor" />
+
+        <TRANSLATION x="-45" y="0" z="95" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 140 140 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="scoreBoard1V2">
+        <MATERIAL id="spotMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="13.5" y="10" z="0.4" />
+		<SCALE sx="0.4" sy="0.4" sz="1"/>
+        <ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+			<NODEREF id="score1" />
+			<NODEREF id="scoreBorder" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="scoreBoard2V2">
+        <MATERIAL id="spotMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="42.5" y="10" z="0.4" />
+		<SCALE sx="0.4" sy="0.4" sz="1"/>
+        <ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+			<NODEREF id="score2" />
+			<NODEREF id="scoreBorder" />
+		</DESCENDANTS>
 
     </NODE>
 

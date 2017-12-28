@@ -304,9 +304,6 @@ XMLscene.prototype.display = function () {
 		// Applies initial transformations.
 		this.multMatrix(this.graph.initialTransforms);
 
-		// Draw axis
-		this.axis.display();
-
 		//detect changes in the lights
 		var i = 0;
 		for (var key in this.lightValues) {

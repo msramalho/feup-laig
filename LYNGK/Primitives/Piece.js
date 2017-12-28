@@ -34,10 +34,16 @@ Piece.prototype.constructor = Piece;
 
 Piece.prototype.display = function (line, column, height) {
 	this.setColor();
-	this.scene.translate(
-		Piece.factors.x * column + Piece.boardStart.x,
-		Piece.factors.y * height + Piece.boardStart.y,
-		Piece.factors.z * line + Piece.boardStart.z);
+	if(this.scene.selectedScene == 2)
+		this.scene.translate(
+			Piece.factors.x * column + Piece.boardStart.x + 10,
+			Piece.factors.y * height + Piece.boardStart.y,
+			Piece.factors.z * line + Piece.boardStart.z);
+	else if(this.scene.selectedScene == 1)
+		this.scene.translate(
+			Piece.factors.x * column + Piece.boardStart.x,
+			Piece.factors.y * height + Piece.boardStart.y,
+			Piece.factors.z * line + Piece.boardStart.z);
 	this.scene.scale(0.45, 0.45, 0.45);
 	this.scene.rotate(Math.PI / 2, -1, 0, 0);
 

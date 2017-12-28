@@ -12,7 +12,7 @@ function MyInterface() {
 
 	this.availableScenes = {
 		'Main Room': 1,
-		'Scene 2': 2,
+		'Forest': 2,
 	};
 
 	CGFinterface.call(this);
