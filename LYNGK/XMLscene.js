@@ -118,6 +118,10 @@ XMLscene.prototype.update = function (systemTime) {
 	this.currTime = (systemTime - this.startingTime) / 1000.0;
 	this.deltaTime = this.currTime - this.oldTime;
 	this.decreaseCountdown();
+	if (this.cameraRotation > 0){
+		this.camera.orbit(vec3.fromValues(0, 1, 0), Math.PI/32);
+		this.cameraRotation--;
+	}
 }
 
 XMLscene.prototype.getCurrTime = function () {
@@ -245,6 +249,8 @@ XMLscene.prototype.doMove = function (from, to) {
 	this.server.move(from.line, from.column, to.line, to.column).then((moveRes) => {
 		if (moveRes) { //success -> animate
 			this.resetCountdown();
+			if (this.selectedScene == 2)
+				this.cameraRotation = 32;
 			from.moveTo(to);
 			this.clearPossible();
 		} else {
@@ -256,7 +262,7 @@ XMLscene.prototype.doMove = function (from, to) {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function () {
-	this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+	this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, -2, 0));
 }
 
 /* Handler called when the graph is finally loaded.

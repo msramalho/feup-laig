@@ -1161,7 +1161,7 @@
 
         <DESCENDANTS>
             <NODEREF id="floor2" />
-			<NODEREF id="boardV2"/>
+			<NODEREF id="board"/>
 			<NODEREF id="walls2" />
 			<!-- <NODEREF id="painting1" />
 			<NODEREF id="painting2" />
@@ -1185,23 +1185,11 @@
 
 	</NODE>
 
-	<NODE id="boardV2">
-        <MATERIAL id="defaultMaterial" />
-        <TEXTURE id="null" />
-
-		<TRANSLATION x="10" y="0" z="0" />
-
-        <DESCENDANTS>
-			<NODEREF id="board" />
-        </DESCENDANTS>
-
-    </NODE>
-
 	<NODE id="boardStats">
         <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
-		<TRANSLATION x="25" y="0" z="50" />
+		<TRANSLATION x="15" y="0" z="50" />
 		<ROTATION axis="y" angle="90" />
 		<ROTATION axis="x" angle="-90" />
 
