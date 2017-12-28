@@ -123,11 +123,6 @@ XMLscene.prototype.update = function (systemTime) {
 		this.cameraRotation--;
 	}
 }
-
-XMLscene.prototype.getCurrTime = function () {
-	return this.currTime;
-}
-
 /**
  * Initializes the scene lights with the values read from the LSX file.
  */

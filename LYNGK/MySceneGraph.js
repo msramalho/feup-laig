@@ -1523,7 +1523,7 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     var mat = material;
     var tex = texture;
 	var currNode = this.nodes[idnode];
-	var time = this.scene.getCurrTime();
+	var time = this.scene.currTime;
 	var remainingTime = time;
 	this.scene.clearPickRegistration();
 
