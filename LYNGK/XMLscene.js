@@ -381,6 +381,7 @@ XMLscene.prototype.startNewGame = function () {
 	}
 	this.server.init().then((value) => {
 		this.interface.gameFolder.close();
+		this.stacks = [];
 		this.populateStacks();
 	});
 };
