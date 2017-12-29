@@ -1,7 +1,7 @@
 function Animation() {
-    if(this.constructor === Animation){
+    if (this.constructor === Animation) {
         throw new Error("ERROR: This is an abstract class and cannot therefore be instantiated, use of it's descendants!");
-	}
+    }
 };
 
 Animation.prototype.constructor = Animation;
@@ -13,6 +13,6 @@ Animation.prototype.constructor = Animation;
     throw new Error("getMatrix is an abstract method!");
 };
 */
-Animation.prototype.animate = function(time){
+Animation.prototype.animate = function(time) {
     throw new Error("animate is an abstract method!");
 };
