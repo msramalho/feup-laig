@@ -64,102 +64,102 @@ XMLscene.prototype.init = function(application) {
  * Initialize Pieces Textures
  */
 XMLscene.prototype.initTextures = function() {
-        this.blackMaterial = new CGFappearance(this);
-        this.blackMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.blackMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
-        this.blackMaterial.setSpecular(0.34, 0.32, 0.17, 1);
-        this.blackMaterial.loadTexture("Scenes/images/dirt.jpg");
-        this.blackMaterial.setShininess(10);
+	this.blackMaterial = new CGFappearance(this);
+	this.blackMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+	this.blackMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
+	this.blackMaterial.setSpecular(0.34, 0.32, 0.17, 1);
+	this.blackMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.blackMaterial.setShininess(10);
 
-        this.redMaterial = new CGFappearance(this);
-        this.redMaterial.setAmbient(1, 0.1, 0.1, 1);
-        this.redMaterial.setDiffuse(1, 0.05, 0.05, 1);
-        this.redMaterial.setSpecular(0.9, 0.32, 0.17, 0.5);
-        this.redMaterial.loadTexture("Scenes/images/dirt.jpg");
-        this.redMaterial.setShininess(5);
+	this.redMaterial = new CGFappearance(this);
+	this.redMaterial.setAmbient(1, 0.1, 0.1, 1);
+	this.redMaterial.setDiffuse(1, 0.05, 0.05, 1);
+	this.redMaterial.setSpecular(0.9, 0.32, 0.17, 0.5);
+	this.redMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.redMaterial.setShininess(5);
 
-        this.ivoryMaterial = new CGFappearance(this);
-        this.ivoryMaterial.setAmbient(0.6, 0.6, 0.6, 1);
-        this.ivoryMaterial.setDiffuse(0.3, 0.3, 0.3, 1);
-        this.ivoryMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);
-        this.ivoryMaterial.loadTexture("Scenes/images/dirt.jpg");
-        this.ivoryMaterial.setShininess(10);
+	this.ivoryMaterial = new CGFappearance(this);
+	this.ivoryMaterial.setAmbient(0.6, 0.6, 0.6, 1);
+	this.ivoryMaterial.setDiffuse(0.3, 0.3, 0.3, 1);
+	this.ivoryMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);
+	this.ivoryMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.ivoryMaterial.setShininess(10);
 
-        this.greenMaterial = new CGFappearance(this);
-        this.greenMaterial.setAmbient(0.2, 0.2, 0.2, 1);
-        this.greenMaterial.setDiffuse(0, 0.407, 0, 1);
-        this.greenMaterial.setSpecular(0.05, 0.207, 0.05, 1);
-        this.greenMaterial.loadTexture("Scenes/images/dirt.jpg");
-        this.greenMaterial.setShininess(10);
+	this.greenMaterial = new CGFappearance(this);
+	this.greenMaterial.setAmbient(0.2, 0.2, 0.2, 1);
+	this.greenMaterial.setDiffuse(0, 0.407, 0, 1);
+	this.greenMaterial.setSpecular(0.05, 0.207, 0.05, 1);
+	this.greenMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.greenMaterial.setShininess(10);
 
-        this.blueMaterial = new CGFappearance(this);
-        this.blueMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.blueMaterial.setDiffuse(0, 0.3, 0.8, 1);
-        this.blueMaterial.setSpecular(0.2, 0.2, 1, 1);
-        this.blueMaterial.loadTexture("Scenes/images/dirt.jpg");
-        this.blueMaterial.setShininess(10);
+	this.blueMaterial = new CGFappearance(this);
+	this.blueMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+	this.blueMaterial.setDiffuse(0, 0.3, 0.8, 1);
+	this.blueMaterial.setSpecular(0.2, 0.2, 1, 1);
+	this.blueMaterial.loadTexture("Scenes/images/dirt.jpg");
+	this.blueMaterial.setShininess(10);
 
-        this.wildMaterial = new CGFappearance(this);
-        this.wildMaterial.setAmbient(0.6, 0.6, 0.6, 1);
-        this.wildMaterial.setDiffuse(0.3, 0.3, 0.3, 1);
-        this.wildMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);
-        this.wildMaterial.loadTexture("Scenes/images/spotty.jpg");
-        this.wildMaterial.setShininess(10);
-    }
-    /**
-     * Function called every update period
-     */
+	this.wildMaterial = new CGFappearance(this);
+	this.wildMaterial.setAmbient(0.6, 0.6, 0.6, 1);
+	this.wildMaterial.setDiffuse(0.3, 0.3, 0.3, 1);
+	this.wildMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);
+	this.wildMaterial.loadTexture("Scenes/images/spotty.jpg");
+	this.wildMaterial.setShininess(10);
+}
+/**
+ * Function called every update period
+ */
 XMLscene.prototype.update = function(systemTime) {
-        if (!this.timerStarted) {
-            this.startingTime = systemTime;
-            this.timerStarted = true;
-        }
-        this.updateShaders();
-        this.oldTime = this.currTime;
-        this.currTime = (systemTime - this.startingTime) / 1000.0;
-        this.deltaTime = this.currTime - this.oldTime;
-        this.decreaseCountdown();
-        if (this.cameraRotation > 0) {
-            this.camera.orbit(vec3.fromValues(0, 1, 0), Math.PI / 32);
-            this.cameraRotation--;
-        }
-    }
-    /**
-     * Initializes the scene lights with the values read from the LSX file.
-     */
+	if (!this.timerStarted) {
+		this.startingTime = systemTime;
+		this.timerStarted = true;
+	}
+	this.updateShaders();
+	this.oldTime = this.currTime;
+	this.currTime = (systemTime - this.startingTime) / 1000.0;
+	this.deltaTime = this.currTime - this.oldTime;
+	this.decreaseCountdown();
+	if (this.cameraRotation > 0) {
+		this.camera.orbit(vec3.fromValues(0, 1, 0), Math.PI / 32);
+		this.cameraRotation--;
+	}
+}
+/**
+ * Initializes the scene lights with the values read from the LSX file.
+ */
 XMLscene.prototype.initLights = function() {
-        var i = 0;
-        // Lights index.
+	var i = 0;
+	// Lights index.
 
-        // Reads the lights from the scene graph.
-        for (var key in this.graph.lights) {
-            if (i >= 8)
-                break; // Only eight lights allowed by WebGL.
+	// Reads the lights from the scene graph.
+	for (var key in this.graph.lights) {
+		if (i >= 8)
+			break; // Only eight lights allowed by WebGL.
 
-            if (this.graph.lights.hasOwnProperty(key)) {
-                var light = this.graph.lights[key];
+		if (this.graph.lights.hasOwnProperty(key)) {
+			var light = this.graph.lights[key];
 
-                this.lights[i].setPosition(light[1][0], light[1][1], light[1][2], light[1][3]);
-                this.lights[i].setAmbient(light[2][0], light[2][1], light[2][2], light[2][3]);
-                this.lights[i].setDiffuse(light[3][0], light[3][1], light[3][2], light[3][3]);
-                this.lights[i].setSpecular(light[4][0], light[4][1], light[4][2], light[4][3]);
+			this.lights[i].setPosition(light[1][0], light[1][1], light[1][2], light[1][3]);
+			this.lights[i].setAmbient(light[2][0], light[2][1], light[2][2], light[2][3]);
+			this.lights[i].setDiffuse(light[3][0], light[3][1], light[3][2], light[3][3]);
+			this.lights[i].setSpecular(light[4][0], light[4][1], light[4][2], light[4][3]);
 
-                this.lights[i].setVisible(true);
-                if (light[0])
-                    this.lights[i].enable();
-                else
-                    this.lights[i].disable();
+			this.lights[i].setVisible(true);
+			if (light[0])
+				this.lights[i].enable();
+			else
+				this.lights[i].disable();
 
-                this.lights[i].update();
+			this.lights[i].update();
 
-                i++;
-            }
-        }
+			i++;
+		}
+	}
 
-    }
-    /**
-     * Logs objects picked.
-     */
+}
+/**
+ * Logs objects picked.
+ */
 XMLscene.prototype.logPicking = function() {
     if (typeof this.lastPicked == 'undefined') { //simulate static variable
         this.lastPicked = false;
@@ -198,6 +198,7 @@ XMLscene.prototype.logPicking = function() {
 									{ x: stack.pieces[0].x, y: stack.pieces[0].y, z: stack.pieces[0].z }]);
 								console.log("[PIECE ANIMATION TIME]", this.pieceAnimation.animation.totalTime);
                                 this.doMove(this.lastPicked, stack);
+								this.clearPossible();
                                 this.updateScoreTex();
                                 break;
                             }
