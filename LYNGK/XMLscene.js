@@ -42,6 +42,7 @@ XMLscene.prototype.init = function(application) {
     this.currTime = 0;
 
     this.selectedScene = 2;
+    this.pieceAnimation = false;
     this.selectedShader = 0;
     this.wireframe = false;
     this.scaleFactor = 2;
@@ -166,14 +167,18 @@ XMLscene.prototype.logPicking = function() {
     if (this.pickMode == false) {
         if (this.pickResults != null && this.pickResults.length > 0) {
             for (var i = 0; i < this.pickResults.length; i++) {
-				var stack = this.pickResults[i][0];
+                var stack = this.pickResults[i][0];
                 if (stack) {
                     var customId = this.pickResults[i][1];
                     console.log("Picked object: " + stack + ", with pick id " + customId);
                     if (this.lastPicked != stack) { //new stack picked, not the same to unpick
                         if (this.lastPicked) {
 							if (stack.possible) { //this is actually an execute move, assumes it is valid
-								console.log(this.lastPicked);
+								this.pieceAnimation = this.lastPicked;
+								this.pieceAnimation.to = stack;
+								this.pieceAnimation.timer = 0;
+								this.pieceAnimation.animation = new CircularAnimation(1, 0, 2, 0, 50, 0, 10);
+								console.log(this.pieceAnimation);
                                 this.doMove(this.lastPicked, stack);
                                 this.updateScoreTex();
                                 break;
@@ -247,7 +252,6 @@ XMLscene.prototype.doMove = function(from, to) {
             this.resetCountdown();
             if (this.selectedScene == 2)
                 this.cameraRotation = 32;
-            from.moveTo(to);
             this.clearPossible();
         } else {
             alert(`An error occured: ${moveRes}`);
@@ -322,10 +326,21 @@ XMLscene.prototype.display = function() {
             }
         }
         // Displays the scene.
-        this.graph.displayScene(this.selectedScene);
+		this.graph.displayScene(this.selectedScene);
 
         for (let i = 0; i < this.stacks.length; i++) {
             this.pushMatrix(); {
+				if(this.stacks[i] == this.pieceAnimation){ //Checks if stack is going to be animated
+					if (this.pieceAnimation.timer < this.pieceAnimation.animation.totalTime) { //Stack animation
+						this.pieceAnimation.animation.lastMatrix = this.pieceAnimation.animation.animate(this.pieceAnimation.timer);
+						this.pieceAnimation.timer += this.deltaTime;
+						console.log(this.pieceAnimation.timer);
+						this.multMatrix(this.pieceAnimation.animation.lastMatrix);
+					} else { //Moves after finishing animation
+						this.pieceAnimation.moveTo(this.pieceAnimation.to);
+						this.pieceAnimation = false;
+					}
+				}
                 this.stacks[i].display();
             }
             this.popMatrix();

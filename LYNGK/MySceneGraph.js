@@ -1562,8 +1562,8 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         }
         if (value.lastMatrix != 'undefined') {
             this.scene.multMatrix(value.lastMatrix);
-        }
-    }
+		}
+	}
 
     //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {
