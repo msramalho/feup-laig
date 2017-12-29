@@ -162,6 +162,11 @@
         <file path="images/forestFloor.jpg" />
         <amplif_factor s="50" t="50" />
     </TEXTURE>
+
+	<TEXTURE id="rock">
+        <file path="images/rock.jpg" />
+        <amplif_factor s="50" t="50" />
+    </TEXTURE>
 </TEXTURES>
 
 
@@ -1167,6 +1172,7 @@
 			<NODEREF id="painting2" />
 			<NODEREF id="painting3" /> -->
 			<NODEREF id="boardStats" />
+			<NODEREF id="rocks" />
         </DESCENDANTS>
 
     </NODE>
@@ -1176,7 +1182,7 @@
 		<MATERIAL id="wallMaterial" />
         <TEXTURE id="forest" />
 
-		<TRANSLATION x="25" y="50" z="25" />
+		<TRANSLATION x="25" y="25" z="25" />
 		<ROTATION axis="x" angle="-90" />
 
 		<DESCENDANTS>
@@ -1206,7 +1212,7 @@
         <MATERIAL id="lightMaterial" />
         <TEXTURE id="forestFloor" />
 
-        <TRANSLATION x="-45" y="0" z="95" />
+        <TRANSLATION x="-45" y="-25" z="95" />
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
@@ -1243,6 +1249,319 @@
 			<NODEREF id="scoreBorder" />
 		</DESCENDANTS>
 
+    </NODE>
+
+	<NODE id="rocks">
+        <MATERIAL id="null" />
+        <TEXTURE id="rock" />
+
+		<TRANSLATION x="0" y="-25" z="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="rockpair1" />
+			<NODEREF id="rockpair2" />
+			<NODEREF id="rockpair3" />
+			<NODEREF id="rockpair4" />
+			<NODEREF id="rockpair5" />
+			<NODEREF id="rockpair6" />
+			<NODEREF id="rockpair7" />
+			<NODEREF id="rockpair8" />
+			<NODEREF id="rockpair9" />
+			<NODEREF id="rockpair10" />
+			<NODEREF id="rockpair11" />
+			<NODEREF id="rockpair12" />
+			<NODEREF id="rockpair13" />
+			<NODEREF id="rockpair14" />
+			<NODEREF id="rockpair15" />
+			<NODEREF id="rockpair16" />
+			<NODEREF id="rockpair17" />
+			<NODEREF id="rockpair18" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0" y="0" z="-39" />
+		<ROTATION axis="y" angle="25" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="23.5" y="0" z="-44" />
+		<ROTATION axis="y" angle="0" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="47" y="0" z="-40" />
+		<ROTATION axis="y" angle="-15" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="68" y="0" z="-29" />
+		<ROTATION axis="y" angle="-40" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="84" y="0" z="-11" />
+		<ROTATION axis="y" angle="-60" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+
+	<NODE id="rockpair6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="93" y="0" z="12" />
+		<ROTATION axis="y" angle="-80" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+
+	<NODE id="rockpair7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="93" y="0" z="36" />
+		<ROTATION axis="y" angle="-98" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+
+	<NODE id="rockpair8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="85" y="0" z="59" />
+		<ROTATION axis="y" angle="-120" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="69" y="0" z="78" />
+		<ROTATION axis="y" angle="-140" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair10">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="48" y="0" z="90" />
+		<ROTATION axis="y" angle="-160" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair11">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="24" y="0" z="93.4" />
+		<ROTATION axis="y" angle="-180" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair12">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="0" y="0" z="89" />
+		<ROTATION axis="y" angle="-200" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair13">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="-21" y="0" z="77" />
+		<ROTATION axis="y" angle="-220" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+
+	<NODE id="rockpair14">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="-36" y="0" z="57" />
+		<ROTATION axis="y" angle="-240" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+
+	<NODE id="rockpair15">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="-43" y="0" z="33.5" />
+		<ROTATION axis="y" angle="-260" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+
+	<NODE id="rockpair16">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="-42" y="0" z="9" />
+		<ROTATION axis="y" angle="-280" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair17">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="-32" y="0" z="-13" />
+		<ROTATION axis="y" angle="-300" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="rockpair18">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="-15" y="0" z="-32" />
+		<ROTATION axis="y" angle="-320" />
+		<SCALE sx="1.1" sy="1" sz="1.1" />
+
+        <DESCENDANTS>
+			<NODEREF id="rock1" />
+			<NODEREF id="rock2" />
+		</DESCENDANTS>
+
+    </NODE>
+
+
+	<NODE id="rock1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<SCALE sx="2" sy="1" sz="1"/>
+
+        <DESCENDANTS>
+			<LEAF id="rocky" type="sphere" args="4 20 20" />
+		</DESCENDANTS>
+    </NODE>
+
+	<NODE id="rock2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="12" y="0" z="1" />
+		<ROTATION axis="y" angle="-15" />
+		<SCALE sx="1" sy="0.5" sz="0.5"/>
+
+        <DESCENDANTS>
+			<LEAF id="rocky" type="sphere" args="4 20 20" />
+		</DESCENDANTS>
     </NODE>
 
 </NODES>

@@ -41,7 +41,7 @@ XMLscene.prototype.init = function (application) {
 	this.startingTime = 0;
 	this.currTime = 0;
 
-	this.selectedScene = 1;
+	this.selectedScene = 2;
 	this.selectedShader = 0;
 	this.wireframe = false;
 	this.scaleFactor = 2;
@@ -276,7 +276,7 @@ XMLscene.prototype.onGraphLoaded = function () {
 	this.initLights();
 
 	// Adds lights group.
-	this.interface.addLightsGroup(this.graph.lights);
+	//this.interface.addLightsGroup(this.graph.lights);
 	//this.interface.addShadersGroup(this.graph.selectables);
 };
 
