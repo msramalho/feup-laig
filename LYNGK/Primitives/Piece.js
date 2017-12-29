@@ -19,8 +19,8 @@ function Piece(scene, color) {
 }
 //scale factor from prolog coordinates into the board size
 Piece.factors = {
-    y: 0.75,
     x: 3.9,
+    y: 0.75,
     z: 2.25
 };
 //where does the board start
@@ -33,11 +33,12 @@ Piece.prototype = Object.create(CGFobject.prototype);
 Piece.prototype.constructor = Piece;
 
 Piece.prototype.display = function(line, column, height) {
-    this.setColor();
-    this.scene.translate(
-        Piece.factors.x * column + Piece.boardStart.x,
-        Piece.factors.y * height + Piece.boardStart.y,
-        Piece.factors.z * line + Piece.boardStart.z);
+	this.x = Piece.factors.x * column + Piece.boardStart.x;
+    this.y = Piece.factors.y * height + Piece.boardStart.y;
+	this.z = Piece.factors.z * line + Piece.boardStart.z;
+
+	this.setColor();
+	this.scene.translate(this.x, this.y, this.z);
     this.scene.scale(0.45, 0.45, 0.45);
     this.scene.rotate(Math.PI / 2, -1, 0, 0);
 

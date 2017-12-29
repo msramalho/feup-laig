@@ -177,8 +177,26 @@ XMLscene.prototype.logPicking = function() {
 								this.pieceAnimation = this.lastPicked;
 								this.pieceAnimation.to = stack;
 								this.pieceAnimation.timer = 0;
-								this.pieceAnimation.animation = new CircularAnimation(1, 0, 2, 0, 50, 0, 10);
-								console.log(this.pieceAnimation);
+								console.log("[PIECE ANIMATION CENTER]", Math.abs(stack.pieces[0].x - this.pieceAnimation.pieces[0].x), Math.abs(stack.pieces[0].y - this.pieceAnimation.pieces[0].y), Math.abs(stack.pieces[0].z - this.pieceAnimation.pieces[0].z));
+								/* this.pieceAnimation.animation = new CircularAnimation( //CIRCULAR TRY
+									10,
+									this.pieceAnimation.pieces[0].x - stack.pieces[0].x,
+									this.pieceAnimation.pieces[0].y - stack.pieces[0].y,
+									this.pieceAnimation.pieces[0].z - stack.pieces[0].z,
+									10,
+									0,
+									180); */
+								/* this.pieceAnimation.animation = new BezierAnimation( //BEZIER TRY
+									10,
+									[{ x: this.pieceAnimation.pieces[0].x, y: this.pieceAnimation.pieces[0].y, z: this.pieceAnimation.pieces[0].z },
+									{ x: this.pieceAnimation.pieces[0].x, y: 3, z: this.pieceAnimation.pieces[0].z },
+									{ x: stack.pieces[0].x, y: 3, z: stack.pieces[0].z },
+									{ x: stack.pieces[0].x, y: stack.pieces[0].y, z: stack.pieces[0].z }]); */
+								this.pieceAnimation.animation = new LinearAnimation(
+									5,
+									[{ x: this.pieceAnimation.pieces[0].x, y: this.pieceAnimation.pieces[0].y, z: this.pieceAnimation.pieces[0].z },
+									{ x: stack.pieces[0].x, y: stack.pieces[0].y, z: stack.pieces[0].z }]);
+								console.log("[PIECE ANIMATION TIME]", this.pieceAnimation.animation.totalTime);
                                 this.doMove(this.lastPicked, stack);
                                 this.updateScoreTex();
                                 break;
@@ -334,7 +352,6 @@ XMLscene.prototype.display = function() {
 					if (this.pieceAnimation.timer < this.pieceAnimation.animation.totalTime) { //Stack animation
 						this.pieceAnimation.animation.lastMatrix = this.pieceAnimation.animation.animate(this.pieceAnimation.timer);
 						this.pieceAnimation.timer += this.deltaTime;
-						console.log(this.pieceAnimation.timer);
 						this.multMatrix(this.pieceAnimation.animation.lastMatrix);
 					} else { //Moves after finishing animation
 						this.pieceAnimation.moveTo(this.pieceAnimation.to);
