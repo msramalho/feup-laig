@@ -6,7 +6,7 @@ function Patch(scene, div_u, div_v, cpoints) {
     var degree1 = cpoints.length - 1;
     var degree2 = cpoints[0].length - 1;
 
-	this.makeSurface(degree1, degree2, cpoints);
+    this.makeSurface(degree1, degree2, cpoints);
 }
 
 Patch.prototype = Object.create(CGFnurbsObject.prototype);
