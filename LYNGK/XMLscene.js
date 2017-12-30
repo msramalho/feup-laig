@@ -180,12 +180,11 @@ XMLscene.prototype.logPicking = function() {
 								this.pieceAnimation = this.lastPicked;
 								this.pieceAnimation.to = stack;
 								this.pieceAnimation.timer = 0;
-								console.log("[PIECE ANIMATION CENTER]", Math.abs(stack.pieces[0].x - this.pieceAnimation.pieces[0].x), Math.abs(stack.pieces[0].y - this.pieceAnimation.pieces[0].y), Math.abs(stack.pieces[0].z - this.pieceAnimation.pieces[0].z));
 								/* this.pieceAnimation.animation = new CircularAnimation( //CIRCULAR TRY
 									10,
-									this.pieceAnimation.pieces[0].x - stack.pieces[0].x,
-									this.pieceAnimation.pieces[0].y - stack.pieces[0].y,
-									this.pieceAnimation.pieces[0].z - stack.pieces[0].z,
+									stack.pieces[0].x - this.pieceAnimation.pieces[0].x,
+									stack.pieces[0].y - this.pieceAnimation.pieces[0].y,
+									stack.pieces[0].z - this.pieceAnimation.pieces[0].z,
 									10,
 									0,
 									180); */
@@ -197,8 +196,8 @@ XMLscene.prototype.logPicking = function() {
 									{ x: stack.pieces[0].x, y: stack.pieces[0].y, z: stack.pieces[0].z }]); */
 								this.pieceAnimation.animation = new LinearAnimation(
 									5,
-									[{ x: this.pieceAnimation.pieces[0].x, y: this.pieceAnimation.pieces[0].y, z: this.pieceAnimation.pieces[0].z },
-									{ x: stack.pieces[0].x, y: stack.pieces[0].y, z: stack.pieces[0].z }]);
+									[{ x: 0, y: 0, z: 0 },
+									{ x: stack.pieces[0].x - this.pieceAnimation.pieces[0].x, y: stack.pieces[0].y - this.pieceAnimation.pieces[0].y, z: stack.pieces[0].z - this.pieceAnimation.pieces[0].z }]);
 								console.log("[PIECE ANIMATION TIME]", this.pieceAnimation.animation.totalTime);
                                 this.doMove(this.lastPicked, stack);
 								this.clearPossible();
@@ -233,7 +232,8 @@ XMLscene.prototype.decreaseCountdown = function() {
         this.countdownSeconds -= this.deltaTime;
         if (this.countdownSeconds <= 0) {
             this.countdownStarted = false; //TODO: GAME OVER
-            this.countdownSeconds = 0;
+			this.countdownSeconds = 0;
+			this.stacks = [];
         }
     }
 };
@@ -354,15 +354,14 @@ XMLscene.prototype.display = function() {
             this.pushMatrix(); {
 				if(this.stacks[i] == this.pieceAnimation){ //Checks if stack is going to be animated
 					if (this.pieceAnimation.timer < this.pieceAnimation.animation.totalTime) { //Stack animation
-						this.pieceAnimation.animation.lastMatrix = this.pieceAnimation.animation.animate(this.pieceAnimation.timer);
+						this.multMatrix(this.pieceAnimation.animation.animate(this.pieceAnimation.timer));
 						this.pieceAnimation.timer += this.deltaTime;
-						this.multMatrix(this.pieceAnimation.animation.lastMatrix);
 					} else { //Moves after finishing animation
 						this.pieceAnimation.moveTo(this.pieceAnimation.to);
 						this.pieceAnimation = false;
 					}
 				}
-                this.stacks[i].display();
+				this.stacks[i].display();
             }
             this.popMatrix();
         }
