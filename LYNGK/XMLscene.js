@@ -123,6 +123,8 @@ XMLscene.prototype.update = function(systemTime) {
 		this.camera.orbit(vec3.fromValues(0, 1, 0), Math.PI / 32);
 		this.cameraRotation--;
 	}
+	if (this.selectedScene == 1 && this.camera.position != vec3.fromValues(15, 15, 15))
+		this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, -2, 0));
 }
 /**
  * Initializes the scene lights with the values read from the LSX file.
