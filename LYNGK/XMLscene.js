@@ -39,7 +39,8 @@ XMLscene.prototype.init = function(application) {
     this.setUpdatePeriod(1000 / 60);
     this.timerStarted = false;
     this.startingTime = 0;
-    this.currTime = 0;
+	this.currTime = 0;
+	this.countdownSeconds = 60;
 
     this.selectedScene = 2;
     this.pieceAnimation = false;
@@ -224,7 +225,7 @@ XMLscene.prototype.logPicking = function() {
 
 XMLscene.prototype.resetCountdown = function() {
     this.countdownStarted = true;
-    this.countdownSeconds = 60.4;
+    this.countdownSeconds = 60;
 };
 
 XMLscene.prototype.decreaseCountdown = function() {
