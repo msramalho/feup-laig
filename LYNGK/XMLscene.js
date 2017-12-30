@@ -40,7 +40,7 @@ XMLscene.prototype.init = function(application) {
     this.timerStarted = false;
     this.startingTime = 0;
 	this.currTime = 0;
-	this.countdownSeconds = 60;
+	this.countdownSecondsBaseline = 60;
 
     this.selectedScene = 2;
     this.pieceAnimation = false;
@@ -225,7 +225,7 @@ XMLscene.prototype.logPicking = function() {
 
 XMLscene.prototype.resetCountdown = function() {
     this.countdownStarted = true;
-    this.countdownSeconds = 60;
+    this.countdownSeconds = this.secondsBaseline;
 };
 
 XMLscene.prototype.decreaseCountdown = function() {
@@ -403,7 +403,8 @@ XMLscene.prototype.updateShaders = function() {
  * Start a new Game
  */
 XMLscene.prototype.startNewGame = function() {
-    console.log("startNewGame");
+	console.log("startNewGame");
+	this.secondsBaseline = this.countdownSecondsBaseline
     if (!this.server.validGameType()) {
         alert(`Invalid game type selected: ${this.server.gameType}`);
         return;
