@@ -46,7 +46,7 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
     'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js', 'Primitives/Patch.js',
     'Primitives/Rectangle.js', 'Primitives/Triangle.js', 'Primitives/Sphere.js', 'Primitives/Cylinder.js', 'Primitives/Piece.js', 'Primitives/Stack.js',
     'Animations/AnimationFactory.js', 'Animations/Animation.js', 'Animations/LinearAnimation.js', 'Animations/CircularAnimation.js', 'Animations/BezierAnimation.js', 'Animations/ComboAnimation.js',
-    'Animations/AnimationRefs.js', 'Prolog/MyServer.js',
+    'Animations/AnimationRefs.js', 'MyServer.js',
 
     main = function() {
         // Standard application, scene and interface setup
