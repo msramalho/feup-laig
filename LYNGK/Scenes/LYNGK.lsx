@@ -292,12 +292,12 @@
         <TEXTURE id="null" />
 
         <DESCENDANTS>
-            <NODEREF id="floor" />
+            <!-- <NODEREF id="floor" /> -->
 			<NODEREF id="board"/>
-			<NODEREF id="walls" />
-			<NODEREF id="painting1" />
-			<NODEREF id="painting2" />
-			<NODEREF id="painting3" />
+			<!-- <NODEREF id="walls" /> -->
+			<!-- <NODEREF id="painting1" /> -->
+			<!-- <NODEREF id="painting2" /> -->
+			<!-- <NODEREF id="painting3" /> -->
 			<NODEREF id="coutdownBoard" />
 			<NODEREF id="scoreBoard1" />
 			<NODEREF id="scoreBoard2" />

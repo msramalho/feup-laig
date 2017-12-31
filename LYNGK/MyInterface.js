@@ -45,6 +45,9 @@ MyInterface.prototype.init = function (application) {
 	this.controlFolder.open();
 	this.controlFolder.add(this.scene, "selectedScene", this.availableScenes).name('Selected Scene');
 	this.controlFolder.add(this.scene, "gameMovie").name('Game Movie');
+	this.controlFolder.add(Stack.boardStart, "x", -100, 0);
+	this.controlFolder.add(Stack.boardStart, "y", -10, 10);
+	this.controlFolder.add(Stack.boardStart, "z", -100, 0);
 
 	return true;
 };
