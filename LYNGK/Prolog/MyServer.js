@@ -126,7 +126,9 @@ class MyServer {
 			Xt: coords[2],
 			Yt: coords[3],
 			removed: this.parseList(parts[2]),
-			color: this.color
+			color: this.color,
+			player: this.player,
+			nextPlayer: this.nextPlayer
 		});
 		// if (this.color) this.player.colors.push(this.color);
 		this.color = false;

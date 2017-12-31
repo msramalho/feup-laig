@@ -289,22 +289,26 @@ XMLscene.prototype.doBotMove = function () {
 	if (this.server.isBotNext()) {
 		this.server.playBot().then((botMove) => { //bot move successful
 			if (botMove === true) { //success
-				//find stack from and to
-				const m = this.server.lastMove();
-				let from = this.findStackByLineAndColumn(m.Xf, m.Yf);
-				let to = this.findStackByLineAndColumn(m.Xt, m.Yt);
-				from.moveTo(to);
-				if (m.color) { //there was also a color claim
-					let claimedColorStack = this.findClaimableByColor(m.color);
-					if (this.server.player.name == this.server.firstPlayerName) claimedColorStack.moveTo(this.claimed2);
-					else claimedColorStack.moveTo(this.claimed1);
-				}
+				this.executeMove(this.server.lastMove());
 				this.doBotMove();
 			} else {
 				this.testGameOver(botMove);
 			}
 
 		});
+	}
+};
+XMLscene.prototype.executeMove = function (move) {
+	//find stack from and to
+	let from = this.findStackByLineAndColumn(move.Xf, move.Yf);
+	let to = this.findStackByLineAndColumn(move.Xt, move.Yt);
+	//execute move
+	from.moveTo(to);
+	//execute claim, if exists
+	if (move.color) { //there was also a color claim
+		let claimedColorStack = this.findClaimableByColor(move.color);
+		if (this.server.player.name == this.server.firstPlayerName) claimedColorStack.moveTo(this.claimed2);
+		else claimedColorStack.moveTo(this.claimed1);
 	}
 };
 
@@ -488,12 +492,8 @@ XMLscene.prototype.startNewGame = function () {
 	}
 	this.server.init().then((value) => {
 		this.interface.gameFolder.close();
-		this.stacks = [];
 		this.populateStacks();
 		this.populateClaimableStacks();
-		//color already claimed go into these 2 stacks:
-		this.claimed1 = new Stack(this, 15, 0);
-		this.claimed2 = new Stack(this, -1, 0);
 		this.doBotMove();
 	}).catch((error) => {
 		alert(`Unable to start game, check if server is open`);
@@ -527,8 +527,21 @@ XMLscene.prototype.populateClaimableStacks = function () {
 		stack.pieces.push(new Piece(this, colors[l]));
 		this.claimableStacks.push(stack);
 	}
+	//color already claimed go into these 2 stacks:
+	this.claimed1 = new Stack(this, 15, 0);
+	this.claimed2 = new Stack(this, -1, 0);
 };
 
 XMLscene.prototype.gameMovie = function () {
+	//TODO: desativar tudo do user
+	this.populateStacks();
+	this.populateClaimableStacks();
 
+	for (let i = 0; i < this.server.moves.length; i++) {
+		console.log("executing: " + JSON.stringify(this.server.moves[i]));
+		const move = this.server.moves[i];
+		this.server.player = move.player;
+		this.server.nextPlayer = move.nextPlayer;
+		this.executeMove(move);
+	}
 };
