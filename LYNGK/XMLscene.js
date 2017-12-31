@@ -17,6 +17,7 @@ function XMLscene(interface) {
 	this.selectableValues = {};
 	this.stacks = [];
 	this.claimableStacks = [];
+	this.gameOver = true;
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -223,7 +224,7 @@ XMLscene.prototype.decreaseCountdown = function () {
 				winner = this.server.player.name;
 			else
 				winner = this.server.nextPlayer.name;
-			alert(`Game Over (by timeout) the winner is: ${winner}`);
+			this.displayGameOver(winner);
 		}
 	}
 };
@@ -233,10 +234,17 @@ XMLscene.prototype.updateCountdownTex = function (node, digit) {
 };
 
 XMLscene.prototype.updateScoreTex = function () {
-	this.graph.nodes["score1"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(0);
-	this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
-	this.graph.nodes["score3"].textureID = "number" + this.server.player.score.toString().charAt(0);
-	this.graph.nodes["score4"].textureID = "number" + this.server.player.score.toString().charAt(1);
+	let score1 = this.server.nextPlayer.score;
+	let score2 = this.server.player.score;
+	if (this.server.player.name == this.server.firstPlayerName) {
+		let temp = score1;
+		score1 = score2;
+		score2 = temp;
+	}
+	this.graph.nodes["score1"].textureID = "number" + score1.toString().charAt(0);
+	this.graph.nodes["score2"].textureID = "number" + score1.toString().charAt(1);
+	this.graph.nodes["score3"].textureID = "number" + score2.toString().charAt(0);
+	this.graph.nodes["score4"].textureID = "number" + score2.toString().charAt(1);
 };
 
 XMLscene.prototype.clearPossible = function () {
@@ -262,11 +270,16 @@ XMLscene.prototype.displayPossibleMoves = function (stack) {
 XMLscene.prototype.testGameOver = function (result) {
 	if (result == "game over") { //not an error, game over
 		this.server.getWinner().then((winner) => {
-			alert(`Game Over the winner is: ${winner}`);
+			this.displayGameOver(winner);
 		});
 	} else {
 		alert(`An error occured: ${result}`);
 	}
+};
+XMLscene.prototype.displayGameOver = function (winner) {
+	alert(`Game Over the winner is: ${winner}`);
+	this.gameOver = true;
+	this.interface.gameFolder.open();
 };
 
 XMLscene.prototype.doMove = function (from, to) {
@@ -286,10 +299,11 @@ XMLscene.prototype.doMove = function (from, to) {
 };
 
 XMLscene.prototype.doBotMove = function () {
-	if (this.server.isBotNext()) {
+	if (this.server.isBotNext() && !this.gameOver) {
 		this.server.playBot().then((botMove) => { //bot move successful
 			if (botMove === true) { //success
 				this.executeMove(this.server.lastMove());
+				this.updateScoreTex();
 				this.doBotMove();
 			} else {
 				this.testGameOver(botMove);
@@ -310,6 +324,7 @@ XMLscene.prototype.executeMove = function (move) {
 		if (this.server.player.name == this.server.firstPlayerName) claimedColorStack.moveTo(this.claimed2);
 		else claimedColorStack.moveTo(this.claimed1);
 	}
+	this.updateScoreTex();
 };
 
 XMLscene.prototype.claim = function (stack) {
@@ -491,6 +506,7 @@ XMLscene.prototype.startNewGame = function () {
 		return;
 	}
 	this.server.init().then((value) => {
+		this.gameOver = false;
 		this.interface.gameFolder.close();
 		this.populateStacks();
 		this.populateClaimableStacks();
