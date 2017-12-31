@@ -218,6 +218,12 @@ XMLscene.prototype.decreaseCountdown = function () {
 		if (this.countdownSeconds <= 0) {
 			this.countdownStarted = false;
 			this.countdownSeconds = 0;
+			let winner = "draw";
+			if (this.server.player.score > this.server.nextPlayer.score)
+				winner = this.server.player.name;
+			else
+				winner = this.server.nextPlayer.name;
+			alert(`Game Over (by timeout) the winner is: ${winner}`);
 		}
 	}
 };
@@ -230,7 +236,7 @@ XMLscene.prototype.updateScoreTex = function () { //TODO: Diference between play
 	console.log(this.server.player);
 	console.log(this.server.nextPlayer);
 	this.graph.nodes["score1"].textureID = "number" + this.server.player.score.toString().charAt(0);
-	// this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
+	this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
 };
 
 XMLscene.prototype.clearPossible = function () {
@@ -262,6 +268,7 @@ XMLscene.prototype.testGameOver = function (result) {
 		alert(`An error occured: ${result}`);
 	}
 };
+
 XMLscene.prototype.doMove = function (from, to) {
 	this.server.move(from.line, from.column, to.line, to.column).then((moveRes) => {
 		if (moveRes === true) { //success -> animate
@@ -466,7 +473,7 @@ XMLscene.prototype.updateShaders = function () {
  */
 XMLscene.prototype.startNewGame = function () {
 	console.log("startNewGame");
-	this.secondsBaseline = this.countdownSecondsBaseline
+	this.secondsBaseline = this.countdownSecondsBaseline;
 	if (!this.server.validGameType()) {
 		alert(`Invalid game type selected: ${this.server.gameType}`);
 		return;
@@ -520,4 +527,8 @@ XMLscene.prototype.populateClaimableStacks = function () {
 		stack.pieces.push(new Piece(this, colors[l]));
 		this.claimableStacks.push(stack);
 	}
+};
+
+XMLscene.prototype.gameMovie = function () {
+
 };
