@@ -559,6 +559,6 @@ XMLscene.prototype.gameMovie = function () {
 		const move = this.server.moves[i];
 		this.server.player = move.player;
 		this.server.nextPlayer = move.nextPlayer;
-		this.executeMove(move);
+		setTimeout(function() {this.executeMove(move);}.bind(this), 2000*i);
 	}
 };

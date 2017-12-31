@@ -85,7 +85,7 @@ Stack.prototype.moveTo = function (destination, howMany) {
 	// this.animation = new CircularAnimation(speed, centerx, centery, centerz, radius, startAng, rotAng);4
 	// this.animation = new CircularAnimation(1, Piece.factors.x * this.column + Piece.boardStart.x, Piece.factors.y * this.pieces.length + Piece.boardStart.y, Piece.factors.z * this.line + Piece.boardStart.z, 10, 0, 90);
 	this.animation = new LinearAnimation(
-		500, [{
+		2, [{
 			x: 0,
 			y: 0,
 			z: 0
