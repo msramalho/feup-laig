@@ -310,12 +310,13 @@
         <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="13.5" y="10" z="2" />
+        <TRANSLATION x="12" y="10" z="2" />
 		<SCALE sx="0.4" sy="0.4" sz="4"/>
         <ROTATION axis="y" angle="90" />
 
         <DESCENDANTS>
 			<NODEREF id="score1" />
+			<NODEREF id="score2" />
 			<NODEREF id="scoreBorder" />
 		</DESCENDANTS>
 
@@ -325,12 +326,13 @@
         <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="42.5" y="10" z="2" />
+        <TRANSLATION x="46" y="10" z="2" />
 		<SCALE sx="0.4" sy="0.4" sz="4"/>
         <ROTATION axis="y" angle="90" />
 
         <DESCENDANTS>
-			<NODEREF id="score2" />
+			<NODEREF id="score3" />
+			<NODEREF id="score4" />
 			<NODEREF id="scoreBorder" />
 		</DESCENDANTS>
 
@@ -340,14 +342,37 @@
         <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
-		<SCALE sx="1" sy="1" sz="0.5"/>
-
         <DESCENDANTS>
 			<NODEREF id="painting" />
 		</DESCENDANTS>
 
     </NODE>
 
+	<NODE id="score4">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="00" />
+
+		<TRANSLATION x="0.25" y="0" z="-10" />
+		<ROTATION axis="y" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 10 10 0" />
+		</DESCENDANTS>
+
+    </NODE>
+
+	<NODE id="score3">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="00" />
+
+		<TRANSLATION x="0.25" y="0" z="-20" />
+		<ROTATION axis="y" angle="-90" />
+
+        <DESCENDANTS>
+			<LEAF  type="rectangle" args="0 10 10 0" />
+		</DESCENDANTS>
+
+    </NODE>
 
 	<NODE id="score2">
         <MATERIAL id="defaultMaterial" />
@@ -366,7 +391,7 @@
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="00" />
 
-		<TRANSLATION x="0.25" y="0" z="-10" />
+		<TRANSLATION x="0.25" y="0" z="-20" />
 		<ROTATION axis="y" angle="-90" />
 
         <DESCENDANTS>
@@ -380,7 +405,7 @@
         <TEXTURE id="null" />
 
 		<SCALE sx="0.8" sy="1" sz="1"/>
-        <TRANSLATION x="42.5" y="10" z="0.5" />
+        <TRANSLATION x="41" y="10" z="0.5" />
         <ROTATION axis="y" angle="90" />
 
         <DESCENDANTS>
@@ -1195,7 +1220,7 @@
         <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
-		<TRANSLATION x="15" y="0" z="50" />
+		<TRANSLATION x="15" y="0" z="49" />
 		<ROTATION axis="y" angle="90" />
 		<ROTATION axis="x" angle="-90" />
 
@@ -1225,12 +1250,13 @@
         <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="13.5" y="10" z="0.4" />
+        <TRANSLATION x="12" y="10" z="0.4" />
 		<SCALE sx="0.4" sy="0.4" sz="1"/>
         <ROTATION axis="y" angle="90" />
 
         <DESCENDANTS>
 			<NODEREF id="score1" />
+			<NODEREF id="score2" />
 			<NODEREF id="scoreBorder" />
 		</DESCENDANTS>
 
@@ -1240,12 +1266,13 @@
         <MATERIAL id="spotMaterial" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="42.5" y="10" z="0.4" />
+        <TRANSLATION x="45.5" y="10" z="0.4" />
 		<SCALE sx="0.4" sy="0.4" sz="1"/>
         <ROTATION axis="y" angle="90" />
 
         <DESCENDANTS>
-			<NODEREF id="score2" />
+			<NODEREF id="score3" />
+			<NODEREF id="score4" />
 			<NODEREF id="scoreBorder" />
 		</DESCENDANTS>
 

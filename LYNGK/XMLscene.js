@@ -236,7 +236,9 @@ XMLscene.prototype.updateScoreTex = function () { //TODO: Diference between play
 	console.log(this.server.player);
 	console.log(this.server.nextPlayer);
 	this.graph.nodes["score1"].textureID = "number" + this.server.player.score.toString().charAt(0);
-	this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
+	this.graph.nodes["score2"].textureID = "number" + this.server.player.score.toString().charAt(1);
+	this.graph.nodes["score3"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(0);
+	this.graph.nodes["score4"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
 };
 
 XMLscene.prototype.clearPossible = function () {
