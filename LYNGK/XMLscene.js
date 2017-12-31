@@ -177,9 +177,9 @@ XMLscene.prototype.logPicking = function() {
                     if (this.lastPicked != stack) { //new stack picked, not the same to unpick
                         if (this.lastPicked) {
 							if (stack.possible) { //this is actually an execute move, assumes it is valid
-								this.pieceAnimation = this.lastPicked;
+								/* this.pieceAnimation = this.lastPicked;
 								this.pieceAnimation.to = stack;
-								this.pieceAnimation.timer = 0;
+								this.pieceAnimation.timer = 0; */
 								/* this.pieceAnimation.animation = new CircularAnimation( //CIRCULAR TRY
 									10,
 									stack.pieces[0].x - this.pieceAnimation.pieces[0].x,
@@ -194,11 +194,11 @@ XMLscene.prototype.logPicking = function() {
 									{ x: this.pieceAnimation.pieces[0].x, y: 3, z: this.pieceAnimation.pieces[0].z },
 									{ x: stack.pieces[0].x, y: 3, z: stack.pieces[0].z },
 									{ x: stack.pieces[0].x, y: stack.pieces[0].y, z: stack.pieces[0].z }]); */
-								this.pieceAnimation.animation = new LinearAnimation(
+								/* this.pieceAnimation.animation = new LinearAnimation(
 									5,
 									[{ x: 0, y: 0, z: 0 },
-									{ x: stack.pieces[0].x - this.pieceAnimation.pieces[0].x, y: stack.pieces[0].y - this.pieceAnimation.pieces[0].y, z: stack.pieces[0].z - this.pieceAnimation.pieces[0].z }]);
-								console.log("[PIECE ANIMATION TIME]", this.pieceAnimation.animation.totalTime);
+									{ x: stack.column - this.pieceAnimation.column, y: stack.pieces.length - this.pieceAnimation.pieces.length, z: stack.line - this.pieceAnimation.line }]);
+								console.log("[PIECE ANIMATION TIME]", this.pieceAnimation.animation.totalTime); */
                                 this.doMove(this.lastPicked, stack);
 								this.clearPossible();
                                 this.updateScoreTex();
@@ -233,7 +233,6 @@ XMLscene.prototype.decreaseCountdown = function() {
         if (this.countdownSeconds <= 0) {
             this.countdownStarted = false; //TODO: GAME OVER
 			this.countdownSeconds = 0;
-			this.stacks = [];
         }
     }
 };
@@ -244,7 +243,7 @@ XMLscene.prototype.updateCountdownTex = function(node, digit) {
 
 XMLscene.prototype.updateScoreTex = function() { //TODO: Diference between player 1/2 AND score always 20
     this.graph.nodes["score1"].textureID = "number" + this.server.player.score.toString().charAt(0);
-    this.graph.nodes["score2"].textureID = "number" + this.server.player.score.toString().charAt(1);
+    this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
 };
 
 XMLscene.prototype.clearPossible = function() {
@@ -259,7 +258,6 @@ XMLscene.prototype.displayPossibleMoves = function(stack) {
             for (let i = 0; i < self.stacks.length; i++) {
                 const s = self.stacks[i];
                 if (move == `${s.line}-${s.column}`) {
-                    console.log("possible");
                     s.possible = true;
                     break; //found the stack for this move
                 }
@@ -270,10 +268,11 @@ XMLscene.prototype.displayPossibleMoves = function(stack) {
 
 XMLscene.prototype.doMove = function(from, to) {
     this.server.move(from.line, from.column, to.line, to.column).then((moveRes) => {
-        if (moveRes) { //success -> animate
+		if (moveRes) { //success -> animate
+			from.moveTo(to);
             this.resetCountdown();
-            if (this.selectedScene == 2)
-                this.cameraRotation = 32;
+            // if (this.selectedScene == 2)
+            //     this.cameraRotation = 32;
             this.clearPossible();
         } else {
             alert(`An error occured: ${moveRes}`);
@@ -352,15 +351,15 @@ XMLscene.prototype.display = function() {
 
         for (let i = 0; i < this.stacks.length; i++) {
             this.pushMatrix(); {
-				if(this.stacks[i] == this.pieceAnimation){ //Checks if stack is going to be animated
-					if (this.pieceAnimation.timer < this.pieceAnimation.animation.totalTime) { //Stack animation
-						this.multMatrix(this.pieceAnimation.animation.animate(this.pieceAnimation.timer));
-						this.pieceAnimation.timer += this.deltaTime;
-					} else { //Moves after finishing animation
-						this.pieceAnimation.moveTo(this.pieceAnimation.to);
-						this.pieceAnimation = false;
-					}
-				}
+				// if(this.stacks[i] == this.pieceAnimation){ //Checks if stack is going to be animated
+				// 	if (this.pieceAnimation.timer < this.pieceAnimation.animation.totalTime) { //Stack animation
+				// 		this.multMatrix(this.pieceAnimation.animation.animate(this.pieceAnimation.timer));
+				// 		this.pieceAnimation.timer += this.deltaTime;
+				// 	} else { //Moves after finishing animation
+				// 		this.pieceAnimation.moveTo(this.pieceAnimation.to);
+				// 		this.pieceAnimation = false;
+				// 	}
+				// }
 				this.stacks[i].display();
             }
             this.popMatrix();
