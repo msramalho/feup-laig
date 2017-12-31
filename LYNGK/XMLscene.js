@@ -231,7 +231,7 @@ XMLscene.prototype.decreaseCountdown = function() {
     if (this.countdownStarted) {
         this.countdownSeconds -= this.deltaTime;
         if (this.countdownSeconds <= 0) {
-            this.countdownStarted = false; //TODO: GAME OVER
+            this.countdownStarted = false;
 			this.countdownSeconds = 0;
         }
     }
@@ -271,8 +271,8 @@ XMLscene.prototype.doMove = function(from, to) {
 		if (moveRes) { //success -> animate
 			from.moveTo(to);
             this.resetCountdown();
-            // if (this.selectedScene == 2)
-            //     this.cameraRotation = 32;
+            if (this.selectedScene == 2)
+                this.cameraRotation = 32;
             this.clearPossible();
         } else {
             alert(`An error occured: ${moveRes}`);
