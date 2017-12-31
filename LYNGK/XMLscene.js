@@ -249,43 +249,86 @@ XMLscene.prototype.displayPossibleMoves = function (stack) {
 	});
 };
 
+XMLscene.prototype.testGameOver = function (result) {
+	if(result == "game over"){//not an error, game over
+		this.server.
+		alert("Game Over the winner is:");
+	}else{
+		alert(`An error occured: ${result}`);
+	}
+};
 XMLscene.prototype.doMove = function (from, to) {
 	this.server.move(from.line, from.column, to.line, to.column).then((moveRes) => {
 		if (moveRes === true) { //success -> animate
 			from.moveTo(to);
 			this.updateScoreTex();
 			this.resetCountdown();
-			if (this.selectedScene == 2)
-			    this.cameraRotation = 32;
+			// if (this.selectedScene == 2)
+			//     this.cameraRotation = 32;
 			this.clearPossible();
+			this.doBotMove(); //only if this a bot is playing will this do anything
 		} else {
-			alert(`An error occured: ${moveRes}`);
+			this.testGameOver(moveRes);
 		}
 	});
+};
+
+XMLscene.prototype.doBotMove = function () {
+	if (this.server.isBotNext()) {
+		this.server.playBot().then((botMove) => { //bot move successful
+			if (botMove === true) { //success
+				//find stack from and to
+				const m = this.server.lastMove();
+				let from = this.findStackByLineAndColumn(m.Xf, m.Yf);
+				let to = this.findStackByLineAndColumn(m.Xt, m.Yt);
+				from.moveTo(to);
+				if (m.color) { //there was also a color claim
+					let claimedColorStack = this.findClaimableByColor(m.color);
+					if (this.server.player.name == this.server.firstPlayerName) claimedColorStack.moveTo(this.claimed2);
+					else claimedColorStack.moveTo(this.claimed1);
+				}
+				this.doBotMove();
+			} else {
+				this.testGameOver(botMove);
+			}
+
+		});
+	}
 };
 
 XMLscene.prototype.claim = function (stack) {
 	this.server.claim(stack.pieces[0].color).then((claimRes) => {
 		if (claimRes === true) {
-			if (this.server.player.name == this.server.firstPlayerName) {
-				stack.moveTo(this.claimed1);
-			} else {
-				stack.moveTo(this.claimed2);
-			}
+			if (this.server.player.name == this.server.firstPlayerName) stack.moveTo(this.claimed1);
+			else stack.moveTo(this.claimed2);
 		} else {
-			alert(`An error occured: ${claimRes}`);
+			this.testGameOver(claimRes);
 		}
 	});
 };
 
+XMLscene.prototype.findStackByLineAndColumn = function (line, column) {
+	for (let i = 0; i < this.stacks.length; i++) {
+		const s = this.stacks[i];
+		if (s.line == line && s.column == column)
+			return this.stacks[i];
+	}
+};
 
+XMLscene.prototype.findClaimableByColor = function (color) {
+	for (let i = 0; i < this.claimableStacks.length; i++) {
+		const s = this.claimableStacks[i];
+		if (s.pieces.length > 0 && s.pieces[0].color == color)
+			return this.claimableStacks[i];
+	}
+};
 
 /**
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function () {
 	this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, -2, 0));
-}
+};
 
 /* Handler called when the graph is finally loaded.
  * As loading is asynchronous, this may be called already after the application has started the run loop
@@ -425,6 +468,9 @@ XMLscene.prototype.startNewGame = function () {
 		//color already claimed go into these 2 stacks:
 		this.claimed1 = new Stack(this, -1, 0);
 		this.claimed2 = new Stack(this, 15, 0);
+		this.doBotMove();
+	}).catch((error)=>{
+		alert(`Unable to start game, check if server is open`);
 	});
 };
 

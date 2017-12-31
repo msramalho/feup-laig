@@ -33,7 +33,8 @@ class MyServer {
             throw "invalid game type";
         }
 
-        let start = await this.sendCommand(command);
+		let start = await this.sendCommand(command);
+        this.board = this.parseList(await this.sendCommand("query(board)"));
 		await this.updateState();
 		this.firstPlayerName = await this.sendCommand("query(player)");
         return start == "success";
@@ -72,13 +73,13 @@ class MyServer {
 
     //update board
     async updateState() {
-        this.board = this.parseList(await this.sendCommand("query(board)"));
-        this.availableColors = this.parseList(await this.sendCommand("query(availableColors)"));
+        // this.board = this.parseList(await this.sendCommand("query(board)"));
+        // this.availableColors = this.parseList(await this.sendCommand("query(availableColors)"));
         this.nextPlayer = this.player;
         this.player = {
-            name: await this.sendCommand("query(player)"),
-            colors: this.parseList(await this.sendCommand("query(colors)")),
-            stacks: this.parseList(await this.sendCommand("query(stacks)")),
+			name: await this.sendCommand("query(player)"),
+            // colors: this.parseList(await this.sendCommand("query(colors)")),
+            // stacks: this.parseList(await this.sendCommand("query(stacks)")),
             score: await this.sendCommand("query(score)")
         };
     }
@@ -92,6 +93,9 @@ class MyServer {
         return await this.sendCommandExpectSuccess("action(undo)");
     }
 
+	async getWinner(){
+
+	}
     // is the next player from a bot
     isBotNext() {
         return this.gameType == "botVbot" || this.gameType == "humanVbot" && this.player.name[0] == "b";
@@ -124,7 +128,7 @@ class MyServer {
             removed: this.parseList(parts[2]),
             color: this.color
         });
-        if (this.color) this.player.colors.push(this.color);
+        // if (this.color) this.player.colors.push(this.color);
         this.color = false;
         return true;
 	}
@@ -141,7 +145,7 @@ class MyServer {
             request.open('GET', self.url + command, true);
             let res;
             request.onload = function(data) {
-                console.log("[" + command + "]: " + data.target.response);
+                // console.log("[" + command + "]: " + data.target.response);
                 resolve(data.target.response);
             };
             request.onerror = function() {

@@ -42,7 +42,7 @@ Stack.prototype.display = function () {
 			this.destination = undefined;
 			this.timer = 0;
 		}
-		console.log("[stack] timer: " + this.timer);
+		// console.log("[stack] timer: " + this.timer);
 	}
 	//shaders and display
 	if (this.picked) this.scene.setActiveShader(this.scene.pickedShader);
@@ -58,35 +58,34 @@ Stack.prototype.display = function () {
 };
 
 Stack.prototype.moveTo = function (destination) {
-	this.animation = new LinearAnimation(
-		5, [{
-				x: Piece.factors.x * this.column + Piece.boardStart.x,
-				y: Piece.factors.y * this.pieces.length + Piece.boardStart.y,
-				z: Piece.factors.z * this.line + Piece.boardStart.z
-			}, {
-				x: Piece.factors.x * this.column + Piece.boardStart.x,
-				y: Piece.factors.y * this.pieces.length + Piece.boardStart.y,
-				z: Piece.factors.z * this.line + Piece.boardStart.z + 10
-			}
-			/* ,{
-						x: Piece.factors.x * destination.column + Piece.boardStart.x,
-						y: Piece.factors.y * destination.pieces.length + Piece.boardStart.y,
-						z: Piece.factors.z * destination.line + Piece.boardStart.z
-					} */
-		]);
+	// this.animation = new LinearAnimation(
+	// 	5, [{
+	// 			x: Piece.factors.x * this.column + Piece.boardStart.x,
+	// 			y: Piece.factors.y * this.pieces.length + Piece.boardStart.y,
+	// 			z: Piece.factors.z * this.line + Piece.boardStart.z
+	// 		}, {
+	// 			x: Piece.factors.x * this.column + Piece.boardStart.x,
+	// 			y: Piece.factors.y * this.pieces.length + Piece.boardStart.y,
+	// 			z: Piece.factors.z * this.line + Piece.boardStart.z + 10
+	// 		}
+	// 		/* ,{
+	// 					x: Piece.factors.x * destination.column + Piece.boardStart.x,
+	// 					y: Piece.factors.y * destination.pieces.length + Piece.boardStart.y,
+	// 					z: Piece.factors.z * destination.line + Piece.boardStart.z
+	// 				} */
+	// 	]);
 	// this.animation = new CircularAnimation(speed, centerx, centery, centerz, radius, startAng, rotAng);4
 	// this.animation = new CircularAnimation(1, Piece.factors.x * this.column + Piece.boardStart.x, Piece.factors.y * this.pieces.length + Piece.boardStart.y, Piece.factors.z * this.line + Piece.boardStart.z, 10, 0, 90);
-	/* this.animation = new LinearAnimation(
-		5, [{
+	this.animation = new LinearAnimation(
+		500, [{
 			x: 0,
 			y: 0,
 			z: 0
 		},{
 			x: 0,
 			y: 0,
-			z: 0
-		}]); */
+			z: 1
+		}]);
 	this.destination = destination;
-	console.log("ANIMATION: ");
-	console.log(this.animation);
+	// console.log(this.animation);
 };

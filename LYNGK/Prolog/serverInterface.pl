@@ -5,7 +5,7 @@
 
 %------------------------------------global functions
 executeCommand(handshake, handshake).
-executeCommand(reconsult, 'reconsulted'):-reconsult('C:/xampp/htdocs/FEUP-LAIG/LYNGK/Prolog/server.pl').
+executeCommand(reconsult, 'reconsulted'):-reconsult('feup-laig/LYNGK/Prolog/server.pl').
 executeCommand(quit, goodbye).
 executeCommand(clear, 'done'):-clear.
 executeCommand(displayBoard, 'done'):-displayBoard.
