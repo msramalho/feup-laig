@@ -24,7 +24,7 @@
     getColors/3,    % a list of the colors claimed by the selected player getColors(player, Colors)
     getStacks/3,    % a list of the stacks collected by the selected player getStacks(player, Stacks)
     hasClaimed/2,   % a flag to indicate wheter the current player has claimed a color in this turn
-    botLevel/3,     % the level of difficulty of each bot
+    botLevel/2,     % the level of difficulty of each bot
 	outputMessage/1. % the current error message
 
 :- dynamic
@@ -36,7 +36,7 @@
     getColors/3,
     getStacks/3,
     hasClaimed/2,
-    botLevel/3,
+    botLevel/2,
 	outputMessage/1.
 
 %make bot start first or human start first, 50% chance
@@ -91,8 +91,8 @@ invertPlayers:-
 endTurn(Removed):-
     clearHasClaimed, % clear the hasClaimed flag.
     removeClaimedStacksWithFive(Removed), %move all the 5 stacks to the players they belong to to their Stacks
-    invertPlayers,
-	pushGame.
+	pushGame,
+    invertPlayers.
 
 %empties the database
 clearInit:-
@@ -103,7 +103,7 @@ clearInit:-
     abolish(toClaim/2),
     abolish(getColors/3),
     abolish(getStacks/3),
-    abolish(botLevel/3),
+    abolish(botLevel/2),
     abolish(outputMessage/1),
 	assert(outputMessage('empty')),
 	setOutputMessage('success'),

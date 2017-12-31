@@ -143,13 +143,9 @@ clearHasClaimed:-
     abolish(hasClaimed/2),
     saveHasClaimed(false).
 % bot level database helpers
-botLevel(Bot, Level):-
-    game(G),
-    botLevel(G, Bot, Level).
 saveBotLevel(Bot, Level):-
-    game(G),
-    tryRetract(botLevel(G, Bot, _)),
-    assert(botLevel(G, Bot, Level)).
+    tryRetract(botLevel(Bot, _)),
+    assert(botLevel(Bot, Level)).
 
 % switch game, can move from original to temporary and such
 saveGame(NewGame):-
