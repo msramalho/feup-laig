@@ -38,6 +38,7 @@ Stack.prototype.display = function () {
 			this.animation = false;
 			this.pieces = [];
 			this.destination = undefined;
+			this.timer = 0;
 		}
 		console.log("[stack] timer: " + this.timer);
 	}
@@ -57,19 +58,33 @@ Stack.prototype.display = function () {
 Stack.prototype.moveTo = function (destination) {
 	this.animation = new LinearAnimation(
 		5, [{
-			x: Piece.factors.x * this.column + Piece.boardStart.x,
-			y: Piece.factors.y * this.pieces.length + Piece.boardStart.y,
-			z: Piece.factors.z * this.line + Piece.boardStart.z
+				x: Piece.factors.x * this.column + Piece.boardStart.x,
+				y: Piece.factors.y * this.pieces.length + Piece.boardStart.y,
+				z: Piece.factors.z * this.line + Piece.boardStart.z
+			}, {
+				x: Piece.factors.x * this.column + Piece.boardStart.x,
+				y: Piece.factors.y * this.pieces.length + Piece.boardStart.y,
+				z: Piece.factors.z * this.line + Piece.boardStart.z + 10
+			}
+			/* ,{
+						x: Piece.factors.x * destination.column + Piece.boardStart.x,
+						y: Piece.factors.y * destination.pieces.length + Piece.boardStart.y,
+						z: Piece.factors.z * destination.line + Piece.boardStart.z
+					} */
+		]);
+	// this.animation = new CircularAnimation(speed, centerx, centery, centerz, radius, startAng, rotAng);4
+	// this.animation = new CircularAnimation(1, Piece.factors.x * this.column + Piece.boardStart.x, Piece.factors.y * this.pieces.length + Piece.boardStart.y, Piece.factors.z * this.line + Piece.boardStart.z, 10, 0, 90);
+	/* this.animation = new LinearAnimation(
+		5, [{
+			x: 0,
+			y: 0,
+			z: 0
 		},{
-			x: Piece.factors.x * destination.column + Piece.boardStart.x,
-			y: Piece.factors.y * destination.pieces.length + Piece.boardStart.y,
-			z: Piece.factors.z * destination.line + Piece.boardStart.z
-		}/* , {
-			x: Piece.factors.x * destination.column - Piece.factors.x * this.column + Piece.boardStart.x,
-			y: Piece.factors.y * destination.pieces.length + Piece.boardStart.y - Piece.factors.y * this.pieces.length + Piece.boardStart.y,
-			z: Piece.factors.z * destination.line + Piece.boardStart.z - Piece.factors.z * this.line + Piece.boardStart.z
-		} */]);
+			x: 0,
+			y: 0,
+			z: 0
+		}]); */
+	this.destination = destination;
 	console.log("ANIMATION: ");
 	console.log(this.animation);
-	this.destination = destination;
 };

@@ -176,35 +176,13 @@ XMLscene.prototype.logPicking = function() {
                     console.log("Picked object: " + stack + ", with pick id " + customId);
                     if (this.lastPicked != stack) { //new stack picked, not the same to unpick
                         if (this.lastPicked) {
+                            this.lastPicked.picked = false;
 							if (stack.possible) { //this is actually an execute move, assumes it is valid
-								/* this.pieceAnimation = this.lastPicked;
-								this.pieceAnimation.to = stack;
-								this.pieceAnimation.timer = 0; */
-								/* this.pieceAnimation.animation = new CircularAnimation( //CIRCULAR TRY
-									10,
-									stack.pieces[0].x - this.pieceAnimation.pieces[0].x,
-									stack.pieces[0].y - this.pieceAnimation.pieces[0].y,
-									stack.pieces[0].z - this.pieceAnimation.pieces[0].z,
-									10,
-									0,
-									180); */
-								/* this.pieceAnimation.animation = new BezierAnimation( //BEZIER TRY
-									10,
-									[{ x: this.pieceAnimation.pieces[0].x, y: this.pieceAnimation.pieces[0].y, z: this.pieceAnimation.pieces[0].z },
-									{ x: this.pieceAnimation.pieces[0].x, y: 3, z: this.pieceAnimation.pieces[0].z },
-									{ x: stack.pieces[0].x, y: 3, z: stack.pieces[0].z },
-									{ x: stack.pieces[0].x, y: stack.pieces[0].y, z: stack.pieces[0].z }]); */
-								/* this.pieceAnimation.animation = new LinearAnimation(
-									5,
-									[{ x: 0, y: 0, z: 0 },
-									{ x: stack.column - this.pieceAnimation.column, y: stack.pieces.length - this.pieceAnimation.pieces.length, z: stack.line - this.pieceAnimation.line }]);
-								console.log("[PIECE ANIMATION TIME]", this.pieceAnimation.animation.totalTime); */
-                                this.doMove(this.lastPicked, stack);
-								this.clearPossible();
+								this.doMove(this.lastPicked, stack);
+								// this.clearPossible();
                                 this.updateScoreTex();
                                 break;
                             }
-                            this.lastPicked.picked = false;
                             this.clearPossible();
                         }
                         this.lastPicked = stack;
@@ -243,7 +221,7 @@ XMLscene.prototype.updateCountdownTex = function(node, digit) {
 
 XMLscene.prototype.updateScoreTex = function() { //TODO: Diference between player 1/2 AND score always 20
     this.graph.nodes["score1"].textureID = "number" + this.server.player.score.toString().charAt(0);
-    this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
+    // this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
 };
 
 XMLscene.prototype.clearPossible = function() {
