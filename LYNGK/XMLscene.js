@@ -5,13 +5,14 @@ var DEGREE_TO_RAD = Math.PI / 180;
  * @constructor
  */
 function XMLscene(interface) {
-    CGFscene.call(this);
+	CGFscene.call(this);
 
-    this.interface = interface;
+	this.interface = interface;
 
-    this.lightValues = {};
-    this.selectableValues = {};
-    this.stacks = [];
+	this.lightValues = {};
+	this.selectableValues = {};
+	this.stacks = [];
+	this.claimableStacks = [];
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -20,51 +21,51 @@ XMLscene.prototype.constructor = XMLscene;
 /**
  * Initializes the scene, setting some WebGL defaults, initializing the camera and the axis.
  */
-XMLscene.prototype.init = function(application) {
-    CGFscene.prototype.init.call(this, application);
+XMLscene.prototype.init = function (application) {
+	CGFscene.prototype.init.call(this, application);
 
-    this.initCameras();
+	this.initCameras();
 
-    this.enableTextures(true);
+	this.enableTextures(true);
 
-    this.initTextures();
+	this.initTextures();
 
-    this.gl.clearDepth(100.0);
-    this.gl.enable(this.gl.DEPTH_TEST);
-    this.gl.enable(this.gl.CULL_FACE);
-    this.gl.depthFunc(this.gl.LEQUAL);
+	this.gl.clearDepth(100.0);
+	this.gl.enable(this.gl.DEPTH_TEST);
+	this.gl.enable(this.gl.CULL_FACE);
+	this.gl.depthFunc(this.gl.LEQUAL);
 
-    this.axis = new CGFaxis(this);
+	this.axis = new CGFaxis(this);
 
-    this.setUpdatePeriod(1000 / 60);
-    this.timerStarted = false;
-    this.startingTime = 0;
+	this.setUpdatePeriod(1000 / 60);
+	this.timerStarted = false;
+	this.startingTime = 0;
 	this.currTime = 0;
 	this.countdownSecondsBaseline = 60;
 
-    this.selectedScene = 2;
-    this.pieceAnimation = false;
-    this.selectedShader = 0;
-    this.wireframe = false;
-    this.scaleFactor = 2;
-    this.selectionColor = [240, 240, 40, 1]; //rgba
+	this.selectedScene = 2;
+	this.pieceAnimation = false;
+	this.selectedShader = 0;
+	this.wireframe = false;
+	this.scaleFactor = 2;
+	this.selectionColor = [240, 240, 40, 1]; //rgba
 
-    /* this.shaders = [
-    	new CGFshader(this.gl, "Shaders/main.vert", "Shaders/main.frag"),
-    	new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),
-    	new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag")
-    ]; */
-    this.pickedShader = new CGFshader(this.gl, "Shaders/picked.vert", "Shaders/picked.frag");
-    this.possibleShader = new CGFshader(this.gl, "Shaders/possible.vert", "Shaders/possible.frag");
-    //game settings
-    this.server = new MyServer();
+	/* this.shaders = [
+		new CGFshader(this.gl, "Shaders/main.vert", "Shaders/main.frag"),
+		new CGFshader(this.gl, "Shaders/flat.vert", "Shaders/flat.frag"),
+		new CGFshader(this.gl, "Shaders/texture1.vert", "Shaders/texture1.frag")
+	]; */
+	this.pickedShader = new CGFshader(this.gl, "Shaders/picked.vert", "Shaders/picked.frag");
+	this.possibleShader = new CGFshader(this.gl, "Shaders/possible.vert", "Shaders/possible.frag");
+	//game settings
+	this.server = new MyServer();
 
-    this.setPickEnabled(true);
+	this.setPickEnabled(true);
 };
 /**
  * Initialize Pieces Textures
  */
-XMLscene.prototype.initTextures = function() {
+XMLscene.prototype.initTextures = function () {
 	this.blackMaterial = new CGFappearance(this);
 	this.blackMaterial.setAmbient(0.1, 0.1, 0.1, 1);
 	this.blackMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
@@ -110,7 +111,7 @@ XMLscene.prototype.initTextures = function() {
 /**
  * Function called every update period
  */
-XMLscene.prototype.update = function(systemTime) {
+XMLscene.prototype.update = function (systemTime) {
 	if (!this.timerStarted) {
 		this.startingTime = systemTime;
 		this.timerStarted = true;
@@ -130,7 +131,7 @@ XMLscene.prototype.update = function(systemTime) {
 /**
  * Initializes the scene lights with the values read from the LSX file.
  */
-XMLscene.prototype.initLights = function() {
+XMLscene.prototype.initLights = function () {
 	var i = 0;
 	// Lights index.
 
@@ -163,258 +164,295 @@ XMLscene.prototype.initLights = function() {
 /**
  * Logs objects picked.
  */
-XMLscene.prototype.logPicking = function() {
-    if (typeof this.lastPicked == 'undefined') { //simulate static variable
-        this.lastPicked = false;
-    }
-    if (this.pickMode == false) {
-        if (this.pickResults != null && this.pickResults.length > 0) {
-            for (var i = 0; i < this.pickResults.length; i++) {
-                var stack = this.pickResults[i][0];
-                if (stack) {
-                    var customId = this.pickResults[i][1];
-                    console.log("Picked object: " + stack + ", with pick id " + customId);
-                    if (this.lastPicked != stack) { //new stack picked, not the same to unpick
-                        if (this.lastPicked) {
-                            this.lastPicked.picked = false;
+XMLscene.prototype.logPicking = function () {
+	if (typeof this.lastPicked == 'undefined') { //simulate static variable
+		this.lastPicked = false;
+	}
+	if (this.pickMode == false) {
+		if (this.pickResults != null && this.pickResults.length > 0) {
+			for (let i = 0; i < this.pickResults.length; i++) {
+				let stack = this.pickResults[i][0];
+				if (stack) {
+					let customId = this.pickResults[i][1];
+					console.log("Picked object: " + stack + ", with pick id " + customId);
+					if (stack.claimable) { //this is a claiming action and not a move
+						this.claim(stack);
+						break;
+					}
+					if (this.lastPicked != stack) { //new stack picked, not the same to unpick
+						if (this.lastPicked) {
+							this.lastPicked.picked = false;
 							if (stack.possible) { //this is actually an execute move, assumes it is valid
 								this.doMove(this.lastPicked, stack);
-								// this.clearPossible();
-                                this.updateScoreTex();
-                                break;
-                            }
-                            this.clearPossible();
-                        }
-                        this.lastPicked = stack;
-                    }
-                    stack.picked = !stack.picked;
-                    if (stack.picked) {
-                        this.displayPossibleMoves(stack);
-                    } else {
-                        this.clearPossible();
-                    }
-                }
-            }
-            this.pickResults.splice(0, this.pickResults.length);
-        }
-    }
+								break;
+							}
+							this.clearPossible();
+						}
+						this.lastPicked = stack;
+					}
+					stack.picked = !stack.picked;
+					if (stack.picked) {
+						this.displayPossibleMoves(stack);
+					} else {
+						this.clearPossible();
+					}
+				}
+			}
+			this.pickResults.splice(0, this.pickResults.length);
+		}
+	}
 };
 
-XMLscene.prototype.resetCountdown = function() {
-    this.countdownStarted = true;
-    this.countdownSeconds = this.secondsBaseline;
+XMLscene.prototype.resetCountdown = function () {
+	this.countdownStarted = true;
+	this.countdownSeconds = this.secondsBaseline;
 };
 
-XMLscene.prototype.decreaseCountdown = function() {
-    if (this.countdownStarted) {
-        this.countdownSeconds -= this.deltaTime;
-        if (this.countdownSeconds <= 0) {
-            this.countdownStarted = false;
+XMLscene.prototype.decreaseCountdown = function () {
+	if (this.countdownStarted) {
+		this.countdownSeconds -= this.deltaTime;
+		if (this.countdownSeconds <= 0) {
+			this.countdownStarted = false;
 			this.countdownSeconds = 0;
-        }
-    }
+		}
+	}
 };
 
-XMLscene.prototype.updateCountdownTex = function(node, digit) {
-    node.textureID = "number" + Math.round(this.countdownSeconds).toString().charAt(digit - 1);
+XMLscene.prototype.updateCountdownTex = function (node, digit) {
+	node.textureID = "number" + Math.round(this.countdownSeconds).toString().charAt(digit - 1);
 };
 
-XMLscene.prototype.updateScoreTex = function() { //TODO: Diference between player 1/2 AND score always 20
-    this.graph.nodes["score1"].textureID = "number" + this.server.player.score.toString().charAt(0);
-    // this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
+XMLscene.prototype.updateScoreTex = function () { //TODO: Diference between player 1/2 AND score always 20
+	console.log(this.server.player);
+	console.log(this.server.nextPlayer);
+	this.graph.nodes["score1"].textureID = "number" + this.server.player.score.toString().charAt(0);
+	// this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
 };
 
-XMLscene.prototype.clearPossible = function() {
-    for (let s = 0; s < this.stacks.length; s++)
-        this.stacks[s].possible = false;
+XMLscene.prototype.clearPossible = function () {
+	for (let s = 0; s < this.stacks.length; s++)
+		this.stacks[s].possible = false;
 };
 
-XMLscene.prototype.displayPossibleMoves = function(stack) {
-    let self = this;
-    this.server.getPossibleMoves(stack.line, stack.column).then(function(moves) {
-        moves.forEach(move => {
-            for (let i = 0; i < self.stacks.length; i++) {
-                const s = self.stacks[i];
-                if (move == `${s.line}-${s.column}`) {
-                    s.possible = true;
-                    break; //found the stack for this move
-                }
-            }
-        });
-    });
+XMLscene.prototype.displayPossibleMoves = function (stack) {
+	let self = this;
+	this.server.getPossibleMoves(stack.line, stack.column).then(function (moves) {
+		moves.forEach(move => {
+			for (let i = 0; i < self.stacks.length; i++) {
+				const s = self.stacks[i];
+				if (move == `${s.line}-${s.column}`) {
+					s.possible = true;
+					break; //found the stack for this move
+				}
+			}
+		});
+	});
 };
 
-XMLscene.prototype.doMove = function(from, to) {
-    this.server.move(from.line, from.column, to.line, to.column).then((moveRes) => {
-		if (moveRes) { //success -> animate
+XMLscene.prototype.doMove = function (from, to) {
+	this.server.move(from.line, from.column, to.line, to.column).then((moveRes) => {
+		if (moveRes === true) { //success -> animate
 			from.moveTo(to);
-            this.resetCountdown();
-            if (this.selectedScene == 2)
-                this.cameraRotation = 32;
-            this.clearPossible();
-        } else {
-            alert(`An error occured: ${moveRes}`);
-        }
-    });
+			this.updateScoreTex();
+			this.resetCountdown();
+			if (this.selectedScene == 2)
+			    this.cameraRotation = 32;
+			this.clearPossible();
+		} else {
+			alert(`An error occured: ${moveRes}`);
+		}
+	});
 };
+
+XMLscene.prototype.claim = function (stack) {
+	this.server.claim(stack.pieces[0].color).then((claimRes) => {
+		if (claimRes === true) {
+			if (this.server.player.name == this.server.firstPlayerName) {
+				stack.moveTo(this.claimed1);
+			} else {
+				stack.moveTo(this.claimed2);
+			}
+		} else {
+			alert(`An error occured: ${claimRes}`);
+		}
+	});
+};
+
+
+
 /**
  * Initializes the scene cameras.
  */
-XMLscene.prototype.initCameras = function() {
-    this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, -2, 0));
+XMLscene.prototype.initCameras = function () {
+	this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, -2, 0));
 }
 
 /* Handler called when the graph is finally loaded.
  * As loading is asynchronous, this may be called already after the application has started the run loop
  */
-XMLscene.prototype.onGraphLoaded = function() {
-    this.camera.near = this.graph.near;
-    this.camera.far = this.graph.far;
-    this.axis = new CGFaxis(this, this.graph.referenceLength);
+XMLscene.prototype.onGraphLoaded = function () {
+	this.camera.near = this.graph.near;
+	this.camera.far = this.graph.far;
+	this.axis = new CGFaxis(this, this.graph.referenceLength);
 
-    this.setGlobalAmbientLight(this.graph.ambientIllumination[0], this.graph.ambientIllumination[1],
-        this.graph.ambientIllumination[2], this.graph.ambientIllumination[3]);
+	this.setGlobalAmbientLight(this.graph.ambientIllumination[0], this.graph.ambientIllumination[1],
+		this.graph.ambientIllumination[2], this.graph.ambientIllumination[3]);
 
-    this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
+	this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
 
-    this.initLights();
+	this.initLights();
 
-    // Adds lights group.
-    //this.interface.addLightsGroup(this.graph.lights);
-    //this.interface.addShadersGroup(this.graph.selectables);
+	// Adds lights group.
+	//this.interface.addLightsGroup(this.graph.lights);
+	//this.interface.addShadersGroup(this.graph.selectables);
 };
 
 /**
  * Displays the scene.
  */
-XMLscene.prototype.display = function() {
-    // Calls picking logger
-    this.logPicking();
-    // ---- BEGIN Background, camera and axis setup
+XMLscene.prototype.display = function () {
+	// Calls picking logger
+	this.logPicking();
+	// ---- BEGIN Background, camera and axis setup
 
-    // Clear image and depth buffer everytime we update the scene
-    this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
-    this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+	// Clear image and depth buffer everytime we update the scene
+	this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
+	this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 
-    // Initialize Model-View matrix as identity (no transformation
-    this.updateProjectionMatrix();
-    this.loadIdentity();
+	// Initialize Model-View matrix as identity (no transformation
+	this.updateProjectionMatrix();
+	this.loadIdentity();
 
-    // Apply transformations corresponding to the camera position relative to the origin
-    this.applyViewMatrix();
+	// Apply transformations corresponding to the camera position relative to the origin
+	this.applyViewMatrix();
 
-    this.pushMatrix();
+	this.pushMatrix();
 
-    if (this.graph.loadedOk) {
-        // Applies initial transformations.
-        this.multMatrix(this.graph.initialTransforms);
+	if (this.graph.loadedOk) {
+		// Applies initial transformations.
+		this.multMatrix(this.graph.initialTransforms);
 
-        //detect changes in the lights
-        var i = 0;
-        for (var key in this.lightValues) {
-            if (this.lightValues.hasOwnProperty(key)) {
-                if (this.lightValues[key]) {
-                    this.lights[i].setVisible(true);
-                    this.lights[i].enable();
-                } else {
-                    this.lights[i].setVisible(false);
-                    this.lights[i].disable();
-                }
-                this.lights[i].update();
-                i++;
-            }
-        }
-        // Displays the scene.
+		//detect changes in the lights
+		var i = 0;
+		for (var key in this.lightValues) {
+			if (this.lightValues.hasOwnProperty(key)) {
+				if (this.lightValues[key]) {
+					this.lights[i].setVisible(true);
+					this.lights[i].enable();
+				} else {
+					this.lights[i].setVisible(false);
+					this.lights[i].disable();
+				}
+				this.lights[i].update();
+				i++;
+			}
+		}
+		// Displays the scene.
 		this.graph.displayScene(this.selectedScene);
 
-        for (let i = 0; i < this.stacks.length; i++) {
-            this.pushMatrix(); {
-				// if(this.stacks[i] == this.pieceAnimation){ //Checks if stack is going to be animated
-				// 	if (this.pieceAnimation.timer < this.pieceAnimation.animation.totalTime) { //Stack animation
-				// 		this.multMatrix(this.pieceAnimation.animation.animate(this.pieceAnimation.timer));
-				// 		this.pieceAnimation.timer += this.deltaTime;
-				// 	} else { //Moves after finishing animation
-				// 		this.pieceAnimation.moveTo(this.pieceAnimation.to);
-				// 		this.pieceAnimation = false;
-				// 	}
-				// }
-				this.stacks[i].display();
-            }
-            this.popMatrix();
-        }
-        this.clearPickRegistration();
-    } else {
-        // Draw axis
-        this.axis.display();
-    }
+		this.displayStacks(this.stacks);
+		this.displayStacks(this.claimableStacks);
+		this.displayStacks([this.claimed1, this.claimed2]);
 
-    this.popMatrix();
-    // ---- END Background, camera and axis setup
+
+		this.clearPickRegistration();
+	} else {
+		// Draw axis
+		this.axis.display();
+	}
+
+	this.popMatrix();
+	// ---- END Background, camera and axis setup
 
 
 };
-XMLscene.prototype.updateShaders = function() {
-    if (typeof counter == 'undefined') {
-        counter = 0;
-    } //use counter as static variable
-    counter++;
-    let timeFactor = Math.abs(Math.sin(counter / 10));
-    let timeFactorInverted = 1 - timeFactor;
-    let goalColor = vec4.fromValues(this.selectionColor[0] / 255, this.selectionColor[1] / 255, this.selectionColor[2] / 255, 1);
-    let saturatedColor = vec4.fromValues(255 / 255, 170 / 255, 0 / 255, 1);
-    this.pickedShader.setUniformsValues({
-        timeFactor: timeFactor,
-        timeFactorInverted: timeFactorInverted,
-        goal_r: goalColor[0],
-        goal_g: goalColor[1],
-        goal_b: goalColor[2],
-        saturated_r: saturatedColor[0],
-        saturated_g: saturatedColor[1],
-        saturated_b: saturatedColor[2],
-    });
+
+XMLscene.prototype.displayStacks = function (stacks) {
+	for (let i = 0; i < stacks.length; i++) {
+		if (stacks[i]) {
+			this.pushMatrix();
+			stacks[i].display();
+			this.popMatrix();
+		}
+	}
+};
+
+XMLscene.prototype.updateShaders = function () {
+	if (typeof counter == 'undefined') {
+		counter = 0;
+	} //use counter as static variable
+	counter++;
+	let timeFactor = Math.abs(Math.sin(counter / 10));
+	let timeFactorInverted = 1 - timeFactor;
+	let goalColor = vec4.fromValues(this.selectionColor[0] / 255, this.selectionColor[1] / 255, this.selectionColor[2] / 255, 1);
+	let saturatedColor = vec4.fromValues(255 / 255, 170 / 255, 0 / 255, 1);
+	this.pickedShader.setUniformsValues({
+		timeFactor: timeFactor,
+		timeFactorInverted: timeFactorInverted,
+		goal_r: goalColor[0],
+		goal_g: goalColor[1],
+		goal_b: goalColor[2],
+		saturated_r: saturatedColor[0],
+		saturated_g: saturatedColor[1],
+		saturated_b: saturatedColor[2],
+	});
 };
 
 
 /**
  * Start a new Game
  */
-XMLscene.prototype.startNewGame = function() {
+XMLscene.prototype.startNewGame = function () {
 	console.log("startNewGame");
 	this.secondsBaseline = this.countdownSecondsBaseline
-    if (!this.server.validGameType()) {
-        alert(`Invalid game type selected: ${this.server.gameType}`);
-        return;
-    }
-    if (!this.server.validBotLevel1()) {
-        alert(`Invalid botlevel 1 type selected: ${this.server.botLevel1}`);
-        return;
-    }
-    if (!this.server.validBotLevel2()) {
-        alert(`Invalid botlevel 2 type selected: ${this.server.botLevel2}`);
-        return;
-    }
-    this.server.init().then((value) => {
-        this.interface.gameFolder.close();
-        this.stacks = [];
-        this.populateStacks();
-    });
+	if (!this.server.validGameType()) {
+		alert(`Invalid game type selected: ${this.server.gameType}`);
+		return;
+	}
+	if (!this.server.validBotLevel1()) {
+		alert(`Invalid botlevel 1 type selected: ${this.server.botLevel1}`);
+		return;
+	}
+	if (!this.server.validBotLevel2()) {
+		alert(`Invalid botlevel 2 type selected: ${this.server.botLevel2}`);
+		return;
+	}
+	this.server.init().then((value) => {
+		this.interface.gameFolder.close();
+		this.stacks = [];
+		this.populateStacks();
+		this.populateClaimableStacks();
+		//color already claimed go into these 2 stacks:
+		this.claimed1 = new Stack(this, -1, 0);
+		this.claimed2 = new Stack(this, 15, 0);
+	});
 };
 
 /**
  * Load the stacks from the server into the scene
  */
-XMLscene.prototype.populateStacks = function() {
-    for (let l = 0; l < this.server.board.length; l++) {
-        const line = this.server.board[l];
-        for (let c = 0; c < line.length; c++) {
-            if (line[c].length > 0) {
-                let stack = new Stack(this, l, c);
-                stack.pieces.push(new Piece(this, line[c][0]));
-                this.stacks.push(stack);
-            }
-        }
-    }
-    console.log(this.stacks);
-    //After stacks are populated countdown starts counting
-    this.resetCountdown();
+XMLscene.prototype.populateStacks = function () {
+	this.stacks = [];
+	for (let l = 0; l < this.server.board.length; l++) {
+		const line = this.server.board[l];
+		for (let c = 0; c < line.length; c++) {
+			if (line[c].length > 0) {
+				let stack = new Stack(this, l, c);
+				stack.pieces.push(new Piece(this, line[c][0]));
+				this.stacks.push(stack);
+			}
+		}
+	}
+	//After stacks are populated countdown starts counting
+	this.resetCountdown();
+};
+
+XMLscene.prototype.populateClaimableStacks = function () {
+	this.claimableStacks = [];
+	let colors = ["blue", "green", "black", "red", "ivory"];
+	for (let l = 0; l < colors.length; l++) {
+		let stack = new Stack(this, l * 2 + 2, 9, true);
+		stack.pieces.push(new Piece(this, colors[l]));
+		this.claimableStacks.push(stack);
+	}
 };

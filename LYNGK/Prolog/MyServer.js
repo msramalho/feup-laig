@@ -14,7 +14,8 @@ class MyServer {
         this.url = url || 'http://localhost:';
         this.url += this.port + "/";
         //utils
-        this.color = false;
+		this.color = false;
+		this.firstPlayerName = "";
     }
 
     // start a new game - bool
@@ -33,7 +34,8 @@ class MyServer {
         }
 
         let start = await this.sendCommand(command);
-        await this.updateState();
+		await this.updateState();
+		this.firstPlayerName = await this.sendCommand("query(player)");
         return start == "success";
     }
 

@@ -3,7 +3,7 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function Stack(scene, line, column) {
+function Stack(scene, line, column, claimable) {
 	CGFobject.call(this, scene);
 
 	this.scene = scene;
@@ -22,6 +22,8 @@ function Stack(scene, line, column) {
 	this.animation = false;
 	this.timer = 0;
 
+	//for stacks that only have one piece and are only used for claim
+	this.claimable = claimable || false;
 }
 Stack.id = 0;
 
