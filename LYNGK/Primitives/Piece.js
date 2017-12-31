@@ -15,7 +15,10 @@ function Piece(scene, color) {
     this.part5 = new Cylinder(this.scene, 0, 2, 0, 50, 50);
     this.part6 = new Cylinder(this.scene, 0, 3.3, 0, 50, 50);
 
-    this.color = color || "noColor";
+	this.color = color || "noColor";
+	this.x = 0;
+	this.y = 0;
+	this.z = 0;
 }
 //scale factor from prolog coordinates into the board size
 Piece.factors = {
