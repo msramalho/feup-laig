@@ -131,7 +131,7 @@ XMLscene.prototype.update = function (systemTime) {
 		this.cameraRotation--;
 	}
 	if (this.selectedScene == 1 && this.camera.position != vec3.fromValues(15, 15, 15))
-		this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, -2, 0));
+		this.initCameras();
 }
 /**
  * Initializes the scene lights with the values read from the LSX file.
@@ -493,6 +493,7 @@ XMLscene.prototype.updateShaders = function () {
 XMLscene.prototype.startNewGame = function () {
 	console.log("startNewGame");
 	this.secondsBaseline = this.countdownSecondsBaseline;
+	this.initCameras();
 	if (!this.server.validGameType()) {
 		alert(`Invalid game type selected: ${this.server.gameType}`);
 		return;
