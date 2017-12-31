@@ -90,10 +90,16 @@ Stack.prototype.moveTo = function (destination, howMany) {
 			y: 0,
 			z: 0
 		}, {
-			x: 0,
-			y: 0,
-			z: 1
+			x: destination.pieces[0].x - this.pieces[0].x,
+			y: destination.pieces[0].y - this.pieces[0].y,
+			z: destination.pieces[0].z - this.pieces[0].z
 		}]);
+	/* this.animation = new BezierAnimation( //BEZIER TRY
+		2,
+		[{ x: this.pieces[0].x, y:  this.pieces[0].y, z:  this.pieces[0].z },
+		{ x: 0, y: 3, z: 0 },
+		{ x: 1, y: 3, z: 1 },
+		{ x: 1, y: 0, z: 1 }]); */
 	this.destination = destination;
 	this.howMany = howMany || this.pieces.length;
 	// console.log(this.animation);
