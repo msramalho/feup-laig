@@ -263,8 +263,8 @@ XMLscene.prototype.doMove = function (from, to) {
 			from.moveTo(to);
 			this.updateScoreTex();
 			this.resetCountdown();
-			// if (this.selectedScene == 2)
-			//     this.cameraRotation = 32;
+			if (this.selectedScene == 2)
+			    this.cameraRotation = 32;
 			this.clearPossible();
 			this.doBotMove(); //only if this a bot is playing will this do anything
 		} else {
