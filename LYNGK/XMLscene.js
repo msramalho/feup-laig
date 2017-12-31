@@ -493,6 +493,7 @@ XMLscene.prototype.updateShaders = function () {
  */
 XMLscene.prototype.startNewGame = function () {
 	console.log("startNewGame");
+	this.gameOver = true;
 	this.secondsBaseline = this.countdownSecondsBaseline;
 	this.initCameras();
 	if (!this.server.validGameType()) {

@@ -51,7 +51,7 @@ BezierAnimation.prototype.animate = function(time) {
         //mat4.rotate(matrix, matrix, );
     }
     return matrix;
-}
+};
 
 BezierAnimation.prototype.calculateDistance = function() {
     var l1 = vec3.fromValues(this.controlPoints[0].x, this.controlPoints[0].y, this.controlPoints[0].z);
@@ -82,4 +82,4 @@ BezierAnimation.prototype.calculateDistance = function() {
 
     this.totalDistance = vec3.distance(l1, l2) + vec3.distance(l2, l3) + vec3.distance(l3, r2) + vec3.distance(r2, r3) + vec3.distance(r3, r4);
     console.log("[Bezier] Distance: ", this.totalDistance);
-}
+};
