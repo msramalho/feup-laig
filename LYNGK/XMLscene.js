@@ -232,13 +232,11 @@ XMLscene.prototype.updateCountdownTex = function (node, digit) {
 	node.textureID = "number" + Math.round(this.countdownSeconds).toString().charAt(digit - 1);
 };
 
-XMLscene.prototype.updateScoreTex = function () { //TODO: Diference between player 1/2 AND score always 20
-	console.log(this.server.player);
-	console.log(this.server.nextPlayer);
-	this.graph.nodes["score1"].textureID = "number" + this.server.player.score.toString().charAt(0);
-	this.graph.nodes["score2"].textureID = "number" + this.server.player.score.toString().charAt(1);
-	this.graph.nodes["score3"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(0);
-	this.graph.nodes["score4"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
+XMLscene.prototype.updateScoreTex = function () {
+	this.graph.nodes["score1"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(0);
+	this.graph.nodes["score2"].textureID = "number" + this.server.nextPlayer.score.toString().charAt(1);
+	this.graph.nodes["score3"].textureID = "number" + this.server.player.score.toString().charAt(0);
+	this.graph.nodes["score4"].textureID = "number" + this.server.player.score.toString().charAt(1);
 };
 
 XMLscene.prototype.clearPossible = function () {
@@ -277,7 +275,7 @@ XMLscene.prototype.doMove = function (from, to) {
 			from.moveTo(to);
 			this.updateScoreTex();
 			this.resetCountdown();
-			if (this.selectedScene == 2)
+			if (this.selectedScene == 2 && this.server.gameType == "humanVhuman")
 				this.cameraRotation = 32;
 			this.clearPossible();
 			this.doBotMove(); //only if this a bot is playing will this do anything
