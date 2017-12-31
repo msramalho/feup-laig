@@ -26,9 +26,9 @@ class MyServer {
         if (gameIndex == 0) { //humanVhuman
             command = `init(${this.gameType})`;
         } else if (gameIndex == 1) { //humanVbot
-            command = `init(${this.gameType},${botLevel1})`;
+            command = `init(${this.gameType},${this.botLevel1})`;
         } else if (gameIndex == 2) { //botVbot
-            command = `init(${this.gameType},${botLevel1},${botLevel2})`
+            command = `init(${this.gameType},${this.botLevel1},${this.botLevel2})`
         } else {
             throw "invalid game type";
         }
@@ -94,7 +94,7 @@ class MyServer {
 
     // is the next player from a bot
     isBotNext() {
-        return this.gameType == "botVbot" || this.gameType == "humanVbot" && this.player.name[0] == "p";
+        return this.gameType == "botVbot" || this.gameType == "humanVbot" && this.player.name[0] == "b";
     }
 
     // make the bot move
@@ -127,7 +127,11 @@ class MyServer {
         if (this.color) this.player.colors.push(this.color);
         this.color = false;
         return true;
-    }
+	}
+
+	lastMove(){
+		return this.moves[this.moves.length - 1];
+	}
 
     // send command
     async sendCommand(command) {
