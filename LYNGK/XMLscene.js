@@ -8,9 +8,8 @@ function XMLscene(interface) {
 	CGFscene.call(this);
 
 	this.interface = interface;
-	let self = this;
 	this.interface.undo = () => {
-		self.undo();
+		this.undo();
 	};
 
 	this.lightValues = {};
@@ -18,6 +17,8 @@ function XMLscene(interface) {
 	this.stacks = [];
 	this.claimableStacks = [];
 	this.gameOver = true;
+
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -222,7 +223,7 @@ XMLscene.prototype.decreaseCountdown = function () {
 			let winner = "draw";
 			if (this.server.player.score > this.server.nextPlayer.score)
 				winner = this.server.player.name;
-			else
+			else if (this.server.player.score < this.server.nextPlayer.score)
 				winner = this.server.nextPlayer.name;
 			this.displayGameOver(winner);
 		}

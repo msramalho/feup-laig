@@ -90,9 +90,9 @@ Stack.prototype.moveTo = function (destination, howMany) {
 			y: 0,
 			z: 0
 		}, {
-			x: destination.pieces[0].x - this.pieces[0].x,
-			y: destination.pieces[0].y - this.pieces[0].y,
-			z: destination.pieces[0].z - this.pieces[0].z
+			x: destination.column - this.column,
+			y: destination.pieces.length - this.pieces.length,
+			z: destination.line - this.line
 		}]);
 	/* this.animation = new BezierAnimation( //BEZIER TRY
 		2,
