@@ -8,6 +8,10 @@ function XMLscene(interface) {
 	CGFscene.call(this);
 
 	this.interface = interface;
+	let self = this;
+	this.interface.undo = () => {
+		self.undo();
+	};
 
 	this.lightValues = {};
 	this.selectableValues = {};
@@ -250,10 +254,11 @@ XMLscene.prototype.displayPossibleMoves = function (stack) {
 };
 
 XMLscene.prototype.testGameOver = function (result) {
-	if(result == "game over"){//not an error, game over
-		this.server.
-		alert("Game Over the winner is:");
-	}else{
+	if (result == "game over") { //not an error, game over
+		this.server.getWinner().then((winner) => {
+			alert(`Game Over the winner is: ${winner}`);
+		});
+	} else {
 		alert(`An error occured: ${result}`);
 	}
 };
@@ -264,7 +269,7 @@ XMLscene.prototype.doMove = function (from, to) {
 			this.updateScoreTex();
 			this.resetCountdown();
 			if (this.selectedScene == 2)
-			    this.cameraRotation = 32;
+				this.cameraRotation = 32;
 			this.clearPossible();
 			this.doBotMove(); //only if this a bot is playing will this do anything
 		} else {
@@ -303,6 +308,20 @@ XMLscene.prototype.claim = function (stack) {
 			else stack.moveTo(this.claimed2);
 		} else {
 			this.testGameOver(claimRes);
+		}
+	});
+};
+
+
+XMLscene.prototype.undo = function () {
+	this.server.undo().then((undoRes) => {
+		if (undoRes === true) {
+			let lm = this.server.lastMove();
+			let undoFrom = this.findStackByLineAndColumn(lm.Xt, lm.Yt); //undo from = original to
+			let undoTo = this.findStackByLineAndColumn(lm.Xf, lm.Yf); //undo to = original from
+			undoFrom.moveTo(undoTo, undoTo.piecesBeforeMove);
+		} else {
+			alert(`Unable to undo: ${undoRes}`);
 		}
 	});
 };
@@ -466,10 +485,10 @@ XMLscene.prototype.startNewGame = function () {
 		this.populateStacks();
 		this.populateClaimableStacks();
 		//color already claimed go into these 2 stacks:
-		this.claimed1 = new Stack(this, -1, 0);
-		this.claimed2 = new Stack(this, 15, 0);
+		this.claimed1 = new Stack(this, 15, 0);
+		this.claimed2 = new Stack(this, -1, 0);
 		this.doBotMove();
-	}).catch((error)=>{
+	}).catch((error) => {
 		alert(`Unable to start game, check if server is open`);
 	});
 };

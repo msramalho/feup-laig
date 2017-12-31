@@ -23,7 +23,7 @@ executeCommand(init(botVbot, Bot1Level, Bot2Level), 'success'):-init(botVbot), c
 % action(move, Xf, Yf, Xt, Yt)
 % executes a move for the current user
 % returns 'success' if all ok or an error message otherwise
-executeCommand(action(move, Xf, Yf, Xt, Yt), 'success'+Xf-Yf-Xt-Yt+Removed):-processMove(Xf, Yf, Xt, Yt), endTurn(Removed).
+executeCommand(action(move, Xf, Yf, Xt, Yt), 'success'+Xf-Yf-Xt-Yt+Removed):-pushGame, processMove(Xf, Yf, Xt, Yt), endTurn(Removed).
 
 % action(claim, Color)
 % makes the current user claim the supplied Color
@@ -33,7 +33,7 @@ executeCommand(action(claim, Color), 'success'):-claimColor(Color).
 % action(playBot)
 % if the next player is a bot, the bot executes a move
 % returns the Move, like
-executeCommand(action(playBot), 'success'+Xf-Yf-Xt-Yt+Removed+Color):- movesAvailable, player(Bot),isBot(Bot),playBot(Bot, Xf-Yf-Xt-Yt-Color), endTurn(Removed).
+executeCommand(action(playBot), 'success'+Xf-Yf-Xt-Yt+Removed+Color):-pushGame, movesAvailable, player(Bot),isBot(Bot),playBot(Bot, Xf-Yf-Xt-Yt-Color), endTurn(Removed).
 
 % action(undo)
 % undo a Move, like

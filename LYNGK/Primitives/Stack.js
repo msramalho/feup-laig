@@ -24,6 +24,10 @@ function Stack(scene, line, column, claimable) {
 
 	//for stacks that only have one piece and are only used for claim
 	this.claimable = claimable || false;
+
+	//for undo (registers the evolution of the number of pieces between movements)
+	this.piecesBeforeMove = 0;
+	this.howMany = 0; //how many pieces to transfer
 }
 Stack.id = 0;
 
@@ -36,9 +40,13 @@ Stack.prototype.display = function () {
 		this.scene.multMatrix(this.animation.animate(this.timer));
 		this.timer += this.scene.deltaTime;
 		if (this.timer > this.animation.totalTime) { //animation end -> process move and clear varaibles
-			this.destination.pieces = this.destination.pieces.concat(this.pieces);
+			//process move
+			let top = this.pieces.slice(this.pieces.length - this.howMany);
+			this.pieces = this.pieces.slice(0, this.pieces.length - this.howMany);
+			this.destination.pieces = this.destination.pieces.concat(top);
+			this.piecesBeforeMove = top.length;
+			//clear varaibles
 			this.animation = false;
-			this.pieces = [];
 			this.destination = undefined;
 			this.timer = 0;
 		}
@@ -57,7 +65,7 @@ Stack.prototype.display = function () {
 	if (this.picked || this.possible) this.scene.setActiveShader(this.scene.defaultShader);
 };
 
-Stack.prototype.moveTo = function (destination) {
+Stack.prototype.moveTo = function (destination, howMany) {
 	// this.animation = new LinearAnimation(
 	// 	5, [{
 	// 			x: Piece.factors.x * this.column + Piece.boardStart.x,
@@ -81,11 +89,12 @@ Stack.prototype.moveTo = function (destination) {
 			x: 0,
 			y: 0,
 			z: 0
-		},{
+		}, {
 			x: 0,
 			y: 0,
 			z: 1
 		}]);
 	this.destination = destination;
+	this.howMany = howMany || this.pieces.length;
 	// console.log(this.animation);
 };
