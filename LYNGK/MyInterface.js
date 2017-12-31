@@ -38,7 +38,7 @@ MyInterface.prototype.init = function (application) {
 	this.gameFolder.add(this.scene.server, "gameType", MyServer.gameTypes).name('Game Type');
 	this.gameFolder.add(this.scene.server, "botLevel1", MyServer.botLevels).name('Bot 1 Level');
 	this.gameFolder.add(this.scene.server, "botLevel2", MyServer.botLevels).name('Bot 2 Level');
-	this.gameFolder.add(this.scene, "countdownSecondsBaseline", 10, 3600).name('Turn Duration');
+	this.gameFolder.add(this.scene, "countdownSecondsBaseline", 10, 90).name('Turn Duration');
 	this.gameFolder.add(this.scene, "startNewGame").name('Start New Game');
 	//control folder
 	this.controlFolder = this.gui.addFolder('Global Settings');
