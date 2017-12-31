@@ -26,7 +26,7 @@ Stack.prototype.constructor = Stack;
 Stack.prototype.display = function() {
     if (this.picked) this.scene.setActiveShader(this.scene.pickedShader);
     else if (this.possible) this.scene.setActiveShader(this.scene.possibleShader);
-    this.scene.registerForPick(this.id, this);
+	if (this.scene.countdownSeconds != 0) this.scene.registerForPick(this.id, this);
     for (let i = 0; i < this.pieces.length; i++) {
         this.scene.pushMatrix(); {
             this.pieces[i].display(this.line, this.column, i); //i is the height
