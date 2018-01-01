@@ -47,7 +47,7 @@ Stack.prototype.display = function () {
 	//shaders and display
 	if (this.picked) this.scene.setActiveShader(this.scene.pickedShader);
 	else if (this.possible) this.scene.setActiveShader(this.scene.possibleShader);
-	if (this.scene.countdownSeconds != 0) this.scene.registerForPick(this.id, this);
+	if (this.scene.countdownSeconds != 0 && this.scene.server.gameType != "botVbot") this.scene.registerForPick(this.id, this);
 	for (let i = 0; i < this.pieces.length; i++) {
 		this.scene.pushMatrix(); {
 			this.pieces[i].display(this.line, this.column, i); //i is the height
