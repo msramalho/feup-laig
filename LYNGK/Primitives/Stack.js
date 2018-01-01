@@ -19,8 +19,7 @@ function Stack(scene, line, column, claimable) {
 	this.possible = false;
 
 	//for animations:
-	this.animation = false;
-	this.timer = 0;
+	this.anim = false;
 
 	//for stacks that only have one piece and are only used for claim
 	this.claimable = claimable || false;
@@ -36,19 +35,12 @@ Stack.prototype.constructor = Stack;
 
 Stack.prototype.display = function () {
 	//animation, if exists
-	if (this.animation) { //ongoing animation
-		this.scene.multMatrix(this.animation.animate(this.timer));
-		this.timer += this.scene.deltaTime;
-		if (this.timer > this.animation.totalTime) { //animation end -> process move and clear varaibles
+	if (this.anim) { //ongoing animation
+		// this.scene.multMatrix(this.anim.animate(this.timer));
+		// this.timer += this.scene.deltaTime;
+		if (this.timer > this.anim.totalTime) { //animation end -> process move and clear varaibles
 			//process move
-			let top = this.pieces.slice(this.pieces.length - this.howMany);
-			this.pieces = this.pieces.slice(0, this.pieces.length - this.howMany);
-			this.destination.pieces = this.destination.pieces.concat(top);
-			this.piecesBeforeMove = top.length;
-			//clear varaibles
-			this.animation = false;
-			this.destination = undefined;
-			this.timer = 0;
+
 		}
 		// console.log("[stack] timer: " + this.timer);
 	}
@@ -64,43 +56,63 @@ Stack.prototype.display = function () {
 	}
 	if (this.picked || this.possible) this.scene.setActiveShader(this.scene.defaultShader);
 };
-
+Stack.duration = 60; //duration of an animation (number of update calls)
 Stack.prototype.moveTo = function (destination, howMany) {
-	// this.animation = new LinearAnimation(
-	// 	5, [{
-	// 			x: Piece.factors.x * this.column + Piece.boardStart.x,
-	// 			y: Piece.factors.y * this.pieces.length + Piece.boardStart.y,
-	// 			z: Piece.factors.z * this.line + Piece.boardStart.z
-	// 		}, {
-	// 			x: Piece.factors.x * this.column + Piece.boardStart.x,
-	// 			y: Piece.factors.y * this.pieces.length + Piece.boardStart.y,
-	// 			z: Piece.factors.z * this.line + Piece.boardStart.z + 10
-	// 		}
-	// 		/* ,{
-	// 					x: Piece.factors.x * destination.column + Piece.boardStart.x,
-	// 					y: Piece.factors.y * destination.pieces.length + Piece.boardStart.y,
-	// 					z: Piece.factors.z * destination.line + Piece.boardStart.z
-	// 				} */
-	// 	]);
-	// this.animation = new CircularAnimation(speed, centerx, centery, centerz, radius, startAng, rotAng);4
-	// this.animation = new CircularAnimation(1, Piece.factors.x * this.column + Piece.boardStart.x, Piece.factors.y * this.pieces.length + Piece.boardStart.y, Piece.factors.z * this.line + Piece.boardStart.z, 10, 0, 90);
-	this.animation = new LinearAnimation(
-		2, [{
-			x: 0,
-			y: 0,
-			z: 0
-		}, {
-			x: destination.column - this.column,
-			y: destination.pieces.length - this.pieces.length,
-			z: destination.line - this.line
-		}]);
-	/* this.animation = new BezierAnimation( //BEZIER TRY
-		2,
-		[{ x: this.pieces[0].x, y:  this.pieces[0].y, z:  this.pieces[0].z },
-		{ x: 0, y: 3, z: 0 },
-		{ x: 1, y: 3, z: 1 },
-		{ x: 1, y: 0, z: 1 }]); */
 	this.destination = destination;
 	this.howMany = howMany || this.pieces.length;
-	// console.log(this.animation);
+
+	this.anim = {
+		time: 0,
+		from: { //starting point
+			x: this.column,
+			y: this.pieces.length,
+			z: this.line
+		},
+		to: { //ending point
+			x: destination.column,
+			y: destination.pieces.length,
+			z: destination.line
+		},
+		at: { //current point
+			x: this.column,
+			y: this.pieces.length,
+			z: this.line
+		}
+	};
+	//curve settings
+	this.anim.h = 4; //max height
+	this.anim.d = Math.sqrt(this.anim.h); //horizontal displacement
+	this.anim.hd = Math.abs(this.anim.to.y - this.anim.from.y) + 1; // height difference between stacks
+	this.anim.diff = this.anim.d + Math.sqrt(this.anim.h - this.anim.hd); //diff between zeros
+	// console.log(this.anim);
+};
+
+Stack.prototype.update = function (currTime) {
+	if (this.anim) { //if animation is ongoing
+		if (this.anim.time >= Stack.duration) { //animation end
+			//process move
+			let top = this.pieces.slice(this.pieces.length - this.howMany);
+			this.pieces = this.pieces.slice(0, this.pieces.length - this.howMany);
+			this.destination.pieces = this.destination.pieces.concat(top);
+			this.piecesBeforeMove = top.length;
+			//clear varaibles
+			this.anim = false;
+			this.destination = undefined;
+			return;
+		}
+
+		//else animation ongoing
+		let percent = this.anim.time / Stack.duration;
+
+		this.anim.at.y = this.anim.from.y - Math.pow(percent * this.anim.diff - this.anim.d, 2) + this.anim.h - this.anim.hd; //quadratic
+		this.anim.at.z = this.anim.from.z + percent * (this.anim.to.z - this.anim.from.z);
+		this.anim.at.x = this.anim.from.x + percent * (this.anim.to.x - this.anim.from.x);
+
+		for (let i = 0; i < this.pieces.length; i++)
+			this.pieces[i].update(this.anim.at.z, this.anim.at.x, this.anim.at.y + i);
+		this.anim.time++;
+	} else {
+		for (let i = 0; i < this.pieces.length; i++)
+			this.pieces[i].update(this.line, this.column, i); // i is the height
+	}
 };

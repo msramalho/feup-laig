@@ -16,9 +16,9 @@ function Piece(scene, color) {
     this.part6 = new Cylinder(this.scene, 0, 3.3, 0, 50, 50);
 
 	this.color = color || "noColor";
-	this.x = 0;
-	this.y = 0;
-	this.z = 0;
+	this.x = -100;
+	this.y = -100;
+	this.z = -100;
 }
 //scale factor from prolog coordinates into the board size
 Piece.factors = {
@@ -35,11 +35,7 @@ Piece.boardStart = {
 Piece.prototype = Object.create(CGFobject.prototype);
 Piece.prototype.constructor = Piece;
 
-Piece.prototype.display = function(line, column, height) {
-	this.x = Piece.factors.x * column + Piece.boardStart.x;
-    this.y = Piece.factors.y * height + Piece.boardStart.y;
-	this.z = Piece.factors.z * line + Piece.boardStart.z;
-
+Piece.prototype.display = function() {
 	this.setColor();
 	this.scene.translate(this.x, this.y, this.z);
     this.scene.scale(0.45, 0.45, 0.45);
@@ -78,4 +74,10 @@ Piece.prototype.setColor = function() {
         this.scene.redMaterial.apply();
     else if (this.color == "ivory")
         this.scene.ivoryMaterial.apply();
+};
+
+Piece.prototype.update = function(line, column, height) {
+	this.x = Piece.factors.x * column + Piece.boardStart.x;
+    this.y = Piece.factors.y * height + Piece.boardStart.y;
+	this.z = Piece.factors.z * line + Piece.boardStart.z;
 };

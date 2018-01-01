@@ -1,7 +1,7 @@
 function LinearAnimation(speed, controlPoints) {
     this.speed = speed;
     this.controlPoints = [];
-    console.log("CONTROL POINT", controlPoints);
+    // console.log("CONTROL POINT", controlPoints);
 
     controlPoints.forEach(cp => {
         this.controlPoints.push(cp);
@@ -19,14 +19,14 @@ function LinearAnimation(speed, controlPoints) {
     for (var i = 1; i < this.controlPoints.length; i++) {
         this.distance.push(this.calculateDistance(this.controlPoints[i - 1], this.controlPoints[i]));
         this.times.push(this.distance[i] / this.speed);
-        console.log("DIST", this.distance[i] / this.speed);
+        // console.log("DIST", this.distance[i] / this.speed);
         this.totalDistance += this.distance[i];
     }
     this.getAnimations();
-    console.log("[Linear]", this.totalDistance, this.times, this.distance, this.animations);
+    // console.log("[Linear]", this.totalDistance, this.times, this.distance, this.animations);
     this.totalTime = this.totalDistance / this.speed;
 
-    console.log("[Linear] totalTime: ", this.totalTime);
+    // console.log("[Linear] totalTime: ", this.totalTime);
 }
 
 LinearAnimation.prototype = Object.create(Animation.prototype);
@@ -84,14 +84,14 @@ LinearAnimation.prototype.calculateDistance = function(p1, p2) {
 LinearAnimation.prototype.getAnimations = function() {
     var lastTime = 0;
     var lastDistance = 0;
-    console.log(this.distance.length);
+    // console.log(this.distance.length);
     for (var i = 1; i < this.distance.length; i++) {
-        console.log(this.controlPoints[i - 1]);
-        console.log(this.controlPoints[i]);
-        console.log(this.times[i - 1]);
-        console.log(this.distance[i]);
-        console.log(this.times[i - 1] - lastTime);
-        console.log(this.distance[i] - lastDistance);
+        // console.log(this.controlPoints[i - 1]);
+        // console.log(this.controlPoints[i]);
+        // console.log(this.times[i - 1]);
+        // console.log(this.distance[i]);
+        // console.log(this.times[i - 1] - lastTime);
+        // console.log(this.distance[i] - lastDistance);
 
         this.animations.push({ p1: this.controlPoints[i - 1], p2: this.controlPoints[i], time: this.times[i - 1], distance: this.distance[i], realtime: this.times[i - 1] - lastTime, realdistance: this.distance[i] - lastDistance });
 

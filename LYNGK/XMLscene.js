@@ -42,8 +42,8 @@ XMLscene.prototype.init = function (application) {
 	this.gl.depthFunc(this.gl.LEQUAL);
 
 	this.axis = new CGFaxis(this);
-
-	this.setUpdatePeriod(1000 / 60);
+	this.updatePeriod = 1000 / 60;
+	this.setUpdatePeriod(this.updatePeriod);
 	this.timerStarted = false;
 	this.startingTime = 0;
 	this.currTime = 0;
@@ -133,7 +133,21 @@ XMLscene.prototype.update = function (systemTime) {
 	}
 	if (this.selectedScene == 1 && this.camera.position != vec3.fromValues(15, 15, 15))
 		this.initCameras();
+
+	this.updateStacks(this.stacks);
+	this.updateStacks(this.claimableStacks);
+	this.updateStacks([this.claimed1, this.claimed2]);
 }
+
+XMLscene.prototype.updateStacks = function (stacks) {
+	for (let i = 0; i < stacks.length; i++) {
+		if (stacks[i]) {
+			this.pushMatrix();
+			stacks[i].update(this.currTime);
+			this.popMatrix();
+		}
+	}
+};
 /**
  * Initializes the scene lights with the values read from the LSX file.
  */
@@ -303,9 +317,11 @@ XMLscene.prototype.doBotMove = function () {
 	if (this.server.isBotNext() && !this.gameOver) {
 		this.server.playBot().then((botMove) => { //bot move successful
 			if (botMove === true) { //success
-				this.executeMove(this.server.lastMove());
 				this.updateScoreTex();
-				this.doBotMove();
+				this.executeMove(this.server.lastMove());
+				setTimeout(function () {
+					this.doBotMove();
+				}.bind(this), this.updatePeriod * Stack.duration);
 			} else {
 				this.testGameOver(botMove);
 			}
@@ -561,6 +577,8 @@ XMLscene.prototype.gameMovie = function () {
 		const move = this.server.moves[i];
 		this.server.player = move.player;
 		this.server.nextPlayer = move.nextPlayer;
-		setTimeout(function() {this.executeMove(move);}.bind(this), 2000*i);
+		setTimeout(function () {
+			this.executeMove(move);
+		}.bind(this), 2000 * i);
 	}
 };
