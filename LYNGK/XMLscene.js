@@ -573,12 +573,14 @@ XMLscene.prototype.gameMovie = function () {
 	this.populateClaimableStacks();
 
 	for (let i = 0; i < this.server.moves.length; i++) {
-		console.log("executing: " + JSON.stringify(this.server.moves[i]));
-		const move = this.server.moves[i];
-		this.server.player = move.player;
-		this.server.nextPlayer = move.nextPlayer;
 		setTimeout(function () {
+			const move = this.server.moves[i];
+			console.log("executing: " + JSON.stringify(move));
+			this.server.player = move.player;
+			this.server.nextPlayer = move.nextPlayer;
 			this.executeMove(move);
+			this.updateScoreTex();
+			this.countdownStarted = false;
 		}.bind(this), 2000 * i);
 	}
 };
