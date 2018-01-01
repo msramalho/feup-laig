@@ -109,7 +109,8 @@ Stack.prototype.update = function (currTime) {
 		this.anim.at.x = this.anim.from.x + percent * (this.anim.to.x - this.anim.from.x);
 
 		for (let i = 0; i < this.pieces.length; i++)
-			this.pieces[i].update(this.anim.at.z, this.anim.at.x, this.anim.at.y + i);
+			if(i >= this.pieces.length - this.howMany)
+				this.pieces[i].update(this.anim.at.z, this.anim.at.x, this.anim.at.y + i);
 		this.anim.time++;
 	} else {
 		for (let i = 0; i < this.pieces.length; i++)
