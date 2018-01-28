@@ -6,8 +6,9 @@ var ILLUMINATION_INDEX = 1;
 var LIGHTS_INDEX = 2;
 var TEXTURES_INDEX = 3;
 var MATERIALS_INDEX = 4;
-var LEAVES_INDEX = 5;
-var NODES_INDEX = 6;
+var ANIMATIONS_INDEX = 5;
+var LEAVES_INDEX = 6;
+var NODES_INDEX = 7;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -20,7 +21,9 @@ function MySceneGraph(filename, scene) {
     this.scene = scene;
     scene.graph = this;
 
-    this.nodes = [];
+	this.nodes = [];
+
+	this.selectables = {};
 
     this.idRoot = null; // The id of the root element.
 
@@ -137,6 +140,17 @@ MySceneGraph.prototype.parseLSXFile = function(rootElement) {
         if ((error = this.parseMaterials(nodes[index])) != null)
             return error;
     }
+
+
+    // <ANIMATIONS>
+    if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
+        return "tag <ANIMATIONS> missing";
+    else {
+        if (index != ANIMATIONS_INDEX)
+            this.onXMLMinorError("tag <ANIMATIONS> out of order");
+		if ((error = this.parseAnimations(nodes[index])) != null)
+			return error;
+	}
 
     // <NODES>
     if ((index = nodeNames.indexOf("NODES")) == -1)
@@ -1107,6 +1121,97 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
     console.log("Parsed materials");
 }
 
+/**
+ * Parses the <ANIMATIONS> node.
+ */
+MySceneGraph.prototype.parseAnimations = function(animationsNode) {
+
+    var children = animationsNode.children;
+    // Each material.
+
+    this.animations = [];
+
+    var oneMaterialDefined = false;
+
+    for (var i = 0; i < children.length; i++) {
+        if (children[i].nodeName != "ANIMATION") {
+            this.onXMLMinorError("unknown tag name <" + children[i].nodeName + ">");
+            continue;
+        }
+        var animationID = this.reader.getString(children[i], 'id');
+        if (animationID == null)
+            return "no ID defined for animation";
+
+        if (this.animations[animationID] != null)
+            return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
+
+
+		var animationType = this.reader.getString(children[i], 'type');
+		if (animationType == null)
+			return "no type defined for animation : " + animationID;
+
+		//read all the properties of each ANIMATION node
+
+		var animationProperties = {};
+		//MANDATORY properties:
+		//type - ss
+		animationProperties["type"] = this.reader.getString(children[i], 'type');
+		if (animationProperties["type"] == null)
+			return "no type defined for animation : " + animationID;
+
+		var animationTypesRequires = {
+			"linear": ["speed"],
+			"circular": ["speed", "centerx", "centery", "centerz", "radius", "startang", "rotang"],
+			"bezier": ["speed"],
+			"combo": []
+		};
+
+		//make sure all the required properties for each type are set, they are all float, so this is quite straightforward
+		for (let j = 0; j < animationTypesRequires[animationProperties["type"]].length; j++) {
+			const requirement = animationTypesRequires[animationProperties["type"]][j];
+			animationProperties[requirement] = this.reader.getFloat(children[i], requirement);
+			if (animationProperties[requirement] == null || isNaN(animationProperties[requirement])){
+				return "Animation (id: "+animationID+") needs property: " + requirement;
+			}
+		}
+
+		//Read all the controlpoint and SPANREF names
+        var animationSpecs = children[i].children;
+
+		//Parse all the controlpoint and SPANREF names
+		animationProperties["controlpoints"] = [];//array of {x,y,z}
+		animationProperties["spanrefs"] = [];//array of animations
+		for (let j = 0; j < animationSpecs.length; j++) {
+			const node = animationSpecs[j];
+			if (node.nodeName == "controlpoint") {//parse control point <controlpoint xx="ff" yy="ff" zz="ff />
+				let xx = this.reader.getFloat(node, "xx");
+				if (xx == null || isNaN(xx)) return "Animation (id: "+animationID+")'s controlpoint needs valid property: xx for subnode " + (j + 1);
+
+				let yy = this.reader.getFloat(node, "yy");
+				if (yy == null || isNaN(yy)) return "Animation (id: "+animationID+")'s controlpoint needs valid property: yy for subnode " + (j + 1);
+
+				let zz = this.reader.getFloat(node, "zz");
+				if (zz == null || isNaN(zz)) return "Animation (id: "+animationID+")'s controlpoint needs valid property: xx for subnode " + (j + 1);
+
+				animationProperties["controlpoints"].push({x: xx, y: yy, z: zz});
+				console.log("Control Points: " + xx + " " + yy + " " + zz + "\n");
+			} else if(node.nodeName == "SPANREF") {//parse SPANREF <SPANREF id="ss" />
+				let spanrefId = this.reader.getString(node, "id");
+				if(spanrefId == null) return "Animation (id: "+animationID+")'s SPANREF needs valid ID for subnode " + (j + 1);
+				if(this.animations[spanrefId] == null) return "Animation (id: "+animationID+") references a SPANREF for an animation that has not yet been declared: " + spanrefId;
+
+				animationProperties["spanrefs"].push(this.animations[spanrefId]);
+			}
+
+		}
+		//create and return the correct type of animation
+		var newAnimation = AnimationFactory(animationType, animationProperties);
+		if(!newAnimation) return "Unable to create animation type for animation: " + animationID;
+		console.log("[ANIMATION] Processed animation " + animationID + " with a " + animationType + " type animation.");
+		//add the newly created animation to this.animations
+		this.animations[animationID] = newAnimation;
+    }
+}
 
 /**
  * Parses the <NODES> block.
@@ -1137,15 +1242,23 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             if (this.nodes[nodeID] != null)
                 return "node ID must be unique (conflict: ID = " + nodeID + ")";
 
+
             this.log("Processing node " + nodeID);
 
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this, nodeID);
 
+			// Checks if this a selectable node
+			var isSelectable = children[i].getAttribute('selectable');
+			if (isSelectable==="true") {
+				this.nodes[nodeID].selectable = true;//set this as a selectable node
+				this.selectables[nodeID] = nodeID;//save the id of the selectable nodes
+			}
+
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
-            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS"];
+            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS", "ANIMATIONREFS"];
             for (var j = 0; j < nodeSpecs.length; j++) {
                 var name = nodeSpecs[j].nodeName;
                 specsNames.push(nodeSpecs[j].nodeName);
@@ -1251,6 +1364,23 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                     default:
                         break;
                 }
+            }
+            this.nodes[nodeID].animations = [];
+			// Retrieves information about animations in this node.
+            var animationsIndex = specsNames.indexOf("ANIMATIONREFS");
+			if (animationsIndex != -1) {//there is at least one animation to parse
+				var animations = nodeSpecs[animationsIndex].children;
+				for (var j = 0; j < animations.length; j++) {//for each node
+					if (animations[j].nodeName == "ANIMATIONREF") {//that is an animation ref
+						var animId = this.reader.getString(animations[j], 'id');
+						if(animId == null || !this.animations[animId]){
+							this.onXMLError("ANIMATIONREF: " + animId + " is not defined on node: " + nodeID);
+						}
+						var animationRef = new AnimationRefs(this.animations[animId]);
+                        this.nodes[nodeID].animations.push(animationRef);
+					}
+				}
+
             }
 
             // Retrieves information about children.
@@ -1382,16 +1512,27 @@ MySceneGraph.generateRandomString = function(length) {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function() {
-        // entry point for graph rendering
-        this.interpretNode(this.idRoot, this.nodes[this.idRoot].materialID, this.nodes[this.idRoot].textureID);
-    }
+	// entry point for graph rendering
+	this.interpretNode(this.idRoot, this.nodes[this.idRoot].materialID, this.nodes[this.idRoot].textureID);
+
+
+}
+
     /**
      * Displays the scene, processing each node, starting in the root node.
      */
 MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
     var mat = material;
     var tex = texture;
-    var currNode = this.nodes[idnode];
+	var currNode = this.nodes[idnode];
+	var time = this.scene.getCurrTime();
+	var remainingTime = time;
+
+	//console.log("SELECTED IS:" + this.scene.selectedSelectable);
+	if(this.scene.selectedSelectable  == idnode){
+		this.scene.setActiveShader(this.scene.shaders[this.scene.selectedShader]);
+	}
+
 
     this.scene.multMatrix(currNode.transformMatrix);
 
@@ -1406,7 +1547,21 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
         if (currNode.textureID == 'clear') {
             tex = null;
         } else tex = currNode.textureID;
-    }
+	}
+
+    for (let key in currNode.animations) {
+		let value = currNode.animations[key];
+		if (remainingTime < currNode.animations[key].totalTime) {
+			value.lastMatrix = value.animate(remainingTime);
+			this.scene.multMatrix(value.lastMatrix);
+			break;
+		} else {
+			remainingTime -= currNode.animations[key].totalTime;
+		}
+		if (value.lastMatrix != 'undefined'){
+			this.scene.multMatrix(value.lastMatrix);
+		}
+	}
 
     //iterate all this node's leaves
     for (var i = 0; i < currNode.leaves.length; i++) {
@@ -1419,16 +1574,21 @@ MySceneGraph.prototype.interpretNode = function(idnode, material, texture) {
             //set Amplification Factor for this texture
             currNode.leaves[i].primitive.setAmplifFactor(this.textures[tex][1], this.textures[tex][2]);
             this.textures[tex][0].bind();
-        }
+		}
 
-        //invoke the display on this primitie
+		//invoke the display on this primitive
+        currNode.leaves[i].primitive.updateWireframe(this.scene.wireframe);
         currNode.leaves[i].primitive.display();
     }
 
     //recursive implementation of interpret node
     for (var i = 0; i < currNode.children.length; i++) {
-        this.scene.pushMatrix(); //save the current matrix's state so it is not altered wrongly
+		this.scene.pushMatrix(); //save the current matrix's state so it is not altered wrongly
         this.interpretNode(currNode.children[i], mat, tex); //recursive call
         this.scene.popMatrix(); //restore the matrix
-    }
+	}
+
+	if(this.scene.selectedSelectable  == idnode){
+		this.scene.setActiveShader(this.scene.defaultShader);
+	}
 }

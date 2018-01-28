@@ -7,7 +7,7 @@ function MyGraphNode(graph, nodeID) {
     this.graph = graph;
 
     this.nodeID = nodeID;
-    
+
     // IDs of child nodes.
     this.children = [];
 
@@ -18,7 +18,10 @@ function MyGraphNode(graph, nodeID) {
     this.materialID = null ;
 
     // The texture ID.
-    this.textureID = null ;
+	this.textureID = null ;
+
+	//The animations this node has
+	this.animations = [];
 
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);

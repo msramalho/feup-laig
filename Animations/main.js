@@ -4,23 +4,32 @@ serialInclude=function(a){var b=console,c=serialInclude.l;if(a.length>0)c.splice
 
 function getUrlVars() {
     var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
     function(m,key,value) {
       vars[decodeURIComponent(key)] = decodeURIComponent(value);
     });
     return vars;
-}	 
+}
 
-serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 
-             'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js', 'Primitives/Patch.js', 
-             'Primitives/Rectangle.js', 'Primitives/Triangle.js', 'Primitives/Sphere.js', 'Primitives/Cylinder.js',
-             
+serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
+             'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js', 'Primitives/Patch.js',
+			 'Primitives/Rectangle.js', 'Primitives/Triangle.js', 'Primitives/Sphere.js', 'Primitives/Cylinder.js',
+			 'Animations/AnimationFactory.js','Animations/Animation.js','Animations/LinearAnimation.js','Animations/CircularAnimation.js', 'Animations/BezierAnimation.js', 'Animations/ComboAnimation.js',
+			 'Animations/AnimationRefs.js',
+
+
 
 main=function()
 {
+	availableShaders = {
+		'Main Shader': 0,
+		'Flat Shading': 1,
+		'Simple texturing': 2,
+	};
+
 	// Standard application, scene and interface setup
     var app = new CGFapplication(document.body);
-    var myInterface = new MyInterface();
+    var myInterface = new MyInterface(availableShaders);
     var myScene = new XMLscene(myInterface);
 
     app.init();
@@ -30,15 +39,15 @@ main=function()
 
     myInterface.setActiveCamera(myScene.camera);
 
-	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
-	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
-	
-	var filename=getUrlVars()['file'] || "minecraft.lsx";
+	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml
+	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor)
 
-	// create and load graph, and associate it to scene. 
+	var filename=getUrlVars()['file'] || "Outros Grupos/demo.lsx";
+
+	// create and load graph, and associate it to scene.
 	// Check console for loading errors
 	var myGraph = new MySceneGraph(filename, myScene);
-	
+
 	// start
     app.run();
 }

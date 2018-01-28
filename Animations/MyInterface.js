@@ -2,11 +2,13 @@
  * MyInterface class, creating a GUI interface.
  * @constructor
  */
-function MyInterface() {
-    //call CGFinterface constructor 
+function MyInterface(availableShaders) {
+	//call CGFinterface constructor
+	this.availableShaders = availableShaders;
+
+
     CGFinterface.call(this);
-}
-;
+};
 
 MyInterface.prototype = Object.create(CGFinterface.prototype);
 MyInterface.prototype.constructor = MyInterface;
@@ -21,11 +23,10 @@ MyInterface.prototype.init = function(application) {
 
     // init GUI. For more information on the methods, check:
     //  http://workshop.chromeexperiments.com/examples/gui
-    
+
     this.gui = new dat.GUI();
 
-    // add a group of controls (and open/expand by defult)
-    
+
     return true;
 };
 
@@ -33,7 +34,6 @@ MyInterface.prototype.init = function(application) {
  * Adds a folder containing the IDs of the lights passed as parameter.
  */
 MyInterface.prototype.addLightsGroup = function(lights) {
-
     var group = this.gui.addFolder("Lights");
     group.open();
 
@@ -46,5 +46,18 @@ MyInterface.prototype.addLightsGroup = function(lights) {
             group.add(this.scene.lightValues, key);
         }
     }
-}
+};
 
+/**
+ * Adds a folder containing the IDs of the selectable nodes passed as parameter.
+ */
+MyInterface.prototype.addShadersGroup = function(selectables) {
+    this.shadersFolder = this.gui.addFolder("Shaders Options");
+	this.shadersFolder.open();
+
+	this.shadersFolder.add(this.scene, 'selectedSelectable', selectables).name('Selectables: ');
+	this.shadersFolder.add(this.scene, 'selectedShader', this.availableShaders).name('Shaders: ');
+	this.shadersFolder.addColor(this.scene, 'selectionColor').name('Selection Color: ');
+	this.shadersFolder.add(this.scene,'scaleFactor', -10.0, 10.0);
+	this.shadersFolder.add(this.scene, 'wireframe').name('Wireframe');
+};
