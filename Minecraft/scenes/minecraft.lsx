@@ -1,0 +1,2985 @@
+<SCENE>
+
+<!-- Initial values -->
+<INITIALS>
+    <frustum near="0.1" far="500"/>
+    <translation x="-1.1" y="2.3" z="0" />
+    <rotation axis="x" angle="10" />
+    <rotation axis="y" angle="-65" />
+    <rotation axis="z" angle="20" />
+    <scale sx="0.10" sy="0.10" sz="0.10" />
+    <reference length="5" />
+</INITIALS>
+
+
+<!-- Illumination and clear colour -->
+<ILLUMINATION>
+    <ambient r="0.2" g="0.2" b="0.2" a="1" />
+    <background r="0" g="0" b="0" a="1" />
+</ILLUMINATION>
+
+
+<!-- Lights -->
+<LIGHTS>
+	<LIGHT id="light0">
+        <enable value ="1" />
+        <position  x="1.5" y="17" z="-69.5" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+	<LIGHT id="light1">
+        <enable value ="1" />
+        <position x="89.5" y="13" z="-69.5" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+	<LIGHT id="light2">
+        <enable value ="1" />
+        <position x="1.5" y="17" z="22.5" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light3">
+        <enable value ="1" />
+        <position x="89.5" y="13" z="18.5" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+        <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="lightsun">
+        <enable value ="1" />
+        <position x="-10" y="18" z="38" w="1" />
+        <ambient r="1" g="1" b="0.4" a="1.0" />
+        <diffuse r="1" g="1" b="0.4" a="1.0" />
+        <specular r="1" g="1" b="0.4" a="1.0" />
+    </LIGHT>
+
+</LIGHTS>
+
+<!-- Textures -->
+<TEXTURES>
+    <!-- Minecraft Dirt Block sides-->
+    <TEXTURE id="minecraft_dirt_side">
+        <file path="images/minecraft_dirt_side.jpg" />
+        <amplif_factor s="4" t="4" />
+    </TEXTURE>
+
+    <!-- Minecraft Wood Block sides-->
+    <TEXTURE id="minecraft_wood">
+        <file path="images/minecraft_wood.jpg" />
+        <amplif_factor s="4" t="4" />
+    </TEXTURE>
+
+    <!-- Minecraft Dirt Block Top = Grass -->
+    <TEXTURE id="minecraft_dirt_top">
+        <file path="images/minecraft_dirt_top.jpg" />
+        <amplif_factor s="4" t="4" />
+    </TEXTURE>
+
+    <!-- Minecraft Dirt Block Bottom -->
+    <TEXTURE id="minecraft_dirt_bottom">
+        <file path="images/minecraft_dirt_bottom.jpg" />
+        <amplif_factor s="4" t="4" />
+    </TEXTURE>
+
+    <!-- Minecraft Dirt Fence -->
+    <TEXTURE id="minecraft_fence">
+        <file path="images/minecraft_fence.jpg" />
+        <amplif_factor s="4" t="4" />
+    </TEXTURE>
+
+    <!-- Tile -->
+    <TEXTURE id="Tile">
+        <file path="images/tile.jpg" />
+        <amplif_factor s="13" t="13" />
+    </TEXTURE>
+
+    <!-- Upper Door -->
+    <TEXTURE id="Door">
+        <file path="images/door.jpg" />
+        <amplif_factor s="4" t="8" />
+    </TEXTURE>
+
+    <!-- Lower Door -->
+    <TEXTURE id="Door2">
+        <file path="images/door2.jpg" />
+        <amplif_factor s="4" t="8" />
+    </TEXTURE>
+
+    <!-- Side Door -->
+    <TEXTURE id="SideDoor">
+        <file path="images/sideDoor.png" />
+        <amplif_factor s="4" t="4" />
+    </TEXTURE>
+    <!-- Wood Stripes -->
+    <TEXTURE id="Stripes">
+        <file path="images/stripes.jpg" />
+        <amplif_factor s="0.5" t="8" />
+    </TEXTURE>
+    <!-- Trunk -->
+    <TEXTURE id="Trunk">
+        <file path="images/trunk2.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+    <!-- Leaves -->
+    <TEXTURE id="Leaves">
+        <file path="images/leaves.png" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+</TEXTURES>
+
+
+<MATERIALS>
+	<!-- Minecraft dirt block material -->
+    <MATERIAL id="minecraftDirtMaterial">
+        <shininess value="1" />
+        <specular r="0.2" g="0.2" b="0.2" a="1" />
+        <diffuse r="0.2" g="0.2" b="0.2" a="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Minecraft wood block material -->
+    <MATERIAL id="minecraftWoodMaterial">
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.5" g="0.5" b="0.5" a="1" />
+        <ambient r="0.5" g="0.5" b="0.5" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Sun material -->
+    <MATERIAL id="sunMaterial">
+        <shininess value="100" />
+        <specular r="0.5" g="0.5" b="0.2" a="1" />
+        <diffuse r="0.5" g="0.5" b="0.2" a="1" />
+        <ambient r="0.5" g="0.5" b="0.2" a="1" />
+        <emission r="1" g="1" b="0.4" a="1" />
+    </MATERIAL>
+
+	<!-- Pyrwateramid material -->
+    <MATERIAL id="waterMaterial">
+        <shininess value="50" />
+        <specular r="0.2" g="0.4" b="1" a="1" />
+        <diffuse r="0.2" g="0.4" b="1" a="1" />
+        <ambient r="0.2" g="0.4" b="1" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Lamp post material -->
+    <MATERIAL id="lightPostMaterial">
+        <shininess value="100" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.447" g="0.416" b="0.416" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Tree leaves material -->
+	<MATERIAL id="leavesTreeMaterial">
+        <shininess value="1" />
+        <specular r="0.2" g="0.2" b="0.2" a="1" />
+        <diffuse r="0.0" g="0.207" b="0.0" a="1" />
+        <ambient r="0.1" g="0.1" b="0.1" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Light bulb material -->
+    <MATERIAL id="lightMaterial">
+        <shininess value="100" />
+        <specular r="0.5" g="0.5" b="0.5" a="1" />
+        <diffuse r="0.5" g="0.5" b="0.5" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- A default material -->
+    <MATERIAL id="defaultMaterial">
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.4" g="0.4" b="0.4" a="1" />
+        <ambient r="0.4" g="0.4" b="0.4" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+</MATERIALS>
+
+<ANIMATIONS>
+	<ANIMATION id="animLin" speed="1" type="linear">
+		<controlpoint xx="1" yy="1" zz="1" />
+		<controlpoint xx="4" yy="4" zz="4" />
+	</ANIMATION>
+
+	<ANIMATION id="animB" speed="1" type="bezier">
+		<controlpoint xx="0" yy="0" zz="0" />
+		<controlpoint xx="0" yy="5" zz="40" />
+		<controlpoint xx="30" yy="5" zz="30" />
+		<controlpoint xx="40" yy="0" zz="0" />
+	</ANIMATION>
+	<ANIMATION id="animCirc" speed="20" type="circular"
+		centerx="20" centery="0" centerz="0"
+		radius="30" startang="0" rotang="100"
+		/>
+	<ANIMATION id="animComb" type="combo">
+		<SPANREF id="animCirc" />
+		<SPANREF id="animB" />
+	</ANIMATION>
+</ANIMATIONS>
+
+<!-- The nodes -->
+<NODES>
+
+    <ROOT id="root" />
+
+    <!-- The root node -->
+    <NODE id="root">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="clear" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlocksGrass" />
+            <NODEREF id="minecraftDirtBlocks" />
+            <NODEREF id="luzes" />
+            <NODEREF id="minecraftWoodBlocks"/>
+            <NODEREF id="minecraftDoor1" />
+            <NODEREF id="minecraftDoor2" />
+            <NODEREF id="rooftop"/>
+            <NODEREF id="fence1"/>
+            <NODEREF id="fence2"/>
+            <NODEREF id="fence3"/>
+            <NODEREF id="bridgeS"/>
+            <NODEREF id="trees"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeS" selectable="true">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+            <NODEREF id="bridge"/>
+            <NODEREF id="bridge2"/>
+            <NODEREF id="bridgeSide"/>
+            <NODEREF id="bridgeSide2"/>
+            <NODEREF id="bridgeInside"/>
+            <NODEREF id="bridgeInside2"/>
+            <NODEREF id="bridgeRails"/>
+            <NODEREF id="bridgeRails2"/>
+            <NODEREF id="bridgeCovers"/>
+        </DESCENDANTS>
+    </NODE>
+
+        <NODE id="bridgeCovers">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="76" y="-0.5" z="0" />
+        <ROTATION axis="y" angle="90"/>
+        <DESCENDANTS>
+            <NODEREF id="bridgeRect"/>
+            <NODEREF id="bridgeRect2"/>
+            <NODEREF id="bridgeRect3"/>
+            <NODEREF id="bridgeRect4"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridge">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+                <CPLINE>
+                    <CPOINT xx="0" yy="-2.5" zz="0" ww="1"/>
+                    <CPOINT xx="14" yy="10" zz="0" ww="1"/>
+                    <CPOINT xx="28" yy="-2.5" zz="0" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="-2.5" zz="20" ww="1"/>
+                    <CPOINT xx="14" yy="10" zz="20" ww="1"/>
+                    <CPOINT xx="28" yy="-2.5" zz="20" ww="1"/>
+                </CPLINE>
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridge2">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+            <CPLINE>
+                    <CPOINT xx="0" yy="-4.5" zz="20" ww="1"/>
+                    <CPOINT xx="14" yy="8" zz="20" ww="1"/>
+                    <CPOINT xx="28" yy="-4.5" zz="20" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="-4.5" zz="0" ww="1"/>
+                    <CPOINT xx="14" yy="8" zz="0" ww="1"/>
+                    <CPOINT xx="28" yy="-4.5" zz="0" ww="1"/>
+                </CPLINE>
+
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+    <NODE id="bridgeSide">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+                <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="20" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="20" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="20" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="-4.5" zz="20" ww="1"/>
+                    <CPOINT xx="14" yy="8" zz="20" ww="1"/>
+                    <CPOINT xx="28" yy="-4.5" zz="20" ww="1"/>
+                </CPLINE>
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeSide2">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+                <CPLINE>
+                    <CPOINT xx="0" yy="-4.5" zz="0" ww="1"/>
+                    <CPOINT xx="14" yy="8" zz="0" ww="1"/>
+                    <CPOINT xx="28" yy="-4.5" zz="0" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="0" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="0" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="0" ww="1"/>
+                </CPLINE>
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeInside">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+                <CPLINE>
+                    <CPOINT xx="0" yy="-4.5" zz="18" ww="1"/>
+                    <CPOINT xx="14" yy="8" zz="18" ww="1"/>
+                    <CPOINT xx="28" yy="-4.5" zz="18" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="18" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="18" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="18" ww="1"/>
+                </CPLINE>
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeInside2">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+                <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="2" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="2" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="2" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="-4.5" zz="2" ww="1"/>
+                    <CPOINT xx="14" yy="8" zz="2" ww="1"/>
+                    <CPOINT xx="28" yy="-4.5" zz="2" ww="1"/>
+                </CPLINE>
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRails">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+                <CPLINE>
+                        <CPOINT xx="0" yy="3.5" zz="0" ww="1"/>
+                        <CPOINT xx="14" yy="16" zz="0" ww="1"/>
+                        <CPOINT xx="28" yy="3.5" zz="0" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                        <CPOINT xx="0" yy="3.5" zz="2" ww="1"/>
+                        <CPOINT xx="14" yy="16" zz="2" ww="1"/>
+                        <CPOINT xx="28" yy="3.5" zz="2" ww="1"/>
+                </CPLINE>
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRails2">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+
+        <TRANSLATION x="48" y="2" z="-20" />
+        <DESCENDANTS>
+            <LEAF type="patch" args="30 30" >
+            <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="18" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="18" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="18" ww="1"/>
+                </CPLINE>
+                <CPLINE>
+                    <CPOINT xx="0" yy="3.5" zz="20" ww="1"/>
+                    <CPOINT xx="14" yy="16" zz="20" ww="1"/>
+                    <CPOINT xx="28" yy="3.5" zz="20" ww="1"/>
+                </CPLINE>
+
+            </LEAF>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRect">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 6 2 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRect2">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+        <ROTATION axis="y" angle="180" />
+        <TRANSLATION x="-2" y="0" z="28" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 6 2 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRect3">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+        <TRANSLATION x="18" y="0" z="0" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 6 2 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="bridgeRect4">
+        <MATERIAL id="null" />
+        <TEXTURE id="Stripes" />
+        <ROTATION axis="y" angle="180" />
+        <TRANSLATION x="-20" y="0" z="28" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 6 2 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="fence1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+            <NODEREF id="fence" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="fence2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="71.1" y="0" z="20.1" />
+		<ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+            <NODEREF id="fence" />
+            <NODEREF id="minecraftFence24" />
+            <NODEREF id="minecraftFence25" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="fence3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-95.8" />
+        <DESCENDANTS>
+            <NODEREF id="fence" />
+        </DESCENDANTS>
+    </NODE>
+
+<!--the  minecraft yard fence -->
+    <NODE id="fence">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence1" />
+            <NODEREF id="minecraftFence2" />
+            <NODEREF id="minecraftFence3" />
+            <NODEREF id="minecraftFence4" />
+            <NODEREF id="minecraftFence5" />
+            <NODEREF id="minecraftFence6" />
+            <NODEREF id="minecraftFence7" />
+            <NODEREF id="minecraftFence8" />
+            <NODEREF id="minecraftFence9" />
+            <NODEREF id="minecraftFence10" />
+            <NODEREF id="minecraftFence11" />
+            <NODEREF id="minecraftFence12" />
+            <NODEREF id="minecraftFence13" />
+            <NODEREF id="minecraftFence14" />
+            <NODEREF id="minecraftFence15" />
+            <NODEREF id="minecraftFence16" />
+            <NODEREF id="minecraftFence17" />
+            <NODEREF id="minecraftFence18" />
+            <NODEREF id="minecraftFence19" />
+            <NODEREF id="minecraftFence20" />
+            <NODEREF id="minecraftFence21" />
+            <NODEREF id="minecraftFence22" />
+            <NODEREF id="minecraftFence23" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- fence 1 -->
+    <NODE id="minecraftFence1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <!-- <TRANSLATION x="12" y="4" z="0" /> -->
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 2 -->
+    <NODE id="minecraftFence2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="4" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 3 -->
+    <NODE id="minecraftFence3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="8" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 4 -->
+    <NODE id="minecraftFence4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="12" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+<!-- fence 5 -->
+    <NODE id="minecraftFence5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="16" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 6 -->
+    <NODE id="minecraftFence6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="20" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 7 -->
+    <NODE id="minecraftFence7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="24" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 8 -->
+    <NODE id="minecraftFence8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="28" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 9 -->
+    <NODE id="minecraftFence9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="32" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 10 -->
+    <NODE id="minecraftFence10">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="36" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 11 -->
+    <NODE id="minecraftFence11">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="40" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 12 -->
+    <NODE id="minecraftFence12">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="44" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 13 -->
+    <NODE id="minecraftFence13">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="48" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 14 -->
+    <NODE id="minecraftFence14">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="52" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 15 -->
+    <NODE id="minecraftFence15">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="56" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 16 -->
+    <NODE id="minecraftFence16">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="60" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 17 -->
+    <NODE id="minecraftFence17">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="64" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 18 -->
+    <NODE id="minecraftFence18">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="68" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 19 -->
+    <NODE id="minecraftFence19">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="72" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 20 -->
+    <NODE id="minecraftFence20">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="76" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 21 -->
+    <NODE id="minecraftFence21">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="80" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 22 -->
+    <NODE id="minecraftFence22">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="84" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 23 -->
+    <NODE id="minecraftFence23">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="97.65" y="0.0001" z="44.8" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 24 -->
+    <NODE id="minecraftFence24">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="8" y="0.0001" z="44.8" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fence 25 -->
+    <NODE id="minecraftFence25">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <SCALE sx="0.8" sy="1" sz="1" />
+        <TRANSLATION x="5.55" y="0.0001" z="44.8" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftFence" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic Dirt Grass Block -->
+    <NODE id="minecraftFence">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+            <NODEREF id="fencePoleRight" />
+            <NODEREF id="fenceSidePoleTop" />
+            <NODEREF id="fenceSidePoleBottom" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- fenceSidePoleTop -->
+    <NODE id="fenceSidePoleTop">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+         <TRANSLATION x="0" y="2" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="fenceSidePole" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- fenceSidePoleBottom -->
+    <NODE id="fenceSidePoleBottom">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+         <TRANSLATION x="0" y="0.75" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="fenceSidePole" />
+        </DESCENDANTS>
+    </NODE>
+
+
+
+    <!-- fencePole -->
+    <NODE id="fenceSidePole">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="-90" />
+        <TRANSLATION x="-2" y="0.625" z="22.20" />
+        <SCALE sx="0.5" sy="0.9" sz="0.5" />
+        <DESCENDANTS>
+            <NODEREF id="fencePole" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- fencePoleLeft -->
+    <NODE id="fencePoleRight">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="3" y="-4" z="22" />
+        <DESCENDANTS>
+            <NODEREF id="fencePole" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- fencePole -->
+    <NODE id="fencePole">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-1" />
+        <SCALE sx="0.25" sy="1" sz="0.25" />
+        <DESCENDANTS>
+            <NODEREF id="fencePoleQuad1" />
+            <NODEREF id="fencePoleQuad2" />
+            <NODEREF id="fencePoleQuad3" />
+            <NODEREF id="fencePoleQuad4" />
+            <NODEREF id="fencePoleQuad5" />
+            <NODEREF id="fencePoleQuad6" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- fencePoleQuad1 left -->
+    <NODE id="fencePoleQuad1">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_fence" />
+        <TRANSLATION x="2.5" y="4" z="7.5" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- fencePoleQuad2 tras -->
+     <NODE id="fencePoleQuad2">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_fence" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+		<ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fencePoleQuad3 frente -->
+    <NODE id="fencePoleQuad3">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_fence" />
+        <TRANSLATION x="6.5" y="4" z="7.5" />
+		<ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fencePoleQuad4 direita-->
+    <NODE id="fencePoleQuad4">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_fence" />
+        <TRANSLATION x="6.5" y="4" z="3.5" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- fencePoleQuad5 top -->
+    <NODE id="fencePoleQuad5">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_fence" />
+        <ROTATION axis="x" angle="-90" />
+        <TRANSLATION x="2.5" y="-7.5" z="8" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+       </DESCENDANTS>
+    </NODE>
+    <!-- fencePoleQuad6 bottom -->
+    <NODE id="fencePoleQuad6">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_wood" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+        <ROTATION axis="x" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+
+
+
+    <!--the  minecraftDirtBlocksGrass -->
+    <NODE id="minecraftDirtBlocksGrass">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+        <DESCENDANTS>
+            <!-- Floor with "stair" effect -->
+            <NODEREF id="minecraftDirtBlockGrassLine1" />
+            <NODEREF id="minecraftDirtBlockGrassLine2" />
+            <NODEREF id="minecraftDirtBlockGrassLine3" />
+            <NODEREF id="minecraftDirtBlockGrassLine4" />
+            <NODEREF id="minecraftDirtBlockGrassLine5" />
+            <NODEREF id="minecraftDirtBlockGrassLine6" />
+            <NODEREF id="minecraftDirtBlockGrassLine7" />
+            <NODEREF id="minecraftDirtBlockGrassLine8" />
+            <NODEREF id="minecraftDirtBlockGrassLine9" />
+            <NODEREF id="minecraftDirtBlockGrassLine10" />
+            <NODEREF id="minecraftDirtBlockGrassLine11" />
+            <NODEREF id="minecraftDirtBlockGrassLine12" />
+            <NODEREF id="minecraftDirtBlockGrassLine13" />
+            <NODEREF id="minecraftDirtBlockGrassLine14" />
+            <NODEREF id="minecraftDirtBlockGrassLine15" />
+            <NODEREF id="minecraftDirtBlockGrassLine16" />
+            <NODEREF id="minecraftDirtBlockGrassLine17" />
+            <NODEREF id="minecraftDirtBlockGrassLine18" />
+            <NODEREF id="minecraftDirtBlockGrassLine19" />
+            <NODEREF id="minecraftDirtBlockGrassLine20" />
+            <NODEREF id="minecraftDirtBlockGrassLine21" />
+            <NODEREF id="minecraftDirtBlockGrassLine22" />
+            <NODEREF id="minecraftDirtBlockGrassLine23" />
+
+            <!-- grass blocks for a light pole -->
+            <NODEREF id="minecraftDirtBlockGrassL1" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!--the  minecraftWoodBlocks -->
+    <NODE id="minecraftWoodBlocks">
+        <MATERIAL id="null"/>
+        <TEXTURE id="clear"/>
+        <DESCENDANTS>
+            <!-- Back Wall -->
+            <NODEREF id="minecraftWoodBlockLine1" />
+            <NODEREF id="minecraftWoodBlockLine2" />
+            <NODEREF id="minecraftWoodBlockLine3" />
+            <NODEREF id="minecraftWoodBlockLine4" />
+            <NODEREF id="minecraftWoodBlockLine5" />
+            <!-- Front Wall -->
+            <NODEREF id="minecraftWoodBlockLineDoor1" />
+            <NODEREF id="minecraftWoodBlockLineDoor2" />
+            <!-- Side Walls -->
+            <NODEREF id="minecraftWoodBlock7" />
+            <NODEREF id="minecraftWoodBlock8" />
+            <NODEREF id="minecraftWoodBlock9" />
+            <NODEREF id="minecraftWoodBlock10" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Wood Line of 6 Blocks 1 -->
+    <NODE id="minecraftWoodBlockLine1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="12" y="4" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Wood Line of 6 Blocks 2 -->
+    <NODE id="minecraftWoodBlockLine2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="12" y="8" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Wood Line of 6 Blocks 3 -->
+    <NODE id="minecraftWoodBlockLine3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="12" y="12" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Wood Line of 6 Blocks 4 -->
+    <NODE id="minecraftWoodBlockLine4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="16" y="12" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Wood Line of 6 Blocks 5 -->
+    <NODE id="minecraftWoodBlockLine5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="20" y="12" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Wood Line Door of 6 Blocks 1 -->
+    <NODE id="minecraftWoodBlockLineDoor1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="20" y="4" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlockLineDoor" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Wood Line Door of 6 Blocks 2 -->
+    <NODE id="minecraftWoodBlockLineDoor2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="20" y="8" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlockLineDoor" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic Dirt Grass Block Line of 6 -->
+    <NODE id="minecraftWoodBlockLine">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+       		<NODEREF id="minecraftWoodBlock1" />
+            <NODEREF id="minecraftWoodBlock2" />
+            <NODEREF id="minecraftWoodBlock3" />
+            <NODEREF id="minecraftWoodBlock4" />
+            <NODEREF id="minecraftWoodBlock5" />
+            <NODEREF id="minecraftWoodBlock6" />
+
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic Dirt Grass Block Line of 6 -->
+    <NODE id="minecraftWoodBlockLineDoor">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+       		<NODEREF id="minecraftWoodBlock1" />
+            <NODEREF id="minecraftWoodBlock2" />
+            <NODEREF id="minecraftWoodBlock5" />
+            <NODEREF id="minecraftWoodBlock6" />
+
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 1 -->
+    <NODE id="minecraftWoodBlock1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 2 -->
+    <NODE id="minecraftWoodBlock2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 3 -->
+    <NODE id="minecraftWoodBlock3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-8" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 4 -->
+    <NODE id="minecraftWoodBlock4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-12" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 5 -->
+    <NODE id="minecraftWoodBlock5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-16" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 6 -->
+    <NODE id="minecraftWoodBlock6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-20" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 7 -->
+    <NODE id="minecraftWoodBlock7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="16" y="4" z="-20" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 8 -->
+    <NODE id="minecraftWoodBlock8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="16" y="8" z="-20" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 9 -->
+    <NODE id="minecraftWoodBlock9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="16" y="4" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 10 -->
+    <NODE id="minecraftWoodBlock10">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="16" y="8" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWoodBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic Dirt Grass Block -->
+    <NODE id="minecraftWoodBlock">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="-3" y="-8" z="13" />
+        <DESCENDANTS>
+       		<NODEREF id="woodBlockFace1" />
+            <NODEREF id="woodBlockFace2" />
+            <NODEREF id="woodBlockFace3" />
+            <NODEREF id="woodBlockFace4" />
+            <NODEREF id="woodBlockFace5" />
+            <NODEREF id="woodBlockFace6" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- dirt block face 1 side esquerda -->
+    <NODE id="woodBlockFace1">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_wood" />
+        <TRANSLATION x="2.5" y="4" z="7.5" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+
+    </NODE>
+    <!-- dirt block face 2 side tras -->
+     <NODE id="woodBlockFace2">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_wood" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+		<ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 3 side frente -->
+    <NODE id="woodBlockFace3">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_wood" />
+        <TRANSLATION x="6.5" y="4" z="7.5" />
+		<ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 4 side direita-->
+    <NODE id="woodBlockFace4">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_wood" />
+        <TRANSLATION x="6.5" y="4" z="3.5" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 5 top -->
+    <NODE id="woodBlockFace5">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_wood" />
+        <ROTATION axis="x" angle="-90" />
+        <TRANSLATION x="2.5" y="-7.5" z="8" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+       </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 6 bottom -->
+    <NODE id="woodBlockFace6">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_wood" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+        <ROTATION axis="x" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 1 -->
+    <NODE id="minecraftDirtBlockGrassLine1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="8" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 2 -->
+    <NODE id="minecraftDirtBlockGrassLine2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="4" y="4" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 3 -->
+    <NODE id="minecraftDirtBlockGrassLine3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="8" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 4 -->
+    <NODE id="minecraftDirtBlockGrassLine4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="12" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 5 -->
+    <NODE id="minecraftDirtBlockGrassLine5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="16" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 6 -->
+    <NODE id="minecraftDirtBlockGrassLine6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="20" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="24" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="28" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="32" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine10">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="36" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine11">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="40" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine12">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="44" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine13">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="48" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine14">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+        <TRANSLATION x="52" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine15">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="56" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine16">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="60" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine17">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="64" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine18">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="68" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine19">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="72" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine20">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="76" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine21">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="80" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine22">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="84" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 7 -->
+    <NODE id="minecraftDirtBlockGrassLine23">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="88" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrassLine" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic Dirt Grass Block Line of 6 -->
+    <NODE id="minecraftDirtBlockGrassLine">
+        <MATERIAL id="minecraftDirtMaterial" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+       		<NODEREF id="minecraftDirtBlockGrass1" />
+            <NODEREF id="minecraftDirtBlockGrass2" />
+            <NODEREF id="minecraftDirtBlockGrass3" />
+            <NODEREF id="minecraftDirtBlockGrass4" />
+            <NODEREF id="minecraftDirtBlockGrass5" />
+            <NODEREF id="minecraftDirtBlockGrass6" />
+            <NODEREF id="minecraftDirtBlockGrass7" />
+            <NODEREF id="minecraftDirtBlockGrass8" />
+            <NODEREF id="minecraftDirtBlockGrass9" />
+            <NODEREF id="minecraftDirtBlockGrass10" />
+            <NODEREF id="minecraftDirtBlockGrass11" />
+            <NODEREF id="minecraftDirtBlockGrass12" />
+            <NODEREF id="minecraftDirtBlockGrass13" />
+            <NODEREF id="minecraftDirtBlockGrass14" />
+            <NODEREF id="minecraftDirtBlockGrass15" />
+            <NODEREF id="minecraftDirtBlockGrass16" />
+            <NODEREF id="minecraftDirtBlockGrass17" />
+            <NODEREF id="minecraftDirtBlockGrass18" />
+            <NODEREF id="minecraftDirtBlockGrass19" />
+            <NODEREF id="minecraftDirtBlockGrass20" />
+            <NODEREF id="minecraftDirtBlockGrass21" />
+            <NODEREF id="minecraftDirtBlockGrass22" />
+            <NODEREF id="minecraftDirtBlockGrass23" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic Water Block Line -->
+    <NODE id="minecraftWaterBlockLine">
+        <MATERIAL id="waterMaterial" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+       		<NODEREF id="minecraftWaterBlock1" />
+            <NODEREF id="minecraftWaterBlock2" />
+            <NODEREF id="minecraftWaterBlock3" />
+            <NODEREF id="minecraftWaterBlock4" />
+            <NODEREF id="minecraftWaterBlock5" />
+            <NODEREF id="minecraftWaterBlock6" />
+            <NODEREF id="minecraftWaterBlock7" />
+            <NODEREF id="minecraftWaterBlock8" />
+            <NODEREF id="minecraftWaterBlock9" />
+            <NODEREF id="minecraftWaterBlock10" />
+            <NODEREF id="minecraftWaterBlock11" />
+            <NODEREF id="minecraftWaterBlock12" />
+            <NODEREF id="minecraftWaterBlock13" />
+            <NODEREF id="minecraftWaterBlock14" />
+            <NODEREF id="minecraftWaterBlock15" />
+            <NODEREF id="minecraftWaterBlock16" />
+            <NODEREF id="minecraftWaterBlock17" />
+            <NODEREF id="minecraftWaterBlock18" />
+            <NODEREF id="minecraftWaterBlock19" />
+            <NODEREF id="minecraftWaterBlock20" />
+            <NODEREF id="minecraftWaterBlock21" />
+            <NODEREF id="minecraftWaterBlock22" />
+            <NODEREF id="minecraftWaterBlock23" />
+        </DESCENDANTS>
+    </NODE>
+
+<!-- Dirt Block 1 -->
+    <NODE id="minecraftWaterBlock1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 2 -->
+    <NODE id="minecraftWaterBlock2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 3 -->
+    <NODE id="minecraftWaterBlock3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-8" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 4 -->
+    <NODE id="minecraftWaterBlock4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-12" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 5 -->
+    <NODE id="minecraftWaterBlock5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-16" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 6 -->
+    <NODE id="minecraftWaterBlock6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-20" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 7 -->
+    <NODE id="minecraftWaterBlock7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-24" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 8 -->
+    <NODE id="minecraftWaterBlock8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-28" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 9 -->
+    <NODE id="minecraftWaterBlock9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-32" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 10 -->
+    <NODE id="minecraftWaterBlock10">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-36" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 11 -->
+    <NODE id="minecraftWaterBlock11">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-40" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 12 -->
+    <NODE id="minecraftWaterBlock12">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-44" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 13 -->
+    <NODE id="minecraftWaterBlock13">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-48" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 14 -->
+    <NODE id="minecraftWaterBlock14">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-52" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 15 -->
+    <NODE id="minecraftWaterBlock15">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-56" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 16 -->
+    <NODE id="minecraftWaterBlock16">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-60" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 17 -->
+    <NODE id="minecraftWaterBlock17">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-64" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 18 -->
+    <NODE id="minecraftWaterBlock18">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-68" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 19 -->
+    <NODE id="minecraftWaterBlock19">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-72" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 20 -->
+    <NODE id="minecraftWaterBlock20">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-76" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 21 -->
+    <NODE id="minecraftWaterBlock21">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-80" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 22 -->
+    <NODE id="minecraftWaterBlock22">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-84" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 23 -->
+    <NODE id="minecraftWaterBlock23">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-88" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftWaterBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 1 -->
+    <NODE id="minecraftDirtBlockGrass1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 2 -->
+    <NODE id="minecraftDirtBlockGrass2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 3 -->
+    <NODE id="minecraftDirtBlockGrass3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-8" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 4 -->
+    <NODE id="minecraftDirtBlockGrass4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-12" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 5 -->
+    <NODE id="minecraftDirtBlockGrass5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-16" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 6 -->
+    <NODE id="minecraftDirtBlockGrass6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-20" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 7 -->
+    <NODE id="minecraftDirtBlockGrass7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-24" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 8 -->
+    <NODE id="minecraftDirtBlockGrass8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-28" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 9 -->
+    <NODE id="minecraftDirtBlockGrass9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-32" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 10 -->
+    <NODE id="minecraftDirtBlockGrass10">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-36" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 11 -->
+    <NODE id="minecraftDirtBlockGrass11">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-40" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 12 -->
+    <NODE id="minecraftDirtBlockGrass12">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-44" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 13 -->
+    <NODE id="minecraftDirtBlockGrass13">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-48" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 14 -->
+    <NODE id="minecraftDirtBlockGrass14">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-52" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 15 -->
+    <NODE id="minecraftDirtBlockGrass15">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-56" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 16 -->
+    <NODE id="minecraftDirtBlockGrass16">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-60" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 17 -->
+    <NODE id="minecraftDirtBlockGrass17">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-64" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 18 -->
+    <NODE id="minecraftDirtBlockGrass18">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-68" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 19 -->
+    <NODE id="minecraftDirtBlockGrass19">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-72" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 20 -->
+    <NODE id="minecraftDirtBlockGrass20">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-76" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 21 -->
+    <NODE id="minecraftDirtBlockGrass21">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-80" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 22 -->
+    <NODE id="minecraftDirtBlockGrass22">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-84" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 23 -->
+    <NODE id="minecraftDirtBlockGrass23">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-88" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block for the left light platform -->
+    <NODE id="minecraftDirtBlockGrassL1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="4" z="4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockGrass" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <!-- Generic Dirt Grass Block -->
+    <NODE id="minecraftDirtBlockGrass">
+        <MATERIAL id="minecraftDirtMaterial" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="-3" y="-8" z="13" />
+        <DESCENDANTS>
+       		<NODEREF id="dirtBlockGrassFace1" />
+            <NODEREF id="dirtBlockGrassFace2" />
+            <NODEREF id="dirtBlockGrassFace3" />
+            <NODEREF id="dirtBlockGrassFace4" />
+            <NODEREF id="dirtBlockGrassFace5" />
+            <NODEREF id="dirtBlockGrassFace6" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- dirt block face 1 side esquerda -->
+    <NODE id="dirtBlockGrassFace1">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_side" />
+        <TRANSLATION x="2.5" y="4" z="7.5" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+
+    </NODE>
+    <!-- dirt block face 2 side tras -->
+     <NODE id="dirtBlockGrassFace2">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_side" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+		<ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 3 side frente -->
+    <NODE id="dirtBlockGrassFace3">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_side" />
+        <TRANSLATION x="6.5" y="4" z="7.5" />
+		<ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 4 side direita-->
+    <NODE id="dirtBlockGrassFace4">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_side" />
+        <TRANSLATION x="6.5" y="4" z="3.5" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 5 top -->
+    <NODE id="dirtBlockGrassFace5">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_top" />
+        <ROTATION axis="x" angle="-90" />
+        <TRANSLATION x="2.5" y="-7.5" z="8" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+       </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 6 bottom -->
+    <NODE id="dirtBlockGrassFace6">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_bottom" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+        <ROTATION axis="x" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic Water Block -->
+    <NODE id="minecraftWaterBlock">
+        <MATERIAL id="waterMaterial" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="-3" y="-8" z="13" />
+        <DESCENDANTS>
+       		<NODEREF id="waterBlockFace1" />
+            <NODEREF id="waterBlockFace2" />
+            <NODEREF id="waterBlockFace3" />
+            <NODEREF id="waterBlockFace4" />
+            <NODEREF id="waterBlockFace5" />
+            <NODEREF id="waterBlockFace6" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- dirt block face 1 side esquerda -->
+    <NODE id="waterBlockFace1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="2.5" y="4" z="7.5" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+
+    </NODE>
+    <!-- dirt block face 2 side tras -->
+     <NODE id="waterBlockFace2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+		<ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 3 side frente -->
+    <NODE id="waterBlockFace3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="6.5" y="4" z="7.5" />
+		<ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 4 side direita-->
+    <NODE id="waterBlockFace4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="6.5" y="4" z="3.5" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 5 top -->
+    <NODE id="waterBlockFace5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="x" angle="-90" />
+        <TRANSLATION x="2.5" y="-7.5" z="8" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+       </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 6 bottom -->
+    <NODE id="waterBlockFace6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+        <ROTATION axis="x" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Door 1 -->
+    <NODE id="minecraftDoor1">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="22.5" y="0" z="12.5" />
+        <ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+       		<NODEREF id="FrontDoor" />
+            <NODEREF id="BackDoor" />
+            <NODEREF id="SideDoor1" />
+            <NODEREF id="SideDoor2" />
+            <NODEREF id="SideDoor3" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Door 2 -->
+    <NODE id="minecraftDoor2">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="23" y="0" z="5" />
+        <ROTATION axis="y" angle="-180" />
+        <DESCENDANTS>
+       		<NODEREF id="FrontDoor" />
+            <NODEREF id="BackDoor" />
+            <NODEREF id="SideDoor1" />
+            <NODEREF id="SideDoor2" />
+            <NODEREF id="SideDoor3" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- FrontDoor -->
+    <NODE id="FrontDoor">
+        <MATERIAL id="null" />
+        <TEXTURE id="Door" />
+        <TRANSLATION x="0" y="0" z="1" />
+        <ROTATION axis="x" angle="0" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 8 4 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- BackDoor -->
+    <NODE id="BackDoor">
+        <MATERIAL id="null" />
+        <TEXTURE id="Door2" />
+        <TRANSLATION x="4" y="0" z="0" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 8 4 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- SideDoor -->
+    <NODE id="SideDoor1">
+        <MATERIAL id="null" />
+        <TEXTURE id="SideDoor" />
+        <TRANSLATION x="4" y="0" z="1" />
+        <ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 8 1 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- SideDoor -->
+    <NODE id="SideDoor2">
+        <MATERIAL id="null" />
+        <TEXTURE id="SideDoor" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 8 1 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- SideDoor -->
+    <NODE id="SideDoor3">
+        <MATERIAL id="null" />
+        <TEXTURE id="SideDoor" />
+        <TRANSLATION x="0" y="8" z="1" />
+        <ROTATION axis="x" angle="-90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 1 4 0" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <!--the  minecraftDirtBlocks -->
+    <NODE id="minecraftDirtBlocks">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+        <DESCENDANTS>
+            <!-- below the platform -->
+            <NODEREF id="minecraftDirtBlockLine1" />
+            <NODEREF id="minecraftDirtBlockLine2" />
+            <NODEREF id="minecraftDirtBlockLine3" />
+            <!-- around the platform -->
+            <NODEREF id="minecraftDirtBlockLine4" />
+            <NODEREF id="minecraftDirtBlockLineT1" />
+            <NODEREF id="minecraftDirtBlockLineT2" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Line of 6 Blocks 1 -->
+    <NODE id="minecraftDirtBlockLine1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 2 -->
+    <NODE id="minecraftDirtBlockLine2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="4" z="-4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 3 -->
+    <NODE id="minecraftDirtBlockLine3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="4" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks 4 -->
+    <NODE id="minecraftDirtBlockLine4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="92" y="0" z="-4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks Transversal 1 -->
+    <NODE id="minecraftDirtBlockLineT1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLineT" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Line of 6 Blocks Transversal 2 -->
+    <NODE id="minecraftDirtBlockLineT2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-96" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLineT" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <!-- Dirt Line of 6 Blocks Transversal General -->
+    <NODE id="minecraftDirtBlockLineT">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="24" y="0" z="21" />
+		<ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlockLine" />
+            <NODEREF id="minecraftDirtBlock7" />
+            <NODEREF id="minecraftDirtBlock8" />
+        </DESCENDANTS>
+    </NODE>
+
+
+
+    <!-- Generic Dirt Block Line of 6 -->
+    <NODE id="minecraftDirtBlockLine">
+        <MATERIAL id="minecraftDirtMaterial" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock0" />
+       		<NODEREF id="minecraftDirtBlock1" />
+            <NODEREF id="minecraftDirtBlock2" />
+            <NODEREF id="minecraftDirtBlock3" />
+            <NODEREF id="minecraftDirtBlock4" />
+            <NODEREF id="minecraftDirtBlock5" />
+            <NODEREF id="minecraftDirtBlock6" />
+            <NODEREF id="minecraftDirtBlock7" />
+            <NODEREF id="minecraftDirtBlock8" />
+            <NODEREF id="minecraftDirtBlock9" />
+            <NODEREF id="minecraftDirtBlock10" />
+            <NODEREF id="minecraftDirtBlock11" />
+            <NODEREF id="minecraftDirtBlock12" />
+            <NODEREF id="minecraftDirtBlock13" />
+            <NODEREF id="minecraftDirtBlock14" />
+            <NODEREF id="minecraftDirtBlock15" />
+            <NODEREF id="minecraftDirtBlock16" />
+            <NODEREF id="minecraftDirtBlock17" />
+            <NODEREF id="minecraftDirtBlock18" />
+            <NODEREF id="minecraftDirtBlock19" />
+            <NODEREF id="minecraftDirtBlock20" />
+            <NODEREF id="minecraftDirtBlock21" />
+            <NODEREF id="minecraftDirtBlock22" />
+            <NODEREF id="minecraftDirtBlock23" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 0-->
+    <NODE id="minecraftDirtBlock0">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Dirt Block 1 -->
+    <NODE id="minecraftDirtBlock1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 2 -->
+    <NODE id="minecraftDirtBlock2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-4" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 3 -->
+    <NODE id="minecraftDirtBlock3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-8" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 4 -->
+    <NODE id="minecraftDirtBlock4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-12" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 5 -->
+    <NODE id="minecraftDirtBlock5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-16" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 6 -->
+    <NODE id="minecraftDirtBlock6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-20" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 7-->
+    <NODE id="minecraftDirtBlock7">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-24" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 8-->
+    <NODE id="minecraftDirtBlock8">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-28" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 9-->
+    <NODE id="minecraftDirtBlock9">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-32" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 10-->
+    <NODE id="minecraftDirtBlock10">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-36" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+<!-- Dirt Block 11 -->
+    <NODE id="minecraftDirtBlock11">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-40" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 12 -->
+    <NODE id="minecraftDirtBlock12">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-44" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 13 -->
+    <NODE id="minecraftDirtBlock13">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-48" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 14 -->
+    <NODE id="minecraftDirtBlock14">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-52" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 15 -->
+    <NODE id="minecraftDirtBlock15">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-56" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 16 -->
+    <NODE id="minecraftDirtBlock16">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-60" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 17-->
+    <NODE id="minecraftDirtBlock17">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-64" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 18-->
+    <NODE id="minecraftDirtBlock18">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-68" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 19-->
+    <NODE id="minecraftDirtBlock19">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-72" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 20-->
+    <NODE id="minecraftDirtBlock20">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-76" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 21-->
+    <NODE id="minecraftDirtBlock21">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-80" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 22-->
+    <NODE id="minecraftDirtBlock22">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-84" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- Dirt Block 23-->
+    <NODE id="minecraftDirtBlock23">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="0" z="-88" />
+        <DESCENDANTS>
+            <NODEREF id="minecraftDirtBlock" />
+        </DESCENDANTS>
+    </NODE>
+
+
+
+
+    <!-- Generic Dirt Block -->
+    <NODE id="minecraftDirtBlock">
+        <MATERIAL id="minecraftDirtMaterial" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="-3" y="-8" z="13" />
+        <DESCENDANTS>
+       		<NODEREF id="dirtBlockFace1" />
+            <NODEREF id="dirtBlockFace2" />
+            <NODEREF id="dirtBlockFace3" />
+            <NODEREF id="dirtBlockFace4" />
+            <NODEREF id="dirtBlockFace5" />
+            <NODEREF id="dirtBlockFace6" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- dirt block face 1 side esquerda -->
+    <NODE id="dirtBlockFace1">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_bottom" />
+        <TRANSLATION x="2.5" y="4" z="7.5" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+
+    </NODE>
+    <!-- dirt block face 2 side tras -->
+     <NODE id="dirtBlockFace2">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_bottom" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+		<ROTATION axis="y" angle="-90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 3 side frente -->
+    <NODE id="dirtBlockFace3">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_bottom" />
+        <TRANSLATION x="6.5" y="4" z="7.5" />
+		<ROTATION axis="y" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 4 side direita -->
+    <NODE id="dirtBlockFace4">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_bottom" />
+        <TRANSLATION x="6.5" y="4" z="3.5" />
+        <ROTATION axis="y" angle="180" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 5 top -->
+    <NODE id="dirtBlockFace5">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_bottom" />
+        <ROTATION axis="x" angle="-90" />
+        <TRANSLATION x="2.5" y="-7.5" z="8" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+       </DESCENDANTS>
+    </NODE>
+    <!-- dirt block face 6 bottom -->
+    <NODE id="dirtBlockFace6">
+        <MATERIAL id="null" />
+        <TEXTURE id="minecraft_dirt_bottom" />
+        <TRANSLATION x="2.5" y="4" z="3.5" />
+        <ROTATION axis="x" angle="90" />
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 4 4 0" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- A pyramid -->
+    <NODE id="rooftop">
+
+        <MATERIAL id="null" />
+        <TEXTURE id="Tile" />
+
+        <TRANSLATION x="9" y="16" z="-17.5" />
+        <SCALE sx="1" sy="1.5" sz="2" />
+
+        <DESCENDANTS>
+       		<NODEREF id="meiaPiramide1" />
+            <NODEREF id="meiaPiramide2" />
+            <NODEREF id="basePiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The pyramid base -->
+    <NODE id="basePiramide">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+       	<ROTATION axis="x" angle="90" />
+       	<TRANSLATION x="1" y="6" z="2.87" />
+       	<SCALE sx="2.8" sy="3.5" sz="1" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Half a pyramid -->
+    <NODE id="meiaPiramide1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="meiaPiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The other half -->
+    <NODE id="meiaPiramide2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="16" y="0" z="26"	/>
+		<ROTATION axis="y" angle="180" />
+
+        <DESCENDANTS>
+            <NODEREF id="meiaPiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Generic half a pyramid -->
+    <NODE id="meiaPiramide">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="facePiramide1" />
+            <NODEREF id="facePiramide2" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Pyramid face -->
+   <NODE id="facePiramide1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="8" y="4" z="13" />
+		<ROTATION axis="x" angle="44.42" />
+       	<ROTATION axis="y" angle="-45" />
+
+        <DESCENDANTS>
+					<LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another pyramid face -->
+    <NODE id="facePiramide2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+       	<TRANSLATION x="10" y="4" z="15" />
+        <TRANSLATION x="-2" y="0" z="-2" />
+       	<ROTATION axis="z" angle="-44.42" />
+       	<ROTATION axis="y" angle="45" />
+
+        <DESCENDANTS>
+					<LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Trees -->
+     <NODE id="trees">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <DESCENDANTS>
+       		<NODEREF id="tree" />
+            <NODEREF id="tree2" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Generic tree -->
+    <NODE id="tree"  selectable="true">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="50" y="0" z="-20" />
+        <SCALE sx="3" sy="3" sz="3" />
+        <ROTATION axis="y" angle="180" />
+
+        <DESCENDANTS>
+            <NODEREF id="treeTrunk" />
+            <NODEREF id="treeLeaves" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Generic tree -->
+    <NODE id="tree2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="30" y="0" z="-40" />
+        <SCALE sx="3" sy="3" sz="3" />
+        <ROTATION axis="y" angle="180" />
+
+        <DESCENDANTS>
+            <NODEREF id="treeTrunk" />
+            <NODEREF id="treeLeaves" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tree trunk -->
+    <NODE id="treeTrunk">
+        <MATERIAL id="minecraftWoodMaterial" />
+        <TEXTURE id="Trunk" />
+
+        <ROTATION axis="x" angle="90" />
+        <TRANSLATION x="5" y="5" z="-4" />
+
+        <DESCENDANTS>
+					<LEAF type="cylinder" args="4 1 1 20 20" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tree leaves -->
+     <NODE id="treeLeaves">
+        <MATERIAL id="leavesTreeMaterial" />
+        <TEXTURE id="Leaves" />
+
+        <DESCENDANTS>
+       		<NODEREF id="treeSide1" />
+            <NODEREF id="treeSide2" />
+            <NODEREF id="treeSide3" />
+            <NODEREF id="treeSide4" />
+            <NODEREF id="treeSide5" />
+            <NODEREF id="treeSide6" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- A cube face -->
+    <NODE id="treeSide1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="2.5" y="4" z="7.5" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+     <NODE id="treeSide2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="2.5" y="4" z="2.5" />
+		<ROTATION axis="y" angle="-90" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="treeSide3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="7.5" y="4" z="7.5" />
+		<ROTATION axis="y" angle="90" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="treeSide4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="7.5" y="4" z="2.5" />
+        <ROTATION axis="y" angle="180" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="treeSide5">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <ROTATION axis="x" angle="-90" />
+        <TRANSLATION x="2.5" y="-7.5" z="8" />
+        <SCALE sx="1" sy="1.25" sz="1" />
+
+        <DESCENDANTS>
+ 					<LEAF  type="rectangle" args="0 4 5 0" />
+       </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Another cube face -->
+    <NODE id="treeSide6">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="2.5" y="4" z="2.5" />
+        <ROTATION axis="x" angle="90" />
+        <SCALE sx="1" sy="1.25" sz="1" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The lights -->
+     <NODE id="luzes">
+        <MATERIAL id="lightMaterial" />
+        <TEXTURE id="clear" />
+        <DESCENDANTS>
+            <NODEREF id="luz1" />
+            <NODEREF id="luz2" />
+            <NODEREF id="luz3" />
+            <NODEREF id="luz4" />
+            <NODEREF id="luz_sol" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- Sun Light -->
+    <NODE id="luz_sol">
+        <MATERIAL id="sunMaterial" />
+        <TEXTURE id="null" />
+
+		<ANIMATIONREFS>
+			<ANIMATIONREF id = "animCirc" />
+			<ANIMATIONREF id = "animB" />
+		</ANIMATIONREFS>
+
+        <TRANSLATION x="-10" y="18" z="38" />
+        <DESCENDANTS>
+            <LEAF id="shpere_sun" type="sphere" args="4 20 20" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <!-- The first light -->
+     <NODE id="luz1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="1.5" y="4" z="-69.5" />
+        <DESCENDANTS>
+            <NODEREF id="luz_candeeiro" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The second light -->
+    <NODE id="luz2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="89.5" y="0" z="-69.5" />
+        <DESCENDANTS>
+            <NODEREF id="luz_candeeiro" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The third light -->
+    <NODE id="luz3">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="1.5" y="4" z="22.5" />
+        <DESCENDANTS>
+           <NODEREF id="luz_candeeiro" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The fourth light -->
+    <NODE id="luz4">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="89.5" y="0" z="18.5" />
+        <DESCENDANTS>
+           <NODEREF id="luz_candeeiro" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Lamp post -->
+    <NODE id="luz_candeeiro">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+           <NODEREF id="luz_esfera" />
+           <NODEREF id="luz_suporte" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Light bulb -->
+    <NODE id="luz_esfera">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="13.3" z="0" />
+        <SCALE sx="-0.7" sy="0.7" sz="0.7" />
+        <DESCENDANTS>
+            <LEAF id="sphere1" type="sphere" args="2 20 20" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- The post in the lamp post... -->
+    <NODE id="luz_suporte">
+        <MATERIAL id="lightPostMaterial" />
+        <TEXTURE id="SideDoor" />
+
+        <SCALE sx="0.5" sy="3" sz="0.5" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+					<LEAF id="cylinder1" type="cylinder" args="4 1 1 20 20" />
+        </DESCENDANTS>
+
+    </NODE>
+
+
+</NODES>
+
+</SCENE>
