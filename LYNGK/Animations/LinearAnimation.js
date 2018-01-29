@@ -28,16 +28,13 @@ LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
 LinearAnimation.prototype.animate = function(time) {
-    if (this.animations.length == 0 || (typeof this.animations[0] === 'undefined' || !this.animations[0])) {
-        return this.lastMatrix;
-    }
+    if (this.animations.length == 0 || (typeof this.animations[0] === 'undefined' || !this.animations[0])) { return this.lastMatrix; }
     var matrix = mat4.create();
 
     if (time >= this.animations[0]['time']) {
         this.animations.shift();
         this.times.shift();
     }
-
     var animationTime = time - this.times[0];
     var animationDistance = animationTime * this.speed;
     var p1;
@@ -58,9 +55,7 @@ LinearAnimation.prototype.animate = function(time) {
     this.vec[2] = this.vec[2] * animationDistance;
 
     mat4.translate(matrix, matrix, [this.vec[0], this.vec[1], this.vec[2]]);
-
     mat4.rotateY(matrix, matrix, this.angles);
-
     this.lastMatrix = matrix;
     return matrix;
 }

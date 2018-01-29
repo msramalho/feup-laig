@@ -27,17 +27,12 @@ Cylinder.prototype.constructor = Cylinder;
  * Initializes the Cylinder buffers (vertices, indices, normals and texCoords)
  */
 Cylinder.prototype.initBuffers = function() {
-
     var delta = 2 * Math.PI / this.slices;
-    this.indices = [];
-    this.indicesTris = [];
-    this.indicesLines = [];
-    this.vertices = [];
-    this.normals = [];
-    this.texCoords = [];
-    var init_radius = this.bottom_radius;
+    this.indices = [];    this.indicesTris = [];    this.indicesLines = [];
+    this.vertices = [];    this.normals = [];
+	this.texCoords = [];
+	var init_radius = this.bottom_radius;
     var radius_dif = (this.top_radius - this.bottom_radius) / this.stacks;
-
     for (var i = 0; i <= this.stacks; i++) {
         for (var j = 0; j <= this.slices; j++) {
             this.vertices.push((init_radius + i * radius_dif) * Math.cos(j * delta), (init_radius + i * radius_dif) * Math.sin(j * delta), this.height * i / this.stacks);
@@ -50,13 +45,11 @@ Cylinder.prototype.initBuffers = function() {
             } else
                 this.normals.push(0, 0, 1);
             this.texCoords.push(j / this.slices, i / this.stacks);
-
             if (i > 0 && j > 0) {
                 var verts = this.vertices.length / 3;
                 this.indicesTris.push(verts - 1, verts - 2, verts - this.slices - 2);
                 this.indicesTris.push(verts - 2, verts - this.slices - 3, verts - this.slices - 2);
             }
-
         }
     }
     this.createIndicesLines();

@@ -419,20 +419,16 @@ XMLscene.prototype.display = function () {
 	// Calls picking logger
 	this.logPicking();
 	// ---- BEGIN Background, camera and axis setup
-
 	// Clear image and depth buffer everytime we update the scene
 	this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 	this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-
 	// Initialize Model-View matrix as identity (no transformation
 	this.updateProjectionMatrix();
 	this.loadIdentity();
-
 	// Apply transformations corresponding to the camera position relative to the origin
 	this.applyViewMatrix();
 
 	this.pushMatrix();
-
 	if (this.graph.loadedOk) {
 		// Applies initial transformations.
 		this.multMatrix(this.graph.initialTransforms);
@@ -454,22 +450,16 @@ XMLscene.prototype.display = function () {
 		}
 		// Displays the scene.
 		this.graph.displayScene(this.selectedScene);
-
 		this.displayStacks(this.stacks);
 		this.displayStacks(this.claimableStacks);
 		this.displayStacks([this.claimed1, this.claimed2]);
-
-
 		this.clearPickRegistration();
 	} else {
 		// Draw axis
 		this.axis.display();
 	}
-
 	this.popMatrix();
 	// ---- END Background, camera and axis setup
-
-
 };
 
 XMLscene.prototype.displayStacks = function (stacks) {

@@ -26,14 +26,12 @@ Sphere.prototype.initBuffers = function() {
     var ang_perimeter = Math.PI * 2 / this.slices;
     var ang_height = Math.PI / this.stacks;
 
-
     this.indices = [];
     this.indicesTris = [];
     this.indicesLines = [];
     this.vertices = [];
     this.normals = [];
     this.texCoords = [];
-
     for (var j = 0; j <= this.slices; j++) {
         for (var i = 0; i <= this.stacks; i++) {
             var temp = Math.PI - ang_height * i;

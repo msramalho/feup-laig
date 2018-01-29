@@ -17,7 +17,6 @@ BezierAnimation.prototype.constructor = BezierAnimation;
 
 BezierAnimation.prototype.animate = function(time) {
     var matrix = mat4.create();
-
     this.t = time / this.totalTime;
 
     if (this.t < 1.0) {
@@ -39,13 +38,10 @@ BezierAnimation.prototype.animate = function(time) {
         vec3.normalize(zVec, zVec);
         vec3.normalize(this.tangent, this.tangent);
         var angle = Math.acos(vec3.dot(zVec, this.tangent));
-
         this.x = new_x;
         this.y = new_y;
         this.z = new_z;
-
         mat4.rotateY(matrix, matrix, angle);
-
         mat4.translate(matrix, matrix, [new_x, new_y, new_z]);
     }
     return matrix;
