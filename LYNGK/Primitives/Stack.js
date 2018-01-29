@@ -34,15 +34,6 @@ Stack.prototype = Object.create(CGFobject.prototype);
 Stack.prototype.constructor = Stack;
 
 Stack.prototype.display = function () {
-	//animation, if exists
-	if (this.anim) { //ongoing animation
-		// this.scene.multMatrix(this.anim.animate(this.timer));
-		// this.timer += this.scene.deltaTime;
-		if (this.timer > this.anim.totalTime) { //animation end -> process move and clear varaibles
-			//process move
-
-		}
-	}
 	//shaders and display
 	if (this.picked) this.scene.setActiveShader(this.scene.pickedShader);
 	else if (this.possible) this.scene.setActiveShader(this.scene.possibleShader);
@@ -83,7 +74,6 @@ Stack.prototype.moveTo = function (destination, howMany) {
 	this.anim.d = Math.sqrt(this.anim.h); //horizontal displacement
 	this.anim.hd = Math.abs(this.anim.to.y - this.anim.from.y) + 1; // height difference between stacks
 	this.anim.diff = this.anim.d + Math.sqrt(this.anim.h - this.anim.hd); //diff between zeros
-	// console.log(this.anim);
 };
 
 Stack.prototype.update = function (currTime) {

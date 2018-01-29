@@ -9,7 +9,6 @@
  */
 function Rectangle(scene, left_top_x, left_top_y, right_bottom_x, right_bottom_y) {
     CGFobject.call(this, scene);
-
     if (typeof left_top_x == 'undefined' || typeof left_top_y == 'undefined' || typeof right_bottom_x == 'undefined' || typeof right_bottom_y == 'undefined') {
         this.left_top_x = -1; 		this.left_top_y = 1;
         this.right_bottom_x = 1;   	this.right_bottom_y = -1;
@@ -17,13 +16,10 @@ function Rectangle(scene, left_top_x, left_top_y, right_bottom_x, right_bottom_y
         this.left_top_x = left_top_x; this.left_top_y = left_top_y;
         this.right_bottom_x = right_bottom_x; this.right_bottom_y = right_bottom_y;
     }
-
     if (typeof minS == 'undefined' || typeof maxS == 'undefined' || typeof minT == 'undefined' || typeof maxT == 'undefined') {
         this.minS = 0;        this.maxS = 1;
         this.minT = 0;        this.maxT = 1;
-    } else {
-        this.minS = minS;        this.maxS = maxS;
-        this.minT = minT;        this.maxT = maxT;
+    } else {   this.minS = minS; this.maxS = maxS; this.minT = minT; this.maxT = maxT;
     }
     this.initBuffers();
 };
