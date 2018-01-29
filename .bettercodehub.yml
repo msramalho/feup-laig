@@ -1,7 +1,8 @@
 exclude:
 - /Animations/.*
 - /Minecraft/.*
-component_depth: 2
+- /lib/.*
+component_depth: 1
 languages:
 - python
 - javascript
