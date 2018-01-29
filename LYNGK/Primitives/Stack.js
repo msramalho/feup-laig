@@ -42,7 +42,6 @@ Stack.prototype.display = function () {
 			//process move
 
 		}
-		// console.log("[stack] timer: " + this.timer);
 	}
 	//shaders and display
 	if (this.picked) this.scene.setActiveShader(this.scene.pickedShader);

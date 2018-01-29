@@ -39,14 +39,3 @@ Patch.prototype.display = function() {
 
 //function stubs so the MySceneGraph can invoke them on any nodes
 Patch.prototype.setAmplifFactor = function(amplif_s, amplif_t) {}
-
-/* HOW DOES ONE?
-Patch.prototype.setFillMode = function () {
-	this.indices = this.indicesTris;
-	this.primitiveType = this.scene.gl.TRIANGLES;
-};
-
-Patch.prototype.setLineMode = function () {
-	this.indices = this.indicesLines;
-	this.primitiveType = this.scene.gl.LINES;
-}; */

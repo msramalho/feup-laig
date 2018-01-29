@@ -47,8 +47,6 @@ BezierAnimation.prototype.animate = function(time) {
         mat4.rotateY(matrix, matrix, angle);
 
         mat4.translate(matrix, matrix, [new_x, new_y, new_z]);
-
-        //mat4.rotate(matrix, matrix, );
     }
     return matrix;
 };

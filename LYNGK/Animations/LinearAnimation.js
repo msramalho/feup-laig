@@ -1,7 +1,6 @@
 function LinearAnimation(speed, controlPoints) {
     this.speed = speed;
     this.controlPoints = [];
-    // console.log("CONTROL POINT", controlPoints);
 
     controlPoints.forEach(cp => {
         this.controlPoints.push(cp);
@@ -19,14 +18,10 @@ function LinearAnimation(speed, controlPoints) {
     for (var i = 1; i < this.controlPoints.length; i++) {
         this.distance.push(this.calculateDistance(this.controlPoints[i - 1], this.controlPoints[i]));
         this.times.push(this.distance[i] / this.speed);
-        // console.log("DIST", this.distance[i] / this.speed);
         this.totalDistance += this.distance[i];
     }
     this.getAnimations();
-    // console.log("[Linear]", this.totalDistance, this.times, this.distance, this.animations);
     this.totalTime = this.totalDistance / this.speed;
-
-    // console.log("[Linear] totalTime: ", this.totalTime);
 }
 
 LinearAnimation.prototype = Object.create(Animation.prototype);

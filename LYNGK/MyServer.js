@@ -73,13 +73,9 @@ class MyServer {
 
 	//update board
 	async updateState() {
-		// this.board = this.parseList(await this.sendCommand("query(board)"));
-		// this.availableColors = this.parseList(await this.sendCommand("query(availableColors)"));
 		this.nextPlayer = this.player;
 		this.player = {
 			name: await this.sendCommand("query(player)"),
-			// colors: this.parseList(await this.sendCommand("query(colors)")),
-			// stacks: this.parseList(await this.sendCommand("query(stacks)")),
 			score: await this.sendCommand("query(score)")
 		};
 	}

@@ -1,9 +1,7 @@
 function ComboAnimation(animations) {
     this.animations = [];
 
-    //if( (typeof animations) != 'undefined' && animations != null) {
     this.animations = animations;
-    //}
 
     this.totalTime = 0;
 
