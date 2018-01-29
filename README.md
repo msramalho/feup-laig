@@ -14,7 +14,7 @@ Utilization of a graphics engine in WebGL and improvement of WebGL utilization t
 ![](https://github.com/AJRamos308/feup-laig/blob/master/Deliveries/Minecraft.PNG)
 
 ## Third Project
-LYNGK visual interface developed in WebGL to represent the game states of a [Prolog](https://en.wikipedia.org/wiki/Prolog) board game, Fabrik, and make use of a game [interface](http://workshop.chromeexperiments.com/examples/gui). See more about this game [here](https://boardgamegeek.com/boardgame/217083/lyngk).
+LYNGK visual interface developed in WebGL to represent the game states of a [Prolog](https://en.wikipedia.org/wiki/Prolog) board game, Lyngk, and make use of a game [interface](http://workshop.chromeexperiments.com/examples/gui). See more about this game [here](https://boardgamegeek.com/boardgame/217083/lyngk).
 
 ![](https://github.com/AJRamos308/feup-laig/blob/master/Deliveries/Game.png)
 
