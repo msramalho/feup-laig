@@ -73,46 +73,27 @@ XMLscene.prototype.init = function (application) {
  */
 XMLscene.prototype.initTextures = function () {
 	this.blackMaterial = new CGFappearance(this);
-	this.blackMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-	this.blackMaterial.setDiffuse(0.1, 0.1, 0.1, 1);
-	this.blackMaterial.setSpecular(0.34, 0.32, 0.17, 1);
-	this.blackMaterial.loadTexture("Scenes/images/dirt.jpg");
-	this.blackMaterial.setShininess(10);
+	this.blackMaterial.setAmbient(0.1, 0.1, 0.1, 1);	this.blackMaterial.setDiffuse(0.1, 0.1, 0.1, 1);	this.blackMaterial.setSpecular(0.34, 0.32, 0.17, 1);
+	this.blackMaterial.loadTexture("Scenes/images/dirt.jpg");	this.blackMaterial.setShininess(10);
 
 	this.redMaterial = new CGFappearance(this);
-	this.redMaterial.setAmbient(1, 0.1, 0.1, 1);
-	this.redMaterial.setDiffuse(1, 0.05, 0.05, 1);
-	this.redMaterial.setSpecular(0.9, 0.32, 0.17, 0.5);
-	this.redMaterial.loadTexture("Scenes/images/dirt.jpg");
-	this.redMaterial.setShininess(5);
+	this.redMaterial.setAmbient(1, 0.1, 0.1, 1);	this.redMaterial.setDiffuse(1, 0.05, 0.05, 1);	this.redMaterial.setSpecular(0.9, 0.32, 0.17, 0.5);
+	this.redMaterial.loadTexture("Scenes/images/dirt.jpg");	this.redMaterial.setShininess(5);
 
 	this.ivoryMaterial = new CGFappearance(this);
-	this.ivoryMaterial.setAmbient(0.6, 0.6, 0.6, 1);
-	this.ivoryMaterial.setDiffuse(0.3, 0.3, 0.3, 1);
-	this.ivoryMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);
-	this.ivoryMaterial.loadTexture("Scenes/images/dirt.jpg");
-	this.ivoryMaterial.setShininess(10);
+	this.ivoryMaterial.setAmbient(0.6, 0.6, 0.6, 1);	this.ivoryMaterial.setDiffuse(0.3, 0.3, 0.3, 1);	this.ivoryMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);	this.ivoryMaterial.loadTexture("Scenes/images/dirt.jpg");	this.ivoryMaterial.setShininess(10);
 
 	this.greenMaterial = new CGFappearance(this);
-	this.greenMaterial.setAmbient(0.2, 0.2, 0.2, 1);
-	this.greenMaterial.setDiffuse(0, 0.407, 0, 1);
-	this.greenMaterial.setSpecular(0.05, 0.207, 0.05, 1);
-	this.greenMaterial.loadTexture("Scenes/images/dirt.jpg");
-	this.greenMaterial.setShininess(10);
+	this.greenMaterial.setAmbient(0.2, 0.2, 0.2, 1);	this.greenMaterial.setDiffuse(0, 0.407, 0, 1);	this.greenMaterial.setSpecular(0.05, 0.207, 0.05, 1);
+	this.greenMaterial.loadTexture("Scenes/images/dirt.jpg");	this.greenMaterial.setShininess(10);
 
 	this.blueMaterial = new CGFappearance(this);
-	this.blueMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-	this.blueMaterial.setDiffuse(0, 0.3, 0.8, 1);
-	this.blueMaterial.setSpecular(0.2, 0.2, 1, 1);
-	this.blueMaterial.loadTexture("Scenes/images/dirt.jpg");
-	this.blueMaterial.setShininess(10);
+	this.blueMaterial.setAmbient(0.1, 0.1, 0.1, 1);	this.blueMaterial.setDiffuse(0, 0.3, 0.8, 1);	this.blueMaterial.setSpecular(0.2, 0.2, 1, 1);
+	this.blueMaterial.loadTexture("Scenes/images/dirt.jpg");	this.blueMaterial.setShininess(10);
 
 	this.wildMaterial = new CGFappearance(this);
-	this.wildMaterial.setAmbient(0.6, 0.6, 0.6, 1);
-	this.wildMaterial.setDiffuse(0.3, 0.3, 0.3, 1);
-	this.wildMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);
-	this.wildMaterial.loadTexture("Scenes/images/spotty.jpg");
-	this.wildMaterial.setShininess(10);
+	this.wildMaterial.setAmbient(0.6, 0.6, 0.6, 1);	this.wildMaterial.setDiffuse(0.3, 0.3, 0.3, 1);	this.wildMaterial.setSpecular(0.75, 0.75, 0.75, 0.5);
+	this.wildMaterial.loadTexture("Scenes/images/spotty.jpg");	this.wildMaterial.setShininess(10);
 }
 /**
  * Function called every update period
@@ -418,21 +399,16 @@ XMLscene.prototype.onGraphLoaded = function () {
 XMLscene.prototype.display = function () {
 	// Calls picking logger
 	this.logPicking();
-	// ---- BEGIN Background, camera and axis setup
 	// Clear image and depth buffer everytime we update the scene
 	this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 	this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-	// Initialize Model-View matrix as identity (no transformation
-	this.updateProjectionMatrix();
+	this.updateProjectionMatrix();	// Initialize Model-View matrix as identity (no transformation
 	this.loadIdentity();
-	// Apply transformations corresponding to the camera position relative to the origin
-	this.applyViewMatrix();
-
+	this.applyViewMatrix(); // Apply transformations corresponding to the camera position relative to the origin
 	this.pushMatrix();
 	if (this.graph.loadedOk) {
 		// Applies initial transformations.
 		this.multMatrix(this.graph.initialTransforms);
-
 		//detect changes in the lights
 		var i = 0;
 		for (var key in this.lightValues) {
@@ -446,20 +422,17 @@ XMLscene.prototype.display = function () {
 				}
 				this.lights[i].update();
 				i++;
-			}
-		}
+		}}
 		// Displays the scene.
 		this.graph.displayScene(this.selectedScene);
 		this.displayStacks(this.stacks);
 		this.displayStacks(this.claimableStacks);
 		this.displayStacks([this.claimed1, this.claimed2]);
 		this.clearPickRegistration();
-	} else {
-		// Draw axis
+	} else {// Draw axis
 		this.axis.display();
 	}
 	this.popMatrix();
-	// ---- END Background, camera and axis setup
 };
 
 XMLscene.prototype.displayStacks = function (stacks) {

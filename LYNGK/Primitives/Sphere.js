@@ -48,10 +48,7 @@ Sphere.prototype.initBuffers = function() {
                 var verts = this.vertices.length / 3;
                 this.indicesTris.push(verts - 2, verts - 1, verts - this.stacks - 2);
                 this.indicesTris.push(verts - this.stacks - 2, verts - this.stacks - 3, verts - 2);
-            }
-        }
-    }
-
+    }}}
     this.createIndicesLines();
     this.setFillMode();
     this.initGLBuffers();
