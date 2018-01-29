@@ -1,4 +1,4 @@
-# FEUP LAIG
+# FEUP LAIG [![BCH compliance](https://bettercodehub.com/edge/badge/AJRamos308/feup-laig?branch=master)](https://bettercodehub.com/)
 
 Projects for the Graphical Applications Laboratory (LAIG) class of the Master in Informatics and Computer Engineering (MIEIC) at the Faculty of Engineering of the University of Porto (FEUP).
 
