@@ -166,9 +166,7 @@ XMLscene.prototype.initLights = function () {
  * Logs objects picked.
  */
 XMLscene.prototype.logPicking = function () {
-	if (typeof this.lastPicked == 'undefined') { //simulate static variable
-		this.lastPicked = false;
-	}
+	if (typeof this.lastPicked == 'undefined') { this.lastPicked = false;}
 	if (this.pickMode == false) {
 		if (this.pickResults != null && this.pickResults.length > 0) {
 			for (let i = 0; i < this.pickResults.length; i++) {
@@ -188,19 +186,11 @@ XMLscene.prototype.logPicking = function () {
 								break;
 							}
 							this.clearPossible();
-						}
-						this.lastPicked = stack;
-					}
-					stack.picked = !stack.picked;
-					if (stack.picked) {
-						this.displayPossibleMoves(stack);
-					} else {
-						this.clearPossible();
-					}
-				}
-			}
-			this.pickResults.splice(0, this.pickResults.length);
-		}
+						} this.lastPicked = stack;
+					} stack.picked = !stack.picked;
+			if (stack.picked) {	this.displayPossibleMoves(stack);
+			} else { this.clearPossible(); }}}
+		this.pickResults.splice(0, this.pickResults.length);}
 	}
 };
 
@@ -397,8 +387,7 @@ XMLscene.prototype.onGraphLoaded = function () {
  * Displays the scene.
  */
 XMLscene.prototype.display = function () {
-	// Calls picking logger
-	this.logPicking();
+	this.logPicking(); // Calls picking logger
 	// Clear image and depth buffer everytime we update the scene
 	this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 	this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -407,10 +396,8 @@ XMLscene.prototype.display = function () {
 	this.applyViewMatrix(); // Apply transformations corresponding to the camera position relative to the origin
 	this.pushMatrix();
 	if (this.graph.loadedOk) {
-		// Applies initial transformations.
-		this.multMatrix(this.graph.initialTransforms);
-		//detect changes in the lights
-		var i = 0;
+		this.multMatrix(this.graph.initialTransforms);// Applies initial transformations.
+		var i = 0;//detect changes in the lights
 		for (var key in this.lightValues) {
 			if (this.lightValues.hasOwnProperty(key)) {
 				if (this.lightValues[key]) {
@@ -423,8 +410,7 @@ XMLscene.prototype.display = function () {
 				this.lights[i].update();
 				i++;
 		}}
-		// Displays the scene.
-		this.graph.displayScene(this.selectedScene);
+		this.graph.displayScene(this.selectedScene); // Displays the scene.
 		this.displayStacks(this.stacks);
 		this.displayStacks(this.claimableStacks);
 		this.displayStacks([this.claimed1, this.claimed2]);

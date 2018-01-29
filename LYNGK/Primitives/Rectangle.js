@@ -19,8 +19,7 @@ function Rectangle(scene, left_top_x, left_top_y, right_bottom_x, right_bottom_y
     if (typeof minS == 'undefined' || typeof maxS == 'undefined' || typeof minT == 'undefined' || typeof maxT == 'undefined') {
         this.minS = 0;        this.maxS = 1;
         this.minT = 0;        this.maxT = 1;
-    } else {   this.minS = minS; this.maxS = maxS; this.minT = minT; this.maxT = maxT;
-    }
+    } else {   this.minS = minS; this.maxS = maxS; this.minT = minT; this.maxT = maxT;   }
     this.initBuffers();
 };
 
