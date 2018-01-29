@@ -14,22 +14,11 @@
  */
 function Triangle(scene, v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z) {
     CGFobject.call(this, scene);
+    this.v1x = v1x;    this.v1y = v1y;    this.v1z = v1z;
+    this.v2x = v2x;    this.v2y = v2y;    this.v2z = v2z;
+    this.v3x = v3x;    this.v3y = v3y;	this.v3z = v3z;
 
-    this.v1x = v1x;
-    this.v1y = v1y;
-    this.v1z = v1z;
-    this.v2x = v2x;
-    this.v2y = v2y;
-    this.v2z = v2z;
-    this.v3x = v3x;
-    this.v3y = v3y;
-    this.v3z = v3z;
-
-    this.minS = 0;
-    this.minT = 0;
-    this.maxS = 1;
-    this.maxT = 1;
-
+    this.minS = 0;    this.minT = 0;    this.maxS = 1;    this.maxT = 1;
     this.initBuffers();
 };
 
@@ -89,9 +78,7 @@ Triangle.prototype.setAmplifFactor = function(amplif_s, amplif_t) {
     var beta = Math.acos((Math.pow(bc, 2) + Math.pow(ab, 2) - Math.pow(ac, 2)) / (2 * ab * bc));
 
     this.texCoords = [
-        this.minS, this.minT,
-        this.maxS, this.minT * ab / amplif_s,
-        ((ab - bc * Math.cos(beta)) / ab) * ab / amplif_s, (bc * Math.sin(beta) / ab) * ab / amplif_t
+        this.minS, this.minT, this.maxS, this.minT * ab / amplif_s, ((ab - bc * Math.cos(beta)) / ab) * ab / amplif_s, (bc * Math.sin(beta) / ab) * ab / amplif_t
     ];
 
     this.updateTexCoordsGLBuffers();

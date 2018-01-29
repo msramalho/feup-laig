@@ -2,6 +2,7 @@ exclude:
 - /Animations/.*
 - /Minecraft/.*
 - /lib/.*
+- /LYNGK/MySceneGraph.js
 component_depth: 2
 languages:
 - python
