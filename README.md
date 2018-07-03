@@ -6,7 +6,7 @@ Projects for the Graphical Applications Laboratory (LAIG) class of the Master in
 - [Third Project](#third-project)
 - [Build](#build)
 
-Made in colaboration with [Miguel Sozinho](https://github.com/msramalho).<br>
+Made in colaboration with [Afonso Jorge](https://github.com/afonsojramos).<br>
 
 ## First and Second Project
 Utilization of a graphics engine in WebGL and improvement of WebGL utilization techniques [WebCGF](https://paginas.fe.up.pt/~ruirodrig/pub/sw/webcgf/docs/). This scene was inspired in Minecraft, even though it has some obvious outcasts, since we needed to implement nurbs.
